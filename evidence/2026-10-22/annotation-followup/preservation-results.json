@@ -1,0 +1,16 @@
+{
+  "initialFiles": 137,
+  "preservedByteForByte": 128,
+  "expectedChangedFiles": [
+    "src/types/booking.ts",
+    "src/data/mockData.ts",
+    "src/components/AuditMarker.tsx",
+    "src/App.tsx",
+    "src/components/DarkPatternInspector.tsx",
+    "src/components/ComparisonBanner.tsx",
+    "src/components/BagsStep.tsx",
+    "src/components/ReviewStep.tsx",
+    "src/components/SeatsStep.tsx"
+  ],
+  "unexpectedChanges": []
+}

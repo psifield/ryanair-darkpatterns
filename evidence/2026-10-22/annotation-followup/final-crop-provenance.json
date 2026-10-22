@@ -1,0 +1,722 @@
+[
+  {
+    "name": "final-dp5-desktop-closeup",
+    "source": "final-original-desktop-seats-on",
+    "rect": {
+      "height": 135.20000457763672,
+      "width": 908,
+      "x": 258.3999938964844,
+      "y": 333.75
+    },
+    "viewport": [
+      1440,
+      1000
+    ],
+    "raster": [
+      1425,
+      990
+    ],
+    "pixel_box": [
+      255,
+      330,
+      1155,
+      465
+    ]
+  },
+  {
+    "name": "final-dp6-desktop-closeup",
+    "source": "final-original-desktop-bags-on",
+    "rect": {
+      "height": 133.20000457763672,
+      "width": 908,
+      "x": 258.3999938964844,
+      "y": 333.75
+    },
+    "viewport": [
+      1440,
+      1000
+    ],
+    "raster": [
+      1425,
+      990
+    ],
+    "pixel_box": [
+      255,
+      330,
+      1155,
+      463
+    ]
+  },
+  {
+    "name": "final-dp7-desktop-closeup",
+    "source": "final-original-desktop-review-on",
+    "rect": {
+      "height": 166.85000610351562,
+      "width": 601.3250122070312,
+      "x": 258.3999938964844,
+      "y": 511.0499877929687
+    },
+    "viewport": [
+      1440,
+      1000
+    ],
+    "raster": [
+      1155,
+      802
+    ],
+    "pixel_box": [
+      207,
+      409,
+      690,
+      544
+    ]
+  },
+  {
+    "name": "final-dp5-narrow-closeup",
+    "source": "final-original-narrow-seats-on",
+    "rect": {
+      "height": 174.1999969482422,
+      "width": 363.2000122070313,
+      "x": 6,
+      "y": 556.7250366210938
+    },
+    "viewport": [
+      390,
+      844
+    ],
+    "raster": [
+      375,
+      811
+    ],
+    "pixel_box": [
+      5,
+      534,
+      356,
+      703
+    ]
+  },
+  {
+    "name": "final-dp6-narrow-closeup",
+    "source": "final-original-narrow-bags-on",
+    "rect": {
+      "height": 172.1999969482422,
+      "width": 363.2000122070313,
+      "x": 6,
+      "y": 556.7250366210938
+    },
+    "viewport": [
+      390,
+      844
+    ],
+    "raster": [
+      375,
+      811
+    ],
+    "pixel_box": [
+      5,
+      534,
+      356,
+      701
+    ]
+  },
+  {
+    "name": "final-dp7-narrow-closeup",
+    "source": "final-original-narrow-review-on",
+    "rect": {
+      "height": 217.5,
+      "width": 363.2000122070313,
+      "x": 6,
+      "y": 293.2250061035156
+    },
+    "viewport": [
+      390,
+      844
+    ],
+    "raster": [
+      375,
+      811
+    ],
+    "pixel_box": [
+      5,
+      281,
+      356,
+      491
+    ]
+  },
+  {
+    "name": "final-original-narrow-dp1-0-closeup",
+    "source": "final-original-narrow-dp1-0",
+    "rect": {
+      "height": 59,
+      "width": 131.8000144958496,
+      "x": 220.6000061035156,
+      "y": 396.5
+    },
+    "viewport": [
+      390,
+      844
+    ],
+    "raster": [
+      375,
+      811
+    ],
+    "pixel_box": [
+      212,
+      380,
+      339,
+      438
+    ]
+  },
+  {
+    "name": "final-original-narrow-dp1-1-closeup",
+    "source": "final-original-narrow-dp1-1",
+    "rect": {
+      "height": 59,
+      "width": 131.8000144958496,
+      "x": 220.6000061035156,
+      "y": 397.0750122070313
+    },
+    "viewport": [
+      390,
+      844
+    ],
+    "raster": [
+      375,
+      811
+    ],
+    "pixel_box": [
+      212,
+      381,
+      339,
+      439
+    ]
+  },
+  {
+    "name": "final-original-narrow-dp2-0-closeup",
+    "source": "final-original-narrow-dp2-0",
+    "rect": {
+      "height": 90.98749923706056,
+      "width": 176.8000030517578,
+      "x": 192.40000915527344,
+      "y": 397.0249938964844
+    },
+    "viewport": [
+      390,
+      844
+    ],
+    "raster": [
+      375,
+      811
+    ],
+    "pixel_box": [
+      185,
+      381,
+      356,
+      469
+    ]
+  },
+  {
+    "name": "final-original-narrow-dp3-0-closeup",
+    "source": "final-original-narrow-dp3-0",
+    "rect": {
+      "height": 58,
+      "width": 245.75,
+      "x": 123.125,
+      "y": 396.75
+    },
+    "viewport": [
+      390,
+      844
+    ],
+    "raster": [
+      375,
+      811
+    ],
+    "pixel_box": [
+      118,
+      381,
+      355,
+      437
+    ]
+  },
+  {
+    "name": "final-original-narrow-dp4-0-closeup",
+    "source": "final-original-narrow-dp4-0",
+    "rect": {
+      "height": 68.5875015258789,
+      "width": 216.5000114440918,
+      "x": 135.90000915527344,
+      "y": 397.1625061035156
+    },
+    "viewport": [
+      390,
+      844
+    ],
+    "raster": [
+      375,
+      811
+    ],
+    "pixel_box": [
+      130,
+      381,
+      339,
+      448
+    ]
+  },
+  {
+    "name": "final-original-narrow-dp4-1-modal-closeup",
+    "source": "final-original-narrow-dp4-1-modal",
+    "rect": {
+      "height": 63,
+      "width": 299.9875183105469,
+      "x": 37.60000228881836,
+      "y": 151.2624969482422
+    },
+    "viewport": [
+      390,
+      844
+    ],
+    "raster": [
+      375,
+      811
+    ],
+    "pixel_box": [
+      36,
+      145,
+      325,
+      206
+    ]
+  },
+  {
+    "name": "final-comparison-narrow-dp1-0-closeup",
+    "source": "final-comparison-narrow-dp1-0",
+    "rect": {
+      "height": 59,
+      "width": 131.8000144958496,
+      "x": 199,
+      "y": 396.7124938964844
+    },
+    "viewport": [
+      390,
+      844
+    ],
+    "raster": [
+      375,
+      811
+    ],
+    "pixel_box": [
+      191,
+      381,
+      319,
+      438
+    ]
+  },
+  {
+    "name": "final-comparison-narrow-dp1-1-closeup",
+    "source": "final-comparison-narrow-dp1-1",
+    "rect": {
+      "height": 59,
+      "width": 131.8000144958496,
+      "x": 199,
+      "y": 396.6875
+    },
+    "viewport": [
+      390,
+      844
+    ],
+    "raster": [
+      375,
+      811
+    ],
+    "pixel_box": [
+      191,
+      381,
+      319,
+      438
+    ]
+  },
+  {
+    "name": "final-comparison-narrow-dp2-0-closeup",
+    "source": "final-comparison-narrow-dp2-0",
+    "rect": {
+      "height": 90.98749923706056,
+      "width": 176.8000030517578,
+      "x": 170.8000030517578,
+      "y": 397.0249938964844
+    },
+    "viewport": [
+      390,
+      844
+    ],
+    "raster": [
+      375,
+      811
+    ],
+    "pixel_box": [
+      164,
+      381,
+      335,
+      469
+    ]
+  },
+  {
+    "name": "final-comparison-narrow-dp3-0-closeup",
+    "source": "final-comparison-narrow-dp3-0",
+    "rect": {
+      "height": 58,
+      "width": 245.75001907348633,
+      "x": 101.5250015258789,
+      "y": 396.75
+    },
+    "viewport": [
+      390,
+      844
+    ],
+    "raster": [
+      375,
+      811
+    ],
+    "pixel_box": [
+      97,
+      381,
+      334,
+      437
+    ]
+  },
+  {
+    "name": "final-comparison-narrow-dp4-0-closeup",
+    "source": "final-comparison-narrow-dp4-0",
+    "rect": {
+      "height": 68.5875015258789,
+      "width": 216.5000114440918,
+      "x": 114.3000030517578,
+      "y": 397.1625061035156
+    },
+    "viewport": [
+      390,
+      844
+    ],
+    "raster": [
+      375,
+      811
+    ],
+    "pixel_box": [
+      109,
+      381,
+      319,
+      448
+    ]
+  },
+  {
+    "name": "final-comparison-narrow-dp4-1-modal-closeup",
+    "source": "final-comparison-narrow-dp4-1-modal",
+    "rect": {
+      "height": 63,
+      "width": 299.9875183105469,
+      "x": 37.60000228881836,
+      "y": 151.2624969482422
+    },
+    "viewport": [
+      390,
+      844
+    ],
+    "raster": [
+      375,
+      811
+    ],
+    "pixel_box": [
+      36,
+      145,
+      325,
+      206
+    ]
+  },
+  {
+    "name": "final-original-desktop-dp1-0-closeup",
+    "source": "final-original-desktop-dp1-0",
+    "rect": {
+      "height": 59,
+      "width": 131.8000030517578,
+      "x": 1137.800048828125,
+      "y": 482.2375183105469
+    },
+    "viewport": [
+      1440,
+      1000
+    ],
+    "raster": [
+      1425,
+      990
+    ],
+    "pixel_box": [
+      1125,
+      477,
+      1257,
+      536
+    ]
+  },
+  {
+    "name": "final-original-desktop-dp1-1-closeup",
+    "source": "final-original-desktop-dp1-1",
+    "rect": {
+      "height": 59,
+      "width": 131.8000030517578,
+      "x": 1137.800048828125,
+      "y": 482.7124938964844
+    },
+    "viewport": [
+      1440,
+      1000
+    ],
+    "raster": [
+      1425,
+      990
+    ],
+    "pixel_box": [
+      1125,
+      477,
+      1257,
+      537
+    ]
+  },
+  {
+    "name": "final-original-desktop-dp2-0-closeup",
+    "source": "final-original-desktop-dp2-0",
+    "rect": {
+      "height": 90.98749923706056,
+      "width": 274.8000183105469,
+      "x": 431.6000061035156,
+      "y": 482.4875183105469
+    },
+    "viewport": [
+      1440,
+      1000
+    ],
+    "raster": [
+      1425,
+      990
+    ],
+    "pixel_box": [
+      427,
+      477,
+      700,
+      568
+    ]
+  },
+  {
+    "name": "final-original-desktop-dp3-0-closeup",
+    "source": "final-original-desktop-dp3-0",
+    "rect": {
+      "height": 58,
+      "width": 245.7500267028809,
+      "x": 733.3250122070312,
+      "y": 482.7000122070313
+    },
+    "viewport": [
+      1440,
+      1000
+    ],
+    "raster": [
+      1425,
+      990
+    ],
+    "pixel_box": [
+      725,
+      477,
+      969,
+      536
+    ]
+  },
+  {
+    "name": "final-original-desktop-dp4-0-closeup",
+    "source": "final-original-desktop-dp4-0",
+    "rect": {
+      "height": 68.5875015258789,
+      "width": 216.5000267028809,
+      "x": 1061.0999755859375,
+      "y": 482.3125
+    },
+    "viewport": [
+      1440,
+      1000
+    ],
+    "raster": [
+      1425,
+      990
+    ],
+    "pixel_box": [
+      1050,
+      477,
+      1265,
+      546
+    ]
+  },
+  {
+    "name": "final-original-desktop-dp4-1-modal-closeup",
+    "source": "final-original-desktop-dp4-1-modal",
+    "rect": {
+      "height": 63,
+      "width": 299.9875183105469,
+      "x": 562.4000244140625,
+      "y": 242.1000061035156
+    },
+    "viewport": [
+      1440,
+      1000
+    ],
+    "raster": [
+      1425,
+      990
+    ],
+    "pixel_box": [
+      556,
+      239,
+      854,
+      303
+    ]
+  },
+  {
+    "name": "final-comparison-desktop-dp1-0-closeup",
+    "source": "final-comparison-desktop-dp1-0",
+    "rect": {
+      "height": 59,
+      "width": 131.8000144958496,
+      "x": 532.2000122070312,
+      "y": 482.75
+    },
+    "viewport": [
+      1440,
+      1000
+    ],
+    "raster": [
+      1425,
+      990
+    ],
+    "pixel_box": [
+      526,
+      477,
+      658,
+      537
+    ]
+  },
+  {
+    "name": "final-comparison-desktop-dp1-1-closeup",
+    "source": "final-comparison-desktop-dp1-1",
+    "rect": {
+      "height": 59,
+      "width": 131.8000144958496,
+      "x": 532.2000122070312,
+      "y": 482.4250183105469
+    },
+    "viewport": [
+      1440,
+      1000
+    ],
+    "raster": [
+      1425,
+      990
+    ],
+    "pixel_box": [
+      526,
+      477,
+      658,
+      537
+    ]
+  },
+  {
+    "name": "final-comparison-desktop-dp2-0-closeup",
+    "source": "final-comparison-desktop-dp2-0",
+    "rect": {
+      "height": 90.98749923706056,
+      "width": 176.8000030517578,
+      "x": 254.80001831054688,
+      "y": 482.3875122070313
+    },
+    "viewport": [
+      1440,
+      1000
+    ],
+    "raster": [
+      1425,
+      990
+    ],
+    "pixel_box": [
+      252,
+      477,
+      428,
+      568
+    ]
+  },
+  {
+    "name": "final-comparison-desktop-dp3-0-closeup",
+    "source": "final-comparison-desktop-dp3-0",
+    "rect": {
+      "height": 58,
+      "width": 245.75,
+      "x": 409.5249938964844,
+      "y": 482.1125183105469
+    },
+    "viewport": [
+      1440,
+      1000
+    ],
+    "raster": [
+      1425,
+      990
+    ],
+    "pixel_box": [
+      405,
+      477,
+      649,
+      535
+    ]
+  },
+  {
+    "name": "final-comparison-desktop-dp4-0-closeup",
+    "source": "final-comparison-desktop-dp4-0",
+    "rect": {
+      "height": 68.5875015258789,
+      "width": 216.5000267028809,
+      "x": 455.5,
+      "y": 482.5249938964844
+    },
+    "viewport": [
+      1440,
+      1000
+    ],
+    "raster": [
+      1425,
+      990
+    ],
+    "pixel_box": [
+      450,
+      477,
+      666,
+      546
+    ]
+  },
+  {
+    "name": "final-comparison-desktop-dp4-1-modal-closeup",
+    "source": "final-comparison-desktop-dp4-1-modal",
+    "rect": {
+      "height": 63,
+      "width": 299.9875183105469,
+      "x": 562.4000244140625,
+      "y": 242.1000061035156
+    },
+    "viewport": [
+      1440,
+      1000
+    ],
+    "raster": [
+      1425,
+      990
+    ],
+    "pixel_box": [
+      556,
+      239,
+      854,
+      303
+    ]
+  }
+]

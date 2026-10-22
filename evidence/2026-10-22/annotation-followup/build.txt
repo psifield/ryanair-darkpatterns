@@ -1,0 +1,14 @@
+$ vite build
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:11:27). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 1674 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   1.05 kB │ gzip:  0.46 kB
+dist/assets/index-BUvHfqRe.css   43.11 kB │ gzip:  8.32 kB
+dist/assets/index-n4ICp3wS.js   326.98 kB │ gzip: 92.87 kB
+
+✓ built in 310ms

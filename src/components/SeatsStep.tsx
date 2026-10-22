@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { AlertTriangle, Check, ShieldCheck, ArrowRight, ArrowLeft } from 'lucide-react';
+import { AuditMarker } from './AuditMarker';
 
 interface SeatsStepProps {
   isDarkPattern: boolean;
+  showAuditMarkers: boolean;
+  onOpenAuditItem?: (id: string) => void;
   onBack: () => void;
   onNext: () => void;
   selectedSeat: string;
@@ -11,6 +14,8 @@ interface SeatsStepProps {
 
 export const SeatsStep: React.FC<SeatsStepProps> = ({
   isDarkPattern,
+  showAuditMarkers,
+  onOpenAuditItem,
   onBack,
   onNext,
   selectedSeat,
@@ -51,15 +56,20 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
 
       {/* Dark Pattern Fear Alert vs Ethical Calm Explanation */}
       {isDarkPattern ? (
-        <div className="bg-amber-50 border-2 border-amber-300 rounded-xl p-4 text-xs space-y-1.5 shadow-xs">
-          <div className="flex items-center gap-2 font-bold text-amber-900 text-sm">
-            <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
-            <span>Warning: Do not get separated!</span>
+        <div className="relative">
+          {showAuditMarkers && (
+            <AuditMarker number={5} auditId="dp-seat-pressure" title="Pressure to Reserve Seats Together" onOpenAuditItem={onOpenAuditItem} />
+          )}
+          <div className="bg-amber-50 border-2 border-amber-300 rounded-xl p-4 text-xs space-y-1.5 shadow-xs">
+            <div className="flex items-center gap-2 font-bold text-amber-900 text-sm">
+              <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
+              <span>Warning: Do not get separated!</span>
+            </div>
+            <p className="text-amber-950 leading-relaxed">
+              If you do not choose a reserved seat now, our system will randomly allocate your seat at check-in.
+              Passengers on the same booking are likely to be seated separately across different rows!
+            </p>
           </div>
-          <p className="text-amber-950 leading-relaxed">
-            If you do not choose a reserved seat now, our system will randomly allocate your seat at check-in.
-            Passengers on the same booking are likely to be seated separately across different rows!
-          </p>
         </div>
       ) : (
         <div className="bg-blue-50/70 border border-blue-200 rounded-xl p-4 text-xs space-y-1 shadow-xs">

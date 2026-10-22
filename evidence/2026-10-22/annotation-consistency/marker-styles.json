@@ -1,0 +1,102 @@
+[
+  {
+    "animation": "none",
+    "background": "oklch(0.645 0.246 16.439)",
+    "borderRadius": "2.68435e+07px",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gapToTarget": 0,
+    "height": 19,
+    "label": "DP 1: Dark Pattern: Manufactured Urgency",
+    "lineHeight": "15px",
+    "pointer": {
+      "color": "oklch(0.645 0.246 16.439)",
+      "depth": "4px",
+      "side": "4px",
+      "top": "19px"
+    },
+    "textTransform": "none",
+    "tracking": "normal",
+    "transition": "all"
+  },
+  {
+    "animation": "none",
+    "background": "oklch(0.645 0.246 16.439)",
+    "borderRadius": "2.68435e+07px",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gapToTarget": 0,
+    "height": 19,
+    "label": "DP 1: Dark Pattern: Manufactured Urgency",
+    "lineHeight": "15px",
+    "pointer": {
+      "color": "oklch(0.645 0.246 16.439)",
+      "depth": "4px",
+      "side": "4px",
+      "top": "19px"
+    },
+    "textTransform": "none",
+    "tracking": "normal",
+    "transition": "all"
+  },
+  {
+    "animation": "none",
+    "background": "oklch(0.645 0.246 16.439)",
+    "borderRadius": "2.68435e+07px",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gapToTarget": 0,
+    "height": 19,
+    "label": "DP 4: Dark Pattern: Roadblock Intercept",
+    "lineHeight": "15px",
+    "pointer": {
+      "color": "oklch(0.645 0.246 16.439)",
+      "depth": "4px",
+      "side": "4px",
+      "top": "19px"
+    },
+    "textTransform": "none",
+    "tracking": "normal",
+    "transition": "all"
+  },
+  {
+    "animation": "none",
+    "background": "oklch(0.645 0.246 16.439)",
+    "borderRadius": "2.68435e+07px",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gapToTarget": 0,
+    "height": 19,
+    "label": "DP 2: Dark Pattern: Drip Surcharge Framing",
+    "lineHeight": "15px",
+    "pointer": {
+      "color": "oklch(0.645 0.246 16.439)",
+      "depth": "4px",
+      "side": "4px",
+      "top": "19px"
+    },
+    "textTransform": "none",
+    "tracking": "normal",
+    "transition": "all"
+  },
+  {
+    "animation": "none",
+    "background": "oklch(0.645 0.246 16.439)",
+    "borderRadius": "2.68435e+07px",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gapToTarget": 0,
+    "height": 19,
+    "label": "DP 3: Dark Pattern: Asymmetric Visual Steering",
+    "lineHeight": "15px",
+    "pointer": {
+      "color": "oklch(0.645 0.246 16.439)",
+      "depth": "4px",
+      "side": "4px",
+      "top": "19px"
+    },
+    "textTransform": "none",
+    "tracking": "normal",
+    "transition": "all"
+  }
+]

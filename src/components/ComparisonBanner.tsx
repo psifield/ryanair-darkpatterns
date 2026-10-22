@@ -11,6 +11,7 @@ interface ComparisonBannerProps {
   onToggleAuditMarkers: () => void;
   onOpenAuditDrawer: () => void;
   auditCount: number;
+  auditGroupCount: number;
 }
 
 export const ComparisonBanner: React.FC<ComparisonBannerProps> = ({
@@ -22,6 +23,7 @@ export const ComparisonBanner: React.FC<ComparisonBannerProps> = ({
   onToggleAuditMarkers,
   onOpenAuditDrawer,
   auditCount,
+  auditGroupCount,
 }) => {
   return (
     <div className="bg-slate-950 text-white border-b border-slate-800 sticky top-0 z-50 px-3 sm:px-6 py-2.5 shadow-md">
@@ -40,7 +42,7 @@ export const ComparisonBanner: React.FC<ComparisonBannerProps> = ({
             className="flex items-center gap-1.5 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/40 text-[11px] font-bold px-2.5 py-1 rounded-full transition cursor-pointer"
           >
             <AlertTriangle className="w-3.5 h-3.5 text-rose-400" />
-            <span>{auditCount} Dark Patterns Analyzed</span>
+            <span>{auditGroupCount} groups · {auditCount} audit records</span>
           </button>
         </div>
 
@@ -55,7 +57,7 @@ export const ComparisonBanner: React.FC<ComparisonBannerProps> = ({
             }`}
           >
             <span className="w-2 h-2 rounded-full bg-rose-300"></span>
-            <span>Original (Dark Pattern)</span>
+            <span>Original Prototype</span>
           </button>
 
           <button
@@ -96,7 +98,7 @@ export const ComparisonBanner: React.FC<ComparisonBannerProps> = ({
             title="Toggle clickable annotations directly on the UI"
           >
             <Eye className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Highlight Violations</span>
+            <span className="hidden sm:inline">Show Audit Markers</span>
           </button>
 
           {/* Device Frame Viewport Toggle (Desktop vs Mobile) */}

@@ -2,6 +2,7 @@ import React from 'react';
 import { FareTierId } from '../types/booking';
 import { FARE_TIERS } from '../data/mockData';
 import { Check, X, Briefcase, Star, Info } from 'lucide-react';
+import { AuditMarker } from './AuditMarker';
 
 interface FareSelectionDarkProps {
   onSelectTier: (tier: FareTierId) => void;
@@ -35,7 +36,7 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
             <h2 className="text-2xl font-black text-[#073590]">Choose your fare</h2>
             {showAuditMarkers && (
               <span className="bg-rose-100 text-rose-800 text-[11px] font-bold px-2 py-0.5 rounded-full border border-rose-200">
-                Original Dark Pattern Experience
+                Original Fare-choice Prototype
               </span>
             )}
           </div>
@@ -45,7 +46,7 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
         </div>
 
         {/* Basic Quick-Continue Banner */}
-        <div className="flex items-center justify-between sm:justify-end gap-3 bg-white border border-gray-200 rounded-lg p-2.5 px-4 shadow-xs relative">
+        <div className="flex flex-wrap items-center justify-between sm:justify-end gap-3 bg-white border border-gray-200 rounded-lg p-2.5 px-4 shadow-xs relative">
           <div className="text-left">
             <span className="text-sm font-black tracking-wide text-gray-800">BASIC</span>
             <span className="block text-[11px] text-gray-400 italic">Travel light</span>
@@ -59,7 +60,7 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
             </div>
           </div>
 
-          <div className="relative">
+          <div className={`relative ml-auto ${showAuditMarkers ? 'mt-5' : ''}`}>
             <button
               onClick={onOpenUpsellModal}
               className="text-xs font-bold text-[#073590] border border-[#073590] hover:bg-blue-50 px-3 py-2 rounded transition whitespace-nowrap cursor-pointer"
@@ -67,24 +68,20 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
               Continue with basic for £131.36
             </button>
             {showAuditMarkers && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onOpenAuditItem?.('dp-roadblock-confirmshame');
-                }}
-                className="absolute -top-3 -right-2 bg-rose-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full animate-bounce shadow-sm z-10"
-                title="Dark Pattern: Roadblock Intercept"
-              >
-                ⚠️ DP 4
-              </button>
+              <AuditMarker
+                number={4}
+                auditId="dp-roadblock-confirmshame"
+                title="Audit Candidate: Basic Upsell Prompt"
+                onOpenAuditItem={onOpenAuditItem}
+              />
             )}
           </div>
         </div>
       </div>
 
-      {/* Fare Tier Matrix Grid */}
-      <div className="overflow-x-auto pb-4">
-        <div className="min-w-[760px] bg-white rounded-lg border border-gray-200 shadow-xs overflow-hidden">
+      {/* Keep the ribbon and its audit marker inside the horizontal scroller's clip. */}
+      <div className={`overflow-x-auto pb-4 ${showAuditMarkers ? 'pt-8' : 'pt-4'}`}>
+        <div className="min-w-[760px] bg-white rounded-lg border border-gray-200 shadow-xs">
           {/* Table Header: Columns for Features + 3 Bundles */}
           <div className="grid grid-cols-4 border-b border-gray-200">
             {/* Left Header Blank / Features Title */}
@@ -111,15 +108,14 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
                 </p>
               </div>
 
-              <div className="mt-4 relative">
+              <div className={`relative ${showAuditMarkers ? 'mt-5' : 'mt-4'}`}>
                 {showAuditMarkers && (
-                  <button
-                    onClick={() => onOpenAuditItem?.('dp-drip-pricing')}
-                    className="absolute -top-3 right-0 bg-rose-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full animate-pulse shadow-xs z-10"
-                    title="Dark Pattern: Drip Surcharge Framing"
-                  >
-                    ⚠️ DP 2
-                  </button>
+                  <AuditMarker
+                    number={2}
+                    auditId="dp-drip-pricing"
+                    title="Audit Candidate: Per-flight Price Framing"
+                    onOpenAuditItem={onOpenAuditItem}
+                  />
                 )}
                 <button
                   onClick={() => onSelectTier('REGULAR')}
@@ -139,17 +135,16 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#f1c40f] text-[#073590] font-black text-[10px] px-3 py-1 rounded-sm uppercase tracking-wider flex items-center gap-1 shadow-xs whitespace-nowrap">
                 <Star className="w-3 h-3 fill-[#073590]" />
                 <span>IDEAL FOR YOUR TRIP TO PALANGA</span>
-              </div>
 
-              {showAuditMarkers && (
-                <button
-                  onClick={() => onOpenAuditItem?.('dp-visual-steering')}
-                  className="absolute -top-4 right-2 bg-rose-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full animate-bounce shadow-xs z-20"
-                  title="Dark Pattern: Asymmetric Visual Steering"
-                >
-                  ⚠️ DP 3
-                </button>
-              )}
+                {showAuditMarkers && (
+                  <AuditMarker
+                    number={3}
+                    auditId="dp-visual-steering"
+                    title="Audit Candidate: Unequal Visual Presentation"
+                    onOpenAuditItem={onOpenAuditItem}
+                  />
+                )}
+              </div>
 
               <div className="pt-2">
                 <div className="text-[11px] font-semibold text-gray-800 bg-yellow-100/90 p-2 rounded mb-2 border border-yellow-200">
@@ -181,7 +176,7 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
             </div>
 
             {/* FLEXI PLUS TIER */}
-            <div className={`p-3 text-center border-l border-gray-200 flex flex-col justify-between ${
+            <div className={`p-3 text-center border-l border-gray-200 rounded-tr-lg flex flex-col justify-between ${
               selectedTier === 'FLEXI_PLUS' ? 'bg-blue-50/30' : ''
             }`}>
               <div>
@@ -208,7 +203,7 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
           </div>
 
           {/* Feature Matrix Rows */}
-          <div className="divide-y divide-gray-100 text-xs">
+          <div className="divide-y divide-gray-100 text-xs rounded-b-lg overflow-hidden">
             {/* Row 1: 1 Small Bag */}
             <div className="grid grid-cols-4 items-center py-3.5 px-4 hover:bg-gray-50/50">
               <div className="flex items-center gap-2 text-gray-800 font-medium">
@@ -333,17 +328,19 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
 
             {/* Modal Header */}
             <div className="p-6 text-center pb-2">
-              <div className="flex items-center justify-center gap-2 mb-1">
+              <div className={`relative inline-block mb-1 ${showAuditMarkers ? 'mt-5' : ''}`}>
                 <h3 className="text-xl font-black text-gray-900 tracking-tight">
                   REGULAR is ideal for your trip!
                 </h3>
                 {showAuditMarkers && (
-                  <button
-                    onClick={() => onOpenAuditItem?.('dp-roadblock-confirmshame')}
-                    className="bg-rose-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm"
-                  >
-                    Confirmshaming ⚠️
-                  </button>
+                  <AuditMarker
+                    number={4}
+                    auditId="dp-roadblock-confirmshame"
+                    title="Audit Candidate: Basic Upsell Prompt"
+                    label="Upsell prompt"
+                    align="left"
+                    onOpenAuditItem={onOpenAuditItem}
+                  />
                 )}
               </div>
               <p className="text-xs text-gray-600 mt-2 max-w-md mx-auto leading-relaxed">

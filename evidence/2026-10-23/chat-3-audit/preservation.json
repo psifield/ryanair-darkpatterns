@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-23",
+  "timezone": "Asia/Singapore",
+  "comparison": "Pre-Chat-3 file hashes, including inherited uncommitted work; not the Git HEAD baseline",
+  "baseline_file_count": 267,
+  "unchanged_count": 257,
+  "changed_expected": [
+    "HANDOFF.md",
+    "src/App.tsx",
+    "src/components/ComparisonBanner.tsx",
+    "src/components/DarkPatternInspector.tsx",
+    "src/components/FareSelectionDark.tsx",
+    "src/components/FlightSelection.tsx",
+    "src/components/SideBySideView.tsx",
+    "src/data/mockData.ts",
+    "src/types/booking.ts",
+    "tests/audit-annotations.test.tsx"
+  ],
+  "deleted": [],
+  "unexpected_changes": [],
+  "new_nonignored_files": [
+    "AUDIT.md",
+    "docs/superpowers/plans/2026-10-23-fare-choice-audit.md",
+    "evidence/2026-10-23/chat-3-audit/audit-modal-desktop.png",
+    "evidence/2026-10-23/chat-3-audit/audit-modal-narrow.png",
+    "evidence/2026-10-23/chat-3-audit/audit-price-desktop.png",
+    "evidence/2026-10-23/chat-3-audit/basic-popup-narrow.png",
+    "evidence/2026-10-23/chat-3-audit/browser-checks.json",
+    "evidence/2026-10-23/chat-3-audit/checks.txt",
+    "evidence/2026-10-23/chat-3-audit/preservation.json",
+    "evidence/2026-10-23/chat-3-audit/verification.md"
+  ],
+  "selected_unchanged_sha256": {
+    "src/components/FareSelectionEthical.tsx": "56f51e0edb4c35e2754df7efb8425a4276ce25f5d4ec423db42260b9e46e3b3a",
+    "src/components/SeatsStep.tsx": "f9f3eec152d23d020592489d9942a8105c00ce4a723e4079eb352bc75c656d61",
+    "src/components/BagsStep.tsx": "48df33f945cd3728ed89f7611b9308ea1d6cf40043575440992be2ab5089022d",
+    "src/components/ReviewStep.tsx": "d29c1ab1e3b08bce76fda75716845b3831abf7acd65888f45bc668d7305d2a46",
+    "src/components/AuditMarker.tsx": "eb10417a6bcdb30701eb9e85302a4f7ff68d098b13246998314857c79805bb60",
+    "package.json": "425ec528aaad376fedc25634415269eca15b615afd197ef80b17ff680edcf4bb",
+    "bun.lock": "639cfd454d691b74aace367692dc627a76bb87f32e87e5512d59227b179fec96",
+    "vite.config.ts": "e2b951ea8ad28347fbd791da1011ca4222ed86e7d19bb54de20acde30487fc96",
+    "evidence/2026-10-23/audit-template-original.png": "797c85addff50ac54a21beee48c5336bfae8572d00f7b2269819dbd203666824",
+    "evidence/2026-10-23/ryanair-fare-screens/01-flight-selection-original.png": "c9f76149d13c6bb8433e4ba3fc6b8ab98d4f7846b0803889d78ddfe5f6e99bb8",
+    "evidence/2026-10-23/ryanair-fare-screens/02-fare-selection-original.png": "6b41d5daaea88c8af9c413c6a1ecfbac43e2c48c1346c44d21fe267058597b18",
+    "evidence/2026-10-23/ryanair-fare-screens/03-basic-upsell-original.png": "445db2e6fd4e6e1a0a13237ba02eb4e1e6fb964c31689e4dcaff90ade47be21e"
+  }
+}

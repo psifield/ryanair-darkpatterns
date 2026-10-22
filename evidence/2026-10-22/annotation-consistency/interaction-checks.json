@@ -1,0 +1,186 @@
+[
+  {
+    "mode": "original",
+    "viewport": 1440,
+    "name": "DP 1: Dark Pattern: Manufactured Urgency",
+    "index": 0,
+    "expected": "Manufactured Scarcity & False Urgency",
+    "passed": true
+  },
+  {
+    "mode": "original",
+    "viewport": 1440,
+    "name": "DP 1: Dark Pattern: Manufactured Urgency",
+    "index": 1,
+    "expected": "Manufactured Scarcity & False Urgency",
+    "passed": true
+  },
+  {
+    "mode": "original",
+    "viewport": 1440,
+    "name": "DP 2: Dark Pattern: Drip Surcharge Framing",
+    "index": 0,
+    "expected": "Deceptive Price Anchoring (Drip Surcharges)",
+    "passed": true
+  },
+  {
+    "mode": "original",
+    "viewport": 1440,
+    "name": "DP 3: Dark Pattern: Asymmetric Visual Steering",
+    "index": 0,
+    "expected": "Asymmetrical Visual Steering (Dark Nudge)",
+    "passed": true
+  },
+  {
+    "mode": "original",
+    "viewport": 1440,
+    "name": "DP 4: Dark Pattern: Roadblock Intercept",
+    "index": 0,
+    "expected": "Aggressive Roadblock & Confirmshaming Modal",
+    "passed": true
+  },
+  {
+    "mode": "comparison",
+    "viewport": 1440,
+    "name": "DP 1: Dark Pattern: Manufactured Urgency",
+    "index": 0,
+    "expected": "Manufactured Scarcity & False Urgency",
+    "passed": true
+  },
+  {
+    "mode": "comparison",
+    "viewport": 1440,
+    "name": "DP 1: Dark Pattern: Manufactured Urgency",
+    "index": 1,
+    "expected": "Manufactured Scarcity & False Urgency",
+    "passed": true
+  },
+  {
+    "mode": "comparison",
+    "viewport": 1440,
+    "name": "DP 2: Dark Pattern: Drip Surcharge Framing",
+    "index": 0,
+    "expected": "Deceptive Price Anchoring (Drip Surcharges)",
+    "passed": true
+  },
+  {
+    "mode": "comparison",
+    "viewport": 1440,
+    "name": "DP 3: Dark Pattern: Asymmetric Visual Steering",
+    "index": 0,
+    "expected": "Asymmetrical Visual Steering (Dark Nudge)",
+    "passed": true
+  },
+  {
+    "mode": "comparison",
+    "viewport": 1440,
+    "name": "DP 4: Dark Pattern: Roadblock Intercept",
+    "index": 0,
+    "expected": "Aggressive Roadblock & Confirmshaming Modal",
+    "passed": true
+  },
+  {
+    "mode": "original",
+    "viewport": 390,
+    "name": "modal DP 4",
+    "passed": true
+  },
+  {
+    "mode": "original",
+    "viewport": 390,
+    "name": "DP 1: Dark Pattern: Manufactured Urgency",
+    "index": 0,
+    "expected": "Manufactured Scarcity & False Urgency",
+    "passed": true
+  },
+  {
+    "mode": "original",
+    "viewport": 390,
+    "name": "DP 1: Dark Pattern: Manufactured Urgency",
+    "index": 1,
+    "expected": "Manufactured Scarcity & False Urgency",
+    "passed": true
+  },
+  {
+    "mode": "original",
+    "viewport": 390,
+    "name": "DP 2: Dark Pattern: Drip Surcharge Framing",
+    "index": 0,
+    "expected": "Deceptive Price Anchoring (Drip Surcharges)",
+    "passed": true
+  },
+  {
+    "mode": "original",
+    "viewport": 390,
+    "name": "DP 3: Dark Pattern: Asymmetric Visual Steering",
+    "index": 0,
+    "expected": "Asymmetrical Visual Steering (Dark Nudge)",
+    "passed": true
+  },
+  {
+    "mode": "original",
+    "viewport": 390,
+    "name": "DP 4: Dark Pattern: Roadblock Intercept",
+    "index": 0,
+    "expected": "Aggressive Roadblock & Confirmshaming Modal",
+    "passed": true
+  },
+  {
+    "mode": "comparison",
+    "viewport": 390,
+    "name": "DP 2: Dark Pattern: Drip Surcharge Framing",
+    "index": 0,
+    "expected": "Deceptive Price Anchoring (Drip Surcharges)",
+    "passed": true
+  },
+  {
+    "mode": "comparison",
+    "viewport": 390,
+    "name": "DP 3: Dark Pattern: Asymmetric Visual Steering",
+    "index": 0,
+    "expected": "Asymmetrical Visual Steering (Dark Nudge)",
+    "passed": true
+  },
+  {
+    "mode": "comparison",
+    "viewport": 390,
+    "name": "DP 4: Dark Pattern: Roadblock Intercept",
+    "index": 0,
+    "expected": "Aggressive Roadblock & Confirmshaming Modal",
+    "passed": true
+  },
+  {
+    "mode": "comparison",
+    "viewport": 390,
+    "name": "modal DP 4",
+    "passed": true
+  },
+  {
+    "mode": "comparison",
+    "viewport": 390,
+    "name": "DP 1: Dark Pattern: Manufactured Urgency",
+    "index": 0,
+    "expected": "Manufactured Scarcity & False Urgency",
+    "passed": true
+  },
+  {
+    "mode": "comparison",
+    "viewport": 390,
+    "name": "DP 1: Dark Pattern: Manufactured Urgency",
+    "index": 1,
+    "expected": "Manufactured Scarcity & False Urgency",
+    "passed": true
+  },
+  {
+    "mode": "original",
+    "viewport": 1440,
+    "name": "modal DP 4",
+    "passed": true
+  },
+  {
+    "mode": "comparison",
+    "viewport": 1440,
+    "name": "modal DP 4",
+    "passed": true
+  }
+]

@@ -1,0 +1,214 @@
+[
+  {
+    "name": "fresh desktop DP5 opens its record",
+    "passed": true
+  },
+  {
+    "name": "fresh desktop DP6 opens its record",
+    "passed": true
+  },
+  {
+    "name": "fresh desktop DP7 opens its record",
+    "passed": true
+  },
+  {
+    "name": "desktop audit click preserves insurance/newsletter/total",
+    "passed": true
+  },
+  {
+    "name": "desktop Ethical Seats has no flags",
+    "passed": true
+  },
+  {
+    "name": "desktop Ethical Bags has no flags",
+    "passed": true
+  },
+  {
+    "name": "desktop Ethical Review & Pay has no flags",
+    "passed": true
+  },
+  {
+    "name": "fresh desktop Ethical insurance starts unchecked",
+    "passed": true
+  },
+  {
+    "name": "desktop DP3 friction selects its own content",
+    "passed": true
+  },
+  {
+    "name": "desktop DP3 visual selects its own content",
+    "passed": true
+  },
+  {
+    "name": "desktop disclosure collapses with keyboard",
+    "passed": true
+  },
+  {
+    "name": "desktop disclosure expands with keyboard",
+    "passed": true
+  },
+  {
+    "name": "actual narrow viewport is 390x844",
+    "passed": true
+  },
+  {
+    "name": "fresh narrow DP5 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "fresh narrow DP6 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "fresh narrow DP7 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "narrow audit preserves insurance/newsletter/total",
+    "passed": true
+  },
+  {
+    "name": "narrow global toggle hides insurance flag and tag",
+    "passed": true
+  },
+  {
+    "name": "narrow DP3 friction selects its own content",
+    "passed": true
+  },
+  {
+    "name": "narrow DP3 visual selects its own content",
+    "passed": true
+  },
+  {
+    "name": "narrow Ethical Seats has no flags",
+    "passed": true
+  },
+  {
+    "name": "narrow Ethical Bags has no flags",
+    "passed": true
+  },
+  {
+    "name": "narrow Ethical Review & Pay has no flags",
+    "passed": true
+  },
+  {
+    "name": "fresh narrow Ethical insurance starts unchecked",
+    "passed": true
+  },
+  {
+    "name": "original-narrow DP1 0 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "original-narrow DP1 1 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "original-narrow DP2 0 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "original-narrow DP3 0 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "original-narrow DP3 direct marker expands correct subtopic",
+    "passed": true
+  },
+  {
+    "name": "original-narrow DP4 0 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "original-narrow DP4 1-modal opens correct record",
+    "passed": true
+  },
+  {
+    "name": "comparison-narrow DP1 0 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "comparison-narrow DP1 1 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "comparison-narrow DP2 0 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "comparison-narrow DP3 0 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "comparison-narrow DP3 direct marker expands correct subtopic",
+    "passed": true
+  },
+  {
+    "name": "comparison-narrow DP4 0 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "comparison-narrow DP4 1-modal opens correct record",
+    "passed": true
+  },
+  {
+    "name": "original-desktop DP1 0 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "original-desktop DP1 1 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "original-desktop DP2 0 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "original-desktop DP3 0 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "original-desktop DP3 direct marker expands correct subtopic",
+    "passed": true
+  },
+  {
+    "name": "original-desktop DP4 0 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "original-desktop DP4 1-modal opens correct record",
+    "passed": true
+  },
+  {
+    "name": "comparison-desktop DP1 0 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "comparison-desktop DP1 1 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "comparison-desktop DP2 0 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "comparison-desktop DP3 0 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "comparison-desktop DP3 direct marker expands correct subtopic",
+    "passed": true
+  },
+  {
+    "name": "comparison-desktop DP4 0 opens correct record",
+    "passed": true
+  },
+  {
+    "name": "comparison-desktop DP4 1-modal opens correct record",
+    "passed": true
+  },
+  {
+    "name": "all new markers retain shared static style and attached 4px pointers",
+    "passed": true
+  }
+]

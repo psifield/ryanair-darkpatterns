@@ -1,0 +1,12 @@
+✔ seven numbered groups retain eight distinct audit records (1.5743ms)
+✔ both DP 3 leaves open their own content in one expanded navigation group (15.1239ms)
+✔ new flags use agreed numbers and follow both mode and global visibility (15.2972ms)
+✔ insurance keeps its £14.50 default and total independently of newsletter and annotations (4.7778ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 462.5276

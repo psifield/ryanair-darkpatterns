@@ -1,8 +1,11 @@
 import React from 'react';
 import { Briefcase, AlertTriangle, ShieldCheck, ArrowRight, ArrowLeft } from 'lucide-react';
+import { AuditMarker } from './AuditMarker';
 
 interface BagsStepProps {
   isDarkPattern: boolean;
+  showAuditMarkers: boolean;
+  onOpenAuditItem?: (id: string) => void;
   onBack: () => void;
   onNext: () => void;
   additionalLuggage: number;
@@ -11,6 +14,8 @@ interface BagsStepProps {
 
 export const BagsStep: React.FC<BagsStepProps> = ({
   isDarkPattern,
+  showAuditMarkers,
+  onOpenAuditItem,
   onBack,
   onNext,
   additionalLuggage,
@@ -35,14 +40,19 @@ export const BagsStep: React.FC<BagsStepProps> = ({
       </div>
 
       {isDarkPattern ? (
-        <div className="bg-rose-50 border-2 border-rose-300 rounded-xl p-4 text-xs space-y-1 shadow-xs">
-          <div className="flex items-center gap-2 font-bold text-rose-900 text-sm">
-            <AlertTriangle className="w-4 h-4 text-rose-600 shrink-0" />
-            <span>Avoid Up to £60 Gate Fee!</span>
+        <div className="relative">
+          {showAuditMarkers && (
+            <AuditMarker number={6} auditId="dp-hidden-baggage" title="Ambiguous Baggage Allowance Framing" onOpenAuditItem={onOpenAuditItem} />
+          )}
+          <div className="bg-rose-50 border-2 border-rose-300 rounded-xl p-4 text-xs space-y-1 shadow-xs">
+            <div className="flex items-center gap-2 font-bold text-rose-900 text-sm">
+              <AlertTriangle className="w-4 h-4 text-rose-600 shrink-0" />
+              <span>Avoid Up to £60 Gate Fee!</span>
+            </div>
+            <p className="text-rose-950 leading-relaxed">
+              Oversized or non-compliant bags discovered at the gate will incur an immediate penalty charge of up to £60.00 per item! Add a 10kg overhead bag now to ensure boarding without hassle.
+            </p>
           </div>
-          <p className="text-rose-950 leading-relaxed">
-            Oversized or non-compliant bags discovered at the gate will incur an immediate penalty charge of up to £60.00 per item! Add a 10kg overhead bag now to ensure boarding without hassle.
-          </p>
         </div>
       ) : (
         <div className="bg-blue-50/70 border border-blue-200 rounded-xl p-4 text-xs space-y-1 shadow-xs">

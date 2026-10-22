@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlightLeg } from '../types/booking';
 import { Check, Info, Plane } from 'lucide-react';
+import { AuditMarker } from './AuditMarker';
 
 interface FlightSelectionProps {
   outboundFlight: FlightLeg;
@@ -228,18 +229,17 @@ export const FlightSelection: React.FC<FlightSelectionProps> = ({
               <div className="flex flex-col items-end relative">
                 {/* DARK PATTERN: Fake Scarcity badge */}
                 {isDarkPattern && outboundFlight.seatsLeft && (
-                  <div className="flex items-center gap-1 mb-1">
+                  <div className={`relative mb-1 ${showAuditMarkers ? 'mt-5' : ''}`}>
                     <span className="text-[11px] text-blue-700 font-bold">
                       {outboundFlight.seatsLeft} seats left at this price
                     </span>
                     {showAuditMarkers && (
-                      <button
-                        onClick={() => onOpenAuditItem?.('dp-scarcity')}
-                        className="bg-rose-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full animate-pulse shadow-sm"
-                        title="Dark Pattern: Manufactured Urgency"
-                      >
-                        ⚠️ DP 1
-                      </button>
+                      <AuditMarker
+                        number={1}
+                        auditId="dp-scarcity"
+                        title="Context: Scarcity Accuracy Unverified"
+                        onOpenAuditItem={onOpenAuditItem}
+                      />
                     )}
                   </div>
                 )}
@@ -380,18 +380,17 @@ export const FlightSelection: React.FC<FlightSelectionProps> = ({
               <div className="flex flex-col items-end relative">
                 {/* DARK PATTERN: Fake Scarcity badge */}
                 {isDarkPattern && inboundFlight.seatsLeft && (
-                  <div className="flex items-center gap-1 mb-1">
+                  <div className={`relative mb-1 ${showAuditMarkers ? 'mt-5' : ''}`}>
                     <span className="text-[11px] text-blue-700 font-bold">
                       {inboundFlight.seatsLeft} seats left at this price
                     </span>
                     {showAuditMarkers && (
-                      <button
-                        onClick={() => onOpenAuditItem?.('dp-scarcity')}
-                        className="bg-rose-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full animate-pulse shadow-sm"
-                        title="Dark Pattern: Manufactured Urgency"
-                      >
-                        ⚠️ DP 1
-                      </button>
+                      <AuditMarker
+                        number={1}
+                        auditId="dp-scarcity"
+                        title="Context: Scarcity Accuracy Unverified"
+                        onOpenAuditItem={onOpenAuditItem}
+                      />
                     )}
                   </div>
                 )}

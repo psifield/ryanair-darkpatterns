@@ -61,18 +61,18 @@ export const SideBySideView: React.FC<SideBySideViewProps> = ({
             Side-by-Side Dual Comparison Mode
           </span>
           <span className="text-xs text-blue-200">
-            Interact with both interfaces simultaneously to compare tactile friction and manipulative cues
+            Compare reconstructed fare choices; behavioural effects remain untested
           </span>
         </div>
 
         <div className="flex items-center gap-3 text-xs">
           <span className="flex items-center gap-1.5 text-rose-300">
             <span className="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
-            Left: Original Dark Pattern UI
+            Left: Original Prototype
           </span>
           <span className="flex items-center gap-1.5 text-emerald-300">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-            Right: Ethical Transparent UI
+            Right: Existing B Prototype
           </span>
         </div>
       </div>
@@ -86,10 +86,10 @@ export const SideBySideView: React.FC<SideBySideViewProps> = ({
           <div className="bg-rose-900 text-white p-3 rounded-xl flex items-center justify-between">
             <div className="flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 text-rose-400" />
-              <span className="font-bold text-sm">Original Ryanair (Dark Patterns Active)</span>
+              <span className="font-bold text-sm">Original Fare-choice Prototype</span>
             </div>
             <span className="text-[11px] bg-rose-800 text-rose-200 px-2.5 py-0.5 rounded-full">
-              High Pressure • Deceptive Anchoring
+              Price Framing • Upsell Candidates
             </span>
           </div>
 
@@ -132,10 +132,10 @@ export const SideBySideView: React.FC<SideBySideViewProps> = ({
           <div className="bg-emerald-950 text-white p-3 rounded-xl flex items-center justify-between">
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span className="font-bold text-sm">Ethical Redesign (Dark-Pattern Free)</span>
+              <span className="font-bold text-sm">Existing Ethical Redesign (Untested)</span>
             </div>
             <span className="text-[11px] bg-emerald-800 text-emerald-100 px-2.5 py-0.5 rounded-full">
-              Full Transparency • Zero Roadblocks
+              Whole-trip Prices • Direct Selection
             </span>
           </div>
 

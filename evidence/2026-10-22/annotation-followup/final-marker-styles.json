@@ -1,0 +1,242 @@
+[
+  {
+    "context": "original-narrow",
+    "number": 1,
+    "index": 0,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "original-narrow",
+    "number": 1,
+    "index": 1,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "original-narrow",
+    "number": 2,
+    "index": 0,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "original-narrow",
+    "number": 3,
+    "index": 0,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "original-narrow",
+    "number": 4,
+    "index": 0,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "original-narrow",
+    "number": 4,
+    "index": 1,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "comparison-narrow",
+    "number": 1,
+    "index": 0,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "comparison-narrow",
+    "number": 1,
+    "index": 1,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "comparison-narrow",
+    "number": 2,
+    "index": 0,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "comparison-narrow",
+    "number": 3,
+    "index": 0,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "comparison-narrow",
+    "number": 4,
+    "index": 0,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "comparison-narrow",
+    "number": 4,
+    "index": 1,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "original-desktop",
+    "number": 1,
+    "index": 0,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "original-desktop",
+    "number": 1,
+    "index": 1,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "original-desktop",
+    "number": 2,
+    "index": 0,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "original-desktop",
+    "number": 3,
+    "index": 0,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "original-desktop",
+    "number": 4,
+    "index": 0,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "original-desktop",
+    "number": 4,
+    "index": 1,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "comparison-desktop",
+    "number": 1,
+    "index": 0,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "comparison-desktop",
+    "number": 1,
+    "index": 1,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "comparison-desktop",
+    "number": 2,
+    "index": 0,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "comparison-desktop",
+    "number": 3,
+    "index": 0,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "comparison-desktop",
+    "number": 4,
+    "index": 0,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  },
+  {
+    "context": "comparison-desktop",
+    "number": 4,
+    "index": 1,
+    "animation": "none",
+    "color": "oklch(0.645 0.246 16.439)",
+    "fontSize": "10px",
+    "fontWeight": "700",
+    "gap": 0
+  }
+]

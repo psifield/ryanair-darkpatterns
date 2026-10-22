@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ViewMode, DeviceView, FareTierId } from './types/booking';
-import { OUTBOUND_FLIGHT, INBOUND_FLIGHT, FARE_TIERS, DARK_PATTERNS_AUDIT } from './data/mockData';
+import { OUTBOUND_FLIGHT, INBOUND_FLIGHT, FARE_TIERS, DARK_PATTERNS_AUDIT, DARK_PATTERN_GROUPS } from './data/mockData';
 import { Header } from './components/Header';
 import { BookingStepper } from './components/BookingStepper';
 import { FlightSelection } from './components/FlightSelection';
@@ -88,6 +88,7 @@ export default function App() {
         onToggleAuditMarkers={() => setShowAuditMarkers(!showAuditMarkers)}
         onOpenAuditDrawer={() => setIsAuditModalOpen(true)}
         auditCount={DARK_PATTERNS_AUDIT.length}
+        auditGroupCount={DARK_PATTERN_GROUPS.length}
       />
 
       {/* Main Container: Wrap in Mobile Frame if deviceView === 'mobile' */}
@@ -157,8 +158,8 @@ export default function App() {
                       <span>
                         <strong>Currently Viewing:</strong>{' '}
                         {viewMode === 'dark-pattern'
-                          ? 'Original Ryanair Experience (Dark Patterns Enabled)'
-                          : 'Ethical Redesign (Dark-Pattern Free & Transparent Pricing)'}
+                          ? 'Original Prototype (Reconstructed Fare Choice)'
+                          : 'Existing Ethical Redesign (Untested)'}
                       </span>
                     </div>
 
@@ -173,7 +174,7 @@ export default function App() {
                             : 'bg-emerald-200 text-emerald-900 hover:bg-emerald-300'
                         }`}
                       >
-                        Switch to {viewMode === 'dark-pattern' ? 'Ethical UI' : 'Dark Pattern'} →
+                        Switch to {viewMode === 'dark-pattern' ? 'Ethical UI' : 'Original Prototype'} →
                       </button>
                     </div>
                   </div>
@@ -231,6 +232,8 @@ export default function App() {
           {currentStep === 'seats' && (
             <SeatsStep
               isDarkPattern={viewMode === 'dark-pattern'}
+              showAuditMarkers={showAuditMarkers}
+              onOpenAuditItem={handleOpenAuditItem}
               selectedSeat={selectedSeat}
               onSelectSeat={setSelectedSeat}
               onBack={() => setCurrentStep('flights')}
@@ -242,6 +245,8 @@ export default function App() {
           {currentStep === 'bags' && (
             <BagsStep
               isDarkPattern={viewMode === 'dark-pattern'}
+              showAuditMarkers={showAuditMarkers}
+              onOpenAuditItem={handleOpenAuditItem}
               additionalLuggage={additionalLuggage}
               onSetAdditionalLuggage={setAdditionalLuggage}
               onBack={() => setCurrentStep('seats')}
@@ -253,6 +258,8 @@ export default function App() {
           {currentStep === 'review' && (
             <ReviewStep
               isDarkPattern={viewMode === 'dark-pattern'}
+              showAuditMarkers={showAuditMarkers}
+              onOpenAuditItem={handleOpenAuditItem}
               selectedTier={selectedTier}
               selectedSeat={selectedSeat}
               additionalLuggage={additionalLuggage}

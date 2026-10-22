@@ -1,0 +1,550 @@
+[
+  {
+    "path": "vite.config.ts",
+    "sha256": "E2B951EA8AD28347FBD791DA1011CA4222ED86E7D19BB54DE20ACDE30487FC96"
+  },
+  {
+    "path": "tsconfig.json",
+    "sha256": "58D501268D21EA004784E658F61FD55061028696FAD319390FD1421240365DF6"
+  },
+  {
+    "path": "src\\types\\booking.ts",
+    "sha256": "DBB548032BB8EF816E3144C465DA739F3377DCA1BD1E3CBAB96E1504B951984A"
+  },
+  {
+    "path": "src\\main.tsx",
+    "sha256": "8B129211A1E36A01A0C294633D8463C9A661A78FE04C3F26F45CA2FDABDEDFF0"
+  },
+  {
+    "path": "src\\index.css",
+    "sha256": "8A760A784F79570E06FDCB0C6A2677EA66C304230B7925EA313D63B46D8BA407"
+  },
+  {
+    "path": "src\\data\\mockData.ts",
+    "sha256": "A4BD5B9356E086BFCDCE35A1D65EA1D17B6FABEA44356C1D2F21F53991BB27D1"
+  },
+  {
+    "path": "src\\components\\AuditMarker.tsx",
+    "sha256": "02E01B9BCB468DAA3C8BC898B55CCF14E7AF28C720AA450EE4B2AADF8FEDCE12"
+  },
+  {
+    "path": "src\\App.tsx",
+    "sha256": "3ADCD9D8392D24F96BCE411C199058A69FF0F8A7F48F542D8D5589AA4BD87F76"
+  },
+  {
+    "path": "package.json",
+    "sha256": "425EC528AAAD376FEDC25634415269ECA15B615AFD197EF80B17FF680EDCF4BB"
+  },
+  {
+    "path": "metadata.json",
+    "sha256": "BEB3C935DC28898FC2D71A0BD37C102BCFC1D0431B97DF2E0DE3159EC59637D4"
+  },
+  {
+    "path": "index.html",
+    "sha256": "75685CC2E51B758A53C062A17AEFF7E9E49F407BD7E621022DEEA9BFB5D31E1A"
+  },
+  {
+    "path": "HANDOFF.md",
+    "sha256": "5F5438BEFC0897128C919D717F1FAA08DF47E5141D05F58A870FD2B6AB3CDC66"
+  },
+  {
+    "path": "src\\components\\FareSelectionDark.tsx",
+    "sha256": "173CDD9D499F2B8E21ECAE2DACD3FF18416B6CD6DB4C6946DD8A6FD9ECC9195A"
+  },
+  {
+    "path": "src\\components\\DarkPatternInspector.tsx",
+    "sha256": "A85E608390F8F98BB6D96A4B3B9A73697D7BA693C0CF8E302F39DBC5414B17E8"
+  },
+  {
+    "path": "src\\components\\ComparisonBanner.tsx",
+    "sha256": "DB9833807C5A50DC9CFB9AF931DC57A7D6A0EC392D71C422CEDBE070A60A9139"
+  },
+  {
+    "path": "src\\components\\BookingStepper.tsx",
+    "sha256": "EED0707019DE2A7F92A69646AA8C6AC373188705FC14B323B421C14AB3D35E62"
+  },
+  {
+    "path": "src\\components\\BagsStep.tsx",
+    "sha256": "29E1C0841F1AE4F5F11F41CACC0A1553A1F175910B9D0E48237B872961421CB2"
+  },
+  {
+    "path": ".gitignore",
+    "sha256": "EB13E93639D4C770F0A28BA670E9F4A922BC20FF1E734BDBE916740B0AE13D74"
+  },
+  {
+    "path": "src\\components\\Header.tsx",
+    "sha256": "5A2E0DE2C36BCFFAE4DC7A8B18B769A08CDE6215AFA26C2CD7CB902F2A2F1182"
+  },
+  {
+    "path": "src\\components\\FlightSelection.tsx",
+    "sha256": "0215448A1C38D5A6A68C8A6C662314DC86AC7BA947A31F67F58B9B02C8232FC0"
+  },
+  {
+    "path": "src\\components\\FareSelectionEthical.tsx",
+    "sha256": "56F51E0EDB4C35E2754DF7EFB8425A4276CE25F5D4EC423DB42260B9E46E3B3A"
+  },
+  {
+    "path": "src\\components\\NewsletterFooter.tsx",
+    "sha256": "E1E4B74062AF667FA07BA1C31F73F4D24A99EA40626331DBD598EBBD5264F9C6"
+  },
+  {
+    "path": "src\\components\\ReviewStep.tsx",
+    "sha256": "7DC9BD8A1FD80FEC6DC1C541F185FD26B4ED11ECE02EDD79CAD2A3DE420DD43D"
+  },
+  {
+    "path": "ANNOTATION_HANDOFF.md",
+    "sha256": "C6DE78F3ABA693EAF614CF03C2B059CE8E2001BBA097AE2BA9A8407346CBC4DC"
+  },
+  {
+    "path": "bun.lock",
+    "sha256": "639CFD454D691B74AACE367692DC627A76BB87F32E87E5512D59227B179FEC96"
+  },
+  {
+    "path": "src\\components\\SideBySideView.tsx",
+    "sha256": "DC8D3A55C9BD91C84DCE1D8A4EFB40710FD473905AA4735794384639BDEBB733"
+  },
+  {
+    "path": "src\\components\\SeatsStep.tsx",
+    "sha256": "469C9EF36A21542A739BBCAA44B0A978380EFC437655FD747C166E0205A1D26A"
+  },
+  {
+    "path": "evidence\\2026-10-22\\ui-and-case-review.md",
+    "sha256": "AF928FA3CB361DED3664CFCF54C06035FCACB7ED559FA0781E0BBE194DF96C11"
+  },
+  {
+    "path": "evidence\\2026-10-22\\review-ethical-full.jpg",
+    "sha256": "1730E35C21417D38F6242B928FCC4FFDA92DA874DF4FE5F6EBFE69C5D48D20B4"
+  },
+  {
+    "path": "evidence\\2026-10-22\\review-ethical-390.jpg",
+    "sha256": "70776E2017DA2AC15BAA40EF6B0009338261F46E2D73004476ED10452D1F92B7"
+  },
+  {
+    "path": "evidence\\2026-10-22\\review-comparison-controls.jpg",
+    "sha256": "A78F71F379C4A9CB15944AB969D31659029E962D83D64A508F13873E33A7C59E"
+  },
+  {
+    "path": "evidence\\2026-10-22\\review-basic-upsell.jpg",
+    "sha256": "DF9E76B310D7837B618821059265F74BDC50C3ACFFB51CCC63A3CB2B5C842D6E"
+  },
+  {
+    "path": "evidence\\2026-10-22\\plus-ribbon-annotations-off.jpg",
+    "sha256": "8E1D27C5608CD00C4B3995ECF8A76B54454C0EAE9CA03F441545F9D7F56D13B6"
+  },
+  {
+    "path": "evidence\\2026-10-22\\plus-ribbon-and-dp3-fixed.jpg",
+    "sha256": "A02DAC224599A226F5F6522A155668F513FE78640ACF2357245705A2D8AB45FD"
+  },
+  {
+    "path": "evidence\\2026-10-22\\plus-ribbon-and-dp3-fixed-390.jpg",
+    "sha256": "37993BFAF9C428136528E07CC2DCC2F374C2B202FD1B2D8746BD414794BEE884"
+  },
+  {
+    "path": "evidence\\2026-10-22\\original-opening-desktop.jpg",
+    "sha256": "9A5B2714F6C4287E1D0A7D964925BD4E9B116FA3124E8F3AEAFE483B20F5B016"
+  },
+  {
+    "path": "evidence\\2026-10-22\\original-opening-desktop-full.jpg",
+    "sha256": "F8991A73703156BACA9A6E8EAD7BC2CD99A9D8C460BB5790634E20466C664BF7"
+  },
+  {
+    "path": "evidence\\2026-10-22\\dp3-badge-fixed.jpg",
+    "sha256": "6491FDB6E41BFA93C1AF10C80B36E09BFB5B167CDDB3D14561379600B60E2D64"
+  },
+  {
+    "path": "evidence\\2026-10-22\\dp3-badge-fixed-390.jpg",
+    "sha256": "96583706BF57C2FE7C7680FE636900FDBBDE5A3EAAFAC0F3523E83F30A25ED53"
+  },
+  {
+    "path": "evidence\\2026-10-22\\dp3-attached-ribbon-view.jpg",
+    "sha256": "1833BDF218722CEC0279492591293DC198BA0EBFCED04F9D3A97DE2EADB1EA90"
+  },
+  {
+    "path": "evidence\\2026-10-22\\dp3-attached-ribbon-detail.jpg",
+    "sha256": "2046DE33232D80E4222B35FA43DF61435E111B76AA4F21A29F2FA9BCE794CDF9"
+  },
+  {
+    "path": "evidence\\2026-10-22\\dp3-attached-ribbon-390.jpg",
+    "sha256": "AE98E2C79D47C249B1B94DF91E6014D6315077CC8B5483E7FD00D557FEA26F7C"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\verification.md",
+    "sha256": "BE3E0F669A1CDB37640F7AFC488D3F1C368643F4D5C5CE62965F9FE06B30F638"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-ribbon-on.jpg",
+    "sha256": "BE7DC4A585F354A0D959E820FD9EA298AB31B2B7AEC58FDBF0175A70EE6754D9"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-ribbon-on.geometry.json",
+    "sha256": "D2DCF5034BA0FEAD362DA8924B76CC3F32551350DA1576C47698832A89C75135"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-ribbon-off.jpg",
+    "sha256": "B1882E450FF091384F5A0D4628D2635735CF7CD9EAD77E11CF935B26E9AC5E3C"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-ribbon-off.geometry.json",
+    "sha256": "5B75AFD9A3AC7D64C6C84B188FA406F45B2416B362FF22470821B3EE7DE7A2A7"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-price-on.jpg",
+    "sha256": "90DE3D3547ECA4C131C67571B06586E4C8521185FEB85C14CCA62B3D0C98CDD6"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-price-on.geometry.json",
+    "sha256": "EF4B6A5FDAC15783F1A57385F7EEB0EDA8F2D3A9D0A18E930228DB78586568CC"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-outbound-on.jpg",
+    "sha256": "8223F8B950894968D7C9CA04E3F816EB318887538D093B139FF104E9B8A2D646"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-outbound-on.geometry.json",
+    "sha256": "5B39740DB5ACCD7355EDF8D6401A25F1F9D4A3261EFA84D0EE6A24DB07B9160A"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-outbound-off.jpg",
+    "sha256": "F992A365E59C47785C708187F69CBACC7B9F989D921C2CE0425319FBE1B5F7C6"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-outbound-off.geometry.json",
+    "sha256": "A9D5AC81A8DCA89FE00019E747EFF935E032233E4C6E3428F337620216BB13DB"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-modal-on.jpg",
+    "sha256": "583B5C7D726A68C05D997EF24E073D5464AFC5CC6AB7CF34C55AD140DAEFEBE7"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-modal-on.geometry.json",
+    "sha256": "730884877D93F61DE23B3F4331523D90E62E12AC49D178A340F4D1C278F5BE32"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-modal-off.jpg",
+    "sha256": "32901BE595E9F1641AF14BF60B0CC49F77D3F367137D5031A3AE0AC17A8C6541"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-modal-off.geometry.json",
+    "sha256": "692BBBB6F498B645829CC9CFEF6541F4697488E5EEB9D9670A6940A8977A53E6"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-inbound-on.jpg",
+    "sha256": "3EF56C3A247A05C9B0594A40B8B3CF1F92B8D48F0CE199F28B514B56D0954264"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-inbound-on.geometry.json",
+    "sha256": "33A6B511E94F3488DC11F6595533A0221B66869852D01D55AB0A0EE1C9BAFAAA"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-inbound-off.jpg",
+    "sha256": "CAB2B736339A808768BA6161ECC67FF800931BA710E95B203A44FCD064395E15"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-inbound-off.geometry.json",
+    "sha256": "ADA0A1028DD765DBFE0A2C0F3D6085B58D5E32A4CEA3961781F836481E52A494"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-basic-on.jpg",
+    "sha256": "6D2B75E1AE22365AB8CEDBF0A1F5F56E575DA6ABBA7BDB7A58EDC4CD9993A962"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-basic-on.geometry.json",
+    "sha256": "7530459BC1274859B2F2617C11E44BD2B2033875C815EC56847EB59354FCD75F"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-basic-off.jpg",
+    "sha256": "9236FF755C84C8538A7DF6AAEA6C6A5DB4E31E32CB19F7450EEF3DCCF74D4BAC"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-narrow-basic-off.geometry.json",
+    "sha256": "692BBBB6F498B645829CC9CFEF6541F4697488E5EEB9D9670A6940A8977A53E6"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-desktop-outbound-on.jpg",
+    "sha256": "D013BA93F056DA14298B4F889614A58E7EE72593D9F73EDC67656E28A24BFA46"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-desktop-outbound-on.geometry.json",
+    "sha256": "A108EFF721CC1BB6B84BE730CBAC122516A7658C8C64536E361B9BBF46D68C6E"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-desktop-modal-on.jpg",
+    "sha256": "5E4A371198785CA94974F35845CF98980B7AAD5CA8AF8806DAB4F9DF07490250"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-desktop-modal-on.geometry.json",
+    "sha256": "A8670D72D43E755689E53562BC955F3973CB3CD60CB7FC497B386888A219B2A7"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-desktop-modal-off.jpg",
+    "sha256": "817BE93B39B5FF1C79D964AC526CCC7E170502DDF252B77C50383C4321F048E0"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-desktop-modal-off.geometry.json",
+    "sha256": "9D433DAAF19FC6AF43D11532CF6B674AAC30C174320016AD1782CE5799819A1A"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-desktop-inbound-on.jpg",
+    "sha256": "AE14498687ED3909B1E47B023D969CB4B855C1CB15DFCB8548E27C264E8303CA"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-desktop-inbound-on.geometry.json",
+    "sha256": "E45C4FA6268653B879A05C1F6D85716044EDD676C86C83C8CF6177CCEBC3ED45"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-desktop-fares-on.jpg",
+    "sha256": "284F96F62AB8D028379DB335287817028A80A35A5825575443233BA106066E0E"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-desktop-fares-on.geometry.json",
+    "sha256": "C373A3521A699EB53416FD032BF337D18222A161D2E06DEC03904CEF35359BBF"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-desktop-fares-off.jpg",
+    "sha256": "3208510D8051AA9712D10926612356293331E6EE02AA9C146953876B14390E22"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\original-desktop-fares-off.geometry.json",
+    "sha256": "9D433DAAF19FC6AF43D11532CF6B674AAC30C174320016AD1782CE5799819A1A"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\marker-styles.json",
+    "sha256": "17AAAC37648DF69B35BD21F4022B6A4D5EA36BF4C0966ADE3177930F81E9528E"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\marker-closeups-narrow.jpg",
+    "sha256": "4213C60D767AB2D9E76CBF3FFCB8AFFB746B30F41F18C1BA831EF697522843C4"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\marker-closeups-desktop.jpg",
+    "sha256": "47E50EFF9ADF754F580EE6F9F648B08776D9F68B91DC4A26A3A156A7FF373929"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\interaction-checks.json",
+    "sha256": "58140F69949D9F3FAA3ADB9A1282A6945C5B9FDDA35A8A76E3CC987D202FA1E6"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\ethical-narrow-on.jpg",
+    "sha256": "8DB47238EFD4DAAA111C769632FEC19E726E43CA627BF9D206E2E4747A5760E6"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\ethical-narrow-on.geometry.json",
+    "sha256": "3152F0B94A11F99E5F7D483FBAB84BE8C413B782CBC204BC47B581A0E8D67991"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\ethical-narrow-off.jpg",
+    "sha256": "A2D72EF6B397C40848103C9A264630E6BBF7895C8D34C56A783F56252C0A277A"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\ethical-narrow-off.geometry.json",
+    "sha256": "3152F0B94A11F99E5F7D483FBAB84BE8C413B782CBC204BC47B581A0E8D67991"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\ethical-desktop-on.jpg",
+    "sha256": "02F938810C71FB04BBA7767C2188CCA10975F1022A1ECD075C2DE0DF06217992"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\ethical-desktop-on.geometry.json",
+    "sha256": "98EC84B8220F4FC744EC215F6D549C6189D48914F81F1B7E05C9CDDEDC1CA533"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\ethical-desktop-off.jpg",
+    "sha256": "01C5C63E5E8E6F1CCE182A398C5BECF46D3529C89B3B8CF92D88D470B0168444"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\ethical-desktop-off.geometry.json",
+    "sha256": "98EC84B8220F4FC744EC215F6D549C6189D48914F81F1B7E05C9CDDEDC1CA533"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\dp4-narrow-modal.jpg",
+    "sha256": "B0ADDCB86809C01F827FA355FFB0444D44D777A941A6124228EF9DBE0D25EE70"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\dp4-narrow-basic.jpg",
+    "sha256": "A1F36DE9218B1325C8BCCC741670EDBB61B6DAF59277612B65DC7151F7CFBE66"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\dp4-desktop-modal.jpg",
+    "sha256": "3D57981C61FAB3ED1B33A963C4F36EA3EC7CE3C5D2AFCEE3AE26E2ED8F579C3E"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\dp4-desktop-basic.jpg",
+    "sha256": "C8A984486EB8FD61324A9CA1FB3272CB30866F0898C84E925B0A71CB230952AB"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\dp3-narrow-ribbon.jpg",
+    "sha256": "323D7D515D7260F63CAE6350C7453D144F6421C7F8AB68EEE8B4B76F2FBCEA34"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\dp3-desktop-ribbon.jpg",
+    "sha256": "CED5B6114E21565958F7F56C3AAE43A4BD271BE6F46AABEF6E0BE87BCC19B842"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\dp2-narrow-price.jpg",
+    "sha256": "2539B8CA21B7CE73486A7497AC0AD099CB640E927AB2FDDF60999C96A7097D3F"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\dp2-desktop-price.jpg",
+    "sha256": "B0B3CD47F4CC7926091A815387CBF62F1A09B2E0906FD2B3B42EA1FC0DA1368A"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\dp1-narrow-outbound.jpg",
+    "sha256": "0D5F8979537BE6A3C7E154030B3598A4DFDF17631669F8C2CF4B8705000B1739"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\dp1-narrow-inbound.jpg",
+    "sha256": "F517E43DDE7C75A6DB9413E4C6660FB4B639498B7EB4C07835AB5F9A019CADC2"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\dp1-desktop-outbound.jpg",
+    "sha256": "A010F77E52B26177C1E914B81B604C60F2E251C135F5F829237F43A9455C92E5"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\dp1-desktop-inbound.jpg",
+    "sha256": "98587A153BFFEE05D09DD57E8C2F7DB12225E02280F05B855820844E05ADD8C7"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-ribbon-on.jpg",
+    "sha256": "CBC546FFF3D1B5B3569F0ACA890BAC1A0C010387B16A1CA94750F9876CD5DA68"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-ribbon-on.geometry.json",
+    "sha256": "1ADB249E63B6BA34642037B5816ECD8D4B65BC307809A710203E78E6056855E5"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-ribbon-off.jpg",
+    "sha256": "0DE94981EEFD2AEE9CB6313F6F602CF84B0B84CA510A1360D6D23F6E5420BE16"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-ribbon-off.geometry.json",
+    "sha256": "8806E12BC9BCB39FDE4ECD7806EFB1C19FB75D052C4A9E919DBBD5FBED14B4F5"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-price-on.jpg",
+    "sha256": "053720634117B26D7EA9ADAC05857A63345AAFA7FF083D31DE8833ADA577EC38"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-price-on.geometry.json",
+    "sha256": "4FB674026F4D2412B2DF7DC68C099A6947BFEA0897D3B47B414FC5A1A8AACC8E"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-outbound-on.jpg",
+    "sha256": "7D06DB4425B96B5488D3975B7C8646EE8F1C147837ECD08C515CF3A7A87F77B0"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-outbound-on.geometry.json",
+    "sha256": "39C51404C25E7B7928D5DD5866EF9CEA9D9A3B10CDA50B5F0A3A885449BD93DE"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-outbound-off.jpg",
+    "sha256": "64979CD0F5B9C1D0001A7D4B177A7581D7A93F7F9963688B8C9EE1F146E3C93C"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-outbound-off.geometry.json",
+    "sha256": "3100A1475C83E2857DC0F99D59F41BFDF639DFA575150650011264A174298E53"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-modal-on.jpg",
+    "sha256": "18E188E5EC4DB1D0CCCA1BFF91D3E5E5625BA35474AA42804557BE7622B2F1EA"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-modal-on.geometry.json",
+    "sha256": "156A1D4AB4C9579927832B877C43B386CCB6611FC4DDCE6DF86A5536E50E22F3"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-modal-off.jpg",
+    "sha256": "73760EA3762D7A62C851B6B45F020441A47D83723CA9F906EA4EA5A66792F322"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-modal-off.geometry.json",
+    "sha256": "C739125D08231CE9BF355173DE945F8479AC6620B44E88E09BAE4618E64F0F95"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-inbound-on.jpg",
+    "sha256": "D971394E4B8666CEFB6919C0FA3A85401A3A00F00B3A69BB2065D442F8C30F59"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-inbound-on.geometry.json",
+    "sha256": "F6241720CC5E01B11EC985039B1870D47D1B1E397D47A8BD604E3058583A96E1"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-inbound-off.jpg",
+    "sha256": "C6BBA366805168A42FE0CDA48D9FC5FFA4548E68FF45E6C1B189E6BE05F1DED8"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-inbound-off.geometry.json",
+    "sha256": "C9BBA100EE6A7C24EF38D667080DEAF3E19A47D09304E5D76DC5D22394AD3BDC"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-basic-on.jpg",
+    "sha256": "90018CD60E2E64F2B2648CAF8582478F9D8BC0A9196F36CED2283DA6F454BED8"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-basic-on.geometry.json",
+    "sha256": "2E65DB4D0AE1A64B8A346F7DCED6C0AA886F34BFC9BEAAF31823E1D69D11CE21"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-basic-off.jpg",
+    "sha256": "022137EAD145592E30C35E983515B217B1E2B9460FAC473AC8CA3FE1807C11EC"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-narrow-basic-off.geometry.json",
+    "sha256": "A7657485C9FA71E01CFBE7B5A1B457E3084F2FF95E85BA5DEC422730BA074C91"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-desktop-price-on.jpg",
+    "sha256": "CB5960F148964C1C0D6401CFEB43E0A5F87B37EF340F683D003C42F749966C77"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-desktop-price-on.geometry.json",
+    "sha256": "EDE3C7336F11C8681DC2DEC62155170EE52C12C0486096D1880147E3AF934113"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-desktop-modal-on.jpg",
+    "sha256": "3789C0C07C947AE66D01FD4027D20D1290F4BAAB872DE32014C47A8D60745D47"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-desktop-modal-on.geometry.json",
+    "sha256": "1FF2387CC97CE922789BFA7D4A3D99A3C11A081FCCD8419F64A9F4843A6CC9B9"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-desktop-modal-off.jpg",
+    "sha256": "83D887A65BD74CB484E091D7A76E3B767920FC27D67C6C00387E45D736C053F4"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-desktop-modal-off.geometry.json",
+    "sha256": "9AD22DC9031D554FAC497F9A64314CDF563506C6266AB57C13C524B1DCA9C3CF"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-desktop-fares-on.jpg",
+    "sha256": "73C45D6784002880DFB1674110A7FE82C9D1E84FD2C51D0F3CFDD3E5753A62F6"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-desktop-fares-on.geometry.json",
+    "sha256": "7A39852948DF151DF639B3410899B8ACE95B3B3897009C1FB8132553AF6A741C"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-desktop-fares-off.jpg",
+    "sha256": "BBA9350B438D91B13A0BBD1AF28F28E3849013C04455ACA6F8A41E37685EDDF0"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\comparison-desktop-fares-off.geometry.json",
+    "sha256": "B0CF86331D2F570E5F1521A2EE5B1753E6B09186F358A39DED0AD9CD2828075C"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\audit-record-6-overlap.jpg",
+    "sha256": "846F22E70334C2741558389D53236E44F1AF0C810B72A29E5F657514BF6A5F58"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\audit-record-6-overlap.geometry.json",
+    "sha256": "CB3B6CBF5E0946D5F79713332C42005F6FAB1E46B30EE6C188F7A199453DF51E"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\audit-record-5.jpg",
+    "sha256": "99E328BE6912362C84092880DCFA7E73E3537F778008E1CF038230F75054F748"
+  },
+  {
+    "path": "evidence\\2026-10-22\\annotation-consistency\\audit-record-5.geometry.json",
+    "sha256": "CB3B6CBF5E0946D5F79713332C42005F6FAB1E46B30EE6C188F7A199453DF51E"
+  }
+]

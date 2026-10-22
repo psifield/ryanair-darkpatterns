@@ -1,0 +1,55 @@
+{
+  "reviewed_on": "2026-10-23",
+  "timezone": "Asia/Singapore",
+  "source_folder": "C:\\Users\\zhang\\Documents\\Decision Architecture Readings",
+  "locator_basis": "One-based PDF pages; not original book or journal pagination.",
+  "method": "Keyword scan, selected full-page reads, visual inspection of 8 key pages, and independent text extraction checks with pypdf and PDFium.",
+  "total_pdf_pages": 482,
+  "files": [
+    {
+      "file": "MGMT6108_AY2627August_Week01.pdf",
+      "pages": 100,
+      "sha256": "94c1064d2f8b0ce93a65d27d46398fd8ea206dc2e79921c7541b6b6746846c8c",
+      "cross_parser_verified_pages": []
+    },
+    {
+      "file": "MGMT6108_AY2627August_Week02_REview.pdf",
+      "pages": 142,
+      "sha256": "004a4573cfa3d9fbaf6132cc91663f4ef2f50409720c7c448a3abf1c892e5a29",
+      "cross_parser_verified_pages": []
+    },
+    {
+      "file": "MGMT6108_AY2627August_Week03_REview.pdf",
+      "pages": 101,
+      "sha256": "469b18aa45b87a335c7bf39686eca7929b3759538a7550fdacdb36640f81a2e0",
+      "cross_parser_verified_pages": []
+    },
+    {
+      "file": "MGMT6108_AY2627August_Week04_Preview.pdf",
+      "pages": 91,
+      "sha256": "cf192bcdd39a8928b8b584bea61ed4f0f9f14bb529d03f506cfc8dd0e5dea123",
+      "cross_parser_verified_pages": [
+        27,
+        41,
+        44,
+        45,
+        48,
+        87,
+        90
+      ]
+    },
+    {
+      "file": "MGMT6108_Week07_Preview.pdf",
+      "pages": 48,
+      "sha256": "c1426284489cfaef9ebbd89a74abe81ffa4a20f255a9bdc6ecf23065b0e747aa",
+      "cross_parser_verified_pages": [
+        6,
+        7,
+        13,
+        14,
+        15,
+        20
+      ]
+    }
+  ]
+}

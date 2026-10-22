@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { FareTierId } from '../types/booking';
 import { FARE_TIERS } from '../data/mockData';
 import { ArrowLeft, CheckCircle2, ShieldCheck, AlertTriangle } from 'lucide-react';
+import { AuditMarker } from './AuditMarker';
 
 interface ReviewStepProps {
   isDarkPattern: boolean;
+  showAuditMarkers: boolean;
+  onOpenAuditItem?: (id: string) => void;
   selectedTier: FareTierId;
   selectedSeat: string;
   additionalLuggage: number;
@@ -15,6 +18,8 @@ interface ReviewStepProps {
 
 export const ReviewStep: React.FC<ReviewStepProps> = ({
   isDarkPattern,
+  showAuditMarkers,
+  onOpenAuditItem,
   selectedTier,
   selectedSeat,
   additionalLuggage,
@@ -112,32 +117,37 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
           </div>
 
           {/* Travel Insurance Add-on (Dark Pattern Pre-check demo) */}
-          <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-xs space-y-3">
-            <div className="flex items-center justify-between">
-              <h3 className="font-bold text-sm text-gray-900">Travel Protection Insurance</h3>
-              {isDarkPattern && (
-                <span className="text-[10px] bg-rose-100 text-rose-800 font-bold px-2 py-0.5 rounded">
-                  Dark Pattern: Pre-selected Opt-in
-                </span>
-              )}
-            </div>
-
-            <label className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 cursor-pointer text-xs">
-              <input
-                type="checkbox"
-                checked={insuranceOptIn}
-                onChange={(e) => setInsuranceOptIn(e.target.checked)}
-                className="mt-0.5 rounded text-[#073590] focus:ring-[#073590]"
-              />
-              <div>
-                <span className="font-bold text-gray-800 block">
-                  Add Comprehensive Medical & Trip Cancellation Cover (+£14.50)
-                </span>
-                <span className="text-gray-500 text-[11px] block mt-0.5">
-                  Protects against unexpected illness, medical repatriation, and flight delays.
-                </span>
+          <div className="relative">
+            {isDarkPattern && showAuditMarkers && (
+              <AuditMarker number={7} auditId="dp-travel-protection" title="Automatically Opted-in Travel Protection" onOpenAuditItem={onOpenAuditItem} />
+            )}
+            <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-xs space-y-3">
+              <div className="flex items-center justify-between">
+                <h3 className="font-bold text-sm text-gray-900">Travel Protection Insurance</h3>
+                {isDarkPattern && showAuditMarkers && (
+                  <span className="text-[10px] bg-rose-100 text-rose-800 font-bold px-2 py-0.5 rounded">
+                    Dark Pattern: Pre-selected Opt-in
+                  </span>
+                )}
               </div>
-            </label>
+
+              <label className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 cursor-pointer text-xs">
+                <input
+                  type="checkbox"
+                  checked={insuranceOptIn}
+                  onChange={(e) => setInsuranceOptIn(e.target.checked)}
+                  className="mt-0.5 rounded text-[#073590] focus:ring-[#073590]"
+                />
+                <div>
+                  <span className="font-bold text-gray-800 block">
+                    Add Comprehensive Medical & Trip Cancellation Cover (+£14.50)
+                  </span>
+                  <span className="text-gray-500 text-[11px] block mt-0.5">
+                    Protects against unexpected illness, medical repatriation, and flight delays.
+                  </span>
+                </div>
+              </label>
+            </div>
           </div>
 
           {/* Marketing Opt-in */}

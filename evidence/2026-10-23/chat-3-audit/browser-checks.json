@@ -1,0 +1,173 @@
+{
+  "reviewDate": "2026-10-23",
+  "timezone": "Asia/Singapore",
+  "url": "http://127.0.0.1:3000/",
+  "requestedCssViewports": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "checks": [
+    {
+      "viewport": "1440x1000",
+      "record": "dp-drip-pricing",
+      "result": "pass",
+      "detail": "Both demo and real-capture price bases shown"
+    },
+    {
+      "viewport": "1440x1000",
+      "record": "dp-visual-steering",
+      "result": "pass"
+    },
+    {
+      "viewport": "1440x1000",
+      "record": "dp-asymmetric-friction",
+      "result": "pass"
+    },
+    {
+      "viewport": "1440x1000",
+      "record": "dp-scarcity",
+      "result": "pass"
+    },
+    {
+      "viewport": "1440x1000",
+      "record": "dp-drip-pricing",
+      "result": "pass"
+    },
+    {
+      "viewport": "1440x1000",
+      "record": "dp-roadblock-confirmshame",
+      "result": "pass"
+    },
+    {
+      "viewport": "1440x1000",
+      "record": "dp-seat-pressure",
+      "result": "pass"
+    },
+    {
+      "viewport": "1440x1000",
+      "record": "dp-hidden-baggage",
+      "result": "pass"
+    },
+    {
+      "viewport": "1440x1000",
+      "record": "dp-travel-protection",
+      "result": "pass"
+    },
+    {
+      "viewport": "390x844",
+      "record": "dp-visual-steering",
+      "result": "pass"
+    },
+    {
+      "viewport": "390x844",
+      "record": "dp-asymmetric-friction",
+      "result": "pass"
+    },
+    {
+      "viewport": "390x844",
+      "record": "dp-scarcity",
+      "result": "pass"
+    },
+    {
+      "viewport": "390x844",
+      "record": "dp-drip-pricing",
+      "result": "pass"
+    },
+    {
+      "viewport": "390x844",
+      "record": "dp-roadblock-confirmshame",
+      "result": "pass"
+    },
+    {
+      "viewport": "390x844",
+      "record": "dp-seat-pressure",
+      "result": "pass"
+    },
+    {
+      "viewport": "390x844",
+      "record": "dp-hidden-baggage",
+      "result": "pass"
+    },
+    {
+      "viewport": "390x844",
+      "record": "dp-travel-protection",
+      "result": "pass"
+    },
+    {
+      "viewport": "1440x1000",
+      "marker": "DP 1: Context: Scarcity Accuracy Unverified",
+      "occurrence": 0,
+      "result": "pass"
+    },
+    {
+      "viewport": "1440x1000",
+      "marker": "DP 1: Context: Scarcity Accuracy Unverified",
+      "occurrence": 1,
+      "result": "pass"
+    },
+    {
+      "viewport": "1440x1000",
+      "marker": "DP 2: Audit Candidate: Per-flight Price Framing",
+      "occurrence": 0,
+      "result": "pass"
+    },
+    {
+      "viewport": "1440x1000",
+      "marker": "DP 3: Audit Candidate: Unequal Visual Presentation",
+      "occurrence": 0,
+      "result": "pass"
+    },
+    {
+      "viewport": "1440x1000",
+      "marker": "DP 4: Audit Candidate: Basic Upsell Prompt",
+      "occurrence": 0,
+      "result": "pass"
+    },
+    {
+      "viewport": "390x844",
+      "marker": "DP 2: Audit Candidate: Per-flight Price Framing",
+      "result": "pass"
+    },
+    {
+      "viewport": "390x844",
+      "marker": "DP 3: Audit Candidate: Unequal Visual Presentation",
+      "result": "pass"
+    },
+    {
+      "viewport": "390x844",
+      "marker": "DP 4: Audit Candidate: Basic Upsell Prompt",
+      "result": "pass"
+    },
+    {
+      "viewport": "390x844",
+      "marker": "Basic popup DP 4",
+      "result": "pass"
+    },
+    {
+      "viewport": "390x844",
+      "interaction": "Basic popup continuation preserves Basic £131.36",
+      "result": "pass"
+    },
+    {
+      "viewport": "390x844",
+      "interaction": "Popup switch applies Regular £189.86",
+      "result": "pass"
+    },
+    {
+      "viewport": "1440x1000",
+      "interaction": "Comparison labels qualified; existing B labelled untested",
+      "result": "pass"
+    },
+    {
+      "viewport": "1440x1000",
+      "interaction": "Existing B displays the unchanged demo Regular total and increment",
+      "result": "pass"
+    }
+  ]
+}

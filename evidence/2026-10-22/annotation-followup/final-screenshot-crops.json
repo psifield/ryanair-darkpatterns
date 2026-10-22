@@ -1,0 +1,332 @@
+[
+  {
+    "name": "final-dp5-desktop-closeup",
+    "source": "final-original-desktop-seats-on",
+    "rect": {
+      "height": 135.20000457763672,
+      "width": 908,
+      "x": 178.40000915527344,
+      "y": 333.75
+    }
+  },
+  {
+    "name": "final-dp6-desktop-closeup",
+    "source": "final-original-desktop-bags-on",
+    "rect": {
+      "height": 133.20000457763672,
+      "width": 908,
+      "x": 178.40000915527344,
+      "y": 333.75
+    }
+  },
+  {
+    "name": "final-dp7-desktop-closeup",
+    "source": "final-original-desktop-review-on",
+    "rect": {
+      "height": 166.85000610351562,
+      "width": 601.3250122070312,
+      "x": 178.40000915527344,
+      "y": 526.25
+    }
+  },
+  {
+    "name": "final-dp7-desktop-closeup",
+    "source": "final-original-desktop-review-on",
+    "rect": {
+      "height": 166.85000610351562,
+      "width": 601.3250122070312,
+      "x": 258.3999938964844,
+      "y": 511.0499877929687
+    }
+  },
+  {
+    "name": "final-dp5-desktop-closeup",
+    "source": "final-original-desktop-seats-on",
+    "rect": {
+      "height": 135.20000457763672,
+      "width": 908,
+      "x": 258.3999938964844,
+      "y": 333.75
+    }
+  },
+  {
+    "name": "final-dp6-desktop-closeup",
+    "source": "final-original-desktop-bags-on",
+    "rect": {
+      "height": 133.20000457763672,
+      "width": 908,
+      "x": 258.3999938964844,
+      "y": 333.75
+    }
+  },
+  {
+    "name": "final-dp5-narrow-closeup",
+    "source": "final-original-narrow-seats-on",
+    "rect": {
+      "height": 174.1999969482422,
+      "width": 363.2000122070313,
+      "x": 6,
+      "y": 556.7250366210938
+    }
+  },
+  {
+    "name": "final-dp6-narrow-closeup",
+    "source": "final-original-narrow-bags-on",
+    "rect": {
+      "height": 172.1999969482422,
+      "width": 363.2000122070313,
+      "x": 6,
+      "y": 556.7250366210938
+    }
+  },
+  {
+    "name": "final-dp7-narrow-closeup",
+    "source": "final-original-narrow-review-on",
+    "rect": {
+      "height": 217.5,
+      "width": 363.2000122070313,
+      "x": 6,
+      "y": 293.2250061035156
+    }
+  },
+  {
+    "name": "final-original-narrow-dp1-0-closeup",
+    "source": "final-original-narrow-dp1-0",
+    "rect": {
+      "height": 59,
+      "width": 131.8000144958496,
+      "x": 220.6000061035156,
+      "y": 396.5
+    }
+  },
+  {
+    "name": "final-original-narrow-dp1-1-closeup",
+    "source": "final-original-narrow-dp1-1",
+    "rect": {
+      "height": 59,
+      "width": 131.8000144958496,
+      "x": 220.6000061035156,
+      "y": 397.0750122070313
+    }
+  },
+  {
+    "name": "final-original-narrow-dp2-0-closeup",
+    "source": "final-original-narrow-dp2-0",
+    "rect": {
+      "height": 90.98749923706056,
+      "width": 176.8000030517578,
+      "x": 192.40000915527344,
+      "y": 397.0249938964844
+    }
+  },
+  {
+    "name": "final-original-narrow-dp3-0-closeup",
+    "source": "final-original-narrow-dp3-0",
+    "rect": {
+      "height": 58,
+      "width": 245.75,
+      "x": 123.125,
+      "y": 396.75
+    }
+  },
+  {
+    "name": "final-original-narrow-dp4-0-closeup",
+    "source": "final-original-narrow-dp4-0",
+    "rect": {
+      "height": 68.5875015258789,
+      "width": 216.5000114440918,
+      "x": 135.90000915527344,
+      "y": 397.1625061035156
+    }
+  },
+  {
+    "name": "final-original-narrow-dp4-1-modal-closeup",
+    "source": "final-original-narrow-dp4-1-modal",
+    "rect": {
+      "height": 63,
+      "width": 299.9875183105469,
+      "x": 37.60000228881836,
+      "y": 151.2624969482422
+    }
+  },
+  {
+    "name": "final-comparison-narrow-dp1-0-closeup",
+    "source": "final-comparison-narrow-dp1-0",
+    "rect": {
+      "height": 59,
+      "width": 131.8000144958496,
+      "x": 199,
+      "y": 396.7124938964844
+    }
+  },
+  {
+    "name": "final-comparison-narrow-dp1-1-closeup",
+    "source": "final-comparison-narrow-dp1-1",
+    "rect": {
+      "height": 59,
+      "width": 131.8000144958496,
+      "x": 199,
+      "y": 396.6875
+    }
+  },
+  {
+    "name": "final-comparison-narrow-dp2-0-closeup",
+    "source": "final-comparison-narrow-dp2-0",
+    "rect": {
+      "height": 90.98749923706056,
+      "width": 176.8000030517578,
+      "x": 170.8000030517578,
+      "y": 397.0249938964844
+    }
+  },
+  {
+    "name": "final-comparison-narrow-dp3-0-closeup",
+    "source": "final-comparison-narrow-dp3-0",
+    "rect": {
+      "height": 58,
+      "width": 245.75001907348633,
+      "x": 101.5250015258789,
+      "y": 396.75
+    }
+  },
+  {
+    "name": "final-comparison-narrow-dp4-0-closeup",
+    "source": "final-comparison-narrow-dp4-0",
+    "rect": {
+      "height": 68.5875015258789,
+      "width": 216.5000114440918,
+      "x": 114.3000030517578,
+      "y": 397.1625061035156
+    }
+  },
+  {
+    "name": "final-comparison-narrow-dp4-1-modal-closeup",
+    "source": "final-comparison-narrow-dp4-1-modal",
+    "rect": {
+      "height": 63,
+      "width": 299.9875183105469,
+      "x": 37.60000228881836,
+      "y": 151.2624969482422
+    }
+  },
+  {
+    "name": "final-original-desktop-dp1-0-closeup",
+    "source": "final-original-desktop-dp1-0",
+    "rect": {
+      "height": 59,
+      "width": 131.8000030517578,
+      "x": 1137.800048828125,
+      "y": 482.2375183105469
+    }
+  },
+  {
+    "name": "final-original-desktop-dp1-1-closeup",
+    "source": "final-original-desktop-dp1-1",
+    "rect": {
+      "height": 59,
+      "width": 131.8000030517578,
+      "x": 1137.800048828125,
+      "y": 482.7124938964844
+    }
+  },
+  {
+    "name": "final-original-desktop-dp2-0-closeup",
+    "source": "final-original-desktop-dp2-0",
+    "rect": {
+      "height": 90.98749923706056,
+      "width": 274.8000183105469,
+      "x": 431.6000061035156,
+      "y": 482.4875183105469
+    }
+  },
+  {
+    "name": "final-original-desktop-dp3-0-closeup",
+    "source": "final-original-desktop-dp3-0",
+    "rect": {
+      "height": 58,
+      "width": 245.7500267028809,
+      "x": 733.3250122070312,
+      "y": 482.7000122070313
+    }
+  },
+  {
+    "name": "final-original-desktop-dp4-0-closeup",
+    "source": "final-original-desktop-dp4-0",
+    "rect": {
+      "height": 68.5875015258789,
+      "width": 216.5000267028809,
+      "x": 1061.0999755859375,
+      "y": 482.3125
+    }
+  },
+  {
+    "name": "final-original-desktop-dp4-1-modal-closeup",
+    "source": "final-original-desktop-dp4-1-modal",
+    "rect": {
+      "height": 63,
+      "width": 299.9875183105469,
+      "x": 562.4000244140625,
+      "y": 242.1000061035156
+    }
+  },
+  {
+    "name": "final-comparison-desktop-dp1-0-closeup",
+    "source": "final-comparison-desktop-dp1-0",
+    "rect": {
+      "height": 59,
+      "width": 131.8000144958496,
+      "x": 532.2000122070312,
+      "y": 482.75
+    }
+  },
+  {
+    "name": "final-comparison-desktop-dp1-1-closeup",
+    "source": "final-comparison-desktop-dp1-1",
+    "rect": {
+      "height": 59,
+      "width": 131.8000144958496,
+      "x": 532.2000122070312,
+      "y": 482.4250183105469
+    }
+  },
+  {
+    "name": "final-comparison-desktop-dp2-0-closeup",
+    "source": "final-comparison-desktop-dp2-0",
+    "rect": {
+      "height": 90.98749923706056,
+      "width": 176.8000030517578,
+      "x": 254.80001831054688,
+      "y": 482.3875122070313
+    }
+  },
+  {
+    "name": "final-comparison-desktop-dp3-0-closeup",
+    "source": "final-comparison-desktop-dp3-0",
+    "rect": {
+      "height": 58,
+      "width": 245.75,
+      "x": 409.5249938964844,
+      "y": 482.1125183105469
+    }
+  },
+  {
+    "name": "final-comparison-desktop-dp4-0-closeup",
+    "source": "final-comparison-desktop-dp4-0",
+    "rect": {
+      "height": 68.5875015258789,
+      "width": 216.5000267028809,
+      "x": 455.5,
+      "y": 482.5249938964844
+    }
+  },
+  {
+    "name": "final-comparison-desktop-dp4-1-modal-closeup",
+    "source": "final-comparison-desktop-dp4-1-modal",
+    "rect": {
+      "height": 63,
+      "width": 299.9875183105469,
+      "x": 562.4000244140625,
+      "y": 242.1000061035156
+    }
+  }
+]

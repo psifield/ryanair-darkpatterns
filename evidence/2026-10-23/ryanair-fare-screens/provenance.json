@@ -1,0 +1,58 @@
+{
+  "provided_on": "2026-10-23",
+  "provided_on_timezone": "Asia/Singapore",
+  "provenance": "User supplied these as fresh captures of the Ryanair website. Originals copied without resizing or editing.",
+  "exact_capture_time": null,
+  "css_viewport": null,
+  "browser_zoom": null,
+  "visible_context": {
+    "domain": "ryanair.com",
+    "locale_path": "gb/en",
+    "origin": "London Stansted (STN)",
+    "destination": "Palanga (PLQ)",
+    "outbound_date": "2026-11-01",
+    "return_date": "2026-11-08",
+    "adults": 1,
+    "currency": "GBP"
+  },
+  "limits": [
+    "Provided date is not independently verified capture time.",
+    "Raster dimensions are not CSS viewport dimensions.",
+    "Still images do not establish click sequence, outcomes, frequency, or causal effects."
+  ],
+  "files": [
+    {
+      "file": "01-flight-selection-original.png",
+      "original_attachment": "codex-clipboard-8f40104d-3650-44c0-9baa-c0e86ba81b10.png",
+      "sha256": "c9f76149d13c6bb8433e4ba3fc6b8ab98d4f7846b0803889d78ddfe5f6e99bb8",
+      "bytes": 296082,
+      "pixel_dimensions": [
+        2303,
+        1476
+      ],
+      "copy_matches_original": true
+    },
+    {
+      "file": "02-fare-selection-original.png",
+      "original_attachment": "codex-clipboard-23264d84-712c-4523-9a72-227b3f87a8b9.png",
+      "sha256": "6b41d5daaea88c8af9c413c6a1ecfbac43e2c48c1346c44d21fe267058597b18",
+      "bytes": 511287,
+      "pixel_dimensions": [
+        2303,
+        1476
+      ],
+      "copy_matches_original": true
+    },
+    {
+      "file": "03-basic-upsell-original.png",
+      "original_attachment": "codex-clipboard-75515a11-4a03-4111-8621-3f35fc717d39.png",
+      "sha256": "445db2e6fd4e6e1a0a13237ba02eb4e1e6fb964c31689e4dcaff90ade47be21e",
+      "bytes": 358472,
+      "pixel_dimensions": [
+        2303,
+        1476
+      ],
+      "copy_matches_original": true
+    }
+  ]
+}

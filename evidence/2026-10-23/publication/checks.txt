@@ -1,0 +1,39 @@
+Publication checks — 2026-10-23 (Asia/Singapore)
+
+Regression tests
+Exit: 0
+✔ seven numbered groups retain eight distinct audit records (1.343ms)
+✔ both DP 3 leaves open their own content in one expanded navigation group (13.9164ms)
+✔ new flags use agreed numbers and follow both mode and global visibility (12.7824ms)
+✔ insurance keeps its £14.50 default and total independently of newsletter and annotations (4.6726ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 441.11
+
+
+TypeScript
+Exit: 0
+$ tsc --noEmit
+
+
+Production build
+Exit: 0
+$ vite build
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:11:27). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 1674 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   1.05 kB │ gzip:  0.46 kB
+dist/assets/index-PiCdSAKc.css   43.16 kB │ gzip:  8.34 kB
+dist/assets/index-BRUV53Y_.js   329.67 kB │ gzip: 93.63 kB
+
+✓ built in 276ms

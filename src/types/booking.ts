@@ -46,9 +46,10 @@ export interface FareTier {
 
 export interface DarkPatternAnnotation {
   id: string;
+  number: 1 | 2 | 3 | 4 | 5 | 6 | 7;
   title: string;
   patternType: string;
-  category: 'Scarcity & Urgency' | 'Visual Interference' | 'Hidden Costs & Drip Pricing' | 'Obstruction & Roadblock' | 'Confirmshaming';
+  category: 'Scarcity & Urgency' | 'Visual Interference' | 'Price Framing' | 'Upsell Interruption' | 'Emotional Pressure' | 'Baggage Warning' | 'Default Selection';
   elementTarget: string;
   originalBehavior: string;
   ethicalFix: string;

@@ -1,0 +1,134 @@
+{
+  "markers": [
+    {
+      "animation": "none",
+      "label": "DP 1: Dark Pattern: Manufactured Urgency",
+      "marker": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "target": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "text": "⚠️ DP 1"
+    },
+    {
+      "animation": "none",
+      "label": "DP 1: Dark Pattern: Manufactured Urgency",
+      "marker": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "target": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "text": "⚠️ DP 1"
+    },
+    {
+      "animation": "none",
+      "label": "DP 4: Dark Pattern: Roadblock Intercept",
+      "marker": {
+        "bottom": 321.76251220703125,
+        "height": 19,
+        "left": 274.26251220703125,
+        "right": 324.8000144958496,
+        "top": 302.76251220703125,
+        "width": 50.53750228881836,
+        "x": 274.26251220703125,
+        "y": 302.76251220703125
+      },
+      "target": {
+        "bottom": 355.35001373291016,
+        "height": 33.587501525878906,
+        "left": 120.3000030517578,
+        "right": 324.8000030517578,
+        "top": 321.76251220703125,
+        "width": 204.5,
+        "x": 120.3000030517578,
+        "y": 321.76251220703125
+      },
+      "text": "⚠️ DP 4"
+    },
+    {
+      "animation": "none",
+      "label": "DP 2: Dark Pattern: Drip Surcharge Framing",
+      "marker": {
+        "bottom": 692.0250244140625,
+        "height": 19,
+        "left": 67.0625,
+        "right": 117.60000228881836,
+        "top": 673.0250244140625,
+        "width": 50.53750228881836,
+        "x": 67.0625,
+        "y": 673.0250244140625
+      },
+      "target": {
+        "bottom": 748.012523651123,
+        "height": 55.98749923706055,
+        "left": -47.20000076293945,
+        "right": 117.60000228881836,
+        "top": 692.0250244140625,
+        "width": 164.8000030517578,
+        "x": -47.20000076293945,
+        "y": 692.0250244140625
+      },
+      "text": "⚠️ DP 2"
+    },
+    {
+      "animation": "none",
+      "label": "DP 3: Dark Pattern: Asymmetric Visual Steering",
+      "marker": {
+        "bottom": 402.9500122070313,
+        "height": 19,
+        "left": 290.7375183105469,
+        "right": 341.27502059936523,
+        "top": 383.9500122070313,
+        "width": 50.53750228881836,
+        "x": 290.7375183105469,
+        "y": 383.9500122070313
+      },
+      "target": {
+        "bottom": 425.9500122070313,
+        "height": 23,
+        "left": 107.5250015258789,
+        "right": 341.2750015258789,
+        "top": 402.9500122070313,
+        "width": 233.75,
+        "x": 107.5250015258789,
+        "y": 402.9500122070313
+      },
+      "text": "⚠️ DP 3"
+    }
+  ],
+  "scrollY": 912.7999877929688,
+  "viewport": {
+    "height": 844,
+    "width": 390
+  }
+}
