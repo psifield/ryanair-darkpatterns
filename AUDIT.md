@@ -1,6 +1,8 @@
 # AUDIT.md - Ryanair · the decision: keep Basic or buy a paid fare bundle
 
-**Status:** Retrospective draft, created 23 October 2026 (Asia/Singapore). Ready for team review; ratings and study results are Pending.
+**Current status (2026-10-23):** Individual ratings recorded; final consolidated severity is **3/4, 2/4, 3/4**, using rounded averages. See [final consolidated findings and calculations](#final-consolidated-findings-and-severity-2026-10-23). Earlier Pending rating fields are retained as history; study results remain Pending.
+
+**Original draft status:** Retrospective draft, created 23 October 2026 (Asia/Singapore). Ready for team review; ratings and study results are Pending.
 
 **Chronology limitation:** The existing Ethical/B prototype predates this audit. It is already present in the initial repository commit, `5579bef45d918a5b1af75e91179736a582ea4f4f`. This document cannot retroactively meet the assignment's requirement to commit the audit before the first prompt for B. No date, prediction or result below is presented as a pre-build record. The lecturer's acceptance of this chronology remains Pending.
 
@@ -147,3 +149,54 @@ Neither the retained identifiers nor taxonomy navigation establishes legal viola
 ### Future additions and chronology rule
 
 After team review, preserve this dated retrospective record. Append the locked ratings and agreed rationale as a new dated entry; do not silently overwrite the original Pending state. Before requesting any subsequent B implementation, commit a clearly labelled prospective protocol/prediction entry and record its actual commit hash/date. Thereafter append implementation departures, corrections and observed outcomes under **Added after building**, keeping that prospective snapshot intact. The historical first prompt for the existing B and its exact time are Pending; do not reconstruct or backdate them.
+
+### 2026-10-23 — Individual ratings received; consolidation Pending
+
+This entry supersedes the individual-rating Pending placeholders in the original draft above. Agreed scores and group discussion remain **Pending** for the next step.
+
+**Source and independence:** Xianlong supplied his, Zinuo's, Roy's and Aishan's responses in this chat; their scores and reasons are preserved below. Aishan's **2.5/4** is retained as submitted, without rounding.
+
+The submitted reasons express individual judgements. Claims about psychological mechanisms or effects remain interpretations subject to the evidence limits in Findings 1–3; these ratings do not establish participant outcomes or verify additional course citations. The scale remains 0 not a problem; 1 cosmetic; 2 minor; 3 major; 4 severe.
+
+| Finding | Member | Individual score 0–4 | Individual driver |
+| --- | --- | --- | --- |
+| 1 | Aishan | 2.5 | Based on Hedonic Editing from Weeks 4 and 5, the way prices are shown can affect how people feel about spending money. When upgrade prices are shown as small amounts per flight, users may focus on each amount instead of the total cost of the return trip. Although this has not been tested on this specific page, the theory helps explain why the design could affect how users see the price. I think this issue is between 2 to 3. |
+| 1 | Roy | 3 | Reason (Cost & Mental Accounting): Hiding the return trip total behind a per-flight label (+£27.75) exploits diminishing sensitivity. An unintended upgrade adds £55.50 (a 50% increase over the base fare), shifting an unearned calculation burden onto the user. |
+| 1 | Xianlong | 3 | Per-flight upgrade prices make the return cost harder to compare with Basic. Regular adds £55.50 across two flights, so overlooking that calculation could mean a substantial unintended spend. |
+| 1 | Zinuo | 4 | I rated this 4/4 because Basic displays the total return fare, while upgrades show additional costs per flight in smaller text. This inconsistent pricing format makes it easy to underestimate the actual cost. For example, Regular adds £55.50 for a return trip, roughly 50% of the Basic fare, making this a significant pricing transparency issue. |
+| 2 | Aishan | 1 | The fare options are presented differently. For example, Plus has a gold border and a recommendation label, while the upgrade button is more eye-catching. This may draw more attention to the paid options. However, there is no clear evidence that these design can actually change users’ decisions. I would rate this as 1/4 based on the current evidence. |
+| 2 | Roy | 2 | Reason (Fluency): Separating Basic into a top strip and highlighting paid tiers with badges and yellow call to action(s) biases visual attention. However, Basic remains clearly visible and selectable, making this comparison disfluency rather than a blocker. |
+| 2 | Xianlong | 2 | Paid fares receive more visual emphasis, which may make comparison less balanced. Basic remains visible and selectable, and the effect on choices has not been tested. |
+| 2 | Zinuo | 2 | I rated this 2/4 because the visual emphasis on paid fares may influence users' choices, although Basic remains visible and selectable. |
+| 3 | Aishan | 3 | After users select Basic, a pop-up suggests upgrading and highlights the features that Basic does not include. It may make users feel pressured and annoyed, especially when they have already made their choice. So a better design would let users continue with Basic directly and allow them to compare others if they want to. The comparison should also avoid repeating information that is already shown on the main page. Although the actual effect has not been tested, reducing these extra steps could make the booking process more comfortable and make user feel they are be respected. |
+| 3 | Roy | 3 | Reason (Loss-Framing): Experienced by people who chose Basic tier. The modal forces an unnecessary speed bump and uses red 'X' icons to reframe unbundled features as active losses. Because the dismissal button is functional, it isn't a severe blocker, but it constitutes coercive choice architecture right at commitment. |
+| 3 | Xianlong | 3 | After I choose Basic, the popup asks me to reconsider and stresses missing benefits. I see this pressure at commitment as a major issue, even though I can continue with Basic. |
+| 3 | Zinuo | 2 | I rated this 2/4 because the upsell popup creates unnecessary friction and pressure, although users can still easily continue with Basic. |
+
+**Consolidation status:** Pending. No final agreed score or shared rationale is recorded in this entry. Differences remain preserved: Finding 1 ranges from 2.5 to 4, Finding 2 from 1 to 2, and Finding 3 from 2 to 3.
+
+### Final consolidated findings and severity (2026-10-23)
+
+**Recorded decision:** Xianlong adopted **3/4 (Major), 2/4 (Minor), and 3/4 (Major)** for the audit's final consolidation on 23 October 2026 (Asia/Singapore). This entry supersedes the earlier Pending consolidated-score fields. All individual scores, reasons and differences remain preserved; this records Xianlong's consolidation rather than a unanimous team vote.
+
+**Calculation:** Give each of the four members equal weight, take the arithmetic mean for each finding, then round to the nearest whole severity level (halves rounded up). Retain the exact mean alongside the final category. These means summarise judgements on the 0–4 scale, not measured behavioural effects.
+
+| Finding | Aishan | Roy | Xianlong | Zinuo | Exact mean | Final consolidated severity |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| 1 | 2.5 | 3 | 3 | 4 | 3.125 | 3/4 (Major) |
+| 2 | 1 | 2 | 2 | 2 | 1.75 | 2/4 (Minor) |
+| 3 | 3 | 3 | 3 | 2 | 2.75 | 3/4 (Major) |
+
+#### Finding 1: Upgrade-price framing and calculation burden (3/4, Major)
+
+Basic displays the return fare, while paid upgrades display increments per flight. For Regular, the captured labels require calculating £27.75 × 2 = £55.50 extra, about 50% of Basic's £110.98, giving a calculated £166.48 total. This creates avoidable calculation burden and a risk of underestimating a substantial upgrade cost. Actual pricing errors or financial losses have not been observed. **Repair:** Show the full-journey total and upgrade increment together for every fare, with a readable per-flight breakdown.
+
+#### Finding 2: Unequal presentation and ease of comparison (2/4, Minor)
+
+Basic sits in a separate strip, while paid bundles receive stronger visual emphasis through borders, recommendations and prominent actions. This may draw attention to paid options and make comparison less balanced. Basic remains visible and selectable; the final minor rating reflects possible steering and comparison effort with no demonstrated effect on choices. **Repair:** Present Basic and paid fares on a comparable basis, with similarly prominent selection controls and clearly explained recommendations.
+
+#### Finding 3: Basic-triggered upsell with missing-feature framing (3/4, Major)
+
+In the reported flow, continuing with Basic opens a Regular upsell that stresses excluded benefits through red crosses and a prominent upgrade action. Reopening the decision after Basic has been chosen creates an interruption and may exert pressure at commitment. For a traveller whose needs fit Basic, this is a major concern even though either popup action applies the corresponding fare. **Repair:** Apply Basic directly and retain an optional feature comparison with clear exclusions.
+
+**Evidence limits:** Underestimation, attention effects, loss framing and unwanted upgrades remain hypotheses. The submitted reasons are preserved, while the consolidated findings make no claim of proven psychological effects, repeated obstruction or measured harm. The existing source qualifications and chronology limitation still apply.
