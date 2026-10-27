@@ -200,3 +200,67 @@ Basic sits in a separate strip, while paid bundles receive stronger visual empha
 In the reported flow, continuing with Basic opens a Regular upsell that stresses excluded benefits through red crosses and a prominent upgrade action. Reopening the decision after Basic has been chosen creates an interruption and may exert pressure at commitment. For a traveller whose needs fit Basic, this is a major concern even though either popup action applies the corresponding fare. **Repair:** Apply Basic directly and retain an optional feature comparison with clear exclusions.
 
 **Evidence limits:** Underestimation, attention effects, loss framing and unwanted upgrades remain hypotheses. The submitted reasons are preserved, while the consolidated findings make no claim of proven psychological effects, repeated obstruction or measured harm. The existing source qualifications and chronology limitation still apply.
+
+### 2026-10-28 — Ancillary flow audit (Fast Track, Insurance, Ground Transport)
+
+Observations below audit the newly replicated post-seat transition and Extras tab ancillaries in Screen A.
+
+---
+
+### Finding 4 - Post-Seat Fast Track Interstitial Roadblock
+- **Where:** Post-seat transition modal before Bags/Extras steps.
+- **What the user sees and does:** Completing seat selection triggers a compulsory full-screen modal urging travellers to "Skip long security queues" for £7.49 per flight, showing a queue-contrast graphic ("Everyone else queue" vs "Fast Track lane") with an oversized yellow "Add Fast Track" button vs. a faint "No, thanks" text link.
+- **Principle:** Week 4, framing and loss aversion (Kahneman ch. 26–27); Week 7, fluency and asymmetric visual weight (Petrova et al.; Lee & Aaker); Mathur et al. (2019) §5.1.4 (Obstruction / Interstitial Roadblock).
+- **Mechanism, whose goal wins:** Primes queue anxiety and fear of missing flights to induce an impulsive add-on purchase before baggage can be evaluated. Asymmetric visual weight steers clicks to the paid action. The platform wins (£7.49/leg). SLUDGE.
+- **Severity 0–4:** Individual member scores **Pending**; agreed score **Pending**. Preserve each member's score and driver in the rating ledger below before recording agreement. **Driver:** how often (100% of seat choosers reach it) and cost (£7.49/flight). No anchor score supplied.
+- **Repair (what should be true afterwards):** Remove the roadblock modal completely. Position Fast Track as an optional card inside the Extras step with equal, neutral buttons.
+- **Prediction:** Fast Track take-up drops from ~40% in A to 15% in B without reducing flight booking completion. We drop this repair if total booking completion falls by >5 percentage points.
+
+---
+
+### Finding 5 - Travel Insurance Micro-Rate Framing & Confirmshaming
+- **Where:** Extras tab (Travel Protection matrix) and refusal control.
+- **What the user sees and does:** Prominent UK FCDO warning induces compliance anxiety. The top-tier Plus plan is framed as "just £0.35 extra per day" rather than the lump-sum policy price (£14.50), and declining forces the traveller to click "No thanks, I will travel without insurance".
+- **Principle:** Week 4, reference dependence & diminishing sensitivity (Kahneman ch. 34; Kern & Chugh); Mathur et al. (2019) §5.1.3 (Confirmshaming & Visual Steering).
+- **Mechanism, whose goal wins:** Daily micro-rate reduces the perceived pain of paying, while confirmshaming induces guilt and loss aversion on refusal. The platform wins insurance commission. SLUDGE.
+- **Severity 0–4:** Individual member scores **Pending**; agreed score **Pending**. Preserve each member's score and driver in the rating ledger below before recording agreement. **Driver:** cost (£14.50 policy) and harm to trust from confirmshaming. No anchor score supplied.
+- **Repair (what should be true afterwards):** Display transparent whole-trip policy costs upfront (£14.50) without daily rate masking, with neutral active choice buttons ("None", "Standard", "Plus").
+- **Prediction:** Insurance take-up moves from ~35% in A to 15% in B, while traveller comprehension of policy coverage increases from 40% to 75%.
+
+---
+
+### Finding 6 - Ground Transport Bandwagon Cues & Sunk Cost Timing
+- **Where:** Extras tab (Transport & Parking cards).
+- **What the user sees and does:** The £65.00 Meet & Greet Parking is styled with gold borders and an unverified "MOST POPULAR & CONVENIENT" badge, and the £119.20 Nissan Qashqai SUV has a "CUSTOMER FAVOURITE" badge.
+- **Principle:** Week 9, descriptive norms and social proof (Goldstein & Mortensen; Berger & Heath); Week 4, sunk cost escalation and drip timing (Roh pp. 27, 87–90); Mathur et al. (2019) §5.1.2 (Social Proof Heuristic).
+- **Mechanism, whose goal wins:** Unverified popularity badges manufacture consensus. Placing £65–£120 commitments at the very end of the funnel exploits sunk cost momentum, as travellers who already invested effort in flights, seats, and bags exhibit lower price resistance. Platform wins high-margin ancillaries. SLUDGE.
+- **Severity 0–4:** Individual member scores **Pending**; agreed score **Pending**. Preserve each member's score and driver in the rating ledger below before recording agreement. **Driver:** high cost (£65–£120) and unverified social proof claims. No anchor score supplied.
+- **Repair (what should be true afterwards):** Neutral card presentation sorted by transparent distance/price, remove unsubstantiated popularity badges, and display clear total trip prices.
+- **Prediction:** Selection of Meet & Greet parking drops from ~55% in A to 25% in B, with travellers choosing options that match their actual budget.
+
+---
+
+### Private ratings ledger for Findings 4–6
+
+All individual scores and drivers below remain **Pending** for team members to lock in privately before group discussion.
+
+| Finding | Member | Independent score 0–4 | Individual driver |
+| --- | --- | --- | --- |
+| 4 | Aishan | Pending | Pending |
+| 4 | Roy | Pending | Pending |
+| 4 | Xianlong | Pending | Pending |
+| 4 | Zinuo | Pending | Pending |
+| 5 | Aishan | Pending | Pending |
+| 5 | Roy | Pending | Pending |
+| 5 | Xianlong | Pending | Pending |
+| 5 | Zinuo | Pending | Pending |
+| 6 | Aishan | Pending | Pending |
+| 6 | Roy | Pending | Pending |
+| 6 | Xianlong | Pending | Pending |
+| 6 | Zinuo | Pending | Pending |
+
+| Finding | Agreed score 0–4 | Discussion date | Agreed driver / preserved disagreement |
+| --- | --- | --- | --- |
+| 4 | Pending | Pending | Pending |
+| 5 | Pending | Pending | Pending |
+| 6 | Pending | Pending | Pending |
