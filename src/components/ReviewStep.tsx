@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { FareTierId } from '../types/booking';
 import { FARE_TIERS } from '../data/mockData';
-import { ArrowLeft, CheckCircle2, ShieldCheck, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, ShieldCheck, AlertTriangle, Car, Key, Zap, CreditCard, Shield } from 'lucide-react';
 import { AuditMarker } from './AuditMarker';
+import { InsurancePlan, ParkingOption, CarHireOption } from './ExtrasStep';
 
 interface ReviewStepProps {
   isDarkPattern: boolean;
@@ -11,6 +12,11 @@ interface ReviewStepProps {
   selectedTier: FareTierId;
   selectedSeat: string;
   additionalLuggage: number;
+  fastTrackSelected?: boolean;
+  insurancePlan?: InsurancePlan;
+  prepaidCredit?: number;
+  selectedParking?: ParkingOption;
+  selectedCarHire?: CarHireOption;
   newsletterOptIn: boolean;
   onToggleNewsletter: () => void;
   onBack: () => void;
@@ -23,19 +29,60 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
   selectedTier,
   selectedSeat,
   additionalLuggage,
+  fastTrackSelected = false,
+  insurancePlan = 'none',
+  prepaidCredit = 0,
+  selectedParking = 'none',
+  selectedCarHire = 'none',
   newsletterOptIn,
   onToggleNewsletter,
   onBack,
 }) => {
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
-  const [insuranceOptIn, setInsuranceOptIn] = useState(isDarkPattern); // pre-checked in dark pattern!
+  const [insuranceOptIn, setInsuranceOptIn] = useState(
+    insurancePlan !== 'none' || isDarkPattern
+  );
 
   const tier = FARE_TIERS[selectedTier] || FARE_TIERS.BASIC;
   const seatCost = selectedSeat.startsWith('15') || selectedSeat.startsWith('16') ? 8.0 : 0.0;
   const luggageCost = additionalLuggage * 30.0; // £15 each flight
-  const insuranceCost = insuranceOptIn ? 14.5 : 0.0;
+  const fastTrackCost = fastTrackSelected ? 7.49 : 0.0;
+  
+  const calcInsurance = () => {
+    if (insurancePlan === 'standard') return 4.68;
+    if (insurancePlan === 'plus') return 6.08;
+    if (insurancePlan === 'annual') return 28.18;
+    if (insuranceOptIn) return 14.50;
+    return 0.0;
+  };
+  const insuranceCost = calcInsurance();
+  const creditCost = prepaidCredit > 0 ? prepaidCredit * 0.9 : 0.0;
 
-  const grandTotal = tier.totalPrice + seatCost + luggageCost + insuranceCost;
+  const parkingPrices: Record<ParkingOption, number> = {
+    none: 0,
+    'short-stay': 50.0,
+    'meet-greet': 65.0,
+    'long-stay': 39.96,
+  };
+  const carHirePrices: Record<CarHireOption, number> = {
+    none: 0,
+    economy: 78.0,
+    suv: 119.2,
+    estate: 96.0,
+  };
+
+  const parkingCost = parkingPrices[selectedParking] || 0.0;
+  const carHireCost = carHirePrices[selectedCarHire] || 0.0;
+
+  const grandTotal =
+    tier.totalPrice +
+    seatCost +
+    luggageCost +
+    fastTrackCost +
+    insuranceCost +
+    creditCost +
+    parkingCost +
+    carHireCost;
 
   if (bookingConfirmed) {
     return (
@@ -196,10 +243,44 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
               </div>
             )}
 
-            {insuranceOptIn && (
+            {fastTrackSelected && (
               <div className="flex justify-between py-1 pt-2">
-                <span className="text-gray-600">Travel Insurance:</span>
+                <span className="text-gray-600">Security Fast Track (STN):</span>
+                <span className="font-semibold">+£{fastTrackCost.toFixed(2)}</span>
+              </div>
+            )}
+
+            {insuranceCost > 0 && (
+              <div className="flex justify-between py-1 pt-2">
+                <span className="text-gray-600">
+                  Travel Protection ({insurancePlan === 'none' ? 'Comprehensive' : insurancePlan.toUpperCase()}):
+                </span>
                 <span className="font-semibold">+£{insuranceCost.toFixed(2)}</span>
+              </div>
+            )}
+
+            {creditCost > 0 && (
+              <div className="flex justify-between py-1 pt-2">
+                <span className="text-gray-600">Inflight Pre-paid Credit (£{prepaidCredit}):</span>
+                <span className="font-semibold">+£{creditCost.toFixed(2)}</span>
+              </div>
+            )}
+
+            {parkingCost > 0 && (
+              <div className="flex justify-between py-1 pt-2">
+                <span className="text-gray-600">
+                  Stansted Parking ({selectedParking === 'meet-greet' ? 'Meet & Greet Valet' : selectedParking === 'short-stay' ? 'Short Stay' : 'Long Stay'}):
+                </span>
+                <span className="font-semibold">+£{parkingCost.toFixed(2)}</span>
+              </div>
+            )}
+
+            {carHireCost > 0 && (
+              <div className="flex justify-between py-1 pt-2">
+                <span className="text-gray-600">
+                  Palanga Car Hire ({selectedCarHire === 'suv' ? 'Automatic SUV' : selectedCarHire === 'estate' ? 'Family Estate' : 'Economy'}):
+                </span>
+                <span className="font-semibold">+£{carHireCost.toFixed(2)}</span>
               </div>
             )}
 

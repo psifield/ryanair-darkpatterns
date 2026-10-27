@@ -11,7 +11,7 @@ import { ComparisonBanner } from './components/ComparisonBanner';
 import { DarkPatternInspector } from './components/DarkPatternInspector';
 import { SeatsStep } from './components/SeatsStep';
 import { BagsStep } from './components/BagsStep';
-import { ExtrasStep, InsurancePlan } from './components/ExtrasStep';
+import { ExtrasStep, InsurancePlan, ParkingOption, CarHireOption } from './components/ExtrasStep';
 import { ReviewStep } from './components/ReviewStep';
 import { NewsletterFooter } from './components/NewsletterFooter';
 
@@ -36,10 +36,12 @@ export default function App() {
   const [additionalLuggage, setAdditionalLuggage] = useState<number>(0);
   const [newsletterOptIn, setNewsletterOptIn] = useState<boolean>(true);
 
-  // Extras State (Fast Track, Travel Insurance, Inflight Pre-paid Credit)
+  // Extras State (Fast Track, Travel Insurance, Inflight Pre-paid Credit, Parking, Car Hire)
   const [fastTrackSelected, setFastTrackSelected] = useState<boolean>(false);
   const [insurancePlan, setInsurancePlan] = useState<InsurancePlan>('none');
   const [prepaidCredit, setPrepaidCredit] = useState<number>(0);
+  const [selectedParking, setSelectedParking] = useState<ParkingOption>('none');
+  const [selectedCarHire, setSelectedCarHire] = useState<CarHireOption>('none');
 
   // Dark Pattern Audit / Inspector State
   const [showAuditMarkers, setShowAuditMarkers] = useState(true);
@@ -53,7 +55,21 @@ export default function App() {
   const fastTrackPrice = fastTrackSelected ? 7.49 : 0.0;
   const insurancePrice = insurancePlan === 'standard' ? 4.68 : insurancePlan === 'plus' ? 6.08 : insurancePlan === 'annual' ? 28.18 : 0.0;
   const creditPrice = prepaidCredit > 0 ? prepaidCredit * 0.9 : 0.0;
-  const currentCartTotal = tierData.totalPrice + seatPrice + luggagePrice + fastTrackPrice + insurancePrice + creditPrice;
+  const parkingPrices: Record<ParkingOption, number> = {
+    none: 0,
+    'short-stay': 50.0,
+    'meet-greet': 65.0,
+    'long-stay': 39.96,
+  };
+  const carHirePrices: Record<CarHireOption, number> = {
+    none: 0,
+    economy: 78.0,
+    suv: 119.2,
+    estate: 96.0,
+  };
+  const parkingPrice = parkingPrices[selectedParking] || 0;
+  const carHirePrice = carHirePrices[selectedCarHire] || 0;
+  const currentCartTotal = tierData.totalPrice + seatPrice + luggagePrice + fastTrackPrice + insurancePrice + creditPrice + parkingPrice + carHirePrice;
 
   // Handlers
   const handleToggleOutbound = () => setOutboundSelected(!outboundSelected);
@@ -265,7 +281,7 @@ export default function App() {
             />
           )}
 
-          {/* STEP 4: EXTRAS (Fast Track, Travel Insurance, Inflight Credit) */}
+          {/* STEP 4: EXTRAS (Fast Track, Travel Insurance, Inflight Credit, Parking, Car Hire) */}
           {currentStep === 'extras' && (
             <ExtrasStep
               isDarkPattern={viewMode === 'dark-pattern'}
@@ -277,6 +293,10 @@ export default function App() {
               onSelectInsurance={setInsurancePlan}
               prepaidCredit={prepaidCredit}
               onSelectPrepaidCredit={setPrepaidCredit}
+              selectedParking={selectedParking}
+              onSelectParking={setSelectedParking}
+              selectedCarHire={selectedCarHire}
+              onSelectCarHire={setSelectedCarHire}
               onBack={() => setCurrentStep('bags')}
               onNext={() => setCurrentStep('review')}
             />
@@ -291,6 +311,11 @@ export default function App() {
               selectedTier={selectedTier}
               selectedSeat={selectedSeat}
               additionalLuggage={additionalLuggage}
+              fastTrackSelected={fastTrackSelected}
+              insurancePlan={insurancePlan}
+              prepaidCredit={prepaidCredit}
+              selectedParking={selectedParking}
+              selectedCarHire={selectedCarHire}
               newsletterOptIn={newsletterOptIn}
               onToggleNewsletter={() => setNewsletterOptIn(!newsletterOptIn)}
               onBack={() => setCurrentStep('extras')}

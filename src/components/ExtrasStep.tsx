@@ -20,10 +20,20 @@ import {
   ArrowLeft,
   Image as ImageIcon,
   CheckCircle2,
-  AlertTriangle
+  AlertTriangle,
+  Car,
+  MapPin,
+  Clock,
+  Sparkles,
+  Users,
+  Fuel,
+  Key,
+  ShieldAlert
 } from 'lucide-react';
 
 export type InsurancePlan = 'none' | 'standard' | 'plus' | 'annual';
+export type ParkingOption = 'none' | 'short-stay' | 'meet-greet' | 'long-stay';
+export type CarHireOption = 'none' | 'economy' | 'suv' | 'estate';
 
 interface ExtrasStepProps {
   isDarkPattern: boolean;
@@ -35,6 +45,10 @@ interface ExtrasStepProps {
   onSelectInsurance: (plan: InsurancePlan) => void;
   prepaidCredit: number; // in £, e.g. 0, 5, 10, 15, 20
   onSelectPrepaidCredit: (amount: number) => void;
+  selectedParking?: ParkingOption;
+  onSelectParking?: (parking: ParkingOption) => void;
+  selectedCarHire?: CarHireOption;
+  onSelectCarHire?: (car: CarHireOption) => void;
   onBack: () => void;
   onNext: () => void;
 }
@@ -49,10 +63,15 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
   onSelectInsurance,
   prepaidCredit,
   onSelectPrepaidCredit,
+  selectedParking = 'none',
+  onSelectParking,
+  selectedCarHire = 'none',
+  onSelectCarHire,
   onBack,
   onNext,
 }) => {
   // Local UI state
+  const [activeSubStep, setActiveSubStep] = useState<'all' | 'airport' | 'transport'>('all');
   const [passengerAccordionOpen, setPassengerAccordionOpen] = useState(false);
   const [showPrepaidSelector, setShowPrepaidSelector] = useState(false);
   const [activeCaptureModal, setActiveCaptureModal] = useState<string | null>(null);
@@ -73,20 +92,53 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
 
         {/* Ryanair Sub-Step Indicator & Capture Gallery Toggle */}
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 text-xs font-bold bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-full">
-            <span className="flex items-center gap-1.5 text-gray-900">
-              <span className="w-5 h-5 rounded-full bg-[#f1c40f] text-[#073590] flex items-center justify-center text-[11px] font-black">
+          <div className="flex items-center gap-1.5 text-xs font-bold bg-gray-50 border border-gray-200 p-1 rounded-full">
+            <button
+              onClick={() => setActiveSubStep('airport')}
+              className={`flex items-center gap-1.5 px-3 py-1 rounded-full transition cursor-pointer ${
+                activeSubStep === 'airport'
+                  ? 'bg-[#073590] text-white shadow-xs'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-black ${
+                activeSubStep === 'airport' ? 'bg-[#f1c40f] text-[#073590]' : 'border border-gray-300'
+              }`}>
                 1
               </span>
               <span>Airport & trip</span>
-            </span>
+            </button>
+
             <span className="text-gray-300">•</span>
-            <span className="flex items-center gap-1.5 text-gray-400 font-medium">
-              <span className="w-5 h-5 rounded-full border border-gray-300 flex items-center justify-center text-[11px]">
+
+            <button
+              onClick={() => setActiveSubStep('transport')}
+              className={`flex items-center gap-1.5 px-3 py-1 rounded-full transition cursor-pointer ${
+                activeSubStep === 'transport'
+                  ? 'bg-[#073590] text-white shadow-xs'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-black ${
+                activeSubStep === 'transport' ? 'bg-[#f1c40f] text-[#073590]' : 'border border-gray-300'
+              }`}>
                 2
               </span>
-              <span>Transport</span>
-            </span>
+              <span>Transport & Parking</span>
+            </button>
+
+            <span className="text-gray-300">•</span>
+
+            <button
+              onClick={() => setActiveSubStep('all')}
+              className={`text-[11px] font-semibold px-2.5 py-1 rounded-full transition cursor-pointer ${
+                activeSubStep === 'all'
+                  ? 'bg-[#f1c40f] text-[#073590] font-black'
+                  : 'text-gray-500 hover:text-gray-800'
+              }`}
+            >
+              View All
+            </button>
           </div>
 
           <button
@@ -170,8 +222,11 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
       )}
 
       {/* ========================================================================= */}
-      {/* 1. SECURITY FAST TRACK CARD (image_16909bab.png) */}
+      {/* SUB-STEP 1: AIRPORT & TRIP ANCILLARIES */}
       {/* ========================================================================= */}
+      {(activeSubStep === 'all' || activeSubStep === 'airport') && (
+        <>
+          {/* 1. SECURITY FAST TRACK CARD (image_16909bab.png) */}
       <div className="bg-white rounded-xl border border-gray-200 shadow-xs overflow-hidden transition-all hover:border-blue-200">
         {/* Card Header */}
         <div className="p-5 sm:p-6 pb-4">
@@ -781,25 +836,604 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
         </div>
       </div>
 
+        </>
+      )}
+
+      {/* ========================================================================= */}
+      {/* SUB-STEP 2: TRANSPORT & PARKING ANCILLARIES */}
+      {/* ========================================================================= */}
+      {(activeSubStep === 'all' || activeSubStep === 'transport') && (
+        <>
+          {/* ===================================================================== */}
+          {/* 4. AIRPORT PARKING (London Stansted - STN) */}
+          {/* ===================================================================== */}
+          <div className="bg-white rounded-xl border border-gray-200 shadow-xs overflow-hidden transition-all hover:border-blue-200">
+            {/* Header */}
+            <div className="p-5 sm:p-6 pb-4">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-blue-50 text-[#073590] flex items-center justify-center shrink-0 mt-0.5 border border-blue-100">
+                    <Car className="w-5 h-5 text-[#073590]" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h3 className="text-lg sm:text-xl font-black text-[#073590]">Airport Parking</h3>
+                      <span className="text-[11px] font-bold bg-blue-100 text-[#073590] px-2.5 py-0.5 rounded-full">
+                        London Stansted (STN)
+                      </span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-gray-600 mt-0.5">
+                      Save up to 40% with official Stansted airport parking. Safe, secure, and right by the terminal for 04 Oct – 08 Oct (4 days).
+                    </p>
+                  </div>
+                </div>
+
+                <div className="hidden sm:flex items-center gap-1 text-xs font-semibold text-[#073590] shrink-0">
+                  <HelpCircle className="w-3.5 h-3.5 text-[#073590]" />
+                  <span>Parking Information</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t border-dashed border-gray-200 mx-5 sm:mx-6" />
+
+            {/* Badges / Guarantees & Scarcity Nudge */}
+            <div className="p-5 sm:p-6 pb-2 space-y-3">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md text-xs font-bold bg-[#fef3c7] text-[#92400e]">
+                  <Check className="w-3.5 h-3.5 stroke-[3]" />
+                  <span>Official Stansted Parking</span>
+                </span>
+                <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md text-xs font-bold bg-[#fef3c7] text-[#92400e]">
+                  <Check className="w-3.5 h-3.5 stroke-[3]" />
+                  <span>24/7 CCTV & Barrier Access</span>
+                </span>
+                <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md text-xs font-bold bg-[#fef3c7] text-[#92400e]">
+                  <Check className="w-3.5 h-3.5 stroke-[3]" />
+                  <span>Free Cancellation up to 24h</span>
+                </span>
+                <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md text-xs font-black bg-[#ffc709] text-gray-900 shadow-xs border border-amber-300">
+                  <Check className="w-3.5 h-3.5 stroke-[3]" />
+                  <span>Guaranteed Bay</span>
+                </span>
+              </div>
+
+              {isDarkPattern && (
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-2.5 text-xs text-amber-900 flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <ShieldAlert className="w-4 h-4 text-amber-600 shrink-0" />
+                    <span className="font-medium">
+                      <strong>High Demand Alert:</strong> 89% of Stansted official parking spaces are already reserved for Oct 04 – Oct 08.
+                    </span>
+                  </div>
+                  <span className="hidden md:inline-block text-[11px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded">
+                    Only 3 spaces left at this rate
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* 3 Parking Tier Options */}
+            <div className="p-5 sm:p-6 pt-2 grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Option 1: Stansted Short Stay */}
+              <div
+                className={`rounded-xl border-2 p-4 flex flex-col justify-between transition shadow-xs ${
+                  selectedParking === 'short-stay'
+                    ? 'border-[#073590] ring-2 ring-[#073590] bg-blue-50/20'
+                    : 'border-gray-200 bg-white hover:border-blue-300'
+                }`}
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                      Walk to Terminal
+                    </span>
+                    <span className="text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">
+                      2 min walk
+                    </span>
+                  </div>
+
+                  <div>
+                    <h4 className="font-black text-gray-900 text-base">Stansted Short Stay</h4>
+                    <p className="text-xs text-gray-600 mt-1 leading-snug">
+                      Covered walkway direct to the check-in hall. No transfer buses needed.
+                    </p>
+                  </div>
+
+                  <ul className="text-xs text-gray-600 space-y-1.5 pt-1">
+                    <li className="flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5 text-[#073590]" />
+                      <span>2 min covered walk to terminal</span>
+                    </li>
+                    <li className="flex items-center gap-1.5">
+                      <Check className="w-3.5 h-3.5 text-emerald-600" />
+                      <span>Automatic number plate recognition</span>
+                    </li>
+                    <li className="flex items-center gap-1.5">
+                      <Check className="w-3.5 h-3.5 text-emerald-600" />
+                      <span>Keep your own keys</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="pt-4 mt-3 border-t border-gray-100 flex items-center justify-between">
+                  <div>
+                    <span className="text-[10px] text-gray-500 block">4 days total</span>
+                    <span className="text-base font-black text-[#073590]">£50.00</span>
+                    <span className="text-[10px] text-gray-400 block">£12.50/day</span>
+                  </div>
+
+                  <button
+                    onClick={() => onSelectParking?.(selectedParking === 'short-stay' ? 'none' : 'short-stay')}
+                    className={`text-xs font-bold px-4 py-2.5 rounded-lg transition shadow-xs cursor-pointer ${
+                      selectedParking === 'short-stay'
+                        ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                        : 'bg-[#1352a2] hover:bg-[#073590] text-white'
+                    }`}
+                  >
+                    {selectedParking === 'short-stay' ? 'Added ✓' : 'Select'}
+                  </button>
+                </div>
+              </div>
+
+              {/* Option 2: Meet & Greet Valet */}
+              <div
+                className={`rounded-xl border-2 p-4 flex flex-col justify-between transition shadow-md relative ${
+                  selectedParking === 'meet-greet'
+                    ? 'border-[#073590] ring-3 ring-[#073590] bg-[#fffcf0]'
+                    : 'border-[#ffc709] bg-[#fffdf5] hover:border-amber-400'
+                }`}
+              >
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#ffc709] text-gray-900 text-[10px] font-black px-3 py-0.5 rounded-full shadow-xs border border-amber-300">
+                  MOST POPULAR & CONVENIENT
+                </div>
+
+                <div className="space-y-3 pt-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-black text-amber-900 uppercase tracking-wider">
+                      Terminal Forecourt
+                    </span>
+                    <span className="text-[11px] font-black text-amber-900 bg-amber-100 px-2 py-0.5 rounded">
+                      Chauffeur Valet
+                    </span>
+                  </div>
+
+                  <div>
+                    <h4 className="font-black text-gray-900 text-base">Stansted Meet & Greet</h4>
+                    <p className="text-xs text-gray-700 mt-1 leading-snug">
+                      Drive straight to the terminal forecourt. Step out, hand over your keys, and head straight to departures.
+                    </p>
+                  </div>
+
+                  <ul className="text-xs text-gray-700 space-y-1.5 pt-1">
+                    <li className="flex items-center gap-1.5">
+                      <Key className="w-3.5 h-3.5 text-[#073590]" />
+                      <span>Dedicated valet check-in booth</span>
+                    </li>
+                    <li className="flex items-center gap-1.5">
+                      <Check className="w-3.5 h-3.5 text-[#d97706] stroke-[3]" />
+                      <span>Zero walking with luggage</span>
+                    </li>
+                    <li className="flex items-center gap-1.5">
+                      <Check className="w-3.5 h-3.5 text-[#d97706] stroke-[3]" />
+                      <span>Vehicle inspected on handover</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="pt-4 mt-3 border-t border-amber-200/70 flex items-center justify-between">
+                  <div>
+                    <span className="text-[10px] text-gray-600 block">4 days total</span>
+                    <span className="text-base font-black text-[#073590]">£65.00</span>
+                    <span className="text-[10px] text-gray-500 block">£16.25/day</span>
+                  </div>
+
+                  <button
+                    onClick={() => onSelectParking?.(selectedParking === 'meet-greet' ? 'none' : 'meet-greet')}
+                    className={`text-xs font-black px-4 py-2.5 rounded-lg transition shadow-xs cursor-pointer ${
+                      selectedParking === 'meet-greet'
+                        ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                        : 'bg-[#ffc709] hover:bg-[#e5b200] text-[#073590]'
+                    }`}
+                  >
+                    {selectedParking === 'meet-greet' ? 'Added ✓' : 'Select Valet'}
+                  </button>
+                </div>
+              </div>
+
+              {/* Option 3: Official Long Stay */}
+              <div
+                className={`rounded-xl border-2 p-4 flex flex-col justify-between transition shadow-xs ${
+                  selectedParking === 'long-stay'
+                    ? 'border-[#073590] ring-2 ring-[#073590] bg-blue-50/20'
+                    : 'border-gray-200 bg-white hover:border-blue-300'
+                }`}
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                      Park & Ride
+                    </span>
+                    <span className="text-[11px] font-bold text-blue-800 bg-blue-50 px-2 py-0.5 rounded">
+                      Best Value
+                    </span>
+                  </div>
+
+                  <div>
+                    <h4 className="font-black text-gray-900 text-base">Stansted Long Stay</h4>
+                    <p className="text-xs text-gray-600 mt-1 leading-snug">
+                      Budget-friendly secured parking with free frequent courtesy shuttles directly to terminal.
+                    </p>
+                  </div>
+
+                  <ul className="text-xs text-gray-600 space-y-1.5 pt-1">
+                    <li className="flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5 text-[#073590]" />
+                      <span>Free 5-min shuttle bus (every 10m)</span>
+                    </li>
+                    <li className="flex items-center gap-1.5">
+                      <Check className="w-3.5 h-3.5 text-emerald-600" />
+                      <span>Full perimeter fencing & CCTV</span>
+                    </li>
+                    <li className="flex items-center gap-1.5">
+                      <Check className="w-3.5 h-3.5 text-emerald-600" />
+                      <span>Self-park: keep your keys</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="pt-4 mt-3 border-t border-gray-100 flex items-center justify-between">
+                  <div>
+                    <span className="text-[10px] text-gray-500 block">4 days total</span>
+                    <span className="text-base font-black text-[#073590]">£39.96</span>
+                    <span className="text-[10px] text-gray-400 block">£9.99/day</span>
+                  </div>
+
+                  <button
+                    onClick={() => onSelectParking?.(selectedParking === 'long-stay' ? 'none' : 'long-stay')}
+                    className={`text-xs font-bold px-4 py-2.5 rounded-lg transition shadow-xs cursor-pointer ${
+                      selectedParking === 'long-stay'
+                        ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                        : 'bg-[#1352a2] hover:bg-[#073590] text-white'
+                    }`}
+                  >
+                    {selectedParking === 'long-stay' ? 'Added ✓' : 'Select'}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Decline Parking Option */}
+            <div className="p-4 pt-1 pb-4 text-right border-t border-gray-100">
+              <button
+                onClick={() => onSelectParking?.('none')}
+                className="text-xs font-bold text-gray-500 hover:text-gray-800 hover:underline cursor-pointer"
+              >
+                No thanks, I will arrange my own airport transport
+              </button>
+            </div>
+          </div>
+
+          {/* ===================================================================== */}
+          {/* 5. CAR HIRE IN PALANGA (PLQ) */}
+          {/* ===================================================================== */}
+          <div className="bg-white rounded-xl border border-gray-200 shadow-xs overflow-hidden transition-all hover:border-blue-200">
+            {/* Header */}
+            <div className="p-5 sm:p-6 pb-4">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-blue-50 text-[#073590] flex items-center justify-center shrink-0 mt-0.5 border border-blue-100">
+                    <Key className="w-5 h-5 text-[#073590]" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h3 className="text-lg sm:text-xl font-black text-[#073590]">Car Hire in Palanga</h3>
+                      <span className="text-[11px] font-bold bg-blue-100 text-[#073590] px-2.5 py-0.5 rounded-full">
+                        Palanga Airport (PLQ)
+                      </span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-gray-600 mt-0.5">
+                      Compare verified car hire partners with pick-up directly at Palanga Airport Arrivals. 04 Oct – 08 Oct (4 days).
+                    </p>
+                  </div>
+                </div>
+
+                <div className="hidden sm:flex items-center gap-1 text-xs font-semibold text-[#073590] shrink-0">
+                  <HelpCircle className="w-3.5 h-3.5 text-[#073590]" />
+                  <span>Car Hire Price Promise</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t border-dashed border-gray-200 mx-5 sm:mx-6" />
+
+            {/* Badges / Guarantees & Scarcity */}
+            <div className="p-5 sm:p-6 pb-2 space-y-3">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md text-xs font-bold bg-[#fef3c7] text-[#92400e]">
+                  <Check className="w-3.5 h-3.5 stroke-[3]" />
+                  <span>Free Cancellation up to 48h</span>
+                </span>
+                <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md text-xs font-bold bg-[#fef3c7] text-[#92400e]">
+                  <Check className="w-3.5 h-3.5 stroke-[3]" />
+                  <span>Full-to-Full Fuel Policy</span>
+                </span>
+                <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md text-xs font-bold bg-[#fef3c7] text-[#92400e]">
+                  <Check className="w-3.5 h-3.5 stroke-[3]" />
+                  <span>Pick up at Terminal Desk</span>
+                </span>
+                <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md text-xs font-black bg-[#ffc709] text-gray-900 shadow-xs border border-amber-300">
+                  <Check className="w-3.5 h-3.5 stroke-[3]" />
+                  <span>Unlimited Mileage</span>
+                </span>
+              </div>
+
+              {isDarkPattern && (
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-2.5 text-xs text-amber-900 flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <ShieldAlert className="w-4 h-4 text-amber-600 shrink-0" />
+                    <span className="font-medium">
+                      <strong>Low Availability in Palanga:</strong> 82% of automatic vehicles already booked for October 04 – 08.
+                    </span>
+                  </div>
+                  <span className="hidden md:inline-block text-[11px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded">
+                    High season demand
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* 3 Car Tier Options */}
+            <div className="p-5 sm:p-6 pt-2 grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Car 1: Economy Polo */}
+              <div
+                className={`rounded-xl border-2 p-4 flex flex-col justify-between transition shadow-xs ${
+                  selectedCarHire === 'economy'
+                    ? 'border-[#073590] ring-2 ring-[#073590] bg-blue-50/20'
+                    : 'border-gray-200 bg-white hover:border-blue-300'
+                }`}
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                      Supplier: Hertz
+                    </span>
+                    <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
+                      Economy
+                    </span>
+                  </div>
+
+                  <div>
+                    <h4 className="font-black text-gray-900 text-base">Volkswagen Polo</h4>
+                    <span className="text-xs text-gray-500">or similar economy class</span>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2 text-xs text-gray-600 pt-1">
+                    <span className="flex items-center gap-1.5">
+                      <Users className="w-3.5 h-3.5 text-[#073590]" />
+                      <span>5 Seats</span>
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <Briefcase className="w-3.5 h-3.5 text-[#073590]" />
+                      <span>2 Bags</span>
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <Fuel className="w-3.5 h-3.5 text-[#073590]" />
+                      <span>Manual / Petrol</span>
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <Check className="w-3.5 h-3.5 text-emerald-600" />
+                      <span>Air conditioning</span>
+                    </span>
+                  </div>
+                </div>
+
+                <div className="pt-4 mt-3 border-t border-gray-100 flex items-center justify-between">
+                  <div>
+                    <span className="text-[10px] text-gray-500 block">4 days rental</span>
+                    <span className="text-base font-black text-[#073590]">£78.00</span>
+                    <span className="text-[10px] text-gray-400 block">£19.50/day</span>
+                  </div>
+
+                  <button
+                    onClick={() => onSelectCarHire?.(selectedCarHire === 'economy' ? 'none' : 'economy')}
+                    className={`text-xs font-bold px-4 py-2.5 rounded-lg transition shadow-xs cursor-pointer ${
+                      selectedCarHire === 'economy'
+                        ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                        : 'bg-[#1352a2] hover:bg-[#073590] text-white'
+                    }`}
+                  >
+                    {selectedCarHire === 'economy' ? 'Booked ✓' : 'Book Car'}
+                  </button>
+                </div>
+              </div>
+
+              {/* Car 2: Compact SUV */}
+              <div
+                className={`rounded-xl border-2 p-4 flex flex-col justify-between transition shadow-md relative ${
+                  selectedCarHire === 'suv'
+                    ? 'border-[#073590] ring-3 ring-[#073590] bg-[#fffcf0]'
+                    : 'border-[#ffc709] bg-[#fffdf5] hover:border-amber-400'
+                }`}
+              >
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#ffc709] text-gray-900 text-[10px] font-black px-3 py-0.5 rounded-full shadow-xs border border-amber-300">
+                  CUSTOMER FAVOURITE
+                </div>
+
+                <div className="space-y-3 pt-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-black text-amber-900 uppercase tracking-wider">
+                      Supplier: Sixt
+                    </span>
+                    <span className="text-[11px] font-black text-amber-900 bg-amber-100 px-2 py-0.5 rounded">
+                      Automatic SUV
+                    </span>
+                  </div>
+
+                  <div>
+                    <h4 className="font-black text-gray-900 text-base">Nissan Qashqai</h4>
+                    <span className="text-xs text-gray-600">or similar compact SUV</span>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2 text-xs text-gray-700 pt-1">
+                    <span className="flex items-center gap-1.5">
+                      <Users className="w-3.5 h-3.5 text-[#073590]" />
+                      <span>5 Seats</span>
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <Briefcase className="w-3.5 h-3.5 text-[#073590]" />
+                      <span>4 Large Bags</span>
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <Fuel className="w-3.5 h-3.5 text-[#073590]" />
+                      <span>Automatic</span>
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-[#d97706]" />
+                      <span>GPS Included</span>
+                    </span>
+                  </div>
+                </div>
+
+                <div className="pt-4 mt-3 border-t border-amber-200/70 flex items-center justify-between">
+                  <div>
+                    <span className="text-[10px] text-gray-600 block">4 days rental</span>
+                    <span className="text-base font-black text-[#073590]">£119.20</span>
+                    <span className="text-[10px] text-gray-500 block">£29.80/day</span>
+                  </div>
+
+                  <button
+                    onClick={() => onSelectCarHire?.(selectedCarHire === 'suv' ? 'none' : 'suv')}
+                    className={`text-xs font-black px-4 py-2.5 rounded-lg transition shadow-xs cursor-pointer ${
+                      selectedCarHire === 'suv'
+                        ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                        : 'bg-[#ffc709] hover:bg-[#e5b200] text-[#073590]'
+                    }`}
+                  >
+                    {selectedCarHire === 'suv' ? 'Booked ✓' : 'Book SUV'}
+                  </button>
+                </div>
+              </div>
+
+              {/* Car 3: Family Estate */}
+              <div
+                className={`rounded-xl border-2 p-4 flex flex-col justify-between transition shadow-xs ${
+                  selectedCarHire === 'estate'
+                    ? 'border-[#073590] ring-2 ring-[#073590] bg-blue-50/20'
+                    : 'border-gray-200 bg-white hover:border-blue-300'
+                }`}
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                      Supplier: Green Motion
+                    </span>
+                    <span className="text-[11px] font-bold text-blue-800 bg-blue-50 px-2 py-0.5 rounded">
+                      Family Estate
+                    </span>
+                  </div>
+
+                  <div>
+                    <h4 className="font-black text-gray-900 text-base">Skoda Octavia Combi</h4>
+                    <span className="text-xs text-gray-500">or similar station wagon</span>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2 text-xs text-gray-600 pt-1">
+                    <span className="flex items-center gap-1.5">
+                      <Users className="w-3.5 h-3.5 text-[#073590]" />
+                      <span>5 Seats</span>
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <Briefcase className="w-3.5 h-3.5 text-[#073590]" />
+                      <span>5 Bags (640L boot)</span>
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <Fuel className="w-3.5 h-3.5 text-[#073590]" />
+                      <span>Manual / Diesel</span>
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <Check className="w-3.5 h-3.5 text-emerald-600" />
+                      <span>Cruise Control</span>
+                    </span>
+                  </div>
+                </div>
+
+                <div className="pt-4 mt-3 border-t border-gray-100 flex items-center justify-between">
+                  <div>
+                    <span className="text-[10px] text-gray-500 block">4 days rental</span>
+                    <span className="text-base font-black text-[#073590]">£96.00</span>
+                    <span className="text-[10px] text-gray-400 block">£24.00/day</span>
+                  </div>
+
+                  <button
+                    onClick={() => onSelectCarHire?.(selectedCarHire === 'estate' ? 'none' : 'estate')}
+                    className={`text-xs font-bold px-4 py-2.5 rounded-lg transition shadow-xs cursor-pointer ${
+                      selectedCarHire === 'estate'
+                        ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                        : 'bg-[#1352a2] hover:bg-[#073590] text-white'
+                    }`}
+                  >
+                    {selectedCarHire === 'estate' ? 'Booked ✓' : 'Book Estate'}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Decline Car Hire Option */}
+            <div className="p-4 pt-1 pb-4 text-right border-t border-gray-100">
+              <button
+                onClick={() => onSelectCarHire?.('none')}
+                className="text-xs font-bold text-gray-500 hover:text-gray-800 hover:underline cursor-pointer"
+              >
+                No thanks, I will travel without car hire
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+
       {/* ========================================================================= */}
       {/* BOTTOM STEPPER NAVIGATION */}
       {/* ========================================================================= */}
       <div className="pt-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <button
-          onClick={onBack}
-          className="flex items-center gap-1.5 text-xs font-semibold text-gray-600 hover:text-gray-900 border border-gray-300 px-4 py-2.5 rounded-lg transition"
-        >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          <span>Back to Bags</span>
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={onBack}
+            className="flex items-center gap-1.5 text-xs font-semibold text-gray-600 hover:text-gray-900 border border-gray-300 px-4 py-2.5 rounded-lg transition cursor-pointer"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Back to Bags</span>
+          </button>
 
-        <button
-          onClick={onNext}
-          className="bg-[#073590] hover:bg-[#052973] text-white font-bold text-xs sm:text-sm px-8 py-3 rounded-lg shadow-md transition flex items-center gap-2 cursor-pointer transform active:scale-95"
-        >
-          <span>Continue to Review & Pay</span>
-          <ArrowRight className="w-4 h-4" />
-        </button>
+          {activeSubStep === 'transport' && (
+            <button
+              onClick={() => setActiveSubStep('airport')}
+              className="text-xs font-semibold text-[#073590] hover:underline px-2 py-1 cursor-pointer"
+            >
+              ← Back to Airport & Trip
+            </button>
+          )}
+        </div>
+
+        <div className="flex items-center gap-3">
+          {activeSubStep === 'airport' && (
+            <button
+              onClick={() => setActiveSubStep('transport')}
+              className="text-xs font-bold text-[#073590] bg-blue-50 hover:bg-blue-100 border border-blue-200 px-4 py-2.5 rounded-lg transition cursor-pointer flex items-center gap-1.5"
+            >
+              <span>Next: Transport & Parking</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          )}
+
+          <button
+            onClick={onNext}
+            className="bg-[#073590] hover:bg-[#052973] text-white font-bold text-xs sm:text-sm px-8 py-3 rounded-lg shadow-md transition flex items-center gap-2 cursor-pointer transform active:scale-95"
+          >
+            <span>Continue to Review & Pay</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
       </div>
 
       {/* Modal for viewing original captures in full detail */}
