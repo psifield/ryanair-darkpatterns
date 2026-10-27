@@ -46,10 +46,19 @@ export interface FareTier {
 
 export interface DarkPatternAnnotation {
   id: string;
-  number: 1 | 2 | 3 | 4 | 5 | 6 | 7;
+  number: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
   title: string;
   patternType: string;
-  category: 'Scarcity & Urgency' | 'Visual Interference' | 'Price Framing' | 'Upsell Interruption' | 'Emotional Pressure' | 'Baggage Warning' | 'Default Selection';
+  category:
+    | 'Scarcity & Urgency'
+    | 'Visual Interference'
+    | 'Price Framing'
+    | 'Upsell Interruption'
+    | 'Emotional Pressure'
+    | 'Baggage Warning'
+    | 'Default Selection'
+    | 'Obstruction & Roadblocks'
+    | 'Social Proof & Sunk Cost';
   elementTarget: string;
   originalBehavior: string;
   ethicalFix: string;

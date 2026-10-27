@@ -209,6 +209,8 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
           onNext();
         }}
         isDarkPattern={isDarkPattern}
+        showAuditMarkers={showAuditMarkers}
+        onOpenAuditItem={onOpenAuditItem}
       />
     </div>
   );

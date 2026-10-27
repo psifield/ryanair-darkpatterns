@@ -4,7 +4,7 @@
 
 ---
 
-## Entry 1 - extras tab population (Screen A baseline) · 2026-10-27, 12:15 · sent by Roy · AI Studio
+## Entry 1 - extras tab population (Screen A baseline) · 2026-10-27, 11:40 · sent by Roy · AI Studio
 
 ROLE: Front-end React developer.
 GOAL: Populate the missing "Extras" tab and post-seat transition for the Original Prototype (viewMode === 'dark-pattern') using uploaded screenshots of Ryanair's real booking flow.
@@ -22,7 +22,7 @@ GUARDRAILS: Front-end only. Change only Screen A. Change nothing else.
 
 ---
 
-## Entry 2 - transport & parking ancillary flow (Screen A baseline) · 2026-10-27, 14:30 · sent by Roy · AI Studio
+## Entry 2 - transport & parking ancillary flow (Screen A baseline) · 2026-10-27, 11:55 · sent by Roy · AI Studio
 
 ROLE: Front-end React developer.
 GOAL: Complete the replication of Ryanair's real Extras tab for the Original Prototype (viewMode === 'dark-pattern') by adding the Transport & Parking ancillary flow.

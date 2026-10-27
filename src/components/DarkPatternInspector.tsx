@@ -61,7 +61,7 @@ export const DarkPatternInspector: React.FC<DarkPatternInspectorProps> = ({
                 Ryanair UX Audit: Fare-choice Evidence
               </h2>
               <p className="text-xs text-slate-400">
-                Three main candidates; DP 1/5/6/7 are context. DP 3 friction overlaps DP 4.
+                Fare-choice candidates (DP 2–4); ancillary extras (DP 7–10); context (DP 1, 5, 6).
               </p>
             </div>
           </div>

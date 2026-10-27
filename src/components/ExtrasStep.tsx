@@ -30,6 +30,7 @@ import {
   Key,
   ShieldAlert
 } from 'lucide-react';
+import { AuditMarker } from './AuditMarker';
 
 export type InsurancePlan = 'none' | 'standard' | 'plus' | 'annual';
 export type ParkingOption = 'none' | 'short-stay' | 'meet-greet' | 'long-stay';
@@ -572,6 +573,20 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
                   {/* Left Top Accent Pill Tab */}
                   <div className="absolute top-0 left-0 w-2.5 h-8 bg-[#ffc709] rounded-tl-[10px] rounded-br-sm" />
 
+                  {/* Audit Marker for DP 9 (Micro-price Framing & Steering) */}
+                  {showAuditMarkers && isDarkPattern && (
+                    <div className="absolute -top-3 right-2 z-30">
+                      <AuditMarker
+                        number={9}
+                        auditId="dp-insurance-confirmshame"
+                        title="Insurance Micro-price Framing & Loaded Refusal"
+                        label="Micro-Pricing (+£0.35/day)"
+                        align="right"
+                        onOpenAuditItem={onOpenAuditItem}
+                      />
+                    </div>
+                  )}
+
                   {/* Floating Gadget Tag Directly Centered Over Insurance Plus */}
                   <div className="absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap z-20 flex items-center gap-1.5 bg-[#ffc709] text-gray-900 text-[11px] font-black px-3.5 py-1 rounded-full shadow-md border border-amber-300">
                     <Smartphone className="w-3.5 h-3.5 text-gray-900 shrink-0" />
@@ -705,7 +720,17 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
             </div>
 
             {/* Decline Insurance Option */}
-            <div className="pt-1 text-right">
+            <div className="pt-2 text-right relative flex items-center justify-end">
+              {showAuditMarkers && isDarkPattern && (
+                <AuditMarker
+                  number={9}
+                  auditId="dp-insurance-confirmshame"
+                  title="Insurance Micro-price Framing & Loaded Refusal"
+                  label="Confirmshaming Refusal"
+                  align="right"
+                  onOpenAuditItem={onOpenAuditItem}
+                />
+              )}
               <button
                 onClick={() => onSelectInsurance('none')}
                 className="text-xs font-bold text-gray-500 hover:text-gray-800 hover:underline cursor-pointer"
@@ -988,6 +1013,19 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
                   MOST POPULAR & CONVENIENT
                 </div>
 
+                {showAuditMarkers && isDarkPattern && (
+                  <div className="absolute -top-3 right-2 z-30">
+                    <AuditMarker
+                      number={10}
+                      auditId="dp-transport-social-proof"
+                      title="Transport Bandwagon Steering & Sunk Cost Timing"
+                      label="Bandwagon / Sunk Cost"
+                      align="right"
+                      onOpenAuditItem={onOpenAuditItem}
+                    />
+                  </div>
+                )}
+
                 <div className="space-y-3 pt-1">
                   <div className="flex items-center justify-between">
                     <span className="text-[11px] font-black text-amber-900 uppercase tracking-wider">
@@ -1259,6 +1297,19 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#ffc709] text-gray-900 text-[10px] font-black px-3 py-0.5 rounded-full shadow-xs border border-amber-300">
                   CUSTOMER FAVOURITE
                 </div>
+
+                {showAuditMarkers && isDarkPattern && (
+                  <div className="absolute -top-3 right-2 z-30">
+                    <AuditMarker
+                      number={10}
+                      auditId="dp-transport-social-proof"
+                      title="Transport Bandwagon Steering & Sunk Cost Timing"
+                      label="Social Proof / Sunk Cost"
+                      align="right"
+                      onOpenAuditItem={onOpenAuditItem}
+                    />
+                  </div>
+                )}
 
                 <div className="space-y-3 pt-1">
                   <div className="flex items-center justify-between">

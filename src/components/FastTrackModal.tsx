@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Check, X, ShieldAlert, Sparkles, Image as ImageIcon } from 'lucide-react';
+import { AuditMarker } from './AuditMarker';
 
 interface FastTrackModalProps {
   isOpen: boolean;
@@ -7,6 +8,8 @@ interface FastTrackModalProps {
   onAddFastTrack: () => void;
   onSkip: () => void;
   isDarkPattern?: boolean;
+  showAuditMarkers?: boolean;
+  onOpenAuditItem?: (id: string) => void;
 }
 
 export const FastTrackModal: React.FC<FastTrackModalProps> = ({
@@ -15,6 +18,8 @@ export const FastTrackModal: React.FC<FastTrackModalProps> = ({
   onAddFastTrack,
   onSkip,
   isDarkPattern = true,
+  showAuditMarkers = false,
+  onOpenAuditItem,
 }) => {
   const [showOriginalCapture, setShowOriginalCapture] = useState(false);
 
@@ -149,7 +154,18 @@ export const FastTrackModal: React.FC<FastTrackModalProps> = ({
                   <span className="text-[11px] text-gray-500 block">Per person, per flight</span>
                 </div>
 
-                <div className="flex items-center justify-end gap-3 w-full sm:w-auto">
+                <div className="relative flex items-center justify-end gap-3 w-full sm:w-auto">
+                  {showAuditMarkers && isDarkPattern && (
+                    <AuditMarker
+                      number={8}
+                      auditId="dp-fast-track-roadblock"
+                      title="Fast Track Interstitial Roadblock & Queue Anxiety Framing"
+                      label="Roadblock & Asymmetric Contrast"
+                      align="right"
+                      onOpenAuditItem={onOpenAuditItem}
+                    />
+                  )}
+
                   <button
                     onClick={onSkip}
                     className="text-xs font-bold text-[#073590] hover:text-blue-800 hover:underline px-3 py-2 cursor-pointer transition"
