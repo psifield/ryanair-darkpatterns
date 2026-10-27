@@ -228,7 +228,19 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
       {(activeSubStep === 'all' || activeSubStep === 'airport') && (
         <>
           {/* 1. SECURITY FAST TRACK CARD (image_16909bab.png) */}
-      <div className="bg-white rounded-xl border border-gray-200 shadow-xs overflow-hidden transition-all hover:border-blue-200">
+      <div className="relative bg-white rounded-xl border border-gray-200 shadow-xs overflow-visible transition-all hover:border-blue-200">
+        {showAuditMarkers && isDarkPattern && (
+          <div className="absolute -top-3 right-4 z-30">
+            <AuditMarker
+              number={8}
+              auditId="dp-fast-track-roadblock"
+              title="Fast Track Interstitial Roadblock & Queue Anxiety Framing"
+              label="Queue Anxiety Framing"
+              align="right"
+              onOpenAuditItem={onOpenAuditItem}
+            />
+          </div>
+        )}
         {/* Card Header */}
         <div className="p-5 sm:p-6 pb-4">
           <div className="flex items-start justify-between gap-4">

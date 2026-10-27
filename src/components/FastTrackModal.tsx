@@ -29,8 +29,21 @@ export const FastTrackModal: React.FC<FastTrackModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-xs overflow-y-auto">
       <div className="bg-white max-w-lg w-full rounded-2xl overflow-hidden shadow-2xl border border-gray-200 my-auto animate-in fade-in zoom-in-95 duration-150">
         {/* Modal Top Bar */}
-        <div className="bg-[#073590] text-white px-4 py-2.5 flex items-center justify-between text-xs font-semibold">
-          <div className="flex items-center gap-1.5">
+        <div className="bg-[#073590] text-white px-4 py-2.5 flex items-center justify-between text-xs font-semibold relative">
+          <div className="flex items-center gap-2">
+            {showAuditMarkers && isDarkPattern && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onOpenAuditItem?.('dp-fast-track-roadblock');
+                }}
+                className="whitespace-nowrap rounded-full bg-rose-500 hover:bg-rose-600 px-2 py-0.5 text-[10px] font-bold text-white shadow-xs cursor-pointer flex items-center gap-1 transition"
+                title="DP 8: Fast Track Interstitial Roadblock & Queue Anxiety Framing"
+              >
+                ⚠️ DP 8 · Roadblock
+              </button>
+            )}
             <span className="bg-[#f1c40f] text-[#073590] text-[10px] font-black px-1.5 py-0.5 rounded tracking-wide uppercase">
               Post-Seat Upsell
             </span>
@@ -107,13 +120,28 @@ export const FastTrackModal: React.FC<FastTrackModalProps> = ({
 
             {/* Modal Body Copy */}
             <div className="p-5 sm:p-6 space-y-4">
-              <div>
-                <h3 className="text-xl sm:text-2xl font-black text-[#073590] tracking-tight">
-                  Skip long security queues with Fast Track
-                </h3>
-                <p className="text-xs sm:text-sm text-gray-600 mt-1 font-medium">
-                  Add Fast Track to your booking to get through security quicker.
-                </p>
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-black text-[#073590] tracking-tight">
+                    Skip long security queues with Fast Track
+                  </h3>
+                  <p className="text-xs sm:text-sm text-gray-600 mt-1 font-medium">
+                    Add Fast Track to your booking to get through security quicker.
+                  </p>
+                </div>
+                {showAuditMarkers && isDarkPattern && (
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onOpenAuditItem?.('dp-fast-track-roadblock');
+                    }}
+                    className="shrink-0 whitespace-nowrap rounded-full bg-rose-500 hover:bg-rose-600 px-2.5 py-1 text-[11px] font-bold text-white shadow-xs cursor-pointer flex items-center gap-1 transition self-start"
+                    title="DP 8: Queue Anxiety & Loss Framing"
+                  >
+                    ⚠️ DP 8 · Queue Loss Framing
+                  </button>
+                )}
               </div>
 
               {/* How to use */}
@@ -154,16 +182,19 @@ export const FastTrackModal: React.FC<FastTrackModalProps> = ({
                   <span className="text-[11px] text-gray-500 block">Per person, per flight</span>
                 </div>
 
-                <div className="relative flex items-center justify-end gap-3 w-full sm:w-auto">
+                <div className="flex items-center justify-end gap-3 w-full sm:w-auto flex-wrap">
                   {showAuditMarkers && isDarkPattern && (
-                    <AuditMarker
-                      number={8}
-                      auditId="dp-fast-track-roadblock"
-                      title="Fast Track Interstitial Roadblock & Queue Anxiety Framing"
-                      label="Roadblock & Asymmetric Contrast"
-                      align="right"
-                      onOpenAuditItem={onOpenAuditItem}
-                    />
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onOpenAuditItem?.('dp-fast-track-roadblock');
+                      }}
+                      className="whitespace-nowrap rounded-full bg-rose-500 hover:bg-rose-600 px-2 py-0.5 text-[10px] font-bold text-white shadow-xs cursor-pointer flex items-center gap-1 transition"
+                      title="DP 8: Asymmetric Action Contrast"
+                    >
+                      ⚠️ DP 8 · Visual Contrast
+                    </button>
                   )}
 
                   <button
