@@ -4,7 +4,7 @@
 
 ---
 
-## Entry 1 - extras tab population (Screen A baseline) · 2026-10-27, 12:15 (SGT) · sent by Roy · AI Studio
+## Entry 1 - extras tab population (Screen A baseline) · 2026-10-27, 14:45 · sent by Roy · AI Studio
 
 ROLE: Front-end React developer.
 GOAL: Populate the missing "Extras" tab and post-seat transition for the Original Prototype (viewMode === 'dark-pattern') using uploaded screenshots of Ryanair's real booking flow.
@@ -22,7 +22,7 @@ GUARDRAILS: Front-end only. Change only Screen A. Change nothing else.
 
 ---
 
-## Entry 2 - transport & parking ancillary flow (Screen A baseline) · 2026-10-27, 12:45 (SGT) · sent by Roy · AI Studio
+## Entry 2 - transport & parking ancillary flow (Screen A baseline) · 2026-10-28, 02:55 · sent by Roy · AI Studio
 
 ROLE: Front-end React developer.
 GOAL: Complete the replication of Ryanair's real Extras tab for the Original Prototype (viewMode === 'dark-pattern') by adding the Transport & Parking ancillary flow.
@@ -42,21 +42,22 @@ GUARDRAILS: Front-end only. Change only Screen A. Replicate Ryanair's real basel
 
 ---
 
-## Entry 3 - ancillary audit markers integration (Screen A baseline) · 2026-10-27, 13:10 (SGT) · sent by Roy · AI Studio
+## Entry 3 - ancillary audit markers integration (Screen A baseline) · 2026-10-28, 03:15 · sent by Roy · AI Studio
 
 ROLE: Front-end React developer.
-GOAL: Map Ryanair's replicated ancillary flow and post-seat transition to behavioural design literature and mount interactive audit markers (DP 8–10) across Screen A.
+GOAL: Audit Ryanair's replicated ancillary flow and post-seat transition using deceptive pattern concepts, and place interactive audit markers across Screen A.
 CONTEXT: Flight booking London Stansted to Palanga, 4-day return trip.
 WHAT TO BUILD:
-- Position audit marker DP 8 on the post-seat Fast Track interstitial modal and the Extras tab Security Fast Track card.
-- Position audit marker DP 9 on the Travel Protection insurance matrix (Plus tier daily micro-rate framing) and confirmshaming refusal link.
-- Position audit marker DP 10 on the Airport Parking (Meet & Greet Valet) and Car Hire (Nissan Qashqai SUV) social proof badges.
-- Expand DarkPatternAnnotation types and integrate comprehensive audit dossiers for DP 8–10 into DarkPatternInspector.
-GUARDRAILS: Front-end only. Change only Screen A. Anchor every marker to specific syllabus readings (Mathur et al. 2019; Gray et al. 2018; Week 4; Week 7).
+- Flag the post-seat Fast Track interstitial modal as an obstruction pattern that exploits queue anxiety and visual contrast to steer add-on sales before baggage selection.
+- Flag the Travel Protection matrix for daily micro-rate framing (+£0.35/day) that exploits diminishing sensitivity, and mark the emotionally loaded refusal link that guilts travellers into accepting coverage.
+- Flag the unverified "Most Popular" and "Customer Favourite" badges on high-cost airport parking and car hire as bandwagon cues that leverage sunk cost escalation late in the checkout funnel.
+- Expand the audit inspector modal to display full behavioral breakdowns, psychological impacts, and proposed ethical remedies for each marked pattern.
+GUARDRAILS: Front-end only. Change only Screen A. Keep the existing booking flow intact while making all markers interactive.
 
 *What came back:* AI Studio mounted interactive audit marker badges on the Fast Track roadblock modal, Extras Fast Track card, Insurance Plus card, refusal button, and parking/car hire cards, expanded DarkPatternAnnotation types, and added comprehensive audit dossiers in DarkPatternInspector.
 
 *Our judgement, and what we changed next:* Verified that toggling "Show Audit Markers" accurately displays DP 8, DP 9, and DP 10 directly on the corresponding elements and opens their respective audit dossiers in the modal inspector. Confirmed all citations match course material on loss framing, confirmshaming, and bandwagon heuristics. Next step is designing Screen B's ethical active-choice alternatives for these ancillary steps.
 
 *Principle check:* Mathur et al. (2019), Obstruction (§5.1.4), Confirmshaming (§5.1.3), Social Proof (§5.1.2); Week 4, Loss Framing & Sunk Cost Escalation (Roh pp. 27, 45, 87–90); Week 7, Asymmetric Visual Weight & Processing Fluency.
+
 
