@@ -11,6 +11,7 @@ import { ComparisonBanner } from './components/ComparisonBanner';
 import { DarkPatternInspector } from './components/DarkPatternInspector';
 import { SeatsStep } from './components/SeatsStep';
 import { BagsStep } from './components/BagsStep';
+import { ExtrasStep, InsurancePlan } from './components/ExtrasStep';
 import { ReviewStep } from './components/ReviewStep';
 import { NewsletterFooter } from './components/NewsletterFooter';
 
@@ -35,6 +36,11 @@ export default function App() {
   const [additionalLuggage, setAdditionalLuggage] = useState<number>(0);
   const [newsletterOptIn, setNewsletterOptIn] = useState<boolean>(true);
 
+  // Extras State (Fast Track, Travel Insurance, Inflight Pre-paid Credit)
+  const [fastTrackSelected, setFastTrackSelected] = useState<boolean>(false);
+  const [insurancePlan, setInsurancePlan] = useState<InsurancePlan>('none');
+  const [prepaidCredit, setPrepaidCredit] = useState<number>(0);
+
   // Dark Pattern Audit / Inspector State
   const [showAuditMarkers, setShowAuditMarkers] = useState(true);
   const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
@@ -44,7 +50,10 @@ export default function App() {
   const tierData = FARE_TIERS[selectedTier] || FARE_TIERS.BASIC;
   const seatPrice = selectedSeat.startsWith('15') || selectedSeat.startsWith('16') ? 8.0 : 0.0;
   const luggagePrice = additionalLuggage * 30.0;
-  const currentCartTotal = tierData.totalPrice + seatPrice + luggagePrice;
+  const fastTrackPrice = fastTrackSelected ? 7.49 : 0.0;
+  const insurancePrice = insurancePlan === 'standard' ? 4.68 : insurancePlan === 'plus' ? 6.08 : insurancePlan === 'annual' ? 28.18 : 0.0;
+  const creditPrice = prepaidCredit > 0 ? prepaidCredit * 0.9 : 0.0;
+  const currentCartTotal = tierData.totalPrice + seatPrice + luggagePrice + fastTrackPrice + insurancePrice + creditPrice;
 
   // Handlers
   const handleToggleOutbound = () => setOutboundSelected(!outboundSelected);
@@ -236,6 +245,8 @@ export default function App() {
               onOpenAuditItem={handleOpenAuditItem}
               selectedSeat={selectedSeat}
               onSelectSeat={setSelectedSeat}
+              fastTrackSelected={fastTrackSelected}
+              onToggleFastTrack={setFastTrackSelected}
               onBack={() => setCurrentStep('flights')}
               onNext={() => setCurrentStep('bags')}
             />
@@ -250,11 +261,28 @@ export default function App() {
               additionalLuggage={additionalLuggage}
               onSetAdditionalLuggage={setAdditionalLuggage}
               onBack={() => setCurrentStep('seats')}
+              onNext={() => setCurrentStep('extras')}
+            />
+          )}
+
+          {/* STEP 4: EXTRAS (Fast Track, Travel Insurance, Inflight Credit) */}
+          {currentStep === 'extras' && (
+            <ExtrasStep
+              isDarkPattern={viewMode === 'dark-pattern'}
+              showAuditMarkers={showAuditMarkers}
+              onOpenAuditItem={handleOpenAuditItem}
+              fastTrackSelected={fastTrackSelected}
+              onToggleFastTrack={setFastTrackSelected}
+              insurancePlan={insurancePlan}
+              onSelectInsurance={setInsurancePlan}
+              prepaidCredit={prepaidCredit}
+              onSelectPrepaidCredit={setPrepaidCredit}
+              onBack={() => setCurrentStep('bags')}
               onNext={() => setCurrentStep('review')}
             />
           )}
 
-          {/* STEP 4 & 5: REVIEW & PAY */}
+          {/* STEP 5: REVIEW & PAY */}
           {currentStep === 'review' && (
             <ReviewStep
               isDarkPattern={viewMode === 'dark-pattern'}
@@ -265,24 +293,8 @@ export default function App() {
               additionalLuggage={additionalLuggage}
               newsletterOptIn={newsletterOptIn}
               onToggleNewsletter={() => setNewsletterOptIn(!newsletterOptIn)}
-              onBack={() => setCurrentStep('bags')}
+              onBack={() => setCurrentStep('extras')}
             />
-          )}
-
-          {/* Optional EXTRAS step redirect */}
-          {currentStep === 'extras' && (
-            <div className="max-w-md mx-auto text-center py-12 space-y-4">
-              <h3 className="text-xl font-bold text-[#073590]">Travel Extras</h3>
-              <p className="text-xs text-gray-600">
-                In Dark Pattern mode, car hire and airport parking are aggressively pre-bundled.
-              </p>
-              <button
-                onClick={() => setCurrentStep('review')}
-                className="bg-[#073590] text-white font-bold text-xs px-6 py-2 rounded-lg"
-              >
-                Proceed to Review & Pay →
-              </button>
-            </div>
           )}
         </main>
 

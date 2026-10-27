@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { AlertTriangle, Check, ShieldCheck, ArrowRight, ArrowLeft } from 'lucide-react';
+import { AlertTriangle, Check, ShieldCheck, ArrowRight, ArrowLeft, Zap } from 'lucide-react';
 import { AuditMarker } from './AuditMarker';
+import { FastTrackModal } from './FastTrackModal';
 
 interface SeatsStepProps {
   isDarkPattern: boolean;
@@ -10,6 +11,8 @@ interface SeatsStepProps {
   onNext: () => void;
   selectedSeat: string;
   onSelectSeat: (seat: string) => void;
+  fastTrackSelected?: boolean;
+  onToggleFastTrack?: (selected: boolean) => void;
 }
 
 export const SeatsStep: React.FC<SeatsStepProps> = ({
@@ -20,14 +23,25 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
   onNext,
   selectedSeat,
   onSelectSeat,
+  fastTrackSelected = false,
+  onToggleFastTrack,
 }) => {
   const [showSeatWarning, setShowSeatWarning] = useState(false);
+  const [showFastTrackModal, setShowFastTrackModal] = useState(false);
 
   const handleRandomSeat = () => {
     if (isDarkPattern) {
       setShowSeatWarning(true);
     } else {
       onSelectSeat('Random (Free)');
+      onNext();
+    }
+  };
+
+  const handleContinue = () => {
+    if (isDarkPattern) {
+      setShowFastTrackModal(true);
+    } else {
       onNext();
     }
   };
@@ -108,15 +122,28 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
 
         {/* Free Option or Next */}
         <div className="pt-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <button
-            onClick={handleRandomSeat}
-            className="text-xs font-bold text-[#073590] hover:underline cursor-pointer"
-          >
-            I'll take a free random seat
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handleRandomSeat}
+              className="text-xs font-bold text-[#073590] hover:underline cursor-pointer"
+            >
+              I'll take a free random seat
+            </button>
+
+            {isDarkPattern && (
+              <button
+                onClick={() => setShowFastTrackModal(true)}
+                className="text-[11px] font-semibold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-2 py-1 rounded transition flex items-center gap-1 cursor-pointer"
+                title="Preview post-seats roadblock modal"
+              >
+                <Zap className="w-3 h-3 text-amber-600" />
+                <span>Preview Fast Track Modal</span>
+              </button>
+            )}
+          </div>
 
           <button
-            onClick={onNext}
+            onClick={handleContinue}
             className="bg-[#073590] hover:bg-[#052973] text-white font-bold text-xs px-6 py-2.5 rounded-lg shadow-xs transition flex items-center gap-2 cursor-pointer"
           >
             <span>Confirm & Continue to Bags</span>
@@ -146,7 +173,7 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
                 onClick={() => {
                   onSelectSeat('15A');
                   setShowSeatWarning(false);
-                  onNext();
+                  setShowFastTrackModal(true);
                 }}
                 className="w-full bg-[#f1c40f] hover:bg-yellow-400 text-[#073590] font-black text-xs py-3 rounded-lg transition shadow-xs cursor-pointer"
               >
@@ -157,7 +184,7 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
                 onClick={() => {
                   onSelectSeat('Random (Free)');
                   setShowSeatWarning(false);
-                  onNext();
+                  setShowFastTrackModal(true);
                 }}
                 className="w-full text-xs font-semibold text-gray-500 hover:text-gray-800 py-2 transition cursor-pointer"
               >
@@ -167,6 +194,22 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
           </div>
         </div>
       )}
+
+      {/* Post-Seats Roadblock: Fast Track Upsell Modal (image_27e49d5b.png) */}
+      <FastTrackModal
+        isOpen={showFastTrackModal}
+        onClose={() => setShowFastTrackModal(false)}
+        onAddFastTrack={() => {
+          onToggleFastTrack?.(true);
+          setShowFastTrackModal(false);
+          onNext();
+        }}
+        onSkip={() => {
+          setShowFastTrackModal(false);
+          onNext();
+        }}
+        isDarkPattern={isDarkPattern}
+      />
     </div>
   );
 };

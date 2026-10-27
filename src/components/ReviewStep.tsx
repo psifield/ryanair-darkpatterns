@@ -87,7 +87,7 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
           className="flex items-center gap-1 text-xs font-semibold text-gray-600 hover:text-gray-900 border border-gray-300 px-3 py-2 rounded-lg transition"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
-          <span>Back to Bags</span>
+          <span>Back to Extras</span>
         </button>
       </div>
 

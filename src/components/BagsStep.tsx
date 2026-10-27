@@ -138,7 +138,7 @@ export const BagsStep: React.FC<BagsStepProps> = ({
           onClick={onNext}
           className="bg-[#073590] hover:bg-[#052973] text-white font-bold text-xs px-6 py-2.5 rounded-lg shadow-xs transition flex items-center gap-2 cursor-pointer"
         >
-          <span>Continue to Review & Pay</span>
+          <span>Continue to Extras</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </div>
