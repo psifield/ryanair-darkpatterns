@@ -208,7 +208,7 @@ Observations below audit the newly replicated post-seat transition and Extras ta
 ---
 
 ### Finding 4 - Post-Seat Fast Track Interstitial Roadblock
-- **Where:** Post-seat transition modal before Bags/Extras steps.
+- **Where:** Post-seat transition modal before Bags/Extras steps (interactive dialog opened after choosing or confirming seats). Prototype audit marker: **DP 8** (`dp-fast-track-roadblock`), anchored on the modal header, queue comparison banner, and CTA row; also anchored on the Extras tab Security Fast Track card (real-site capture `/assets/aistudio/image_27e49d5b.png` and `/assets/aistudio/image_16909bab.png`).
 - **What the user sees and does:** Completing seat selection triggers a compulsory full-screen modal urging travellers to "Skip long security queues" for £7.49 per flight, showing a queue-contrast graphic ("Everyone else queue" vs "Fast Track lane") with an oversized yellow "Add Fast Track" button vs. a faint "No, thanks" text link.
 - **Principle:** Week 4, framing and loss aversion (Kahneman ch. 26–27); Week 7, fluency and asymmetric visual weight (Petrova et al.; Lee & Aaker); Mathur et al. (2019) §5.1.4 (Obstruction / Interstitial Roadblock).
 - **Mechanism, whose goal wins:** Primes queue anxiety and fear of missing flights to induce an impulsive add-on purchase before baggage can be evaluated. Asymmetric visual weight steers clicks to the paid action. The platform wins (£7.49/leg). SLUDGE.
@@ -219,7 +219,7 @@ Observations below audit the newly replicated post-seat transition and Extras ta
 ---
 
 ### Finding 5 - Travel Insurance Micro-Rate Framing & Confirmshaming
-- **Where:** Extras tab (Travel Protection matrix) and refusal control.
+- **Where:** Extras tab (Sub-step 1: "Airport & trip"), Travel Protection comparison table and refusal action. Prototype audit marker: **DP 9** (`dp-insurance-confirmshame`), anchored on the Insurance Plus card (+£0.35/day gadget tag) and the "No thanks, I will travel without insurance" decline button (real-site capture `/assets/aistudio/image_fcdb3a57.png`).
 - **What the user sees and does:** Prominent UK FCDO warning induces compliance anxiety. The top-tier Plus plan is framed as "just £0.35 extra per day" rather than the lump-sum policy price (£14.50), and declining forces the traveller to click "No thanks, I will travel without insurance".
 - **Principle:** Week 4, reference dependence & diminishing sensitivity (Kahneman ch. 34; Kern & Chugh); Mathur et al. (2019) §5.1.3 (Confirmshaming & Visual Steering).
 - **Mechanism, whose goal wins:** Daily micro-rate reduces the perceived pain of paying, while confirmshaming induces guilt and loss aversion on refusal. The platform wins insurance commission. SLUDGE.
@@ -230,7 +230,7 @@ Observations below audit the newly replicated post-seat transition and Extras ta
 ---
 
 ### Finding 6 - Ground Transport Bandwagon Cues & Sunk Cost Timing
-- **Where:** Extras tab (Transport & Parking cards).
+- **Where:** Extras tab (Sub-step 2: "Transport & parking"), Stansted Airport Parking and Palanga Car Hire options. Prototype audit marker: **DP 10** (`dp-transport-social-proof`), anchored on the London Stansted Meet & Greet Valet Parking card ("MOST POPULAR & CONVENIENT" badge) and the Nissan Qashqai Automatic SUV card ("CUSTOMER FAVOURITE" badge).
 - **What the user sees and does:** The £65.00 Meet & Greet Parking is styled with gold borders and an unverified "MOST POPULAR & CONVENIENT" badge, and the £119.20 Nissan Qashqai SUV has a "CUSTOMER FAVOURITE" badge.
 - **Principle:** Week 9, descriptive norms and social proof (Goldstein & Mortensen; Berger & Heath); Week 4, sunk cost escalation and drip timing (Roh pp. 27, 87–90); Mathur et al. (2019) §5.1.2 (Social Proof Heuristic).
 - **Mechanism, whose goal wins:** Unverified popularity badges manufacture consensus. Placing £65–£120 commitments at the very end of the funnel exploits sunk cost momentum, as travellers who already invested effort in flights, seats, and bags exhibit lower price resistance. Platform wins high-margin ancillaries. SLUDGE.
