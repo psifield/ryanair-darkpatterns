@@ -246,15 +246,15 @@ Xianlong's scores and drivers are recorded below. Other members' ratings and the
 
 | Finding | Member | Independent score 0–4 | Individual driver |
 | --- | --- | --- | --- |
-| 4 | Aishan | Pending | Pending |
+| 4 | Aishan | 3 | After users select their seats, a full-screen pop-up appears, recommending Fast Track for £7.49 per flight. The yellow upgrade button is more noticeable than the “No, thanks” option, and the queue comparison image may make users worry about long waiting times, creating a sense of pressure.Since the pop-up interrupts the booking process and puts more emphasis on the paid option, it may cause stress and negatively affect the user experience. I consider this a major issue. However, users can still decline the offer, and there is no testing evidence yet to show whether this design actually affects their decisions. |
 | 4 | Roy | Pending | Pending |
 | 4 | Xianlong | 3 | The Fast Track popup interrupts the move from seats to baggage. Its queue graphic and prominent yellow purchase button put pressure on an optional £7.49 decision before I can continue. I rate this 3/4, although the working "No, thanks" option keeps it from being a severe blocker. |
 | 4 | Zinuo | Pending | Pending |
-| 5 | Aishan | Pending | Pending |
+| 5 | Aishan | 3 | The Insurance Plus plan is presented as costing only an extra £0.35 per day, while the full policy actually costs £14.50. This may make the price seem lower than it really is. In addition, the refusal option says, “No thanks, I will travel without insurance,” which may make users feel unsafe or worried about declining the offer.I consider this a major issue because the pricing method and wording may put unnecessary pressure on users. However, there is no user-testing evidence yet to show how much these designs affect insurance purchases. |
 | 5 | Roy | Pending | Pending |
 | 5 | Xianlong | 3 | I rate this 3/4 because the daily upgrade price makes the full-trip cost harder to judge, while the government advice banner and "I will travel without insurance" wording put pressure on refusal. A traveller may already have cover elsewhere. Declining remains available, but the wording can undermine an informed choice. |
 | 5 | Zinuo | Pending | Pending |
-| 6 | Aishan | Pending | Pending |
+| 6 | Aishan | 2 | The parking and car hire options use labels such as “MOST POPULAR & CONVENIENT” and “CUSTOMER FAVOURITE”, but there is currently no evidence that these claims are supported by actual customer data. These labels may make users feel that certain options are more popular or trustworthy.Since these services appear later in the booking process, users may be more willing to spend extra after completing the previous steps. However, users can still choose not to purchase these services, and the actual impact of this design has not yet been measured. |
 | 6 | Roy | Pending | Pending |
 | 6 | Xianlong | 2 | The popularity badges and gold styling favour £65 Meet & Greet parking and the £119.20 SUV without explaining the recommendations. I rate this 2/4 because cheaper options, whole-trip prices and decline controls remain visible. The late timing may add pressure, but it does not establish sunk-cost effects or unwanted spending. |
 | 6 | Zinuo | Pending | Pending |
