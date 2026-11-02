@@ -212,7 +212,7 @@ Observations below audit the newly replicated post-seat transition and Extras ta
 - **What the user sees and does:** Completing seat selection triggers a compulsory full-screen modal urging travellers to "Skip long security queues" for £7.49 per flight, showing a queue-contrast graphic ("Everyone else queue" vs "Fast Track lane") with an oversized yellow "Add Fast Track" button vs. a faint "No, thanks" text link.
 - **Principle:** Week 4, framing and loss aversion (Kahneman ch. 26–27); Week 7, fluency and asymmetric visual weight (Petrova et al.; Lee & Aaker); Mathur et al. (2019) §5.1.4 (Obstruction / Interstitial Roadblock).
 - **Mechanism, whose goal wins:** Primes queue anxiety and fear of missing flights to induce an impulsive add-on purchase before baggage can be evaluated. Asymmetric visual weight steers clicks to the paid action. The platform wins (£7.49/leg). SLUDGE.
-- **Severity 0–4:** Xianlong **3/4 (Major)**; remaining member scores and agreed score **Pending**. See the rating ledger below for the individual driver.
+- **Severity 0–4:** 3/4 (Major). Individual scores: Aishan 3, Roy 3, Xianlong 3, Zinuo 2 (mean 2.75). See agreed ledger below.
 - **Repair (what should be true afterwards):** Remove the roadblock modal completely. Position Fast Track as an optional card inside the Extras step with equal, neutral buttons.
 - **Prediction:** Fast Track take-up drops from ~40% in A to 15% in B without reducing flight booking completion. We drop this repair if total booking completion falls by >5 percentage points.
 
@@ -223,7 +223,7 @@ Observations below audit the newly replicated post-seat transition and Extras ta
 - **What the user sees and does:** Prominent UK FCDO warning induces compliance anxiety. The top-tier Plus plan is framed as "just £0.35 extra per day" rather than the lump-sum policy price (£14.50), and declining forces the traveller to click "No thanks, I will travel without insurance".
 - **Principle:** Week 4, reference dependence & diminishing sensitivity (Kahneman ch. 34; Kern & Chugh); Mathur et al. (2019) §5.1.3 (Confirmshaming & Visual Steering).
 - **Mechanism, whose goal wins:** Daily micro-rate reduces the perceived pain of paying, while confirmshaming induces guilt and loss aversion on refusal. The platform wins insurance commission. SLUDGE.
-- **Severity 0–4:** Xianlong **3/4 (Major)**; remaining member scores and agreed score **Pending**. See the rating ledger below for the individual driver.
+- **Severity 0–4:** 3/4 (Major). Individual scores: Aishan 3, Roy 3, Xianlong 3, Zinuo 2 (mean 2.75). See agreed ledger below.
 - **Repair (what should be true afterwards):** Display transparent whole-trip policy costs upfront (£14.50) without daily rate masking, with neutral active choice buttons ("None", "Standard", "Plus").
 - **Prediction:** Insurance take-up moves from ~35% in A to 15% in B, while traveller comprehension of policy coverage increases from 40% to 75%.
 
@@ -234,7 +234,7 @@ Observations below audit the newly replicated post-seat transition and Extras ta
 - **What the user sees and does:** The £65.00 Meet & Greet Parking is styled with gold borders and an unverified "MOST POPULAR & CONVENIENT" badge, and the £119.20 Nissan Qashqai SUV has a "CUSTOMER FAVOURITE" badge.
 - **Principle:** Week 9, descriptive norms and social proof (Goldstein & Mortensen; Berger & Heath); Week 4, sunk cost escalation and drip timing (Roh pp. 27, 87–90); Mathur et al. (2019) §5.1.2 (Social Proof Heuristic).
 - **Mechanism, whose goal wins:** Unverified popularity badges manufacture consensus. Placing £65–£120 commitments at the very end of the funnel exploits sunk cost momentum, as travellers who already invested effort in flights, seats, and bags exhibit lower price resistance. Platform wins high-margin ancillaries. SLUDGE.
-- **Severity 0–4:** Xianlong **2/4 (Minor)**; remaining member scores and agreed score **Pending**. See the rating ledger below for the individual driver.
+- **Severity 0–4:** 3/4 (Major). Individual scores: Aishan 2, Roy 3, Xianlong 2, Zinuo 2 (mean 2.25, rounded up). See agreed ledger below.
 - **Repair (what should be true afterwards):** Neutral card presentation sorted by transparent distance/price, remove unsubstantiated popularity badges, and display clear total trip prices.
 - **Prediction:** Selection of Meet & Greet parking drops from ~55% in A to 25% in B, with travellers choosing options that match their actual budget.
 
@@ -242,25 +242,25 @@ Observations below audit the newly replicated post-seat transition and Extras ta
 
 ### Private ratings ledger for Findings 4–6
 
-Xianlong's scores and drivers are recorded below. Other members' ratings and the agreed scores remain **Pending**.
+All four individual scores and drivers are recorded below. Agreed scores consolidated on 2026-11-02 following team discussion.
 
 | Finding | Member | Independent score 0–4 | Individual driver |
 | --- | --- | --- | --- |
 | 4 | Aishan | 3 | After users select their seats, a full-screen pop-up appears, recommending Fast Track for £7.49 per flight. The yellow upgrade button is more noticeable than the “No, thanks” option, and the queue comparison image may make users worry about long waiting times, creating a sense of pressure.Since the pop-up interrupts the booking process and puts more emphasis on the paid option, it may cause stress and negatively affect the user experience. I consider this a major issue. However, users can still decline the offer, and there is no testing evidence yet to show whether this design actually affects their decisions. |
-| 4 | Roy | Pending | Pending |
+| 4 | Roy | 3 | Interruption & Asymmetry: 100% of travellers completing seats hit this compulsory roadblock. It weaponizes queue anxiety with a contrast graphic and uses stark asymmetric visual weight (bold yellow button vs. faint text link) to extract £7.49 per leg before baggage can even be viewed. It avoids a 4 because the dismissal link is functional, but it is clear obstruction sludge. |
 | 4 | Xianlong | 3 | The Fast Track popup interrupts the move from seats to baggage. Its queue graphic and prominent yellow purchase button put pressure on an optional £7.49 decision before I can continue. I rate this 3/4, although the working "No, thanks" option keeps it from being a severe blocker. |
 | 4 | Zinuo | 2 | The Fast Track offer interrupts the booking process, but the “No, thanks” option is still visible and users can decline it. I do not consider the wording itself misleading, so I rate this as a minor issue. |
 | 5 | Aishan | 3 | The Insurance Plus plan is presented as costing only an extra £0.35 per day, while the full policy actually costs £14.50. This may make the price seem lower than it really is. In addition, the refusal option says, “No thanks, I will travel without insurance,” which may make users feel unsafe or worried about declining the offer.I consider this a major issue because the pricing method and wording may put unnecessary pressure on users. However, there is no user-testing evidence yet to show how much these designs affect insurance purchases. |
-| 5 | Roy | Pending | Pending |
+| 5 | Roy | 3 | Micro-Pricing & Confirmshaming: Fragments a £14.50 policy into "+£0.35/day" to exploit diminishing sensitivity, while leveraging official UK travel warnings to induce compliance anxiety. Forcing travellers to click "No thanks, I will travel without insurance" weaponizes cognitive dissonance and risk aversion rather than providing a neutral opt-out. |
 | 5 | Xianlong | 3 | I rate this 3/4 because the daily upgrade price makes the full-trip cost harder to judge, while the government advice banner and "I will travel without insurance" wording put pressure on refusal. A traveller may already have cover elsewhere. Declining remains available, but the wording can undermine an informed choice. |
 | 5 | Zinuo | 2 | Presenting the upgrade as a small extra cost per day may make it harder to judge the total price. However, I do not think the current refusal wording is a major problem. Wording that suggested users would lose additional protection might create more pressure. |
 | 6 | Aishan | 2 | The parking and car hire options use labels such as “MOST POPULAR & CONVENIENT” and “CUSTOMER FAVOURITE”, but there is currently no evidence that these claims are supported by actual customer data. These labels may make users feel that certain options are more popular or trustworthy.Since these services appear later in the booking process, users may be more willing to spend extra after completing the previous steps. However, users can still choose not to purchase these services, and the actual impact of this design has not yet been measured. |
-| 6 | Roy | Pending | Pending |
+| 6 | Roy | 3 | Sunk Cost & Unverified Norms: Sunk cost timing introduces large ancillary expenses (£65.00 parking, £119.20 car hire) late in the funnel after substantial cognitive effort has already been invested. Unverified "Most Popular" and "Customer Favourite" badges steer attention toward the highest-margin options, exploiting bandwagon heuristics. |
 | 6 | Xianlong | 2 | The popularity badges and gold styling favour £65 Meet & Greet parking and the £119.20 SUV without explaining the recommendations. I rate this 2/4 because cheaper options, whole-trip prices and decline controls remain visible. The late timing may add pressure, but it does not establish sunk-cost effects or unwanted spending. |
 | 6 | Zinuo | 2 | Labels such as “Customer Favourite” may influence users through social norms, but we do not know how strong that effect is. Travellers’ need for parking or car hire may also vary, so I rate this as a minor issue. |
 
 | Finding | Agreed score 0–4 | Discussion date | Agreed driver / preserved disagreement |
 | --- | --- | --- | --- |
-| 4 | Pending | Pending | Pending |
-| 5 | Pending | Pending | Pending |
-| 6 | Pending | Pending | Pending |
+| 4 | 3/4 (Major) | 2026-11-02 | Compulsory roadblock interrupts the booking flow between seats and bags, using queue-contrast imagery and asymmetric button weight to pressure an optional £7.49/leg decision. Kept at 3/4 because the dismissal link remains functional and behavioural impact is unmeasured (mean 2.75). |
+| 5 | 3/4 (Major) | 2026-11-02 | Daily micro-rate (+£0.35/day) obscures the full £14.50 policy cost, while the government warning banner and loaded refusal wording ('travel without insurance') exploit risk aversion. Rated 3/4 because opting out remains fully available even if choice neutrality is compromised (mean 2.75). |
+| 6 | 3/4 (Major) | 2026-11-02 | Unverified popularity badges ('Most Popular', 'Customer Favourite') and gold borders steer travellers toward high-margin £65 parking and £119 SUV rentals late in the funnel. Agreed at 3/4 (mean 2.25 rounded up; Aishan, Xianlong, Zinuo rated 2/4, Roy rated 3/4 preserving disagreement on sunk-cost severity) as cheaper options and decline controls remain visible. |
