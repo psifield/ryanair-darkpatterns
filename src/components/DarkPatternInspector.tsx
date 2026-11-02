@@ -118,7 +118,7 @@ export const DarkPatternInspector: React.FC<DarkPatternInspectorProps> = ({
                 Target Element: <span className="font-semibold text-gray-700">{activePattern.elementTarget}</span>
               </p>
               <p className="text-xs text-gray-500 mt-1">
-                Retrospective draft, 23 Oct 2026. B predates this audit; effects and team ratings remain unmeasured. See root AUDIT.md.
+                Existing B predates this retrospective audit. Lecture citations use one-based PDF pages; original-publication pages remain unverified. Historical audit: AUDIT.md; later UI improvements: PROMPTS.md. Behavioural effects remain untested.
               </p>
             </div>
 

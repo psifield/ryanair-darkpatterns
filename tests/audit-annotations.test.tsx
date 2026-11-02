@@ -11,8 +11,8 @@ import { ReviewStep } from '../src/components/ReviewStep';
 const noop = () => {};
 const markerProps = { isDarkPattern: true, showAuditMarkers: true, onOpenAuditItem: noop };
 
-test('seven numbered groups retain eight distinct audit records', () => {
-  assert.equal(auditData.DARK_PATTERNS_AUDIT.length, 8);
+test('ten numbered groups retain eleven distinct audit records', () => {
+  assert.equal(auditData.DARK_PATTERNS_AUDIT.length, 11);
   assert.deepEqual(auditData.DARK_PATTERN_GROUPS.map(group => [group.number, group.items.map(item => item.id)]), [
     [1, ['dp-scarcity']],
     [2, ['dp-drip-pricing']],
@@ -21,15 +21,18 @@ test('seven numbered groups retain eight distinct audit records', () => {
     [5, ['dp-seat-pressure']],
     [6, ['dp-hidden-baggage']],
     [7, ['dp-travel-protection']],
+    [8, ['dp-fast-track-roadblock']],
+    [9, ['dp-insurance-confirmshame']],
+    [10, ['dp-transport-social-proof']],
   ]);
-  assert.equal(new Set(auditData.DARK_PATTERN_GROUPS.flatMap(group => group.items.map(item => item.id))).size, 8);
+  assert.equal(new Set(auditData.DARK_PATTERN_GROUPS.flatMap(group => group.items.map(item => item.id))).size, 11);
 });
 
 test('both DP 3 leaves open their own content in one expanded navigation group', () => {
   for (const id of ['dp-visual-steering', 'dp-asymmetric-friction']) {
     const record = auditData.DARK_PATTERNS_AUDIT.find(item => item.id === id)!;
     const html = renderToStaticMarkup(<DarkPatternInspector isOpen onClose={noop} onSelectPattern={noop} selectedPatternId={id} />);
-    assert.match(html, /7 groups.*8 (?:audit )?records/);
+    assert.match(html, /10 groups.*11 (?:audit )?records/);
     assert.match(html, /<details[^>]*open=""/);
     assert.ok(html.includes('Visual Interference'));
     assert.ok(html.includes('Upsell Interruption'));

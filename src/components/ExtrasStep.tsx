@@ -234,8 +234,8 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
             <AuditMarker
               number={8}
               auditId="dp-fast-track-roadblock"
-              title="Fast Track Interstitial Roadblock & Queue Anxiety Framing"
-              label="Queue Anxiety Framing"
+              title="Fast Track Interstitial & Queue Framing"
+              label="Queue Framing"
               align="right"
               onOpenAuditItem={onOpenAuditItem}
             />
@@ -738,7 +738,7 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
                   number={9}
                   auditId="dp-insurance-confirmshame"
                   title="Insurance Micro-price Framing & Loaded Refusal"
-                  label="Confirmshaming Refusal"
+                  label="Loaded Refusal"
                   align="right"
                   onOpenAuditItem={onOpenAuditItem}
                 />
@@ -1030,8 +1030,8 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
                     <AuditMarker
                       number={10}
                       auditId="dp-transport-social-proof"
-                      title="Transport Bandwagon Steering & Sunk Cost Timing"
-                      label="Bandwagon / Sunk Cost"
+                      title="Transport Popularity Cues & Late Add-ons"
+                      label="Popularity Cue"
                       align="right"
                       onOpenAuditItem={onOpenAuditItem}
                     />
@@ -1315,8 +1315,8 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
                     <AuditMarker
                       number={10}
                       auditId="dp-transport-social-proof"
-                      title="Transport Bandwagon Steering & Sunk Cost Timing"
-                      label="Social Proof / Sunk Cost"
+                      title="Transport Popularity Cues & Late Add-ons"
+                      label="Popularity Cue"
                       align="right"
                       onOpenAuditItem={onOpenAuditItem}
                     />

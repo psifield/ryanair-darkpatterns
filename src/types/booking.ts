@@ -58,7 +58,7 @@ export interface DarkPatternAnnotation {
     | 'Baggage Warning'
     | 'Default Selection'
     | 'Obstruction & Roadblocks'
-    | 'Social Proof & Sunk Cost';
+    | 'Social Proof';
   elementTarget: string;
   originalBehavior: string;
   ethicalFix: string;

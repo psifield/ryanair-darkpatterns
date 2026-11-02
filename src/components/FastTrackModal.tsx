@@ -39,15 +39,15 @@ export const FastTrackModal: React.FC<FastTrackModalProps> = ({
                   onOpenAuditItem?.('dp-fast-track-roadblock');
                 }}
                 className="whitespace-nowrap rounded-full bg-rose-500 hover:bg-rose-600 px-2 py-0.5 text-[10px] font-bold text-white shadow-xs cursor-pointer flex items-center gap-1 transition"
-                title="DP 8: Fast Track Interstitial Roadblock & Queue Anxiety Framing"
+                title="DP 8: Fast Track Interstitial & Queue Framing"
               >
-                ⚠️ DP 8 · Roadblock
+                ⚠️ DP 8 · Queue Framing
               </button>
             )}
             <span className="bg-[#f1c40f] text-[#073590] text-[10px] font-black px-1.5 py-0.5 rounded tracking-wide uppercase">
               Post-Seat Upsell
             </span>
-            <span>Security Fast Track Roadblock</span>
+            <span>Security Fast Track Interstitial</span>
           </div>
 
           <div className="flex items-center gap-2">
@@ -73,7 +73,7 @@ export const FastTrackModal: React.FC<FastTrackModalProps> = ({
         {showOriginalCapture ? (
           <div className="p-4 bg-gray-900 text-white space-y-3">
             <div className="text-xs text-gray-300 flex items-center justify-between">
-              <span>Original Ryanair Capture: Roadblock modal after Seats</span>
+              <span>Original Ryanair Capture: Fast Track modal after Seats</span>
               <span className="font-mono text-[10px] text-gray-400">/assets/aistudio/image_27e49d5b.png</span>
             </div>
             <div className="rounded-xl overflow-hidden border border-gray-700 bg-black flex items-center justify-center max-h-[460px]">
@@ -137,9 +137,9 @@ export const FastTrackModal: React.FC<FastTrackModalProps> = ({
                       onOpenAuditItem?.('dp-fast-track-roadblock');
                     }}
                     className="shrink-0 whitespace-nowrap rounded-full bg-rose-500 hover:bg-rose-600 px-2.5 py-1 text-[11px] font-bold text-white shadow-xs cursor-pointer flex items-center gap-1 transition self-start"
-                    title="DP 8: Queue Anxiety & Loss Framing"
+                    title="DP 8: Queue Contrast"
                   >
-                    ⚠️ DP 8 · Queue Loss Framing
+                    ⚠️ DP 8 · Queue Contrast
                   </button>
                 )}
               </div>
@@ -218,7 +218,7 @@ export const FastTrackModal: React.FC<FastTrackModalProps> = ({
                 <div className="mt-2 bg-amber-50/80 border border-amber-200 rounded-lg p-2.5 text-[11px] text-amber-900 flex items-start gap-2">
                   <ShieldAlert className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                   <p className="leading-snug">
-                    <strong>Dark Pattern Analysis (Roadblock & Scarcity Cue):</strong> Intercepts seat selection with a high-pressure queue fear graphic before allowing progression to baggage, steering travellers toward an optional £7.49 airport add-on.
+                    <strong>Audit Observation (Interstitial & Queue Contrast):</strong> Interrupts the transition from seats to baggage with contrasting queue images and an optional £7.49 add-on. Whether it changes travellers' choices is untested.
                   </p>
                 </div>
               )}
