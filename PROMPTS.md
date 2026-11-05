@@ -6,12 +6,14 @@
 
 ## Entry 1 - extras tab population (Screen A baseline) · 2026-10-27, 14:45 · sent by Roy · AI Studio
 
-ROLE: Front-end React developer.
 GOAL: Populate the missing "Extras" tab and post-seat transition for the Original Prototype (viewMode === 'dark-pattern') using uploaded screenshots of Ryanair's real booking flow.
+
 CONTEXT: Flight booking London Stansted to Palanga, 4-day return trip.
+
 WHAT TO BUILD:
 - Fast Track prompt positioned immediately after the "Seats" selection tab.
 - Extras tab populated with Travel Protection, Airport Parking, and Car Hire matching the real Ryanair baseline screenshots.
+
 GUARDRAILS: Front-end only. Change only Screen A. Change nothing else.
 
 *What came back:* AI Studio generated the transition for Fast Track security after Seats, along with the full card layout for Travel Protection and airport extras on the Extras tab and wired all ancillary selections into the final checkout review total.
@@ -24,14 +26,16 @@ GUARDRAILS: Front-end only. Change only Screen A. Change nothing else.
 
 ## Entry 2 - transport & parking ancillary flow (Screen A baseline) · 2026-10-28, 02:55 · sent by Roy · AI Studio
 
-ROLE: Front-end React developer.
 GOAL: Complete the replication of Ryanair's real Extras tab for the Original Prototype (viewMode === 'dark-pattern') by adding the Transport & Parking ancillary flow.
+
 CONTEXT: Flight booking London Stansted (STN) to Palanga (PLQ), 4-day return trip.
+
 WHAT TO BUILD:
 - Replicate Ryanair's Airport Parking section at London Stansted (Short Stay, Meet & Greet, and Long Stay) matching the real layout, pricing, and visual presentation.
 - Replicate Ryanair's Car Hire vehicle selection (Economy, Compact, SUV) based on the live booking flow captures.
 - Connect sub-step filtering between "Airport & trip" and "Transport & parking".
 - Wire parking and car rental selections into the Review step checkout price summary.
+
 GUARDRAILS: Front-end only. Change only Screen A. Replicate Ryanair's real baseline without inventing or modifying features.
 
 *What came back:* AI Studio built the interactive Stansted Airport Parking and Car Hire selection cards directly matching Ryanair's visual design, including their sub-step toggle and full price aggregation into the checkout summary.
@@ -44,14 +48,16 @@ GUARDRAILS: Front-end only. Change only Screen A. Replicate Ryanair's real basel
 
 ## Entry 3 - ancillary audit markers integration (Screen A baseline) · 2026-10-28, 03:15 · sent by Roy · AI Studio
 
-ROLE: Front-end React developer.
 GOAL: Audit Ryanair's replicated ancillary flow and post-seat transition using deceptive pattern concepts, and place interactive audit markers across Screen A.
+
 CONTEXT: Flight booking London Stansted to Palanga, 4-day return trip.
+
 WHAT TO BUILD:
 - Flag the post-seat Fast Track interstitial modal as an obstruction pattern that exploits queue anxiety and visual contrast to steer add-on sales before baggage selection.
 - Flag the Travel Protection matrix for daily micro-rate framing (+£0.35/day) that exploits diminishing sensitivity, and mark the emotionally loaded refusal link that guilts travellers into accepting coverage.
 - Flag the unverified "Most Popular" and "Customer Favourite" badges on high-cost airport parking and car hire as bandwagon cues that leverage sunk cost escalation late in the checkout funnel.
 - Expand the audit inspector modal to display full behavioral breakdowns, psychological impacts, and proposed ethical remedies for each marked pattern.
+
 GUARDRAILS: Front-end only. Change only Screen A. Keep the existing booking flow intact while making all markers interactive.
 
 *What came back:* AI Studio mounted interactive audit marker badges on the Fast Track roadblock modal, Extras Fast Track card, Insurance Plus card, refusal button, and parking/car hire cards, expanded DarkPatternAnnotation types, and added comprehensive audit dossiers in DarkPatternInspector.
@@ -102,5 +108,28 @@ The source check changed several explanations. DP6 now cites Week 4's framing an
 *Verification:* The initial two failing navigation tests expected seven groups/eight records. After updating those expectations to ten groups/eleven records, all four existing tests passed, including marker visibility and the independent insurance-default check. Type checking and the production build passed. The build still emits the existing Vite warning about __dirname in its config. Browser checks opened every record, including both DP3 leaves, and checked desktop layout plus mobile evidence wrapping for DP6, DP7 and DP10. These checks verify the prototype's presentation and existing controls, not psychological effects.
 
 *Judgement:* Xianlong's lecture-first citation requirement determined the revision. Codex retained uncertainty where the readings do not establish an effect, especially DP1's limited framing connection and the unverified popularity cues. The final wording awaits Xianlong's review. AUDIT.md and the earlier three prompt entries were preserved; booking behaviour, fares and defaults were not changed.
+
+---
+
+## Entry 5 - side-by-side dual comparison expansion (Flights, Seats & Bags) · 2026-11-05, 12:50 · sent by Roy · AI Studio
+
+GOAL: Fix layout issues in the side-by-side comparison mode for Flights, and expand the dual comparison to the Seats and Bags steps so evaluators can contrast the dark patterns against the ethical redesign directly.
+
+CONTEXT: Flight booking London Stansted (STN) to Palanga (PLQ), 4-day return trip.
+
+WHAT TO BUILD:
+- Fix the Flights comparison: make the fare table fit comfortably without horizontal scrolling, and arrange the ethical fare cards into a clean 2-by-2 grid so text and buttons are no longer squished.
+- Build a side-by-side view for Seats: display Ryanair's seat separation warnings, confirmshaming pop-up, and Fast Track roadblock on the left, directly contrasted with the calm, transparent free seat policy on the right.
+- Build a side-by-side view for Bags: display Ryanair's £60 gate fee penalty threats and steering toward paid cabin bags on the left, contrasted with honest bag dimensions and clear allowances on the right.
+- Connect both side-by-side views into the main flow so steps navigate smoothly and cart totals stay synchronized.
+
+GUARDRAILS: Front-end only. Keep all automated tests passing. Do not alter dark pattern numbers or audit scores.
+
+*What came back:* AI Studio fixed the card squishing and horizontal scrolling on the Flights tab, created responsive side-by-side comparison views for both the Seats and Bags steps, and wired them into the booking flow. All automated tests pass cleanly.
+
+*Our judgement, and what we changed next:* Verified that evaluators can now compare the original flow with the ethical redesign side by side across Flights, Seats, and Bags without visual clutter. The behavioral contrast is immediately obvious: choosing a free seat on the left triggers fear warnings and an intrusive Fast Track roadblock, whereas the right side allocates freely and proceeds directly. Next step is completing the ethical redesign for the Extras step (travel insurance, parking, and car hire) and building its side-by-side view.
+
+*Principle check:* Week 10, Usability Principles (Consistency between variants, Recognition rather than Recall, Clean and readable layout); Week 8, Visual Asymmetry & Color Steering; Week 9, Social Norms & Loss/Penalty Framing (seat separation anxiety, gate penalty threats).
+
 
 

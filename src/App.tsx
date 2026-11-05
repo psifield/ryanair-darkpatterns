@@ -7,6 +7,8 @@ import { FlightSelection } from './components/FlightSelection';
 import { FareSelectionDark } from './components/FareSelectionDark';
 import { FareSelectionEthical } from './components/FareSelectionEthical';
 import { SideBySideView } from './components/SideBySideView';
+import { SideBySideSeatsView } from './components/SideBySideSeatsView';
+import { SideBySideBagsView } from './components/SideBySideBagsView';
 import { ComparisonBanner } from './components/ComparisonBanner';
 import { DarkPatternInspector } from './components/DarkPatternInspector';
 import { SeatsStep } from './components/SeatsStep';
@@ -255,30 +257,54 @@ export default function App() {
 
           {/* STEP 2: SEATS */}
           {currentStep === 'seats' && (
-            <SeatsStep
-              isDarkPattern={viewMode === 'dark-pattern'}
-              showAuditMarkers={showAuditMarkers}
-              onOpenAuditItem={handleOpenAuditItem}
-              selectedSeat={selectedSeat}
-              onSelectSeat={setSelectedSeat}
-              fastTrackSelected={fastTrackSelected}
-              onToggleFastTrack={setFastTrackSelected}
-              onBack={() => setCurrentStep('flights')}
-              onNext={() => setCurrentStep('bags')}
-            />
+            viewMode === 'side-by-side' ? (
+              <SideBySideSeatsView
+                selectedSeat={selectedSeat}
+                onSelectSeat={setSelectedSeat}
+                fastTrackSelected={fastTrackSelected}
+                onToggleFastTrack={setFastTrackSelected}
+                onBack={() => setCurrentStep('flights')}
+                onNext={() => setCurrentStep('bags')}
+                showAuditMarkers={showAuditMarkers}
+                onOpenAuditItem={handleOpenAuditItem}
+              />
+            ) : (
+              <SeatsStep
+                isDarkPattern={viewMode === 'dark-pattern'}
+                showAuditMarkers={showAuditMarkers}
+                onOpenAuditItem={handleOpenAuditItem}
+                selectedSeat={selectedSeat}
+                onSelectSeat={setSelectedSeat}
+                fastTrackSelected={fastTrackSelected}
+                onToggleFastTrack={setFastTrackSelected}
+                onBack={() => setCurrentStep('flights')}
+                onNext={() => setCurrentStep('bags')}
+              />
+            )
           )}
 
           {/* STEP 3: BAGS */}
           {currentStep === 'bags' && (
-            <BagsStep
-              isDarkPattern={viewMode === 'dark-pattern'}
-              showAuditMarkers={showAuditMarkers}
-              onOpenAuditItem={handleOpenAuditItem}
-              additionalLuggage={additionalLuggage}
-              onSetAdditionalLuggage={setAdditionalLuggage}
-              onBack={() => setCurrentStep('seats')}
-              onNext={() => setCurrentStep('extras')}
-            />
+            viewMode === 'side-by-side' ? (
+              <SideBySideBagsView
+                additionalLuggage={additionalLuggage}
+                onSetAdditionalLuggage={setAdditionalLuggage}
+                onBack={() => setCurrentStep('seats')}
+                onNext={() => setCurrentStep('extras')}
+                showAuditMarkers={showAuditMarkers}
+                onOpenAuditItem={handleOpenAuditItem}
+              />
+            ) : (
+              <BagsStep
+                isDarkPattern={viewMode === 'dark-pattern'}
+                showAuditMarkers={showAuditMarkers}
+                onOpenAuditItem={handleOpenAuditItem}
+                additionalLuggage={additionalLuggage}
+                onSetAdditionalLuggage={setAdditionalLuggage}
+                onBack={() => setCurrentStep('seats')}
+                onNext={() => setCurrentStep('extras')}
+              />
+            )
           )}
 
           {/* STEP 4: EXTRAS (Fast Track, Travel Insurance, Inflight Credit, Parking, Car Hire) */}

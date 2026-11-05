@@ -122,6 +122,7 @@ export const SideBySideView: React.FC<SideBySideViewProps> = ({
             onSwitchToRegular={onSwitchToRegular}
             showAuditMarkers={showAuditMarkers}
             onOpenAuditItem={onOpenAuditItem}
+            isSplitView={true}
           />
         </div>
 
@@ -164,6 +165,7 @@ export const SideBySideView: React.FC<SideBySideViewProps> = ({
             onProceedToNextStep={onProceedToNextStep}
             showAuditMarkers={showAuditMarkers}
             onOpenAuditItem={onOpenAuditItem}
+            isSplitView={true}
           />
         </div>
       </div>

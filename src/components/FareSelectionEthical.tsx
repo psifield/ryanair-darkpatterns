@@ -8,6 +8,7 @@ interface FareSelectionEthicalProps {
   onProceedToNextStep: () => void;
   showAuditMarkers?: boolean;
   onOpenAuditItem?: (id: string) => void;
+  isSplitView?: boolean;
 }
 
 export const FareSelectionEthical: React.FC<FareSelectionEthicalProps> = ({
@@ -16,6 +17,7 @@ export const FareSelectionEthical: React.FC<FareSelectionEthicalProps> = ({
   onProceedToNextStep,
   showAuditMarkers = false,
   onOpenAuditItem,
+  isSplitView = false,
 }) => {
   const tiers = [
     {
@@ -99,7 +101,7 @@ export const FareSelectionEthical: React.FC<FareSelectionEthicalProps> = ({
       </div>
 
       {/* 4 Balanced Fare Cards Grid (Image 7 / 9) */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 pb-2">
+      <div className={`grid gap-4 pb-2 ${isSplitView ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'}`}>
         {tiers.map((tier) => {
           const isSelected = selectedTier === tier.id;
 
@@ -184,8 +186,8 @@ export const FareSelectionEthical: React.FC<FareSelectionEthicalProps> = ({
         </div>
 
         <div className="overflow-x-auto">
-          <div className="min-w-[620px]">
-            <div className="grid grid-cols-5 text-xs font-bold text-gray-700 bg-gray-100/70 p-3 border-b border-gray-200">
+          <div className="min-w-[500px]">
+            <div className="grid grid-cols-5 text-[11px] sm:text-xs font-bold text-gray-700 bg-gray-100/70 p-2 sm:p-3 border-b border-gray-200">
               <div>Features & Bags</div>
               <div className="text-center font-bold text-gray-900">Basic (£131.36)</div>
               <div className="text-center text-[#073590]">Regular (£189.86)</div>

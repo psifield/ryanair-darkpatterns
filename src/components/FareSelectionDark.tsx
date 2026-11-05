@@ -14,6 +14,7 @@ interface FareSelectionDarkProps {
   onSwitchToRegular: () => void;
   showAuditMarkers?: boolean;
   onOpenAuditItem?: (id: string) => void;
+  isSplitView?: boolean;
 }
 
 export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
@@ -26,6 +27,7 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
   onSwitchToRegular,
   showAuditMarkers = false,
   onOpenAuditItem,
+  isSplitView = false,
 }) => {
   return (
     <section className="pt-2" data-purpose="fare-selection-matrix">
@@ -33,7 +35,7 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
       <div className="flex flex-col md:flex-row md:items-center justify-between pb-4 gap-3">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-2xl font-black text-[#073590]">Choose your fare</h2>
+            <h2 className="text-xl sm:text-2xl font-black text-[#073590]">Choose your fare</h2>
             {showAuditMarkers && (
               <span className="bg-rose-100 text-rose-800 text-[11px] font-bold px-2 py-0.5 rounded-full border border-rose-200">
                 Original Fare-choice Prototype
@@ -46,14 +48,14 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
         </div>
 
         {/* Basic Quick-Continue Banner */}
-        <div className="flex flex-wrap items-center justify-between sm:justify-end gap-3 bg-white border border-gray-200 rounded-lg p-2.5 px-4 shadow-xs relative">
+        <div className="flex flex-wrap items-center justify-between sm:justify-end gap-2.5 bg-white border border-gray-200 rounded-lg p-2.5 px-3 sm:px-4 shadow-xs relative">
           <div className="text-left">
             <span className="text-sm font-black tracking-wide text-gray-800">BASIC</span>
             <span className="block text-[11px] text-gray-400 italic">Travel light</span>
           </div>
 
           <div className="flex items-center gap-2 border-l border-gray-200 pl-3">
-            <Briefcase className="w-5 h-5 text-[#073590]" />
+            <Briefcase className="w-4 h-4 sm:w-5 sm:h-5 text-[#073590]" />
             <div className="text-[11px] leading-tight text-gray-600">
               <span className="font-bold block">1 small bag</span>
               <span className="text-[10px] text-gray-400">Must fit under the seat in front</span>
@@ -63,7 +65,7 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
           <div className={`relative ml-auto ${showAuditMarkers ? 'mt-5' : ''}`}>
             <button
               onClick={onOpenUpsellModal}
-              className="text-xs font-bold text-[#073590] border border-[#073590] hover:bg-blue-50 px-3 py-2 rounded transition whitespace-nowrap cursor-pointer"
+              className="text-xs font-bold text-[#073590] border border-[#073590] hover:bg-blue-50 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded transition whitespace-nowrap cursor-pointer"
             >
               Continue with basic for £131.36
             </button>
@@ -79,36 +81,36 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
         </div>
       </div>
 
-      {/* Keep the ribbon and its audit marker inside the horizontal scroller's clip. */}
+      {/* Fit-to-width table container without forced min-width */}
       <div className={`overflow-x-auto pb-4 ${showAuditMarkers ? 'pt-8' : 'pt-4'}`}>
-        <div className="min-w-[760px] bg-white rounded-lg border border-gray-200 shadow-xs">
+        <div className="w-full min-w-0 bg-white rounded-lg border border-gray-200 shadow-xs">
           {/* Table Header: Columns for Features + 3 Bundles */}
           <div className="grid grid-cols-4 border-b border-gray-200">
             {/* Left Header Blank / Features Title */}
-            <div className="p-4 flex flex-col justify-end">
-              <span className="text-xs text-gray-400 uppercase font-bold tracking-wider">
+            <div className="p-2 sm:p-3 lg:p-4 flex flex-col justify-end">
+              <span className="text-[10px] sm:text-xs text-gray-400 uppercase font-bold tracking-wider">
                 Features included
               </span>
             </div>
 
             {/* REGULAR TIER */}
-            <div className={`p-3 text-center border-l border-gray-200 flex flex-col justify-between relative ${
+            <div className={`p-2 sm:p-3 text-center border-l border-gray-200 flex flex-col justify-between relative ${
               selectedTier === 'REGULAR' ? 'bg-blue-50/30' : ''
             }`}>
               <div>
                 <img
                   alt="Regular bag feature"
-                  className="w-full h-24 object-cover rounded mb-2"
+                  className="w-full h-16 sm:h-20 lg:h-24 object-cover rounded mb-1.5"
                   src={FARE_TIERS.REGULAR.imageUrl}
                   referrerPolicy="no-referrer"
                 />
-                <h3 className="font-extrabold text-lg text-gray-900 uppercase">REGULAR</h3>
-                <p className="text-xs text-gray-500 italic mt-0.5">
+                <h3 className="font-extrabold text-sm sm:text-base lg:text-lg text-gray-900 uppercase">REGULAR</h3>
+                <p className="text-[10px] sm:text-xs text-gray-500 italic mt-0.5 line-clamp-2">
                   Choose your seat and 10kg bag on board
                 </p>
               </div>
 
-              <div className={`relative ${showAuditMarkers ? 'mt-5' : 'mt-4'}`}>
+              <div className={`relative ${showAuditMarkers ? 'mt-5' : 'mt-3 sm:mt-4'}`}>
                 {showAuditMarkers && (
                   <AuditMarker
                     number={2}
@@ -119,22 +121,22 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
                 )}
                 <button
                   onClick={() => onSelectTier('REGULAR')}
-                  className="w-full bg-[#073590] hover:bg-blue-900 text-white font-bold py-2.5 px-2 rounded text-xs transition cursor-pointer"
+                  className="w-full bg-[#073590] hover:bg-blue-900 text-white font-bold py-2 sm:py-2.5 px-1 sm:px-2 rounded text-xs transition cursor-pointer"
                 >
-                  <span className="block text-sm font-black">+£29.25</span>
-                  <span className="text-[10px] font-normal opacity-90">on each flight</span>
+                  <span className="block text-xs sm:text-sm font-black">+£29.25</span>
+                  <span className="text-[9px] sm:text-[10px] font-normal opacity-90 block">on each flight</span>
                 </button>
               </div>
             </div>
 
             {/* PLUS TIER (Aggressively Highlighted Dark Pattern Steering) */}
-            <div className={`relative p-3 text-center border-l-2 border-r-2 border-[#f1c40f] bg-yellow-50/30 flex flex-col justify-between ${
+            <div className={`relative p-2 sm:p-3 text-center border-l-2 border-r-2 border-[#f1c40f] bg-yellow-50/30 flex flex-col justify-between ${
               selectedTier === 'PLUS' ? 'ring-2 ring-yellow-400' : ''
             }`}>
               {/* Top Ribbon Badge */}
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#f1c40f] text-[#073590] font-black text-[10px] px-3 py-1 rounded-sm uppercase tracking-wider flex items-center gap-1 shadow-xs whitespace-nowrap">
-                <Star className="w-3 h-3 fill-[#073590]" />
-                <span>IDEAL FOR YOUR TRIP TO PALANGA</span>
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#f1c40f] text-[#073590] font-black text-[8px] sm:text-[10px] px-2 sm:px-3 py-0.5 sm:py-1 rounded-sm uppercase tracking-wider flex items-center gap-1 shadow-xs whitespace-nowrap z-10 max-w-[95%] justify-center">
+                <Star className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-[#073590] shrink-0" />
+                <span className="truncate">IDEAL FOR YOUR TRIP</span>
 
                 {showAuditMarkers && (
                   <AuditMarker
@@ -147,145 +149,145 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
               </div>
 
               <div className="pt-2">
-                <div className="text-[11px] font-semibold text-gray-800 bg-yellow-100/90 p-2 rounded mb-2 border border-yellow-200">
-                  <span className="font-bold">PLUS</span> is the only bundle with a{' '}
-                  <span className="font-bold text-gray-900">20kg checked-in bag</span> included
+                <div className="text-[10px] sm:text-[11px] font-semibold text-gray-800 bg-yellow-100/90 p-1.5 sm:p-2 rounded mb-1.5 sm:mb-2 border border-yellow-200 leading-tight">
+                  <span className="font-bold">PLUS</span> includes a{' '}
+                  <span className="font-bold text-gray-900">20kg checked bag</span>
                 </div>
 
                 <img
                   alt="Plus 20kg suitcase"
-                  className="w-full h-24 object-cover rounded mb-2"
+                  className="w-full h-16 sm:h-20 lg:h-24 object-cover rounded mb-1.5"
                   src={FARE_TIERS.PLUS.imageUrl}
                   referrerPolicy="no-referrer"
                 />
-                <h3 className="font-extrabold text-lg text-[#073590] uppercase">PLUS</h3>
-                <p className="text-xs text-gray-500 italic mt-0.5">
-                  Choose your seat and a 20kg checked in bag
+                <h3 className="font-extrabold text-sm sm:text-base lg:text-lg text-[#073590] uppercase">PLUS</h3>
+                <p className="text-[10px] sm:text-xs text-gray-500 italic mt-0.5 line-clamp-2">
+                  Choose seat & 20kg checked bag
                 </p>
               </div>
 
-              <div className="mt-4">
+              <div className="mt-3 sm:mt-4">
                 <button
                   onClick={() => onSelectTier('PLUS')}
-                  className="w-full bg-[#f1c40f] hover:bg-[#f4b800] text-[#073590] font-black py-2.5 px-2 rounded text-xs transition shadow-xs cursor-pointer"
+                  className="w-full bg-[#f1c40f] hover:bg-[#f4b800] text-[#073590] font-black py-2 sm:py-2.5 px-1 sm:px-2 rounded text-xs transition shadow-xs cursor-pointer"
                 >
-                  <span className="block text-sm font-black">+£43.24</span>
-                  <span className="text-[10px] font-medium opacity-90">on each flight</span>
+                  <span className="block text-xs sm:text-sm font-black">+£43.24</span>
+                  <span className="text-[9px] sm:text-[10px] font-medium opacity-90 block">on each flight</span>
                 </button>
               </div>
             </div>
 
             {/* FLEXI PLUS TIER */}
-            <div className={`p-3 text-center border-l border-gray-200 rounded-tr-lg flex flex-col justify-between ${
+            <div className={`p-2 sm:p-3 text-center border-l border-gray-200 rounded-tr-lg flex flex-col justify-between ${
               selectedTier === 'FLEXI_PLUS' ? 'bg-blue-50/30' : ''
             }`}>
               <div>
                 <img
                   alt="Flexi Plus Traveler"
-                  className="w-full h-24 object-cover rounded mb-2"
+                  className="w-full h-16 sm:h-20 lg:h-24 object-cover rounded mb-1.5"
                   src={FARE_TIERS.FLEXI_PLUS.imageUrl}
                   referrerPolicy="no-referrer"
                 />
-                <h3 className="font-extrabold text-lg text-gray-900 uppercase">FLEXI PLUS</h3>
-                <p className="text-xs text-gray-500 italic mt-0.5">Our most flexible bundle</p>
+                <h3 className="font-extrabold text-sm sm:text-base lg:text-lg text-gray-900 uppercase">FLEXI PLUS</h3>
+                <p className="text-[10px] sm:text-xs text-gray-500 italic mt-0.5 line-clamp-2">Our most flexible bundle</p>
               </div>
 
-              <div className="mt-4">
+              <div className="mt-3 sm:mt-4">
                 <button
                   onClick={() => onSelectTier('FLEXI_PLUS')}
-                  className="w-full bg-[#073590] hover:bg-blue-900 text-white font-bold py-2.5 px-2 rounded text-xs transition cursor-pointer"
+                  className="w-full bg-[#073590] hover:bg-blue-900 text-white font-bold py-2 sm:py-2.5 px-1 sm:px-2 rounded text-xs transition cursor-pointer"
                 >
-                  <span className="block text-sm font-black">+£94.50</span>
-                  <span className="text-[10px] font-normal opacity-90">on each flight</span>
+                  <span className="block text-xs sm:text-sm font-black">+£94.50</span>
+                  <span className="text-[9px] sm:text-[10px] font-normal opacity-90 block">on each flight</span>
                 </button>
               </div>
             </div>
           </div>
 
           {/* Feature Matrix Rows */}
-          <div className="divide-y divide-gray-100 text-xs rounded-b-lg overflow-hidden">
+          <div className="divide-y divide-gray-100 text-[11px] sm:text-xs rounded-b-lg overflow-hidden">
             {/* Row 1: 1 Small Bag */}
-            <div className="grid grid-cols-4 items-center py-3.5 px-4 hover:bg-gray-50/50">
-              <div className="flex items-center gap-2 text-gray-800 font-medium">
-                <Briefcase className="w-4 h-4 text-gray-600" />
+            <div className="grid grid-cols-4 items-center py-2.5 sm:py-3 px-2 sm:px-3 hover:bg-gray-50/50">
+              <div className="flex items-center gap-1.5 sm:gap-2 text-gray-800 font-medium leading-tight">
+                <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-600 shrink-0" />
                 <span>1 small bag</span>
               </div>
               <div className="text-center">
-                <span className="text-blue-700 font-bold text-base">✔</span>
+                <span className="text-blue-700 font-bold text-sm sm:text-base">✔</span>
               </div>
               <div className="text-center border-x-2 border-[#f1c40f] bg-yellow-50/20">
-                <span className="text-blue-700 font-bold text-base">✔</span>
+                <span className="text-blue-700 font-bold text-sm sm:text-base">✔</span>
               </div>
               <div className="text-center">
-                <span className="text-blue-700 font-bold text-base">✔</span>
+                <span className="text-blue-700 font-bold text-sm sm:text-base">✔</span>
               </div>
             </div>
 
             {/* Row 2: Reserved Seat */}
-            <div className="grid grid-cols-4 items-center py-3.5 px-4 hover:bg-gray-50/50">
-              <div className="flex items-center gap-2 text-gray-800 font-medium">
-                <span className="text-gray-600 font-bold">💺</span>
+            <div className="grid grid-cols-4 items-center py-2.5 sm:py-3 px-2 sm:px-3 hover:bg-gray-50/50">
+              <div className="flex items-center gap-1.5 sm:gap-2 text-gray-800 font-medium leading-tight">
+                <span className="text-gray-600 font-bold text-xs">💺</span>
                 <span>Reserved seat</span>
               </div>
               <div className="text-center">
-                <span className="text-blue-700 font-bold text-base">✔</span>
-                <span className="block text-[10px] text-gray-400">Specific rows</span>
+                <span className="text-blue-700 font-bold text-sm sm:text-base">✔</span>
+                <span className="block text-[9px] sm:text-[10px] text-gray-400">Rows 18–33</span>
               </div>
               <div className="text-center border-x-2 border-[#f1c40f] bg-yellow-50/20">
-                <span className="text-blue-700 font-bold text-base">✔</span>
-                <span className="block text-[10px] text-gray-400">Specific rows</span>
+                <span className="text-blue-700 font-bold text-sm sm:text-base">✔</span>
+                <span className="block text-[9px] sm:text-[10px] text-gray-400">Rows 18–33</span>
               </div>
               <div className="text-center">
-                <span className="text-blue-700 font-bold text-base">✔</span>
-                <span className="block text-[10px] text-gray-400">Any seat</span>
+                <span className="text-blue-700 font-bold text-sm sm:text-base">✔</span>
+                <span className="block text-[9px] sm:text-[10px] text-gray-400">Any seat</span>
               </div>
             </div>
 
             {/* Row 3: Priority Boarding */}
-            <div className="grid grid-cols-4 items-center py-3.5 px-4 hover:bg-gray-50/50">
-              <div className="flex items-center gap-2 text-gray-800 font-medium">
-                <span className="text-gray-600 font-bold">⚡</span>
+            <div className="grid grid-cols-4 items-center py-2.5 sm:py-3 px-2 sm:px-3 hover:bg-gray-50/50">
+              <div className="flex items-center gap-1.5 sm:gap-2 text-gray-800 font-medium leading-tight">
+                <span className="text-gray-600 font-bold text-xs">⚡</span>
                 <span>Priority boarding</span>
               </div>
               <div className="text-center">
-                <span className="text-blue-700 font-bold text-base">✔</span>
+                <span className="text-blue-700 font-bold text-sm sm:text-base">✔</span>
               </div>
               <div className="text-center border-x-2 border-[#f1c40f] bg-yellow-50/20">
                 <span className="text-gray-300 font-bold">-</span>
               </div>
               <div className="text-center">
-                <span className="text-blue-700 font-bold text-base">✔</span>
+                <span className="text-blue-700 font-bold text-sm sm:text-base">✔</span>
               </div>
             </div>
 
             {/* Row 4: 10kg Overhead Locker Bag */}
-            <div className="grid grid-cols-4 items-center py-3.5 px-4 hover:bg-gray-50/50">
-              <div className="flex items-center gap-2 text-gray-800 font-medium">
-                <Briefcase className="w-4 h-4 text-gray-600" />
-                <span>10kg overhead locker bag</span>
+            <div className="grid grid-cols-4 items-center py-2.5 sm:py-3 px-2 sm:px-3 hover:bg-gray-50/50">
+              <div className="flex items-center gap-1.5 sm:gap-2 text-gray-800 font-medium leading-tight">
+                <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-600 shrink-0" />
+                <span>10kg cabin bag</span>
               </div>
               <div className="text-center">
-                <span className="text-blue-700 font-bold text-base">✔</span>
+                <span className="text-blue-700 font-bold text-sm sm:text-base">✔</span>
               </div>
               <div className="text-center border-x-2 border-[#f1c40f] bg-yellow-50/20">
                 <span className="text-gray-300 font-bold">-</span>
               </div>
               <div className="text-center">
-                <span className="text-blue-700 font-bold text-base">✔</span>
+                <span className="text-blue-700 font-bold text-sm sm:text-base">✔</span>
               </div>
             </div>
 
             {/* Row 5: 20kg Check-in Bag */}
-            <div className="grid grid-cols-4 items-center py-3.5 px-4 hover:bg-gray-50/50">
-              <div className="flex items-center gap-2 text-gray-800 font-medium">
-                <Briefcase className="w-4 h-4 text-gray-600" />
-                <span>20kg check-in bag</span>
+            <div className="grid grid-cols-4 items-center py-2.5 sm:py-3 px-2 sm:px-3 hover:bg-gray-50/50">
+              <div className="flex items-center gap-1.5 sm:gap-2 text-gray-800 font-medium leading-tight">
+                <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-600 shrink-0" />
+                <span>20kg check-in</span>
               </div>
               <div className="text-center">
                 <span className="text-gray-300 font-bold">-</span>
               </div>
               <div className="text-center border-x-2 border-[#f1c40f] bg-yellow-50/20">
-                <span className="text-blue-700 font-bold text-base">✔</span>
+                <span className="text-blue-700 font-bold text-sm sm:text-base">✔</span>
               </div>
               <div className="text-center">
                 <span className="text-gray-300 font-bold">-</span>
@@ -293,9 +295,9 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
             </div>
 
             {/* Row 6: Fast Track Security */}
-            <div className="grid grid-cols-4 items-center py-3.5 px-4 hover:bg-gray-50/50">
-              <div className="flex items-center gap-2 text-gray-800 font-medium">
-                <span className="text-gray-600 font-bold">🛡️</span>
+            <div className="grid grid-cols-4 items-center py-2.5 sm:py-3 px-2 sm:px-3 hover:bg-gray-50/50">
+              <div className="flex items-center gap-1.5 sm:gap-2 text-gray-800 font-medium leading-tight">
+                <span className="text-gray-600 font-bold text-xs">🛡️</span>
                 <span>Fast Track Security</span>
               </div>
               <div className="text-center">
@@ -305,7 +307,7 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
                 <span className="text-gray-300 font-bold">-</span>
               </div>
               <div className="text-center">
-                <span className="text-blue-700 font-bold text-base">✔</span>
+                <span className="text-blue-700 font-bold text-sm sm:text-base">✔</span>
               </div>
             </div>
           </div>
