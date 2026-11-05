@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AlertTriangle, ShieldCheck } from 'lucide-react';
 import { FARE_TIERS } from '../data/mockData';
 import { getBookingPricing } from '../data/bookingExtras';
@@ -54,6 +54,8 @@ interface BookingAddOnViewProps {
 export function BookingAddOnView({
   step, viewMode, selectedTier, bookings, onChangeBooking, onStepChange, showAuditMarkers, onOpenAuditItem,
 }: BookingAddOnViewProps) {
+  const [extrasSubStep, setExtrasSubStep] = useState<'all' | 'airport' | 'transport'>('airport');
+
   const renderStep = (mode: PrototypeMode) => {
     const isDarkPattern = mode === 'dark-pattern';
     const common = { isDarkPattern, showAuditMarkers, onOpenAuditItem };
@@ -100,6 +102,8 @@ export function BookingAddOnView({
           selectedCarHire={booking.selectedCarHire}
           onSelectCarHire={selectedCarHire => update({ selectedCarHire })}
           bookingTotal={total}
+          activeSubStep={extrasSubStep}
+          onSubStepChange={setExtrasSubStep}
           onBack={() => onStepChange('bags')}
           onNext={() => onStepChange('review')}
         />;

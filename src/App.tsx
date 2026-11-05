@@ -47,7 +47,14 @@ export default function App() {
     : getBookingPricing(FARE_TIERS[selectedTier], bookings[viewMode], viewMode === 'dark-pattern').total;
 
   const changeBooking = (mode: PrototypeMode, changes: Partial<BookingChoices>) => {
-    setBookings(previous => ({ ...previous, [mode]: { ...previous[mode], ...changes } }));
+    if (viewMode === 'side-by-side') {
+      setBookings(previous => ({
+        'dark-pattern': { ...previous['dark-pattern'], ...changes },
+        ethical: { ...previous.ethical, ...changes },
+      }));
+    } else {
+      setBookings(previous => ({ ...previous, [mode]: { ...previous[mode], ...changes } }));
+    }
   };
 
   const handleToggleOutbound = () => setOutboundSelected(!outboundSelected);

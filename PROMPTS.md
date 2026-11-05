@@ -184,3 +184,26 @@ okay, one more thing i'd like to get ironed out. when navigating to the Side-by-
 The Original Fast Track dialog opens inside its own column, leaving the Ethical design visible. At desktop width the two versions sit alongside each other. At phone width they stack, with **Jump to Original** and **Jump to Ethical** links so travellers can move between versions without scrolling through a whole booking step.
 
 *Verification:* Nine tests, type checking and the production build passed. Browser checks covered all five steps at desktop and phone widths and confirmed that the Original Fast Track dialog stayed inside its column. With Basic in both views, Original totalled £161.35 after selecting seat 15A and Fast Track and retaining its default insurance. Ethical totalled £167.44 after selecting one bag and Plus cover. These totals confirmed that the choices stayed with the intended version.
+
+---
+
+## Entry 9 - synchronized extras sub-tabs and mirrored comparison choices · 2026-11-05, 19:15 · sent by Roy · AI Studio
+
+GOAL: Synchronize the sub-step categories and user selections across the Original and Ethical designs in Side-by-Side mode, so both columns navigate and compare extras on an equal, apples-to-apples basis.
+
+CONTEXT: Flight booking London Stansted (STN) to Palanga (PLQ), 4-day return trip.
+
+WHAT TO BUILD:
+- Synchronize Extras sub-step categories: add matching sub-step pill tabs (`1. Airport & trip`, `2. Transport & parking` and `View All`) to the Ethical redesign, and share category state so both sides switch categories together.
+- Align step navigation: ensure both sides provide a *"Next: Transport & Parking"* button on Stage 1, and only advance to the final Review & Pay step once Stage 2 (*Transport & parking*) or *"View All"* is complete.
+- Mirror user choices in Side-by-Side mode: when interacting in comparison mode, selecting any add-on (Fast Track, insurance, parking, car hire, seats or bags) updates both designs simultaneously so evaluators can contrast how the exact same choices are framed and billed.
+- Keep all automated tests passing and verify that standalone views preserve their respective defaults.
+
+GUARDRAILS: Front-end only. Keep all 9 automated tests passing. Do not alter existing audit findings or scoring.
+
+*What came back:* AI Studio added matching category pill tabs to the Ethical Extras screen, connected both designs to a shared sub-step controller in the split view, aligned the bottom progression buttons and updated the booking handler to mirror user selections across both columns during side-by-side mode. All 9 automated tests continue to pass cleanly.
+
+*Our judgement, and what we changed next:* Verified that clicking between "Airport & trip" and "Transport & parking" now switches both columns simultaneously. On Stage 1, both sides display airport services and advance together to transport; on Stage 2, both display parking and car hire side by side. Selecting an option on either side now mirrors to the other, allowing evaluators to see directly how the same passenger selections are nudged and priced under dark patterns versus transparent choice architecture.
+
+*Principle check:* Week 10, Usability Principles (Consistency & Standards between variants, Error Prevention and Visibility of System Status); Week 4, Reference Framing & Drip Pricing (ensuring transparent comparison across stages); Week 9, Social Norms & Default Bias.
+

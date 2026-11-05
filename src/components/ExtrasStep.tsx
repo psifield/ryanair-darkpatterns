@@ -55,6 +55,8 @@ export interface ExtrasStepProps {
   bookingTotal?: number;
   onBack: () => void;
   onNext: () => void;
+  activeSubStep?: 'all' | 'airport' | 'transport';
+  onSubStepChange?: (subStep: 'all' | 'airport' | 'transport') => void;
 }
 
 export const ExtrasStep: React.FC<ExtrasStepProps> = (props) => props.isDarkPattern
@@ -78,9 +80,13 @@ const OriginalExtrasStep: React.FC<ExtrasStepProps> = ({
   onSelectCarHire,
   onBack,
   onNext,
+  activeSubStep: externalSubStep,
+  onSubStepChange: externalSetSubStep,
 }) => {
-  // Local UI state
-  const [activeSubStep, setActiveSubStep] = useState<'all' | 'airport' | 'transport'>('all');
+  // Local or shared UI state
+  const [internalSubStep, setInternalSubStep] = useState<'all' | 'airport' | 'transport'>('airport');
+  const activeSubStep = externalSubStep ?? internalSubStep;
+  const setActiveSubStep = externalSetSubStep ?? setInternalSubStep;
   const [passengerAccordionOpen, setPassengerAccordionOpen] = useState(false);
   const [showPrepaidSelector, setShowPrepaidSelector] = useState(false);
   const [activeCaptureModal, setActiveCaptureModal] = useState<string | null>(null);
