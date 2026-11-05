@@ -131,5 +131,56 @@ GUARDRAILS: Front-end only. Keep all automated tests passing. Do not alter dark 
 
 *Principle check:* Week 10, Usability Principles (Consistency between variants, Recognition rather than Recall, Clean and readable layout); Week 8, Visual Asymmetry & Color Steering; Week 9, Social Norms & Loss/Penalty Framing (seat separation anxiety, gate penalty threats).
 
+---
 
+## Entry 6 - ethical booking interface (Screen B) · 2026-11-05, time not captured · sent by Xianlong · Codex
 
+*Initial prompt:*
+
+~~~text
+alright. i was thinking of refining the ethical UI a bit since we haven't really touched it.
+~~~
+
+*Follow-up prompt:*
+
+~~~text
+hmmmm, please reverse the changes you made in AUDIT.md and do it in PROMPTS.md instead. also, please spin up the website, as what i meant is to change the UI of the ethical version itself
+~~~
+
+*What came back:* In Screen B, travellers go straight from Seats to Bags and can decide about Fast Track in Extras. The Extras screen shows the **£7.49** charge for the Stansted departure, or says the service is included with the fare. Each paid extra has a clear way to decline it. Parking and car hire show the full four-day cost, with the cheapest options first and no popularity badges.
+
+Insurance lists the full premium for each policy and starts at **No insurance**. Review shows the policy chosen in Extras and includes its premium in the total. For this itinerary, Plus costs **£6.08**. The **£14.50** Comprehensive offer is a separate policy, available in A's Review and B's Extras at this stage.
+
+The fare follow-up made the selected price and next action explicit. Regular, for example, shows a **£189.86 return total**, **£58.50 more than Basic**, with the per-flight increase shown separately. The main button reads **Continue with Regular** when that fare is selected.
+
+*Our judgement, and what we changed next:* The first pass concentrated on Findings 4–6. After the follow-up, Codex refined the Ethical fare screen and opened it in the local preview. The four fares share a card layout with return totals, upgrade differences, and the same seat and bag rows. The full inclusions table can be expanded, and the selected fare can continue straight to Seats. Xianlong confirmed that `AUDIT.md` is frozen and that prompts and implementation notes belong here.
+
+*Verification:* All seven tests, type checking and the production build passed. Browser checks confirmed Regular's £189.86 return total, the expandable comparison and direct continuation with Basic. The fare cards fit in one column at phone width and four on desktop. Earlier desktop and phone checks covered Extras and checkout totals. On phones, the cart total clipped and Review opened partway down after continuing from Extras. Codex adjusted the header and step scrolling, then checked the flow again. Effects on traveller decisions remain untested.
+
+---
+
+## Entry 7 - checkout opt-ins (Screen B) · 2026-11-05, time not captured · sent by Xianlong · Codex
+
+~~~text
+i realise that the travel insurance option in the Review and Pay tab of the ethical version is not present. could you add the travel insurance option from the original prototype to the ethical version, but keep it unchecked to differentiate it from the original version? also, communication preferences should be unchecked in the ethical redesign too.
+~~~
+
+*What came back:* Ethical Review & Pay offers the same **£14.50 Comprehensive travel protection** as the Original Prototype. When no policy has been chosen, its box starts unchecked. Checking it adds one premium to the price breakdown; clearing it removes that charge. The separate **Communication Preferences** box also starts unchecked in Ethical and can be changed independently of insurance. Both boxes start checked in the Original Prototype.
+
+Review uses the policy already selected in Extras. Comprehensive appears as checked if it was chosen there. For another policy, such as Plus, Review shows the policy and its premium and directs the traveller back to Extras to change it. That keeps the selected cover visible without offering a second policy at checkout.
+
+*Verification:* All eight tests, type checking and the production build passed. In the local preview, adding and removing Comprehensive changed both the cart and the payment amount between £131.36 and £145.86. Promotional emails had no effect on the price. Selecting Plus in Extras showed one £6.08 policy at Review, for a £137.44 total. Revisiting Review kept the chosen settings, and switching to Original showed its own defaults.
+
+---
+
+## Entry 8 - comparison across the booking flow · 2026-11-05, time not captured · sent by Xianlong · Codex
+
+~~~text
+okay, one more thing i'd like to get ironed out. when navigating to the Side-by-Side Split tab, the Seats, Bags, Extras, and Review & Pay sub-tabs do not actually show a side-by-side split of the original and ethical redesign. only the Flights sub-tab has a working side-by-side split view. please implement side-by-side split views for the other tabs so that as a user of this website, i will be able to clearly view both designs for all tabs, not just the Flights tab.
+~~~
+
+*What came back:* The split layout now stays in place when moving from Flights to Seats, Bags, Extras or Review & Pay. Both columns advance together and use the same itinerary and fare. Each version keeps its own seat, bag, extras and email choices, so the Review screens show separate price breakdowns and totals for the same base trip.
+
+The Original Fast Track dialog opens inside its own column, leaving the Ethical design visible. At desktop width the two versions sit alongside each other. At phone width they stack, with **Jump to Original** and **Jump to Ethical** links so travellers can move between versions without scrolling through a whole booking step.
+
+*Verification:* Nine tests, type checking and the production build passed. Browser checks covered all five steps at desktop and phone widths and confirmed that the Original Fast Track dialog stayed inside its column. With Basic in both views, Original totalled £161.35 after selecting seat 15A and Fast Track and retaining its default insurance. Ethical totalled £167.44 after selecting one bag and Plus cover. These totals confirmed that the choices stayed with the intended version.

@@ -1,9 +1,10 @@
 import React from 'react';
 import { Plane, Armchair, Briefcase, Sparkles, CreditCard } from 'lucide-react';
+import type { BookingStep } from '../types/booking';
 
 interface BookingStepperProps {
-  currentStep: 'flights' | 'seats' | 'bags' | 'extras' | 'review';
-  onStepChange: (step: 'flights' | 'seats' | 'bags' | 'extras' | 'review') => void;
+  currentStep: BookingStep;
+  onStepChange: (step: BookingStep) => void;
   canNavigateForward?: boolean;
 }
 
@@ -31,6 +32,7 @@ export const BookingStepper: React.FC<BookingStepperProps> = ({
           return (
             <button
               key={step.id}
+              aria-current={isActive ? 'step' : undefined}
               onClick={() => {
                 if (isPassed || canNavigateForward || isActive) {
                   onStepChange(step.id);

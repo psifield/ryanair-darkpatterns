@@ -5,6 +5,7 @@ import { FastTrackModal } from './FastTrackModal';
 
 interface SeatsStepProps {
   isDarkPattern: boolean;
+  inComparison?: boolean;
   showAuditMarkers: boolean;
   onOpenAuditItem?: (id: string) => void;
   onBack: () => void;
@@ -13,11 +14,11 @@ interface SeatsStepProps {
   onSelectSeat: (seat: string) => void;
   fastTrackSelected?: boolean;
   onToggleFastTrack?: (selected: boolean) => void;
-  isSplitView?: boolean;
 }
 
 export const SeatsStep: React.FC<SeatsStepProps> = ({
   isDarkPattern,
+  inComparison = false,
   showAuditMarkers,
   onOpenAuditItem,
   onBack,
@@ -26,7 +27,6 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
   onSelectSeat,
   fastTrackSelected = false,
   onToggleFastTrack,
-  isSplitView = false,
 }) => {
   const [showSeatWarning, setShowSeatWarning] = useState(false);
   const [showFastTrackModal, setShowFastTrackModal] = useState(false);
@@ -49,12 +49,12 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
   };
 
   return (
-    <div className={isSplitView ? "w-full space-y-4" : "max-w-4xl mx-auto space-y-6 pt-4"}>
+    <div className={inComparison ? '@container relative w-full space-y-4' : '@container relative max-w-4xl mx-auto space-y-6 pt-2'}>
       {/* Step Header */}
-      <div className={`bg-white rounded-xl border border-gray-200 shadow-xs flex flex-wrap items-center justify-between gap-3 ${isSplitView ? 'p-3.5' : 'p-5'}`}>
+      <div className={`bg-white rounded-xl border border-gray-200 shadow-xs flex flex-col @min-[28rem]:flex-row @min-[28rem]:items-center justify-between gap-4 ${inComparison ? 'p-3.5' : 'p-5'}`}>
         <div>
-          <h2 className={`${isSplitView ? 'text-lg' : 'text-2xl'} font-black text-[#073590]`}>Select your seats</h2>
-          <p className="text-xs text-gray-500 mt-0.5">
+          <h2 className={`${inComparison ? 'text-lg' : 'text-2xl'} font-black text-[#073590]`}>Select your seats</h2>
+          <p className="text-xs text-gray-500 mt-1">
             Flight FR 286 • London Stansted (STN) to Palanga (PLQ)
           </p>
         </div>
@@ -62,7 +62,7 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={onBack}
-            className="flex items-center gap-1 text-xs font-semibold text-gray-600 hover:text-gray-900 border border-gray-300 px-3 py-1.5 rounded-lg transition"
+            className="flex items-center gap-1 text-xs font-semibold text-gray-600 hover:text-gray-900 border border-gray-300 px-3 py-2 rounded-lg transition"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Back to Fares</span>
@@ -123,8 +123,8 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
         </div>
 
         {/* Free Option or Next */}
-        <div className="pt-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2.5">
+        <div className="pt-4 border-t border-gray-200 flex flex-col @min-[40rem]:flex-row items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-3">
             <button
               onClick={handleRandomSeat}
               className="text-xs font-bold text-[#073590] hover:underline cursor-pointer"
@@ -135,7 +135,7 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
             {isDarkPattern && (
               <button
                 onClick={() => setShowFastTrackModal(true)}
-                className="text-[10px] sm:text-[11px] font-semibold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-2 py-1 rounded transition flex items-center gap-1 cursor-pointer"
+                className="text-[11px] font-semibold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-2 py-1 rounded transition flex items-center gap-1 cursor-pointer"
                 title="Preview post-seats roadblock modal"
               >
                 <Zap className="w-3 h-3 text-amber-600" />
@@ -146,7 +146,7 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
 
           <button
             onClick={handleContinue}
-            className="w-full sm:w-auto bg-[#073590] hover:bg-[#052973] text-white font-bold text-xs px-5 py-2.5 rounded-lg shadow-xs transition flex items-center justify-center gap-2 cursor-pointer"
+            className="bg-[#073590] hover:bg-[#052973] text-white font-bold text-xs px-6 py-2.5 rounded-lg shadow-xs transition flex items-center gap-2 cursor-pointer"
           >
             <span>Confirm & Continue to Bags</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -156,8 +156,8 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
 
       {/* Dark Pattern Seat Roadblock Dialog */}
       {showSeatWarning && isDarkPattern && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
-          <div className="bg-white max-w-md w-full rounded-2xl p-6 shadow-2xl space-y-4 border border-gray-100">
+        <div className={`inset-0 z-50 flex justify-center p-4 bg-black/60 backdrop-blur-xs ${inComparison ? 'absolute items-start rounded-xl' : 'fixed items-center'}`}>
+          <div role="dialog" aria-label="Confirm seat allocation" className={`bg-white max-w-md w-full rounded-2xl p-6 shadow-2xl space-y-4 border border-gray-100 ${inComparison ? 'sticky top-44 max-h-[calc(100dvh-12rem)] overflow-y-auto' : ''}`}>
             <div className="w-12 h-12 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center mx-auto">
               <AlertTriangle className="w-6 h-6" />
             </div>
@@ -200,6 +200,7 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
       {/* Post-Seats Roadblock: Fast Track Upsell Modal (image_27e49d5b.png) */}
       <FastTrackModal
         isOpen={showFastTrackModal}
+        inComparison={inComparison}
         onClose={() => setShowFastTrackModal(false)}
         onAddFastTrack={() => {
           onToggleFastTrack?.(true);

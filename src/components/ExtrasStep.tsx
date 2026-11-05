@@ -31,16 +31,18 @@ import {
   ShieldAlert
 } from 'lucide-react';
 import { AuditMarker } from './AuditMarker';
+import { EthicalExtrasStep } from './EthicalExtrasStep';
+import type { InsurancePlan, ParkingOption, CarHireOption } from '../data/bookingExtras';
 
-export type InsurancePlan = 'none' | 'standard' | 'plus' | 'annual';
-export type ParkingOption = 'none' | 'short-stay' | 'meet-greet' | 'long-stay';
-export type CarHireOption = 'none' | 'economy' | 'suv' | 'estate';
+export type { InsurancePlan, ParkingOption, CarHireOption } from '../data/bookingExtras';
 
-interface ExtrasStepProps {
+export interface ExtrasStepProps {
   isDarkPattern: boolean;
+  inComparison?: boolean;
   showAuditMarkers: boolean;
   onOpenAuditItem?: (id: string) => void;
   fastTrackSelected: boolean;
+  fastTrackIncluded?: boolean;
   onToggleFastTrack: (enabled: boolean) => void;
   insurancePlan: InsurancePlan;
   onSelectInsurance: (plan: InsurancePlan) => void;
@@ -50,12 +52,18 @@ interface ExtrasStepProps {
   onSelectParking?: (parking: ParkingOption) => void;
   selectedCarHire?: CarHireOption;
   onSelectCarHire?: (car: CarHireOption) => void;
+  bookingTotal?: number;
   onBack: () => void;
   onNext: () => void;
 }
 
-export const ExtrasStep: React.FC<ExtrasStepProps> = ({
+export const ExtrasStep: React.FC<ExtrasStepProps> = (props) => props.isDarkPattern
+  ? <OriginalExtrasStep {...props} />
+  : <EthicalExtrasStep {...props} />;
+
+const OriginalExtrasStep: React.FC<ExtrasStepProps> = ({
   isDarkPattern,
+  inComparison = false,
   showAuditMarkers,
   onOpenAuditItem,
   fastTrackSelected,
@@ -79,9 +87,9 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
   const [viewOriginalScreenshots, setViewOriginalScreenshots] = useState(false);
 
   return (
-    <div className="max-w-5xl mx-auto space-y-6 pt-2 pb-12">
+    <div className="@container relative max-w-5xl mx-auto space-y-6 pt-2 pb-12">
       {/* Top Header & Sub-step Pill */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white rounded-xl border border-gray-200 p-4 sm:p-5 shadow-xs">
+      <div className="flex flex-col @min-[52rem]:flex-row @min-[52rem]:items-center justify-between gap-4 bg-white rounded-xl border border-gray-200 p-4 sm:p-5 shadow-xs">
         <div>
           <h2 className="text-2xl sm:text-3xl font-black text-[#073590] tracking-tight">
             The best deals for your trip
@@ -92,8 +100,8 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
         </div>
 
         {/* Ryanair Sub-Step Indicator & Capture Gallery Toggle */}
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1.5 text-xs font-bold bg-gray-50 border border-gray-200 p-1 rounded-full">
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-1.5 text-xs font-bold bg-gray-50 border border-gray-200 p-1 rounded-full">
             <button
               onClick={() => setActiveSubStep('airport')}
               className={`flex items-center gap-1.5 px-3 py-1 rounded-full transition cursor-pointer ${
@@ -173,7 +181,7 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 @min-[48rem]:grid-cols-3 gap-4">
             <div className="bg-slate-800 rounded-xl p-3 border border-slate-700 space-y-2">
               <span className="text-xs font-bold text-amber-300 block">1. Security Fast Track</span>
               <div
@@ -270,9 +278,9 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
         <div className="border-t border-dashed border-gray-200 mx-5 sm:mx-6" />
 
         {/* Card Body */}
-        <div className="p-5 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        <div className="p-5 sm:p-6 grid grid-cols-1 @min-[48rem]:grid-cols-12 gap-6 items-center">
           {/* Left Graphic: Authentic Cropped Illustration (Everyone Else vs Fast Track) */}
-          <div className="lg:col-span-5 flex items-center justify-center">
+          <div className="@min-[48rem]:col-span-5 flex items-center justify-center">
             <div className="w-full flex items-center justify-center bg-white p-1">
               <img
                 src="/assets/aistudio/fast_track_graphic.png"
@@ -283,7 +291,7 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
           </div>
 
           {/* Right Features & Add-on List */}
-          <div className="lg:col-span-7 space-y-3">
+          <div className="@min-[48rem]:col-span-7 space-y-3">
             <div>
               <h4 className="text-xs font-bold text-gray-900 mb-2">Why choose Security Fast Track?</h4>
               <div className="flex flex-wrap items-center gap-2">
@@ -428,7 +436,8 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
           {/* Matrix Content */}
           <div className="p-4 sm:p-6 pt-10 space-y-4">
             {/* Scrollable Container with Guaranteed Proportions */}
-            <div className="overflow-x-auto pb-4 -mx-1 px-1">
+            {inComparison && <p className="text-xs text-gray-600 @min-[56rem]:hidden">Scroll the table to compare all policies.</p>}
+            <div className="overflow-x-auto pb-4 -mx-1 px-1" tabIndex={0} role="region" aria-label="Travel insurance comparison">
               <div className="min-w-[840px] grid grid-cols-[1.3fr_1fr_1.08fr_1fr] gap-3.5 items-start">
                 {/* ========================================================= */}
                 {/* Feature Labels Column */}
@@ -784,9 +793,9 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
         <div className="border-t border-dashed border-gray-200 mx-5 sm:mx-6" />
 
         {/* Card Body */}
-        <div className="p-5 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        <div className="p-5 sm:p-6 grid grid-cols-1 @min-[48rem]:grid-cols-12 gap-6 items-center">
           {/* Attendant Photo Column */}
-          <div className="lg:col-span-5">
+          <div className="@min-[48rem]:col-span-5">
             <div className="rounded-xl overflow-hidden border border-gray-200 bg-gray-50 shadow-xs max-w-sm mx-auto">
               <img
                 src="/assets/aistudio/image_6967650a.png"
@@ -797,7 +806,7 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
           </div>
 
           {/* Right Credit Options */}
-          <div className="lg:col-span-7 space-y-4">
+          <div className="@min-[48rem]:col-span-7 space-y-4">
             <div>
               <h4 className="text-xs font-bold text-gray-900 mb-2">Why choose Inflight Credit?</h4>
               <div className="flex flex-wrap gap-2">
@@ -817,7 +826,7 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
             </div>
 
             {/* Credit Selector Banner */}
-            <div className="p-4 rounded-xl border border-gray-200 bg-gray-50/70 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="p-4 rounded-xl border border-gray-200 bg-gray-50/70 flex flex-col @min-[48rem]:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-8 bg-[#073590] rounded-md shadow-xs flex items-center justify-center text-[#f1c40f] font-black text-xs">
                   RYN
@@ -951,7 +960,7 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
             </div>
 
             {/* 3 Parking Tier Options */}
-            <div className="p-5 sm:p-6 pt-2 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-5 sm:p-6 pt-2 grid grid-cols-1 @min-[48rem]:grid-cols-3 gap-4">
               {/* Option 1: Stansted Short Stay */}
               <div
                 className={`rounded-xl border-2 p-4 flex flex-col justify-between transition shadow-xs ${
@@ -1234,7 +1243,7 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
             </div>
 
             {/* 3 Car Tier Options */}
-            <div className="p-5 sm:p-6 pt-2 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-5 sm:p-6 pt-2 grid grid-cols-1 @min-[48rem]:grid-cols-3 gap-4">
               {/* Car 1: Economy Polo */}
               <div
                 className={`rounded-xl border-2 p-4 flex flex-col justify-between transition shadow-xs ${
@@ -1458,8 +1467,8 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
       {/* ========================================================================= */}
       {/* BOTTOM STEPPER NAVIGATION */}
       {/* ========================================================================= */}
-      <div className="pt-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-2">
+      <div className="pt-4 border-t border-gray-200 flex flex-wrap items-center justify-between gap-4">
+        <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={onBack}
             className="flex items-center gap-1.5 text-xs font-semibold text-gray-600 hover:text-gray-900 border border-gray-300 px-4 py-2.5 rounded-lg transition cursor-pointer"
@@ -1478,7 +1487,7 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
           )}
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           {activeSubStep === 'airport' && (
             <button
               onClick={() => setActiveSubStep('transport')}
@@ -1501,13 +1510,14 @@ export const ExtrasStep: React.FC<ExtrasStepProps> = ({
 
       {/* Modal for viewing original captures in full detail */}
       {activeCaptureModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs">
-          <div className="bg-slate-900 border border-slate-700 rounded-2xl max-w-4xl w-full p-4 space-y-3 shadow-2xl overflow-hidden">
+        <div className={`inset-0 z-50 flex justify-center p-4 bg-black/80 backdrop-blur-xs ${inComparison ? 'absolute items-start rounded-xl' : 'fixed items-center'}`}>
+          <div role="dialog" aria-label="Original extras capture" className={`bg-slate-900 border border-slate-700 rounded-2xl max-w-4xl w-full p-4 space-y-3 shadow-2xl ${inComparison ? 'sticky top-44 max-h-[calc(100dvh-12rem)] overflow-y-auto' : 'overflow-hidden'}`}>
             <div className="flex items-center justify-between border-b border-slate-700 pb-2">
-              <span className="text-xs font-bold text-white font-mono">{activeCaptureModal}</span>
+              <span className="text-xs font-bold text-white font-mono break-all">{activeCaptureModal}</span>
               <button
                 onClick={() => setActiveCaptureModal(null)}
                 className="text-white hover:text-amber-400 p-1"
+                aria-label="Close capture"
               >
                 <X className="w-5 h-5" />
               </button>

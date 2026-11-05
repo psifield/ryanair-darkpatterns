@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { FareTierId } from '../types/booking';
 import { FARE_TIERS } from '../data/mockData';
+import { CAR_HIRE_PRICES, CREDIT_PRICE_FACTOR, FAST_TRACK_PRICE, INSURANCE_PLANS, PARKING_PRICES } from '../data/bookingExtras';
+import type { CarHireOption, InsurancePlan, ParkingOption } from '../data/bookingExtras';
 import { ArrowLeft, CheckCircle2, ShieldCheck, AlertTriangle, Car, Key, Zap, CreditCard, Shield } from 'lucide-react';
 import { AuditMarker } from './AuditMarker';
-import { InsurancePlan, ParkingOption, CarHireOption } from './ExtrasStep';
 
 interface ReviewStepProps {
   isDarkPattern: boolean;
@@ -14,6 +15,7 @@ interface ReviewStepProps {
   additionalLuggage: number;
   fastTrackSelected?: boolean;
   insurancePlan?: InsurancePlan;
+  onSelectInsurance: (plan: InsurancePlan) => void;
   prepaidCredit?: number;
   selectedParking?: ParkingOption;
   selectedCarHire?: CarHireOption;
@@ -31,6 +33,7 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
   additionalLuggage,
   fastTrackSelected = false,
   insurancePlan = 'none',
+  onSelectInsurance,
   prepaidCredit = 0,
   selectedParking = 'none',
   selectedCarHire = 'none',
@@ -39,40 +42,31 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
   onBack,
 }) => {
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
-  const [insuranceOptIn, setInsuranceOptIn] = useState(
-    insurancePlan !== 'none' || isDarkPattern
-  );
+  const [originalInsuranceOptIn, setOriginalInsuranceOptIn] = useState(true);
 
   const tier = FARE_TIERS[selectedTier] || FARE_TIERS.BASIC;
   const seatCost = selectedSeat.startsWith('15') || selectedSeat.startsWith('16') ? 8.0 : 0.0;
   const luggageCost = additionalLuggage * 30.0; // £15 each flight
-  const fastTrackCost = fastTrackSelected ? 7.49 : 0.0;
-  
-  const calcInsurance = () => {
-    if (insurancePlan === 'standard') return 4.68;
-    if (insurancePlan === 'plus') return 6.08;
-    if (insurancePlan === 'annual') return 28.18;
-    if (insuranceOptIn) return 14.50;
-    return 0.0;
-  };
-  const insuranceCost = calcInsurance();
-  const creditCost = prepaidCredit > 0 ? prepaidCredit * 0.9 : 0.0;
+  const fastTrackCost = fastTrackSelected ? FAST_TRACK_PRICE : 0;
+  const showComprehensiveOption = isDarkPattern || insurancePlan === 'none' || insurancePlan === 'comprehensive';
+  const comprehensiveSelected = insurancePlan === 'comprehensive' || (isDarkPattern && originalInsuranceOptIn);
+  const reviewInsurancePlan = insurancePlan === 'none' && comprehensiveSelected
+    ? 'comprehensive'
+    : insurancePlan;
+  const insuranceCost = INSURANCE_PLANS[reviewInsurancePlan].price;
+  const insuranceLabel = isDarkPattern && insurancePlan !== 'none'
+    ? insurancePlan.toUpperCase()
+    : INSURANCE_PLANS[reviewInsurancePlan].label;
+  const creditCost = prepaidCredit * CREDIT_PRICE_FACTOR;
+  const parkingCost = PARKING_PRICES[selectedParking];
+  const carHireCost = CAR_HIRE_PRICES[selectedCarHire];
 
-  const parkingPrices: Record<ParkingOption, number> = {
-    none: 0,
-    'short-stay': 50.0,
-    'meet-greet': 65.0,
-    'long-stay': 39.96,
+  const updateComprehensive = (checked: boolean) => {
+    if (isDarkPattern) setOriginalInsuranceOptIn(checked);
+    if (!isDarkPattern || insurancePlan === 'comprehensive') {
+      onSelectInsurance(checked ? 'comprehensive' : 'none');
+    }
   };
-  const carHirePrices: Record<CarHireOption, number> = {
-    none: 0,
-    economy: 78.0,
-    suv: 119.2,
-    estate: 96.0,
-  };
-
-  const parkingCost = parkingPrices[selectedParking] || 0.0;
-  const carHireCost = carHirePrices[selectedCarHire] || 0.0;
 
   const grandTotal =
     tier.totalPrice +
@@ -121,9 +115,9 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 pt-4">
+    <div className="@container max-w-4xl mx-auto space-y-6 pt-2">
       {/* Header */}
-      <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-xs flex flex-col @min-[28rem]:flex-row @min-[28rem]:items-center justify-between gap-4">
         <div>
           <h2 className="text-2xl font-black text-[#073590]">Review & Pay</h2>
           <p className="text-xs text-gray-500 mt-1">Review your final itemized breakdown</p>
@@ -138,9 +132,9 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 @min-[42rem]:grid-cols-3 gap-6">
         {/* Left 2 Cols: Flight Summary & Addons */}
-        <div className="md:col-span-2 space-y-4">
+        <div className="@min-[42rem]:col-span-2 space-y-4">
           <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-xs space-y-4">
             <h3 className="font-bold text-sm text-gray-900 border-b pb-2">Selected Flights</h3>
 
@@ -163,39 +157,46 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
             </div>
           </div>
 
-          {/* Travel Insurance Add-on (Dark Pattern Pre-check demo) */}
-          <div className="relative">
-            {isDarkPattern && showAuditMarkers && (
-              <AuditMarker number={7} auditId="dp-travel-protection" title="Automatically Opted-in Travel Protection" onOpenAuditItem={onOpenAuditItem} />
-            )}
-            <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-xs space-y-3">
-              <div className="flex items-center justify-between">
-                <h3 className="font-bold text-sm text-gray-900">Travel Protection Insurance</h3>
-                {isDarkPattern && showAuditMarkers && (
-                  <span className="text-[10px] bg-rose-100 text-rose-800 font-bold px-2 py-0.5 rounded">
-                    Dark Pattern: Pre-selected Opt-in
-                  </span>
-                )}
-              </div>
-
-              <label className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 cursor-pointer text-xs">
-                <input
-                  type="checkbox"
-                  checked={insuranceOptIn}
-                  onChange={(e) => setInsuranceOptIn(e.target.checked)}
-                  className="mt-0.5 rounded text-[#073590] focus:ring-[#073590]"
-                />
-                <div>
-                  <span className="font-bold text-gray-800 block">
-                    Add Comprehensive Medical & Trip Cancellation Cover (+£14.50)
-                  </span>
-                  <span className="text-gray-500 text-[11px] block mt-0.5">
-                    Protects against unexpected illness, medical repatriation, and flight delays.
-                  </span>
+          {showComprehensiveOption ? (
+            <div className="relative">
+              {isDarkPattern && showAuditMarkers && (
+                <AuditMarker number={7} auditId="dp-travel-protection" title="Automatically Opted-in Travel Protection" onOpenAuditItem={onOpenAuditItem} />
+              )}
+              <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-xs space-y-3">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-bold text-sm text-gray-900">Travel Protection Insurance</h3>
+                  {isDarkPattern && showAuditMarkers && (
+                    <span className="text-[10px] bg-rose-100 text-rose-800 font-bold px-2 py-0.5 rounded">
+                      Dark Pattern: Pre-selected Opt-in
+                    </span>
+                  )}
                 </div>
-              </label>
+
+                <label className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 cursor-pointer text-xs">
+                  <input
+                    type="checkbox"
+                    checked={comprehensiveSelected}
+                    onChange={(e) => updateComprehensive(e.target.checked)}
+                    className="mt-0.5 rounded text-[#073590] focus:ring-[#073590]"
+                  />
+                  <div>
+                    <span className="font-bold text-gray-800 block">
+                      Add Comprehensive Medical & Trip Cancellation Cover (+£{INSURANCE_PLANS.comprehensive.price.toFixed(2)})
+                    </span>
+                    <span className="text-gray-500 text-[11px] block mt-0.5">
+                      Protects against unexpected illness, medical repatriation, and flight delays.
+                    </span>
+                  </div>
+                </label>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-xs space-y-2">
+              <h3 className="font-bold text-sm text-gray-900">Travel insurance</h3>
+              <p className="text-sm text-gray-700">{insuranceLabel} cover · £{insuranceCost.toFixed(2)}</p>
+              <p className="text-xs text-gray-600">You can change your policy in Extras.</p>
+            </div>
+          )}
 
           {/* Marketing Opt-in */}
           <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-xs space-y-2">
@@ -243,17 +244,17 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
               </div>
             )}
 
-            {fastTrackSelected && (
+            {(fastTrackSelected || (!isDarkPattern && tier.features.fastTrack)) && (
               <div className="flex justify-between py-1 pt-2">
                 <span className="text-gray-600">Security Fast Track (STN):</span>
-                <span className="font-semibold">+£{fastTrackCost.toFixed(2)}</span>
+                <span className="font-semibold">{fastTrackSelected ? `+£${fastTrackCost.toFixed(2)}` : 'Included'}</span>
               </div>
             )}
 
             {insuranceCost > 0 && (
               <div className="flex justify-between py-1 pt-2">
                 <span className="text-gray-600">
-                  Travel Protection ({insurancePlan === 'none' ? 'Comprehensive' : insurancePlan.toUpperCase()}):
+                  Travel Protection ({insuranceLabel}):
                 </span>
                 <span className="font-semibold">+£{insuranceCost.toFixed(2)}</span>
               </div>

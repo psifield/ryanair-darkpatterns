@@ -2,7 +2,7 @@ import React from 'react';
 import { ShoppingCart } from 'lucide-react';
 
 interface HeaderProps {
-  cartTotal: number;
+  cartTotal?: number;
   onEditSearch?: () => void;
   outboundDate?: string;
   inboundDate?: string;
@@ -42,17 +42,19 @@ export const Header: React.FC<HeaderProps> = ({
           </span>
           <span className="text-gray-200 hover:underline cursor-pointer">Log in</span>
 
-          <button className="bg-[#f1c40f] hover:bg-yellow-400 text-[#073590] font-black px-3.5 py-1.5 rounded-full text-xs transition shadow-sm">
+          <button className="hidden sm:inline-block bg-[#f1c40f] hover:bg-yellow-400 text-[#073590] font-black px-3.5 py-1.5 rounded-full text-xs transition shadow-sm">
             myRyanair Portal
           </button>
 
-          <div
-            className="flex items-center gap-1.5 font-bold text-white text-xs bg-[#052973] px-3 py-1.5 rounded-md border border-blue-900 shadow-inner"
-            title="Cart Summary"
-          >
-            <ShoppingCart className="w-3.5 h-3.5 text-[#f1c40f]" />
-            <span className="font-mono tabular-nums">£{cartTotal.toFixed(2)}</span>
-          </div>
+          {cartTotal !== undefined && (
+            <div
+              className="flex items-center gap-1.5 font-bold text-white text-xs bg-[#052973] px-3 py-1.5 rounded-md border border-blue-900 shadow-inner"
+              title="Cart Summary"
+            >
+              <ShoppingCart className="w-3.5 h-3.5 text-[#f1c40f]" />
+              <span className="font-mono tabular-nums">£{cartTotal.toFixed(2)}</span>
+            </div>
+          )}
         </div>
       </div>
 

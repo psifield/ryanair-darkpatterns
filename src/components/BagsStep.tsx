@@ -24,7 +24,7 @@ export const BagsStep: React.FC<BagsStepProps> = ({
   isSplitView = false,
 }) => {
   return (
-    <div className={isSplitView ? "w-full space-y-4" : "max-w-4xl mx-auto space-y-6 pt-4"}>
+    <div className={isSplitView ? '@container w-full space-y-4' : '@container max-w-4xl mx-auto space-y-6 pt-4'}>
       {/* Header */}
       <div className={`bg-white rounded-xl border border-gray-200 shadow-xs flex flex-wrap items-center justify-between gap-3 ${isSplitView ? 'p-3.5' : 'p-5'}`}>
         <div>
@@ -70,7 +70,7 @@ export const BagsStep: React.FC<BagsStepProps> = ({
       )}
 
       {/* Luggage Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+      <div className="grid grid-cols-1 @min-[34rem]:grid-cols-2 gap-3.5">
         {/* Small Personal Bag */}
         <div className={`bg-white rounded-xl border-2 ${isDarkPattern ? 'border-gray-200' : 'border-emerald-600/70'} p-4 sm:p-5 shadow-xs flex flex-col justify-between`}>
           <div>
@@ -148,7 +148,7 @@ export const BagsStep: React.FC<BagsStepProps> = ({
         </div>
       </div>
 
-      <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-gray-200">
+      <div className="pt-4 flex flex-col @min-[32rem]:flex-row items-center justify-between gap-3 border-t border-gray-200">
         <div className="text-xs text-gray-500 font-medium">
           {additionalLuggage > 0 ? (
             <span>Additional luggage: <strong>{additionalLuggage} bag{additionalLuggage > 1 ? 's' : ''} (+£{additionalLuggage * 15 * 2}.00 return)</strong></span>
@@ -159,7 +159,7 @@ export const BagsStep: React.FC<BagsStepProps> = ({
 
         <button
           onClick={onNext}
-          className="w-full sm:w-auto bg-[#073590] hover:bg-[#052973] text-white font-bold text-xs px-6 py-2.5 rounded-lg shadow-xs transition flex items-center justify-center gap-2 cursor-pointer"
+          className="w-full @min-[32rem]:w-auto bg-[#073590] hover:bg-[#052973] text-white font-bold text-xs px-6 py-2.5 rounded-lg shadow-xs transition flex items-center justify-center gap-2 cursor-pointer"
         >
           <span>Continue to Extras</span>
           <ArrowRight className="w-3.5 h-3.5" />

@@ -1,174 +1,132 @@
 import React from 'react';
-import { FlightLeg, FareTierId } from '../types/booking';
-import { FlightSelection } from './FlightSelection';
-import { FareSelectionDark } from './FareSelectionDark';
-import { FareSelectionEthical } from './FareSelectionEthical';
 import { AlertTriangle, ShieldCheck } from 'lucide-react';
+import { FARE_TIERS } from '../data/mockData';
+import { getBookingPricing } from '../data/bookingExtras';
+import type { BookingChoices } from '../data/bookingExtras';
+import type { BookingStep, FareTierId, PrototypeMode, ViewMode } from '../types/booking';
+import { SeatsStep } from './SeatsStep';
+import { BagsStep } from './BagsStep';
+import { ExtrasStep } from './ExtrasStep';
+import { ReviewStep } from './ReviewStep';
 
-interface SideBySideViewProps {
-  outboundFlight: FlightLeg;
-  inboundFlight: FlightLeg;
-  outboundSelected: boolean;
-  inboundSelected: boolean;
-  selectedOutboundDate: string;
-  selectedInboundDate: string;
-  onSelectOutboundDate: (date: string) => void;
-  onSelectInboundDate: (date: string) => void;
-  onToggleOutbound: () => void;
-  onToggleInbound: () => void;
-  onResetFlights: () => void;
+export function SideBySideView({ original, ethical }: { original: React.ReactNode; ethical: React.ReactNode }) {
+  return (
+    <div className="@container mx-auto w-full max-w-[1700px] space-y-4">
+      <div className="rounded-xl bg-blue-900 p-4 text-white">
+        <h2 className="font-bold">Side-by-Side Comparison</h2>
+        <p className="mt-1 text-sm text-blue-100">Both designs follow the same booking step. Seat, bag and extras choices are separate.</p>
+        <div className="mt-2 flex flex-wrap gap-x-4 text-sm font-semibold @min-[44rem]:hidden">
+          <a className="inline-flex min-h-11 items-center underline" href="#compare-original">Jump to Original</a>
+          <a className="inline-flex min-h-11 items-center underline" href="#compare-ethical">Jump to Ethical</a>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 items-start gap-4 @min-[44rem]:grid-cols-2">
+        <section id="compare-original" aria-label="Original Prototype" className="min-w-0 scroll-mt-48 space-y-3 rounded-2xl border-2 border-rose-300 bg-slate-100 p-2 sm:p-3">
+          <h3 className="flex items-center gap-2 rounded-xl bg-rose-900 p-3 text-sm font-bold text-white">
+            <AlertTriangle className="size-4 shrink-0 text-rose-300" aria-hidden="true" />
+            Original Prototype
+          </h3>
+          {original}
+        </section>
+        <section id="compare-ethical" aria-label="Ethical Redesign" className="min-w-0 scroll-mt-48 space-y-3 rounded-2xl border-2 border-emerald-400 bg-slate-100 p-2 sm:p-3">
+          <h3 className="flex items-center gap-2 rounded-xl bg-emerald-950 p-3 text-sm font-bold text-white">
+            <ShieldCheck className="size-4 shrink-0 text-emerald-300" aria-hidden="true" />
+            Ethical Redesign
+          </h3>
+          {ethical}
+        </section>
+      </div>
+    </div>
+  );
+}
+
+interface BookingAddOnViewProps {
+  step: Exclude<BookingStep, 'flights'>;
+  viewMode: ViewMode;
   selectedTier: FareTierId;
-  onSelectTier: (tier: FareTierId) => void;
-  showUpsellModal: boolean;
-  onOpenUpsellModal: () => void;
-  onCloseUpsellModal: () => void;
-  onConfirmBasic: () => void;
-  onSwitchToRegular: () => void;
-  onProceedToNextStep: () => void;
+  bookings: Record<PrototypeMode, BookingChoices>;
+  onChangeBooking: (mode: PrototypeMode, changes: Partial<BookingChoices>) => void;
+  onStepChange: (step: BookingStep) => void;
   showAuditMarkers: boolean;
   onOpenAuditItem: (id: string) => void;
 }
 
-export const SideBySideView: React.FC<SideBySideViewProps> = ({
-  outboundFlight,
-  inboundFlight,
-  outboundSelected,
-  inboundSelected,
-  selectedOutboundDate,
-  selectedInboundDate,
-  onSelectOutboundDate,
-  onSelectInboundDate,
-  onToggleOutbound,
-  onToggleInbound,
-  onResetFlights,
-  selectedTier,
-  onSelectTier,
-  showUpsellModal,
-  onOpenUpsellModal,
-  onCloseUpsellModal,
-  onConfirmBasic,
-  onSwitchToRegular,
-  onProceedToNextStep,
-  showAuditMarkers,
-  onOpenAuditItem,
-}) => {
-  return (
-    <div className="w-full max-w-[1700px] mx-auto px-2 sm:px-4 py-4 space-y-4">
-      {/* Side-by-Side Context Banner */}
-      <div className="bg-blue-900 text-white rounded-xl p-3 sm:p-4 flex flex-wrap items-center justify-between gap-3 shadow-sm">
-        <div className="flex items-center gap-2">
-          <span className="font-bold text-sm sm:text-base">
-            Side-by-Side Dual Comparison Mode
-          </span>
-          <span className="text-xs text-blue-200">
-            Compare reconstructed fare choices; behavioural effects remain untested
-          </span>
-        </div>
+export function BookingAddOnView({
+  step, viewMode, selectedTier, bookings, onChangeBooking, onStepChange, showAuditMarkers, onOpenAuditItem,
+}: BookingAddOnViewProps) {
+  const renderStep = (mode: PrototypeMode) => {
+    const isDarkPattern = mode === 'dark-pattern';
+    const common = { isDarkPattern, showAuditMarkers, onOpenAuditItem };
+    const inComparison = viewMode === 'side-by-side';
+    const booking = bookings[mode];
+    const update = (changes: Partial<BookingChoices>) => onChangeBooking(mode, changes);
 
-        <div className="flex items-center gap-3 text-xs">
-          <span className="flex items-center gap-1.5 text-rose-300">
-            <span className="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
-            Left: Original Prototype
-          </span>
-          <span className="flex items-center gap-1.5 text-emerald-300">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-            Right: Existing B Prototype
-          </span>
-        </div>
-      </div>
+    switch (step) {
+      case 'seats':
+        return <SeatsStep
+          {...common}
+          key={mode}
+          inComparison={inComparison}
+          selectedSeat={booking.selectedSeat}
+          onSelectSeat={selectedSeat => update({ selectedSeat })}
+          fastTrackSelected={booking.fastTrackSelected}
+          onToggleFastTrack={fastTrackSelected => update({ fastTrackSelected })}
+          onBack={() => onStepChange('flights')}
+          onNext={() => onStepChange('bags')}
+        />;
+      case 'bags':
+        return <BagsStep
+          {...common}
+          isSplitView={inComparison}
+          additionalLuggage={booking.additionalLuggage}
+          onSetAdditionalLuggage={additionalLuggage => update({ additionalLuggage })}
+          onBack={() => onStepChange('seats')}
+          onNext={() => onStepChange('extras')}
+        />;
+      case 'extras': {
+        const { fastTrackIncluded, total } = getBookingPricing(FARE_TIERS[selectedTier], booking, isDarkPattern);
+        return <ExtrasStep
+          {...common}
+          inComparison={inComparison}
+          fastTrackSelected={booking.fastTrackSelected}
+          fastTrackIncluded={fastTrackIncluded}
+          onToggleFastTrack={fastTrackSelected => update({ fastTrackSelected })}
+          insurancePlan={booking.insurancePlan}
+          onSelectInsurance={insurancePlan => update({ insurancePlan })}
+          prepaidCredit={booking.prepaidCredit}
+          onSelectPrepaidCredit={prepaidCredit => update({ prepaidCredit })}
+          selectedParking={booking.selectedParking}
+          onSelectParking={selectedParking => update({ selectedParking })}
+          selectedCarHire={booking.selectedCarHire}
+          onSelectCarHire={selectedCarHire => update({ selectedCarHire })}
+          bookingTotal={total}
+          onBack={() => onStepChange('bags')}
+          onNext={() => onStepChange('review')}
+        />;
+      }
+      case 'review': {
+        const { chargeFastTrack } = getBookingPricing(FARE_TIERS[selectedTier], booking, isDarkPattern);
+        return <ReviewStep
+          {...common}
+          key={mode}
+          selectedTier={selectedTier}
+          selectedSeat={booking.selectedSeat}
+          additionalLuggage={booking.additionalLuggage}
+          fastTrackSelected={chargeFastTrack}
+          insurancePlan={booking.insurancePlan}
+          onSelectInsurance={insurancePlan => update({ insurancePlan })}
+          prepaidCredit={booking.prepaidCredit}
+          selectedParking={booking.selectedParking}
+          selectedCarHire={booking.selectedCarHire}
+          newsletterOptIn={booking.newsletterOptIn}
+          onToggleNewsletter={() => update({ newsletterOptIn: !booking.newsletterOptIn })}
+          onBack={() => onStepChange('extras')}
+        />;
+      }
+    }
+  };
 
-      {/* 2-Column Split Grid */}
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 items-start">
-        {/* ========================================================================= */}
-        {/* LEFT COLUMN: ORIGINAL DARK PATTERN UI                                     */}
-        {/* ========================================================================= */}
-        <div className="bg-slate-100 rounded-2xl p-3 sm:p-4 border-2 border-rose-300 shadow-sm space-y-4">
-          <div className="bg-rose-900 text-white p-3 rounded-xl flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <AlertTriangle className="w-4 h-4 text-rose-400" />
-              <span className="font-bold text-sm">Original Fare-choice Prototype</span>
-            </div>
-            <span className="text-[11px] bg-rose-800 text-rose-200 px-2.5 py-0.5 rounded-full">
-              Price Framing • Upsell Candidates
-            </span>
-          </div>
-
-          {/* Flight selection in dark mode */}
-          <FlightSelection
-            outboundFlight={outboundFlight}
-            inboundFlight={inboundFlight}
-            outboundSelected={outboundSelected}
-            inboundSelected={inboundSelected}
-            selectedOutboundDate={selectedOutboundDate}
-            selectedInboundDate={selectedInboundDate}
-            onSelectOutboundDate={onSelectOutboundDate}
-            onSelectInboundDate={onSelectInboundDate}
-            onToggleOutbound={onToggleOutbound}
-            onToggleInbound={onToggleInbound}
-            onResetFlights={onResetFlights}
-            isDarkPattern={true}
-            showAuditMarkers={showAuditMarkers}
-            onOpenAuditItem={onOpenAuditItem}
-          />
-
-          {/* Fare selection in dark mode */}
-          <FareSelectionDark
-            onSelectTier={onSelectTier}
-            selectedTier={selectedTier}
-            showUpsellModal={showUpsellModal}
-            onOpenUpsellModal={onOpenUpsellModal}
-            onCloseUpsellModal={onCloseUpsellModal}
-            onConfirmBasic={onConfirmBasic}
-            onSwitchToRegular={onSwitchToRegular}
-            showAuditMarkers={showAuditMarkers}
-            onOpenAuditItem={onOpenAuditItem}
-            isSplitView={true}
-          />
-        </div>
-
-        {/* ========================================================================= */}
-        {/* RIGHT COLUMN: ETHICAL REDESIGN                                            */}
-        {/* ========================================================================= */}
-        <div className="bg-slate-100 rounded-2xl p-3 sm:p-4 border-2 border-emerald-400 shadow-sm space-y-4">
-          <div className="bg-emerald-950 text-white p-3 rounded-xl flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span className="font-bold text-sm">Existing Ethical Redesign (Untested)</span>
-            </div>
-            <span className="text-[11px] bg-emerald-800 text-emerald-100 px-2.5 py-0.5 rounded-full">
-              Whole-trip Prices • Direct Selection
-            </span>
-          </div>
-
-          {/* Flight selection in ethical mode */}
-          <FlightSelection
-            outboundFlight={outboundFlight}
-            inboundFlight={inboundFlight}
-            outboundSelected={outboundSelected}
-            inboundSelected={inboundSelected}
-            selectedOutboundDate={selectedOutboundDate}
-            selectedInboundDate={selectedInboundDate}
-            onSelectOutboundDate={onSelectOutboundDate}
-            onSelectInboundDate={onSelectInboundDate}
-            onToggleOutbound={onToggleOutbound}
-            onToggleInbound={onToggleInbound}
-            onResetFlights={onResetFlights}
-            isDarkPattern={false}
-            showAuditMarkers={showAuditMarkers}
-            onOpenAuditItem={onOpenAuditItem}
-          />
-
-          {/* Fare selection in ethical mode */}
-          <FareSelectionEthical
-            onSelectTier={onSelectTier}
-            selectedTier={selectedTier}
-            onProceedToNextStep={onProceedToNextStep}
-            showAuditMarkers={showAuditMarkers}
-            onOpenAuditItem={onOpenAuditItem}
-            isSplitView={true}
-          />
-        </div>
-      </div>
-    </div>
-  );
-};
+  return viewMode === 'side-by-side'
+    ? <SideBySideView original={renderStep('dark-pattern')} ethical={renderStep('ethical')} />
+    : renderStep(viewMode);
+}

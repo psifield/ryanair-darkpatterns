@@ -4,6 +4,7 @@ import { AuditMarker } from './AuditMarker';
 
 interface FastTrackModalProps {
   isOpen: boolean;
+  inComparison?: boolean;
   onClose: () => void;
   onAddFastTrack: () => void;
   onSkip: () => void;
@@ -14,6 +15,7 @@ interface FastTrackModalProps {
 
 export const FastTrackModal: React.FC<FastTrackModalProps> = ({
   isOpen,
+  inComparison = false,
   onClose,
   onAddFastTrack,
   onSkip,
@@ -26,11 +28,11 @@ export const FastTrackModal: React.FC<FastTrackModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-xs overflow-y-auto">
-      <div className="bg-white max-w-lg w-full rounded-2xl overflow-hidden shadow-2xl border border-gray-200 my-auto animate-in fade-in zoom-in-95 duration-150">
+    <div className={`inset-0 z-50 flex justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-xs ${inComparison ? 'absolute items-start rounded-xl' : 'fixed items-center overflow-y-auto'}`}>
+      <div role="dialog" aria-label="Security Fast Track Interstitial" className={`bg-white max-w-lg w-full rounded-2xl shadow-2xl border border-gray-200 animate-in fade-in zoom-in-95 duration-150 ${inComparison ? 'sticky top-44 max-h-[calc(100dvh-12rem)] overflow-y-auto' : 'my-auto overflow-hidden'}`}>
         {/* Modal Top Bar */}
-        <div className="bg-[#073590] text-white px-4 py-2.5 flex items-center justify-between text-xs font-semibold relative">
-          <div className="flex items-center gap-2">
+        <div className="bg-[#073590] text-white px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs font-semibold relative">
+          <div className="flex flex-wrap items-center gap-2">
             {showAuditMarkers && isDarkPattern && (
               <button
                 type="button"

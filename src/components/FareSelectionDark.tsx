@@ -14,7 +14,6 @@ interface FareSelectionDarkProps {
   onSwitchToRegular: () => void;
   showAuditMarkers?: boolean;
   onOpenAuditItem?: (id: string) => void;
-  isSplitView?: boolean;
 }
 
 export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
@@ -27,14 +26,13 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
   onSwitchToRegular,
   showAuditMarkers = false,
   onOpenAuditItem,
-  isSplitView = false,
 }) => {
   return (
-    <section className="pt-2" data-purpose="fare-selection-matrix">
+    <section className="@container pt-2" data-purpose="fare-selection-matrix">
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between pb-4 gap-3">
+      <div className="flex flex-col @min-[54rem]:flex-row @min-[54rem]:items-center justify-between pb-4 gap-3">
         <div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <h2 className="text-xl sm:text-2xl font-black text-[#073590]">Choose your fare</h2>
             {showAuditMarkers && (
               <span className="bg-rose-100 text-rose-800 text-[11px] font-bold px-2 py-0.5 rounded-full border border-rose-200">
@@ -81,9 +79,9 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
         </div>
       </div>
 
-      {/* Fit-to-width table container without forced min-width */}
-      <div className={`overflow-x-auto pb-4 ${showAuditMarkers ? 'pt-8' : 'pt-4'}`}>
-        <div className="w-full min-w-0 bg-white rounded-lg border border-gray-200 shadow-xs">
+      {/* Keep fare columns readable when the comparison pane is narrow. */}
+      <div className={`overflow-x-auto pb-4 ${showAuditMarkers ? 'pt-8' : 'pt-4'}`} tabIndex={0} role="region" aria-label="Original fare comparison">
+        <div className="w-full min-w-[32rem] bg-white rounded-lg border border-gray-200 shadow-xs">
           {/* Table Header: Columns for Features + 3 Bundles */}
           <div className="grid grid-cols-4 border-b border-gray-200">
             {/* Left Header Blank / Features Title */}

@@ -1,5 +1,7 @@
-export type ViewMode = 'dark-pattern' | 'ethical' | 'side-by-side';
+export type PrototypeMode = 'dark-pattern' | 'ethical';
+export type ViewMode = PrototypeMode | 'side-by-side';
 export type DeviceView = 'desktop' | 'mobile';
+export type BookingStep = 'flights' | 'seats' | 'bags' | 'extras' | 'review';
 
 export interface FlightLeg {
   id: string;
@@ -73,7 +75,7 @@ export interface BookingState {
   inboundDate: string;
   selectedTier: FareTierId;
   showUpsellModal: boolean;
-  step: 'flights' | 'seats' | 'bags' | 'extras' | 'review';
+  step: BookingStep;
   selectedSeat?: string;
   additionalLuggage?: number;
   newsletterOptIn: boolean;
