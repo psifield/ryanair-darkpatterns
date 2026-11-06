@@ -33,7 +33,7 @@ export const ComparisonBanner: React.FC<ComparisonBannerProps> = ({
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
             <span className="font-bold text-xs sm:text-sm tracking-tight text-slate-100">
-              Ryanair UX Audit & Comparison
+              Fare-choice audit & comparison
             </span>
           </div>
 

@@ -1,6 +1,6 @@
 {
-  "name": "Ryanair UX Audit: Dark Patterns vs Ethical UI",
-  "description": "Interactive flight booking comparison exploring Ryanair's aggressive dark patterns alongside an ethical, transparent redesign with side-by-side analysis.",
+  "name": "Flight Fare Prototype",
+  "description": "Compare fares for a simulated return flight in a class prototype.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

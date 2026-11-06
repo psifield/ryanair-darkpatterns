@@ -55,6 +55,7 @@ export function BookingAddOnView({
   step, viewMode, selectedTier, bookings, onChangeBooking, onStepChange, showAuditMarkers, onOpenAuditItem,
 }: BookingAddOnViewProps) {
   const [extrasSubStep, setExtrasSubStep] = useState<'all' | 'airport' | 'transport'>('airport');
+  const fare = FARE_TIERS[selectedTier];
 
   const renderStep = (mode: PrototypeMode) => {
     const isDarkPattern = mode === 'dark-pattern';
@@ -68,6 +69,7 @@ export function BookingAddOnView({
         return <SeatsStep
           {...common}
           key={mode}
+          fare={fare}
           inComparison={inComparison}
           selectedSeat={booking.selectedSeat}
           onSelectSeat={selectedSeat => update({ selectedSeat })}
@@ -79,6 +81,7 @@ export function BookingAddOnView({
       case 'bags':
         return <BagsStep
           {...common}
+          fare={fare}
           isSplitView={inComparison}
           additionalLuggage={booking.additionalLuggage}
           onSetAdditionalLuggage={additionalLuggage => update({ additionalLuggage })}
@@ -86,7 +89,7 @@ export function BookingAddOnView({
           onNext={() => onStepChange('extras')}
         />;
       case 'extras': {
-        const { fastTrackIncluded, total } = getBookingPricing(FARE_TIERS[selectedTier], booking, isDarkPattern);
+        const { fastTrackIncluded, total } = getBookingPricing(fare, booking, isDarkPattern, 'extras');
         return <ExtrasStep
           {...common}
           inComparison={inComparison}
@@ -108,25 +111,16 @@ export function BookingAddOnView({
           onNext={() => onStepChange('review')}
         />;
       }
-      case 'review': {
-        const { chargeFastTrack } = getBookingPricing(FARE_TIERS[selectedTier], booking, isDarkPattern);
+      case 'review':
         return <ReviewStep
           {...common}
           key={mode}
-          selectedTier={selectedTier}
-          selectedSeat={booking.selectedSeat}
-          additionalLuggage={booking.additionalLuggage}
-          fastTrackSelected={chargeFastTrack}
-          insurancePlan={booking.insurancePlan}
+          fare={fare}
+          booking={booking}
           onSelectInsurance={insurancePlan => update({ insurancePlan })}
-          prepaidCredit={booking.prepaidCredit}
-          selectedParking={booking.selectedParking}
-          selectedCarHire={booking.selectedCarHire}
-          newsletterOptIn={booking.newsletterOptIn}
           onToggleNewsletter={() => update({ newsletterOptIn: !booking.newsletterOptIn })}
           onBack={() => onStepChange('extras')}
         />;
-      }
     }
   };
 

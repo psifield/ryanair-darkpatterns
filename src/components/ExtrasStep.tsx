@@ -6,7 +6,7 @@ import {
   HelpCircle,
   Check,
   Plane,
-  X,
+  PlaneTakeoff,
   CreditCard,
   Heart,
   Briefcase,
@@ -18,7 +18,6 @@ import {
   ChevronUp,
   ArrowRight,
   ArrowLeft,
-  Image as ImageIcon,
   CheckCircle2,
   AlertTriangle,
   Car,
@@ -32,6 +31,8 @@ import {
 } from 'lucide-react';
 import { AuditMarker } from './AuditMarker';
 import { EthicalExtrasStep } from './EthicalExtrasStep';
+import { AIRLINE, OUTBOUND_FLIGHT } from '../data/mockData';
+import { INSURANCE_PLANS } from '../data/bookingExtras';
 import type { InsurancePlan, ParkingOption, CarHireOption } from '../data/bookingExtras';
 
 export type { InsurancePlan, ParkingOption, CarHireOption } from '../data/bookingExtras';
@@ -44,7 +45,7 @@ export interface ExtrasStepProps {
   fastTrackSelected: boolean;
   fastTrackIncluded?: boolean;
   onToggleFastTrack: (enabled: boolean) => void;
-  insurancePlan: InsurancePlan;
+  insurancePlan: InsurancePlan | null;
   onSelectInsurance: (plan: InsurancePlan) => void;
   prepaidCredit: number; // in £, e.g. 0, 5, 10, 15, 20
   onSelectPrepaidCredit: (amount: number) => void;
@@ -89,8 +90,6 @@ const OriginalExtrasStep: React.FC<ExtrasStepProps> = ({
   const setActiveSubStep = externalSetSubStep ?? setInternalSubStep;
   const [passengerAccordionOpen, setPassengerAccordionOpen] = useState(false);
   const [showPrepaidSelector, setShowPrepaidSelector] = useState(false);
-  const [activeCaptureModal, setActiveCaptureModal] = useState<string | null>(null);
-  const [viewOriginalScreenshots, setViewOriginalScreenshots] = useState(false);
 
   return (
     <div className="@container relative max-w-5xl mx-auto space-y-6 pt-2 pb-12">
@@ -101,11 +100,11 @@ const OriginalExtrasStep: React.FC<ExtrasStepProps> = ({
             The best deals for your trip
           </h2>
           <p className="text-xs text-gray-500 mt-1">
-            Airport services, travel protection, and on-board credit for flight FR 286
+            Airport services, travel protection, and on-board credit for flight {OUTBOUND_FLIGHT.flightNumber}
           </p>
         </div>
 
-        {/* Ryanair Sub-Step Indicator & Capture Gallery Toggle */}
+        {/* Extras sub-step indicator */}
         <div className="flex flex-wrap items-center gap-3">
           <div className="flex flex-wrap items-center gap-1.5 text-xs font-bold bg-gray-50 border border-gray-200 p-1 rounded-full">
             <button
@@ -156,85 +155,8 @@ const OriginalExtrasStep: React.FC<ExtrasStepProps> = ({
             </button>
           </div>
 
-          <button
-            onClick={() => setViewOriginalScreenshots(!viewOriginalScreenshots)}
-            className="flex items-center gap-1.5 text-xs font-bold text-[#073590] bg-blue-50 hover:bg-blue-100 border border-blue-200 px-3 py-2 rounded-lg transition cursor-pointer"
-          >
-            <ImageIcon className="w-4 h-4 text-[#073590]" />
-            <span>{viewOriginalScreenshots ? 'Hide Real-Site Captures' : 'View Real Captures'}</span>
-          </button>
         </div>
       </div>
-
-      {/* Real-Site Screenshots Showcase Banner */}
-      {viewOriginalScreenshots && (
-        <div className="bg-slate-900 text-white rounded-2xl p-5 border border-slate-700 space-y-4 animate-in fade-in duration-200 shadow-xl">
-          <div className="flex items-center justify-between border-b border-slate-700 pb-3">
-            <div>
-              <h3 className="text-sm font-black text-[#f1c40f] flex items-center gap-2">
-                <ImageIcon className="w-4 h-4" />
-                <span>Original Ryanair Real-Site Captured Extras Screens</span>
-              </h3>
-              <p className="text-[11px] text-slate-300 mt-0.5">
-                Exact reference screenshots provided from the Ryanair booking flow
-              </p>
-            </div>
-            <button
-              onClick={() => setViewOriginalScreenshots(false)}
-              className="text-slate-400 hover:text-white p-1 rounded"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-
-          <div className="grid grid-cols-1 @min-[48rem]:grid-cols-3 gap-4">
-            <div className="bg-slate-800 rounded-xl p-3 border border-slate-700 space-y-2">
-              <span className="text-xs font-bold text-amber-300 block">1. Security Fast Track</span>
-              <div
-                onClick={() => setActiveCaptureModal('/assets/aistudio/image_16909bab.png')}
-                className="cursor-pointer rounded-lg overflow-hidden border border-slate-600 hover:border-amber-400 transition max-h-44 bg-black flex items-center justify-center"
-              >
-                <img
-                  src="/assets/aistudio/image_16909bab.png"
-                  alt="Security Fast Track Real Capture"
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-              <p className="text-[10px] text-slate-400">image_16909bab.png</p>
-            </div>
-
-            <div className="bg-slate-800 rounded-xl p-3 border border-slate-700 space-y-2">
-              <span className="text-xs font-bold text-amber-300 block">2. Travel Insurance Matrix</span>
-              <div
-                onClick={() => setActiveCaptureModal('/assets/aistudio/image_fcdb3a57.png')}
-                className="cursor-pointer rounded-lg overflow-hidden border border-slate-600 hover:border-amber-400 transition max-h-44 bg-black flex items-center justify-center"
-              >
-                <img
-                  src="/assets/aistudio/image_fcdb3a57.png"
-                  alt="Travel Insurance Real Capture"
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-              <p className="text-[10px] text-slate-400">image_fcdb3a57.png</p>
-            </div>
-
-            <div className="bg-slate-800 rounded-xl p-3 border border-slate-700 space-y-2">
-              <span className="text-xs font-bold text-amber-300 block">3. Pre-paid Credit Card</span>
-              <div
-                onClick={() => setActiveCaptureModal('/assets/aistudio/image_6967650a.png')}
-                className="cursor-pointer rounded-lg overflow-hidden border border-slate-600 hover:border-amber-400 transition max-h-44 bg-black flex items-center justify-center"
-              >
-                <img
-                  src="/assets/aistudio/image_6967650a.png"
-                  alt="Pre-paid Credit Real Capture"
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-              <p className="text-[10px] text-slate-400">image_6967650a.png</p>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* ========================================================================= */}
       {/* SUB-STEP 1: AIRPORT & TRIP ANCILLARIES */}
@@ -270,13 +192,6 @@ const OriginalExtrasStep: React.FC<ExtrasStepProps> = ({
               </div>
             </div>
 
-            <button
-              onClick={() => setActiveCaptureModal('/assets/aistudio/image_16909bab.png')}
-              className="hidden sm:flex items-center gap-1 text-xs font-semibold text-[#073590] hover:underline shrink-0 cursor-pointer"
-            >
-              <HelpCircle className="w-3.5 h-3.5 text-[#073590]" />
-              <span>Frequently Asked Questions</span>
-            </button>
           </div>
         </div>
 
@@ -428,13 +343,6 @@ const OriginalExtrasStep: React.FC<ExtrasStepProps> = ({
               </div>
             </div>
 
-            <button
-              onClick={() => setActiveCaptureModal('/assets/aistudio/image_fcdb3a57.png')}
-              className="hidden sm:flex items-center gap-1 text-xs font-semibold text-[#073590] hover:underline shrink-0 cursor-pointer"
-            >
-              <HelpCircle className="w-3.5 h-3.5 text-[#073590]" />
-              <span>Frequently Asked Questions</span>
-            </button>
           </div>
 
           <div className="border-t border-dashed border-gray-200 mx-5 sm:mx-6" />
@@ -452,10 +360,10 @@ const OriginalExtrasStep: React.FC<ExtrasStepProps> = ({
                   {/* Header / Brand Area */}
                   <div className="h-[76px] flex flex-col justify-center px-1">
                     <div className="flex items-center gap-2">
-                      <span className="font-black text-xl text-amber-500 tracking-tighter">✕✕</span>
-                      <span className="font-black text-base tracking-widest text-gray-900">XCOVER</span>
+                      <Shield className="size-5 text-amber-600" aria-hidden="true" />
+                      <span className="font-black text-base text-gray-900">Travel cover</span>
                     </div>
-                    <span className="text-[10px] text-gray-400 font-medium">Cover underwritten by XCover</span>
+                    <span className="text-[10px] text-gray-500 font-medium">Illustrative policies</span>
                   </div>
 
                   {/* Feature Rows */}
@@ -747,6 +655,11 @@ const OriginalExtrasStep: React.FC<ExtrasStepProps> = ({
             </div>
 
             {/* Decline Insurance Option */}
+            {insurancePlan === 'comprehensive' && (
+              <p className="text-sm font-semibold text-gray-800">
+                Comprehensive cover selected · £{INSURANCE_PLANS.comprehensive.price.toFixed(2)}
+              </p>
+            )}
             <div className="pt-2 text-right relative flex items-center justify-end">
               {showAuditMarkers && isDarkPattern && (
                 <AuditMarker
@@ -760,6 +673,7 @@ const OriginalExtrasStep: React.FC<ExtrasStepProps> = ({
               )}
               <button
                 onClick={() => onSelectInsurance('none')}
+                aria-pressed={insurancePlan === 'none'}
                 className="text-xs font-bold text-gray-500 hover:text-gray-800 hover:underline cursor-pointer"
               >
                 No thanks, I will travel without insurance
@@ -787,27 +701,19 @@ const OriginalExtrasStep: React.FC<ExtrasStepProps> = ({
             </div>
           </div>
 
-          <button
-            onClick={() => setActiveCaptureModal('/assets/aistudio/image_6967650a.png')}
-            className="hidden sm:flex items-center gap-1 text-xs font-semibold text-[#073590] hover:underline shrink-0 cursor-pointer"
-          >
-            <HelpCircle className="w-3.5 h-3.5 text-[#073590]" />
-            <span>How does it work?</span>
-          </button>
         </div>
 
         <div className="border-t border-dashed border-gray-200 mx-5 sm:mx-6" />
 
         {/* Card Body */}
         <div className="p-5 sm:p-6 grid grid-cols-1 @min-[48rem]:grid-cols-12 gap-6 items-center">
-          {/* Attendant Photo Column */}
-          <div className="@min-[48rem]:col-span-5">
-            <div className="rounded-xl overflow-hidden border border-gray-200 bg-gray-50 shadow-xs max-w-sm mx-auto">
-              <img
-                src="/assets/aistudio/image_6967650a.png"
-                alt="Ryanair flight attendant presenting inflight menu"
-                className="w-full h-44 object-cover object-[10%_50%]"
-              />
+          <div className="flex min-h-44 items-center justify-center rounded-xl border border-blue-100 bg-blue-50 p-5 @min-[48rem]:col-span-5">
+            <div className="w-full max-w-56 space-y-3 rounded-lg bg-[#073590] p-4 text-white shadow-sm">
+              <PlaneTakeoff className="size-6 text-[#f1c40f]" aria-hidden="true" />
+              <div>
+                <p className="text-sm font-bold">{AIRLINE.name}</p>
+                <p className="text-xs text-blue-100">Inflight credit</p>
+              </div>
             </div>
           </div>
 
@@ -835,7 +741,7 @@ const OriginalExtrasStep: React.FC<ExtrasStepProps> = ({
             <div className="p-4 rounded-xl border border-gray-200 bg-gray-50/70 flex flex-col @min-[48rem]:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-8 bg-[#073590] rounded-md shadow-xs flex items-center justify-center text-[#f1c40f] font-black text-xs">
-                  RYN
+                  {AIRLINE.code}
                 </div>
                 <div>
                   <span className="text-xs font-black text-blue-900 block">+ 10% more credit</span>
@@ -1261,7 +1167,7 @@ const OriginalExtrasStep: React.FC<ExtrasStepProps> = ({
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">
-                      Supplier: Hertz
+                      Airport rental desk
                     </span>
                     <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
                       Economy
@@ -1341,7 +1247,7 @@ const OriginalExtrasStep: React.FC<ExtrasStepProps> = ({
                 <div className="space-y-3 pt-1">
                   <div className="flex items-center justify-between">
                     <span className="text-[11px] font-black text-amber-900 uppercase tracking-wider">
-                      Supplier: Sixt
+                      Airport rental desk
                     </span>
                     <span className="text-[11px] font-black text-amber-900 bg-amber-100 px-2 py-0.5 rounded">
                       Automatic SUV
@@ -1404,7 +1310,7 @@ const OriginalExtrasStep: React.FC<ExtrasStepProps> = ({
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">
-                      Supplier: Green Motion
+                      Airport rental desk
                     </span>
                     <span className="text-[11px] font-bold text-blue-800 bg-blue-50 px-2 py-0.5 rounded">
                       Family Estate
@@ -1514,30 +1420,6 @@ const OriginalExtrasStep: React.FC<ExtrasStepProps> = ({
         </div>
       </div>
 
-      {/* Modal for viewing original captures in full detail */}
-      {activeCaptureModal && (
-        <div className={`inset-0 z-50 flex justify-center p-4 bg-black/80 backdrop-blur-xs ${inComparison ? 'absolute items-start rounded-xl' : 'fixed items-center'}`}>
-          <div role="dialog" aria-label="Original extras capture" className={`bg-slate-900 border border-slate-700 rounded-2xl max-w-4xl w-full p-4 space-y-3 shadow-2xl ${inComparison ? 'sticky top-44 max-h-[calc(100dvh-12rem)] overflow-y-auto' : 'overflow-hidden'}`}>
-            <div className="flex items-center justify-between border-b border-slate-700 pb-2">
-              <span className="text-xs font-bold text-white font-mono break-all">{activeCaptureModal}</span>
-              <button
-                onClick={() => setActiveCaptureModal(null)}
-                className="text-white hover:text-amber-400 p-1"
-                aria-label="Close capture"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-            <div className="max-h-[75vh] overflow-auto rounded-lg bg-black flex items-center justify-center">
-              <img
-                src={activeCaptureModal}
-                alt="Ryanair Real Capture"
-                className="w-full h-auto object-contain"
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

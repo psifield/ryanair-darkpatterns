@@ -7,6 +7,7 @@ interface FareSelectionEthicalProps {
   onSelectTier: (tier: FareTierId) => void;
   selectedTier: FareTierId;
   onProceedToNextStep: () => void;
+  continueLabel?: string;
   showAuditMarkers?: boolean;
   onOpenAuditItem?: (id: string) => void;
 }
@@ -44,7 +45,7 @@ const comparison: FareFeature[] = [
 const nextButton = 'inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#073590] px-4 py-2 text-sm font-semibold text-white hover:bg-[#052973] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#073590]';
 
 export function FareSelectionEthical({
-  onSelectTier, selectedTier, onProceedToNextStep,
+  onSelectTier, selectedTier, onProceedToNextStep, continueLabel = 'Continue to seats',
 }: FareSelectionEthicalProps) {
   const headingId = useId();
   const selectedFare = FARE_TIERS[selectedTier];
@@ -146,7 +147,7 @@ export function FareSelectionEthical({
           <p className="text-base font-bold tabular-nums text-slate-900">{selectedFare.name} · £{selectedFare.totalPrice.toFixed(2)}</p>
         </div>
         <button type="button" onClick={onProceedToNextStep} className={nextButton}>
-          Continue to seats <ArrowRight className="size-4 shrink-0" aria-hidden="true" />
+          {continueLabel} <ArrowRight className="size-4 shrink-0" aria-hidden="true" />
         </button>
       </div>
     </section>

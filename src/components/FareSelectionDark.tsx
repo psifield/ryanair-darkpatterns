@@ -80,7 +80,7 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
       </div>
 
       {/* Keep fare columns readable when the comparison pane is narrow. */}
-      <div className={`overflow-x-auto pb-4 ${showAuditMarkers ? 'pt-8' : 'pt-4'}`} tabIndex={0} role="region" aria-label="Original fare comparison">
+      <div className={`overflow-x-auto pb-4 ${showAuditMarkers ? 'pt-8' : 'pt-4'}`} tabIndex={0} role="region" aria-label="Fare comparison">
         <div className="w-full min-w-[32rem] bg-white rounded-lg border border-gray-200 shadow-xs">
           {/* Table Header: Columns for Features + 3 Bundles */}
           <div className="grid grid-cols-4 border-b border-gray-200">

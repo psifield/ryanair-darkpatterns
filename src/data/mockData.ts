@@ -1,8 +1,14 @@
 import { FlightLeg, FareTier, DarkPatternAnnotation } from '../types/booking';
 
+export const AIRLINE = {
+  name: 'Alderwake Air',
+  portal: 'Alderwake Portal',
+  code: 'ALDW',
+} as const;
+
 export const OUTBOUND_FLIGHT: FlightLeg = {
   id: 'outbound-1',
-  flightNumber: 'FR 286',
+  flightNumber: `${AIRLINE.code} 286`,
   departureAirport: 'London Stansted',
   departureCode: 'STN',
   arrivalAirport: 'Palanga',
@@ -25,7 +31,7 @@ export const OUTBOUND_FLIGHT: FlightLeg = {
 
 export const INBOUND_FLIGHT: FlightLeg = {
   id: 'inbound-1',
-  flightNumber: 'FR 285',
+  flightNumber: `${AIRLINE.code} 285`,
   departureAirport: 'Palanga',
   departureCode: 'PLQ',
   arrivalAirport: 'London Stansted',

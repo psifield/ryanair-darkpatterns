@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { AlertTriangle, Check, ShieldCheck, ArrowRight, ArrowLeft, Zap } from 'lucide-react';
 import { AuditMarker } from './AuditMarker';
 import { FastTrackModal } from './FastTrackModal';
+import { OUTBOUND_FLIGHT } from '../data/mockData';
+import { getSeatPrice, RANDOM_SEAT } from '../data/bookingExtras';
+import type { FareTier } from '../types/booking';
+
+const seats = ['15A', '15B', '15C', '16D', '16E', '16F', '18A', '18B', '18C'];
 
 interface SeatsStepProps {
   isDarkPattern: boolean;
@@ -10,6 +15,7 @@ interface SeatsStepProps {
   onOpenAuditItem?: (id: string) => void;
   onBack: () => void;
   onNext: () => void;
+  fare: FareTier;
   selectedSeat: string;
   onSelectSeat: (seat: string) => void;
   fastTrackSelected?: boolean;
@@ -23,6 +29,7 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
   onOpenAuditItem,
   onBack,
   onNext,
+  fare,
   selectedSeat,
   onSelectSeat,
   fastTrackSelected = false,
@@ -30,12 +37,14 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
 }) => {
   const [showSeatWarning, setShowSeatWarning] = useState(false);
   const [showFastTrackModal, setShowFastTrackModal] = useState(false);
+  const suggestedSeat = fare.id === 'REGULAR' ? '18A' : '15A';
+  const suggestedSeatPrice = getSeatPrice(fare, suggestedSeat);
 
   const handleRandomSeat = () => {
     if (isDarkPattern) {
       setShowSeatWarning(true);
     } else {
-      onSelectSeat('Random (Free)');
+      onSelectSeat(RANDOM_SEAT);
       onNext();
     }
   };
@@ -55,7 +64,7 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
         <div>
           <h2 className={`${inComparison ? 'text-lg' : 'text-2xl'} font-black text-[#073590]`}>Select your seats</h2>
           <p className="text-xs text-gray-500 mt-1">
-            Flight FR 286 • London Stansted (STN) to Palanga (PLQ)
+            Flight {OUTBOUND_FLIGHT.flightNumber} • London Stansted (STN) to Palanga (PLQ)
           </p>
         </div>
 
@@ -95,31 +104,36 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
           </div>
           <p className="text-gray-700 leading-relaxed">
             Standard random seat allocation is 100% free when you check in online between 24 and 2 hours before departure.
-            You may optionally reserve a specific seat below if you have a preferred window or aisle row.
+            Choose a seat below if you prefer to reserve a specific seat.
           </p>
         </div>
       )}
 
       {/* Interactive Simplified Airplane Cabin Seat Grid */}
       <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-xs text-center space-y-4">
-        <h3 className="text-sm font-bold text-gray-800">Boeing 737-800 Cabin Layout</h3>
+        <h3 className="text-sm font-bold text-gray-800">Cabin layout</h3>
 
         <div className="max-w-xs mx-auto bg-gray-50 border border-gray-200 rounded-2xl p-4 space-y-3">
-          <div className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Rows 15–18 Standard</div>
-          {['15A', '15B', '15C', '16D', '16E', '16F'].map((seat) => (
-            <button
-              key={seat}
-              onClick={() => onSelectSeat(seat)}
-              className={`w-full py-2.5 px-3 rounded-lg text-xs font-bold transition flex items-center justify-between cursor-pointer ${
-                selectedSeat === seat
-                  ? 'bg-[#073590] text-white shadow-xs'
-                  : 'bg-white border border-gray-300 text-gray-700 hover:border-[#073590]'
-              }`}
-            >
-              <span>Seat {seat}</span>
-              <span>{selectedSeat === seat ? 'Selected ✓' : '+£8.00'}</span>
-            </button>
-          ))}
+          <div className="text-[11px] font-bold text-gray-600 uppercase tracking-wider">Rows 15–18</div>
+          {seats.map(seat => {
+            const price = getSeatPrice(fare, seat);
+            const selected = selectedSeat === seat;
+            return (
+              <button
+                key={seat}
+                aria-pressed={selected}
+                onClick={() => onSelectSeat(seat)}
+                className={`min-h-11 w-full py-2.5 px-3 rounded-lg text-xs font-bold transition flex items-center justify-between cursor-pointer ${
+                  selected
+                    ? 'bg-[#073590] text-white shadow-xs'
+                    : 'bg-white border border-gray-300 text-gray-700 hover:border-[#073590]'
+                }`}
+              >
+                <span>Seat {seat}</span>
+                <span>{selected && 'Selected · '}{price > 0 ? `+£${price.toFixed(2)}` : 'Included'}</span>
+              </button>
+            );
+          })}
         </div>
 
         {/* Free Option or Next */}
@@ -166,25 +180,27 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
               <h4 className="text-lg font-black text-gray-900">Are you sure you want to risk it?</h4>
               <p className="text-xs text-gray-600 leading-relaxed">
                 By choosing random allocation, you might be assigned a middle seat in the back of the plane.
-                Upgrade to a reserved seat for only <strong className="text-[#073590]">£8.00</strong> to travel with peace of mind.
+                {suggestedSeatPrice > 0
+                  ? <> Upgrade to a reserved seat for only <strong className="text-[#073590]">£{suggestedSeatPrice.toFixed(2)}</strong> to travel with peace of mind.</>
+                  : ' You can reserve a seat in row 18 with your Regular fare.'}
               </p>
             </div>
 
             <div className="space-y-2 pt-2">
               <button
                 onClick={() => {
-                  onSelectSeat('15A');
+                  onSelectSeat(suggestedSeat);
                   setShowSeatWarning(false);
                   setShowFastTrackModal(true);
                 }}
                 className="w-full bg-[#f1c40f] hover:bg-yellow-400 text-[#073590] font-black text-xs py-3 rounded-lg transition shadow-xs cursor-pointer"
               >
-                Choose Seat 15A for £8.00
+                Choose Seat {suggestedSeat} {suggestedSeatPrice > 0 ? `for £${suggestedSeatPrice.toFixed(2)}` : '(included)'}
               </button>
 
               <button
                 onClick={() => {
-                  onSelectSeat('Random (Free)');
+                  onSelectSeat(RANDOM_SEAT);
                   setShowSeatWarning(false);
                   setShowFastTrackModal(true);
                 }}

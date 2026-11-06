@@ -1,25 +1,18 @@
 import React, { useState } from 'react';
-import { FareTierId } from '../types/booking';
-import { FARE_TIERS } from '../data/mockData';
-import { CAR_HIRE_PRICES, CREDIT_PRICE_FACTOR, FAST_TRACK_PRICE, INSURANCE_PLANS, PARKING_PRICES } from '../data/bookingExtras';
-import type { CarHireOption, InsurancePlan, ParkingOption } from '../data/bookingExtras';
-import { ArrowLeft, CheckCircle2, ShieldCheck, AlertTriangle, Car, Key, Zap, CreditCard, Shield } from 'lucide-react';
+import type { FareTier } from '../types/booking';
+import { AIRLINE, INBOUND_FLIGHT, OUTBOUND_FLIGHT } from '../data/mockData';
+import { getBookingPricing, INSURANCE_PLANS, RANDOM_SEAT } from '../data/bookingExtras';
+import type { BookingChoices, InsurancePlan } from '../data/bookingExtras';
+import { ArrowLeft, CheckCircle2 } from 'lucide-react';
 import { AuditMarker } from './AuditMarker';
 
 interface ReviewStepProps {
   isDarkPattern: boolean;
   showAuditMarkers: boolean;
   onOpenAuditItem?: (id: string) => void;
-  selectedTier: FareTierId;
-  selectedSeat: string;
-  additionalLuggage: number;
-  fastTrackSelected?: boolean;
-  insurancePlan?: InsurancePlan;
+  fare: FareTier;
+  booking: BookingChoices;
   onSelectInsurance: (plan: InsurancePlan) => void;
-  prepaidCredit?: number;
-  selectedParking?: ParkingOption;
-  selectedCarHire?: CarHireOption;
-  newsletterOptIn: boolean;
   onToggleNewsletter: () => void;
   onBack: () => void;
 }
@@ -28,55 +21,21 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
   isDarkPattern,
   showAuditMarkers,
   onOpenAuditItem,
-  selectedTier,
-  selectedSeat,
-  additionalLuggage,
-  fastTrackSelected = false,
-  insurancePlan = 'none',
+  fare,
+  booking,
   onSelectInsurance,
-  prepaidCredit = 0,
-  selectedParking = 'none',
-  selectedCarHire = 'none',
-  newsletterOptIn,
   onToggleNewsletter,
   onBack,
 }) => {
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
-  const [originalInsuranceOptIn, setOriginalInsuranceOptIn] = useState(true);
-
-  const tier = FARE_TIERS[selectedTier] || FARE_TIERS.BASIC;
-  const seatCost = selectedSeat.startsWith('15') || selectedSeat.startsWith('16') ? 8.0 : 0.0;
-  const luggageCost = additionalLuggage * 30.0; // £15 each flight
-  const fastTrackCost = fastTrackSelected ? FAST_TRACK_PRICE : 0;
-  const showComprehensiveOption = isDarkPattern || insurancePlan === 'none' || insurancePlan === 'comprehensive';
-  const comprehensiveSelected = insurancePlan === 'comprehensive' || (isDarkPattern && originalInsuranceOptIn);
-  const reviewInsurancePlan = insurancePlan === 'none' && comprehensiveSelected
-    ? 'comprehensive'
-    : insurancePlan;
-  const insuranceCost = INSURANCE_PLANS[reviewInsurancePlan].price;
-  const insuranceLabel = isDarkPattern && insurancePlan !== 'none'
-    ? insurancePlan.toUpperCase()
-    : INSURANCE_PLANS[reviewInsurancePlan].label;
-  const creditCost = prepaidCredit * CREDIT_PRICE_FACTOR;
-  const parkingCost = PARKING_PRICES[selectedParking];
-  const carHireCost = CAR_HIRE_PRICES[selectedCarHire];
-
-  const updateComprehensive = (checked: boolean) => {
-    if (isDarkPattern) setOriginalInsuranceOptIn(checked);
-    if (!isDarkPattern || insurancePlan === 'comprehensive') {
-      onSelectInsurance(checked ? 'comprehensive' : 'none');
-    }
-  };
-
-  const grandTotal =
-    tier.totalPrice +
-    seatCost +
-    luggageCost +
-    fastTrackCost +
-    insuranceCost +
-    creditCost +
-    parkingCost +
-    carHireCost;
+  const { selectedSeat, additionalLuggage, prepaidCredit, selectedParking, selectedCarHire, newsletterOptIn } = booking;
+  const {
+    total: grandTotal, seatCost, paidCabinBags, luggageCost, fastTrackIncluded, fastTrackCost,
+    insurancePlan, insuranceCost, creditCost, parkingCost, carHireCost,
+  } = getBookingPricing(fare, booking, isDarkPattern, 'review');
+  const showComprehensiveOption = insurancePlan === 'none' || insurancePlan === 'comprehensive';
+  const insuranceLabel = INSURANCE_PLANS[insurancePlan].label;
+  const showInsuranceDefaultMarker = isDarkPattern && showAuditMarkers && booking.insurancePlan === null;
 
   if (bookingConfirmed) {
     return (
@@ -86,13 +45,13 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
         </div>
         <h2 className="text-2xl font-black text-gray-900">Booking Confirmed!</h2>
         <p className="text-xs text-gray-600 max-w-md mx-auto">
-          Reference: <span className="font-mono font-bold text-gray-900">RYN-847291</span> • London Stansted (STN) ⇄ Palanga (PLQ)
+          Reference: <span className="font-mono font-bold text-gray-900">{AIRLINE.code}-847291</span> • London Stansted (STN) ⇄ Palanga (PLQ)
         </p>
 
         <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 text-xs text-left max-w-md mx-auto space-y-2">
           <div className="flex justify-between">
             <span className="text-gray-600">Fare Bundle:</span>
-            <span className="font-bold">{tier.name}</span>
+            <span className="font-bold">{fare.name}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-600">Seat:</span>
@@ -142,7 +101,7 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
               <div className="flex justify-between items-center py-1">
                 <div>
                   <div className="font-bold text-gray-800">London Stansted (STN) → Palanga (PLQ)</div>
-                  <div className="text-[11px] text-gray-500">Sun, 04 Oct • FR 286 • 17:20 - 21:45</div>
+                  <div className="text-[11px] text-gray-500">Sun, 04 Oct • {OUTBOUND_FLIGHT.flightNumber} • 17:20 - 21:45</div>
                 </div>
                 <span className="font-bold text-gray-800">£51.99</span>
               </div>
@@ -150,7 +109,7 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
               <div className="flex justify-between items-center py-1 border-t border-gray-100 pt-2">
                 <div>
                   <div className="font-bold text-gray-800">Palanga (PLQ) → London Stansted (STN)</div>
-                  <div className="text-[11px] text-gray-500">Thu, 08 Oct • FR 285 • 15:50 - 16:20</div>
+                  <div className="text-[11px] text-gray-500">Thu, 08 Oct • {INBOUND_FLIGHT.flightNumber} • 15:50 - 16:20</div>
                 </div>
                 <span className="font-bold text-gray-800">£79.37</span>
               </div>
@@ -159,13 +118,13 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
 
           {showComprehensiveOption ? (
             <div className="relative">
-              {isDarkPattern && showAuditMarkers && (
+              {showInsuranceDefaultMarker && (
                 <AuditMarker number={7} auditId="dp-travel-protection" title="Automatically Opted-in Travel Protection" onOpenAuditItem={onOpenAuditItem} />
               )}
               <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-xs space-y-3">
                 <div className="flex items-center justify-between">
                   <h3 className="font-bold text-sm text-gray-900">Travel Protection Insurance</h3>
-                  {isDarkPattern && showAuditMarkers && (
+                  {showInsuranceDefaultMarker && (
                     <span className="text-[10px] bg-rose-100 text-rose-800 font-bold px-2 py-0.5 rounded">
                       Dark Pattern: Pre-selected Opt-in
                     </span>
@@ -175,8 +134,8 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
                 <label className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 cursor-pointer text-xs">
                   <input
                     type="checkbox"
-                    checked={comprehensiveSelected}
-                    onChange={(e) => updateComprehensive(e.target.checked)}
+                    checked={insurancePlan === 'comprehensive'}
+                    onChange={(e) => onSelectInsurance(e.target.checked ? 'comprehensive' : 'none')}
                     className="mt-0.5 rounded text-[#073590] focus:ring-[#073590]"
                   />
                   <div>
@@ -226,28 +185,35 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
             </div>
 
             <div className="flex justify-between py-1 pt-2">
-              <span className="text-gray-600">{tier.name} Bundle Upgrade:</span>
-              <span className="font-semibold">+£{tier.roundtripSurcharge.toFixed(2)}</span>
+              <span className="text-gray-600">{fare.name} Bundle Upgrade:</span>
+              <span className="font-semibold">+£{fare.roundtripSurcharge.toFixed(2)}</span>
             </div>
 
-            {seatCost > 0 && (
+            {selectedSeat && selectedSeat !== RANDOM_SEAT && (
               <div className="flex justify-between py-1 pt-2">
                 <span className="text-gray-600">Seat Reservation ({selectedSeat}):</span>
-                <span className="font-semibold">+£{seatCost.toFixed(2)}</span>
+                <span className="font-semibold">{seatCost > 0 ? `+£${seatCost.toFixed(2)}` : 'Included'}</span>
+              </div>
+            )}
+
+            {fare.features.cabinBag10kg && additionalLuggage > 0 && (
+              <div className="flex justify-between py-1 pt-2">
+                <span className="text-gray-600">10 kg Cabin Bag:</span>
+                <span className="font-semibold">Included</span>
               </div>
             )}
 
             {luggageCost > 0 && (
               <div className="flex justify-between py-1 pt-2">
-                <span className="text-gray-600">Extra Overhead Bags ({additionalLuggage}):</span>
+                <span className="text-gray-600">Extra Overhead Bags ({paidCabinBags}):</span>
                 <span className="font-semibold">+£{luggageCost.toFixed(2)}</span>
               </div>
             )}
 
-            {(fastTrackSelected || (!isDarkPattern && tier.features.fastTrack)) && (
+            {(fastTrackCost > 0 || fastTrackIncluded) && (
               <div className="flex justify-between py-1 pt-2">
                 <span className="text-gray-600">Security Fast Track (STN):</span>
-                <span className="font-semibold">{fastTrackSelected ? `+£${fastTrackCost.toFixed(2)}` : 'Included'}</span>
+                <span className="font-semibold">{fastTrackIncluded ? 'Included' : `+£${fastTrackCost.toFixed(2)}`}</span>
               </div>
             )}
 

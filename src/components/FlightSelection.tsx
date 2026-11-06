@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlightLeg } from '../types/booking';
-import { Check, Info, Plane } from 'lucide-react';
+import { Check, Info, Plane, PlaneTakeoff } from 'lucide-react';
+import { AIRLINE } from '../data/mockData';
 import { AuditMarker } from './AuditMarker';
 
 interface FlightSelectionProps {
@@ -16,6 +17,7 @@ interface FlightSelectionProps {
   onToggleInbound: () => void;
   onResetFlights: () => void;
   isDarkPattern: boolean;
+  showScarcity: boolean;
   showAuditMarkers?: boolean;
   onOpenAuditItem?: (id: string) => void;
 }
@@ -33,6 +35,7 @@ export const FlightSelection: React.FC<FlightSelectionProps> = ({
   onToggleInbound,
   onResetFlights,
   isDarkPattern,
+  showScarcity,
   showAuditMarkers = false,
   onOpenAuditItem,
 }) => {
@@ -185,10 +188,8 @@ export const FlightSelection: React.FC<FlightSelectionProps> = ({
           <div className="p-4 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="flex items-center gap-4 sm:gap-8 flex-1">
               <div className="flex flex-col items-center">
-                <svg className="h-6 w-auto text-[#f1c40f]" fill="currentColor" viewBox="0 0 100 100">
-                  <path d="M50,5 C25.14,5 5,25.14 5,50 C5,74.86 25.14,95 50,95 C74.86,95 95,74.86 95,50 C95,25.14 74.86,5 50,5 Z M76,46 L62,49 L46,31 L40,33 L49,52 L36,55 L31,50 L27,51 L30,59 L35,67 L39,66 L38,59 L52,56 L47,76 L53,77 L66,54 L80,51 C82,50 82,47 76,46 Z" />
-                </svg>
-                <span className="text-[10px] font-bold text-gray-500 tracking-wider">Ryanair</span>
+                <PlaneTakeoff className="size-6 text-[#073590]" aria-hidden="true" />
+                <span className="text-center text-[10px] font-bold text-gray-500">{AIRLINE.name}</span>
               </div>
 
               <div className="flex-1 max-w-sm flex items-center justify-between gap-3">
@@ -228,10 +229,10 @@ export const FlightSelection: React.FC<FlightSelectionProps> = ({
 
               <div className="flex flex-col items-end relative">
                 {/* DARK PATTERN: Fake Scarcity badge */}
-                {isDarkPattern && outboundFlight.seatsLeft && (
+                {showScarcity && !!outboundFlight.seatsLeft && (
                   <div className={`relative mb-1 ${showAuditMarkers ? 'mt-5' : ''}`}>
                     <span className="text-[11px] text-blue-700 font-bold">
-                      {outboundFlight.seatsLeft} seats left at this price
+                      {outboundFlight.seatsLeft} {outboundFlight.seatsLeft === 1 ? 'seat' : 'seats'} left at this price
                     </span>
                     {showAuditMarkers && (
                       <AuditMarker
@@ -336,10 +337,8 @@ export const FlightSelection: React.FC<FlightSelectionProps> = ({
           <div className="p-4 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="flex items-center gap-4 sm:gap-8 flex-1">
               <div className="flex flex-col items-center">
-                <svg className="h-6 w-auto text-[#f1c40f]" fill="currentColor" viewBox="0 0 100 100">
-                  <path d="M50,5 C25.14,5 5,25.14 5,50 C5,74.86 25.14,95 50,95 C74.86,95 95,74.86 95,50 C95,25.14 74.86,5 50,5 Z M76,46 L62,49 L46,31 L40,33 L49,52 L36,55 L31,50 L27,51 L30,59 L35,67 L39,66 L38,59 L52,56 L47,76 L53,77 L66,54 L80,51 C82,50 82,47 76,46 Z" />
-                </svg>
-                <span className="text-[10px] font-bold text-gray-500 tracking-wider">Ryanair</span>
+                <PlaneTakeoff className="size-6 text-[#073590]" aria-hidden="true" />
+                <span className="text-center text-[10px] font-bold text-gray-500">{AIRLINE.name}</span>
               </div>
 
               <div className="flex-1 max-w-sm flex items-center justify-between gap-3">
@@ -379,7 +378,7 @@ export const FlightSelection: React.FC<FlightSelectionProps> = ({
 
               <div className="flex flex-col items-end relative">
                 {/* DARK PATTERN: Fake Scarcity badge */}
-                {isDarkPattern && inboundFlight.seatsLeft && (
+                {showScarcity && !!inboundFlight.seatsLeft && (
                   <div className={`relative mb-1 ${showAuditMarkers ? 'mt-5' : ''}`}>
                     <span className="text-[11px] text-blue-700 font-bold">
                       {inboundFlight.seatsLeft} seats left at this price

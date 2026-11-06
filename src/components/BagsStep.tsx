@@ -1,6 +1,8 @@
 import React from 'react';
-import { Briefcase, AlertTriangle, ShieldCheck, ArrowRight, ArrowLeft } from 'lucide-react';
+import { AlertTriangle, ShieldCheck, ArrowRight, ArrowLeft } from 'lucide-react';
 import { AuditMarker } from './AuditMarker';
+import { CABIN_BAG_PRICE_PER_FLIGHT, getCabinBagPricing } from '../data/bookingExtras';
+import type { FareTier } from '../types/booking';
 
 interface BagsStepProps {
   isDarkPattern: boolean;
@@ -8,6 +10,7 @@ interface BagsStepProps {
   onOpenAuditItem?: (id: string) => void;
   onBack: () => void;
   onNext: () => void;
+  fare: FareTier;
   additionalLuggage: number;
   onSetAdditionalLuggage: (qty: number) => void;
   isSplitView?: boolean;
@@ -19,10 +22,14 @@ export const BagsStep: React.FC<BagsStepProps> = ({
   onOpenAuditItem,
   onBack,
   onNext,
+  fare,
   additionalLuggage,
   onSetAdditionalLuggage,
   isSplitView = false,
 }) => {
+  const cabinBagIncluded = fare.features.cabinBag10kg;
+  const { luggageCost } = getCabinBagPricing(fare, additionalLuggage);
+
   return (
     <div className={isSplitView ? '@container w-full space-y-4' : '@container max-w-4xl mx-auto space-y-6 pt-4'}>
       {/* Header */}
@@ -52,7 +59,10 @@ export const BagsStep: React.FC<BagsStepProps> = ({
               <span>Avoid Up to £60 Gate Fee!</span>
             </div>
             <p className="text-rose-950 leading-relaxed">
-              Oversized or non-compliant bags discovered at the gate will incur an immediate penalty charge of up to £60.00 per item! Add a 10kg overhead bag now to ensure boarding without hassle.
+              Oversized or non-compliant bags discovered at the gate will incur an immediate penalty charge of up to £60.00 per item!
+              {cabinBagIncluded
+                ? ' Check the dimensions of your included 10 kg cabin bag below.'
+                : ' Add a 10kg overhead bag now to ensure boarding without hassle.'}
             </p>
           </div>
         </div>
@@ -103,16 +113,19 @@ export const BagsStep: React.FC<BagsStepProps> = ({
 
         {/* 10kg Overhead Locker Bag */}
         <div className={`bg-white rounded-xl border-2 ${isDarkPattern ? 'border-[#073590] shadow-md ring-1 ring-[#073590]/20' : 'border-gray-200'} p-4 sm:p-5 shadow-xs flex flex-col justify-between relative`}>
-          {isDarkPattern && (
+          {isDarkPattern && !cabinBagIncluded && (
             <div className="absolute -top-3 right-4 bg-[#f1c40f] text-[#073590] text-[10px] font-black px-2 py-0.5 rounded shadow-xs uppercase tracking-wider">
               Recommended
             </div>
           )}
 
           <div>
-            <div className="flex items-center justify-between mb-3">
-              <span className="font-extrabold text-sm text-gray-900">10kg Overhead Cabin Bag</span>
-              <span className="text-xs font-bold text-[#073590]">+£15.00 / flight</span>
+            <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 mb-3">
+              <span className="font-extrabold text-sm text-gray-900">10 kg Overhead Cabin Bag</span>
+              <span className="text-xs font-bold text-[#073590]">
+                {cabinBagIncluded && '1 included · extras '}
+                +£{CABIN_BAG_PRICE_PER_FLIGHT.toFixed(2)} / flight
+              </span>
             </div>
             <img
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuD16_BaFgiIp5TWAhwoqh1u_5k8ZLTnZjlF3Y8oCK15VxjvQTYU8ydFrug_t9uYTbRuDhO08oTKpJ11DEf2_602UbYZpFSmoqEkSoggvh_qfk_i_ZP3pmzBpzM8x7cqfZPGexwG1d6gSne8iQbYtcuKdF_Q6aknAfYma9uCvr1uoYZV03-jjXMsVJCW95LSVTvAKDZhPw32vpBkcEHdh-ZICEmlsEScGYbBhe9lZ6Lug9acNWY6BxY"
@@ -129,8 +142,9 @@ export const BagsStep: React.FC<BagsStepProps> = ({
             <span className="text-xs font-semibold text-gray-700">Add to booking:</span>
             <div className="flex items-center gap-2">
               <button
-                onClick={() => onSetAdditionalLuggage(Math.max(0, additionalLuggage - 1))}
-                className="w-7 h-7 rounded border border-gray-300 font-bold flex items-center justify-center hover:bg-gray-100 cursor-pointer"
+                disabled={additionalLuggage === 0}
+                onClick={() => onSetAdditionalLuggage(additionalLuggage - 1)}
+                className="size-11 rounded border border-gray-300 font-bold flex items-center justify-center hover:bg-gray-100 cursor-pointer disabled:opacity-50 disabled:cursor-default"
                 aria-label="Decrease baggage count"
               >
                 -
@@ -138,7 +152,7 @@ export const BagsStep: React.FC<BagsStepProps> = ({
               <span className="font-bold text-sm w-4 text-center">{additionalLuggage}</span>
               <button
                 onClick={() => onSetAdditionalLuggage(additionalLuggage + 1)}
-                className="w-7 h-7 rounded bg-[#073590] text-white font-bold flex items-center justify-center hover:bg-[#052973] cursor-pointer"
+                className="size-11 rounded bg-[#073590] text-white font-bold flex items-center justify-center hover:bg-[#052973] cursor-pointer"
                 aria-label="Increase baggage count"
               >
                 +
@@ -149,9 +163,12 @@ export const BagsStep: React.FC<BagsStepProps> = ({
       </div>
 
       <div className="pt-4 flex flex-col @min-[32rem]:flex-row items-center justify-between gap-3 border-t border-gray-200">
-        <div className="text-xs text-gray-500 font-medium">
+        <div className="text-xs text-gray-600 font-medium" role="status">
           {additionalLuggage > 0 ? (
-            <span>Additional luggage: <strong>{additionalLuggage} bag{additionalLuggage > 1 ? 's' : ''} (+£{additionalLuggage * 15 * 2}.00 return)</strong></span>
+            <span>
+              <strong>{additionalLuggage} cabin bag{additionalLuggage > 1 ? 's' : ''} selected</strong>
+              {' · '}{luggageCost > 0 ? `+£${luggageCost.toFixed(2)} return` : 'Included'}
+            </span>
           ) : (
             <span>Base luggage: <strong>1 underseat bag included free</strong></span>
           )}

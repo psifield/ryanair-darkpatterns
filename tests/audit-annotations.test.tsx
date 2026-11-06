@@ -3,6 +3,7 @@ import test from 'node:test';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import * as auditData from '../src/data/mockData';
+import { EMPTY_BOOKING_CHOICES } from '../src/data/bookingExtras';
 import { DarkPatternInspector } from '../src/components/DarkPatternInspector';
 import { FareSelectionEthical } from '../src/components/FareSelectionEthical';
 import { SeatsStep } from '../src/components/SeatsStep';
@@ -13,6 +14,13 @@ import * as comparison from '../src/components/SideBySideView';
 
 const noop = () => {};
 const markerProps = { isDarkPattern: true, showAuditMarkers: true, onOpenAuditItem: noop };
+const reviewProps = {
+  fare: auditData.FARE_TIERS.BASIC,
+  booking: EMPTY_BOOKING_CHOICES,
+  onSelectInsurance: noop,
+  onToggleNewsletter: noop,
+  onBack: noop,
+};
 
 test('ten numbered groups retain eleven distinct audit records', () => {
   assert.equal(auditData.DARK_PATTERNS_AUDIT.length, 11);
@@ -45,9 +53,9 @@ test('both DP 3 leaves open their own content in one expanded navigation group',
 
 test('new flags use agreed numbers and follow both mode and global visibility', () => {
   for (const [Component, props, number] of [
-    [SeatsStep, { selectedSeat: '', onSelectSeat: noop, onBack: noop, onNext: noop }, 5],
-    [BagsStep, { additionalLuggage: 0, onSetAdditionalLuggage: noop, onBack: noop, onNext: noop }, 6],
-    [ReviewStep, { selectedTier: 'BASIC', selectedSeat: '', additionalLuggage: 0, onSelectInsurance: noop, newsletterOptIn: true, onToggleNewsletter: noop, onBack: noop }, 7],
+    [SeatsStep, { fare: auditData.FARE_TIERS.BASIC, selectedSeat: '', onSelectSeat: noop, onBack: noop, onNext: noop }, 5],
+    [BagsStep, { fare: auditData.FARE_TIERS.BASIC, additionalLuggage: 0, onSetAdditionalLuggage: noop, onBack: noop, onNext: noop }, 6],
+    [ReviewStep, reviewProps, 7],
   ] as const) {
     const render = (overrides = {}) => renderToStaticMarkup(React.createElement(Component as React.ComponentType<any>, { ...props, ...markerProps, ...overrides }));
     assert.match(render(), new RegExp(`aria-label="DP ${number}:`));
@@ -57,7 +65,7 @@ test('new flags use agreed numbers and follow both mode and global visibility', 
 });
 
 test('review offers the same £14.50 policy with different defaults by mode', () => {
-  const props = { ...markerProps, selectedTier: 'BASIC' as const, selectedSeat: '', additionalLuggage: 0, onSelectInsurance: noop, newsletterOptIn: false, onToggleNewsletter: noop, onBack: noop };
+  const props = { ...markerProps, ...reviewProps };
   for (const showAuditMarkers of [true, false]) {
     const original = renderToStaticMarkup(<ReviewStep {...props} showAuditMarkers={showAuditMarkers} />);
     assert.equal((original.match(/checked=""/g) ?? []).length, 1);
@@ -93,16 +101,10 @@ test('ethical extras default to no insurance and show the full Plus premium', ()
 
 test('ethical review carries the selected policy price without a second insurance offer', () => {
   const html = renderToStaticMarkup(<ReviewStep
+    {...reviewProps}
     isDarkPattern={false}
     showAuditMarkers={true}
-    selectedTier="BASIC"
-    selectedSeat=""
-    additionalLuggage={0}
-    insurancePlan="plus"
-    onSelectInsurance={noop}
-    newsletterOptIn={false}
-    onToggleNewsletter={noop}
-    onBack={noop}
+    booking={{ ...EMPTY_BOOKING_CHOICES, insurancePlan: 'plus' }}
   />);
   assert.ok(html.includes('Pay £137.44 &amp; Confirm'));
   assert.ok(!html.includes('£14.50'), 'expected only the selected Plus policy at Review');
@@ -110,16 +112,10 @@ test('ethical review carries the selected policy price without a second insuranc
 
 test('ethical review reflects a previously selected Comprehensive policy once', () => {
   const html = renderToStaticMarkup(<ReviewStep
+    {...reviewProps}
     isDarkPattern={false}
     showAuditMarkers={false}
-    selectedTier="BASIC"
-    selectedSeat=""
-    additionalLuggage={0}
-    insurancePlan="comprehensive"
-    onSelectInsurance={noop}
-    newsletterOptIn={false}
-    onToggleNewsletter={noop}
-    onBack={noop}
+    booking={{ ...EMPTY_BOOKING_CHOICES, insurancePlan: 'comprehensive' }}
   />);
   assert.equal((html.match(/checked=""/g) ?? []).length, 1);
   assert.match(html, /Pay £145\.86 &amp; Confirm/);
@@ -140,12 +136,10 @@ test('ethical fare choice exposes the active fare and its return price', () => {
 test('the split view renders the Original and Ethical versions of every step after Flights', () => {
   const View = comparison.BookingAddOnView;
   assert.equal(typeof View, 'function', 'booking steps after Flights should support comparison');
-  const empty = {
-    selectedSeat: '', additionalLuggage: 0, newsletterOptIn: false,
-    fastTrackSelected: false, insurancePlan: 'none', prepaidCredit: 0,
-    selectedParking: 'none', selectedCarHire: 'none',
-  } as const;
-  const bookings = { 'dark-pattern': { ...empty, newsletterOptIn: true }, ethical: empty };
+  const bookings = {
+    'dark-pattern': { ...EMPTY_BOOKING_CHOICES, newsletterOptIn: true },
+    ethical: EMPTY_BOOKING_CHOICES,
+  };
 
   for (const [step, originalContent, ethicalContent] of [
     ['seats', /Warning: Do not get separated!/, /Seat Allocation Policy/],

@@ -207,3 +207,100 @@ GUARDRAILS: Front-end only. Keep all 9 automated tests passing. Do not alter exi
 
 *Principle check:* Week 10, Usability Principles (Consistency & Standards between variants, Error Prevention and Visibility of System Status); Week 4, Reference Framing & Drip Pricing (ensuring transparent comparison across stages); Week 9, Social Norms & Default Bias.
 
+---
+
+## Entry 10 - prototype verification, priorities and participant entry · 2026-11-06, time not captured · sent by Xianlong · Codex
+
+### Verify the checklist
+
+*Edited user input*
+
+~~~text
+A teammate raised the following issues while checking the prototype against the term paper requirements. Please verify which reports are reproducible before implementing any fixes. You may run independent checks in parallel if helpful.
+
+1. A/B links. The ?v=A, ?v=B, and bare links all appear to open A. They should select A, select B, or randomly assign and remember a version, respectively.
+2. Consent. The booking flow appears to begin without a consent screen.
+3. Debrief. The confirmation should explain that no purchase occurred, identify the assigned version, and describe the designs studied in A.
+4. Branding. Replace the Ryanair name, myRyanair label, logo, and FR 286 flight number with fictional branding.
+5. Privacy. Remove the email signup field in the footer.
+6. README. Add instructions for opening A and B.
+7. Participant mode. Reserve audit markers, the Ethical Redesign label, side-by-side comparison, and A/B switching for review mode.
+8. Basic fare. Continuing with Basic leaves A on the fare screen, while B advances to Seats.
+9. Seat availability. B omits the seats-left message. My teammate suggested showing it in both versions because it is outside the main findings.
+10. Insurance decline. Declining insurance in A appears to add £14.50 at Review, leaving the totals out of sync.
+11. Insurance Plus. Selecting Plus (£6.08) in A appears to show Comprehensive (£14.50) at Review.
+12. Regular fare. The included seat selection and 10 kg cabin bag do not carry through to Seats and Bags.
+~~~
+
+*Edited follow-up* “Does that mean #11 is the only issue, or were the other reports also confirmed?”
+
+The audit checked the local build at `ea9e724` and the public demo. Eleven reports matched the observed behavior. #11 was partially confirmed. Review showed the £14.50 Comprehensive offer as checked, while the line item and totals still charged £6.08 for Plus. #10 did change the amount due. After declining, Basic showed £131.36 in the cart and £145.86 at Review. The existing nine tests and TypeScript check passed during the audit.
+
+### Set priorities and prepare a handoff
+
+*Edited user input*
+
+~~~text
+Please group the issues into highest, medium, and low priorities. We can implement the highest-priority fixes in later turns in this chat. Prepare a handoff for the medium- and low-priority items so they can be addressed in a follow-up chat.
+~~~
+
+The highest-priority list covered #1–5, #7, and #8, which affect submission requirements and the fare-choice flow. #9–12 went into the medium-priority handoff for pilot consistency and checkout accuracy. #6 was scheduled after the entry links were settled. [Handoff](docs/prototype-followup-handoff.md)
+
+### Implement participant entry, consent and debrief
+
+*Edited user input*
+
+~~~text
+Please implement #1, #2, #3, and #7 in this pass. I would like to work through the highest-priority items in smaller groups to keep this chat manageable.
+~~~
+
+`?v=A` and `?v=B` now open the specified participant variant after consent. The bare URL draws an arm once and saves it in the browser. A valid explicit link takes precedence for that visit. The full demo, audit markers, and comparison controls open at `?mode=review`.
+
+Confirming a fare enables **View debrief** while keeping fare information available for the pilot's follow-up questions. The debrief names the assigned version, states that no order or payment occurred, and explains the three fare-choice designs studied in A. The implementation scope was #1, #2, #3, and #7. [Implementation plan](docs/superpowers/plans/2026-11-06-participant-entry.md)
+
+*Verification* The new consent checks first failed against the existing app. All 16 tests, TypeScript, and the production build then passed. Eight local Edge checks covered both direct links, persistent assignment and override, Basic and paid fare choices at desktop and phone widths, debrief, and review navigation across all five booking steps.
+
+### Check preview access and A/B assignment
+
+*Edited user input* “The local preview does not open in either the in-app browser or my external browser. Please check it.”
+
+The local preview server had stopped. Codex started it again on port 3000 and confirmed that the consent screen opened in the in-app browser.
+
+*Edited user input* “I would prefer to avoid separate tracking for A/B assignment. Keep #1 if it is required by the term paper brief.”
+
+Slides 11 and 39 of the term paper brief specify the direct A/B links and a persistent random assignment for the bare link. The implementation stores a single value, `A` or `B`, in the browser.
+
+---
+
+## Entry 11 - fictional branding, footer privacy and Basic continuation · 2026-11-06, time not captured · sent by Xianlong · Codex
+
+*Edited user input*
+
+~~~text
+Please finish the remaining highest-priority issues, #4, #5, and #8. Once they are verified, draft a concise WhatsApp message for the group that explains what changed for each issue. Include the draft and a record of the completed work in the handoff.
+~~~
+
+Both variants and the review demo now use fictional Alderwake Air branding and `ALDW` identifiers. Original screenshots are archived in the repository evidence and are excluded from the production build. The footer email signup was removed. In review mode, confirming either choice in A's Basic upsell now advances to Seats with the selected fare. Participant mode keeps the fare-choice endpoint and debrief.
+
+*Verification* The branding, email-field, and Basic navigation checks reproduced the original failures. All 18 tests, TypeScript, the production build, and 12 local Edge checks passed. The checks covered both participant variants, the full and split demos, and the local preview.
+
+*Edited follow-up* “Please use the original issue numbering in the WhatsApp draft and leave unfinished entries blank. Use the same format in the handoff so the next chat can fill in those entries.”
+
+The handoff adopted the original 1–12 numbering. At this checkpoint, #6 and #9–12 were blank in the draft for the follow-up chat. [Handoff](docs/prototype-followup-handoff.md)
+
+---
+
+## Entry 12 - participant scarcity, insurance and fare inclusions · 2026-11-07 · sent by Xianlong · Codex
+
+~~~text
+we'll do the medium priority tasks in this chat, and hopefully the low priority ones as well after if the context window allows.
+~~~
+
+For #9, both pilot arms omit the simulated seats-left cue. The pilot tests three fare-choice designs, so keeping availability copy out of both arms avoids introducing another difference. Original review retains the example for discussion.
+
+For #10 and #11, the cart and Review use the same pricing calculation. A preselects £14.50 Comprehensive at Review when there has been no insurance choice. B starts unchecked. A decline persists, and a plan selected in Extras appears as the only policy on Review. Basic with no extras totals £131.36 after a decline or £137.44 with Plus.
+
+For #12, both variants offer seats in row 18 and the first 10 kg cabin bag within the £189.86 Regular fare. A paid seat and a second bag bring the return total to £227.86 before insurance. Basic with a paid reservation and one cabin bag totals £169.36.
+
+*Verification* All 26 tests, TypeScript, the production build, and 11 local Edge scenarios passed. For #6, five fresh Edge sessions on 7 November 2026 (SGT) verified the published A and B links, the bare link's saved assignment, the full review demo, and direct entry to review in B. A fresh link check is pending for the next release. [README](README.md) · [Handoff](docs/prototype-followup-handoff.md)
+

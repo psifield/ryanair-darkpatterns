@@ -1,5 +1,6 @@
 import React from 'react';
-import { ShoppingCart } from 'lucide-react';
+import { PlaneTakeoff, ShoppingCart } from 'lucide-react';
+import { AIRLINE } from '../data/mockData';
 
 interface HeaderProps {
   cartTotal?: number;
@@ -20,12 +21,9 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
         {/* Left: Brand Logo & Links */}
         <div className="flex items-center space-x-6">
-          <div className="flex items-center gap-1.5 focus:outline-none cursor-pointer">
-            {/* Authentic Ryanair Harp SVG */}
-            <svg className="h-6 w-auto text-[#f1c40f]" fill="currentColor" viewBox="0 0 100 100">
-              <path d="M50,5 C25.14,5 5,25.14 5,50 C5,74.86 25.14,95 50,95 C74.86,95 95,74.86 95,50 C95,25.14 74.86,5 50,5 Z M76,46 L62,49 L46,31 L40,33 L49,52 L36,55 L31,50 L27,51 L30,59 L35,67 L39,66 L38,59 L52,56 L47,76 L53,77 L66,54 L80,51 C82,50 82,47 76,46 Z" />
-            </svg>
-            <span className="font-black text-xl tracking-tight text-white uppercase italic">RYANAIR</span>
+          <div className="flex items-center gap-1.5">
+            <PlaneTakeoff className="size-5 shrink-0 text-[#f1c40f] sm:size-6" aria-hidden="true" />
+            <span className="text-base font-black tracking-tight text-white sm:text-xl">{AIRLINE.name}</span>
           </div>
           <span className="hidden md:inline-block text-xs font-semibold text-gray-200 hover:underline cursor-pointer">
             Fees
@@ -43,7 +41,7 @@ export const Header: React.FC<HeaderProps> = ({
           <span className="text-gray-200 hover:underline cursor-pointer">Log in</span>
 
           <button className="hidden sm:inline-block bg-[#f1c40f] hover:bg-yellow-400 text-[#073590] font-black px-3.5 py-1.5 rounded-full text-xs transition shadow-sm">
-            myRyanair Portal
+            {AIRLINE.portal}
           </button>
 
           {cartTotal !== undefined && (

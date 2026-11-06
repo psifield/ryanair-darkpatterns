@@ -11,19 +11,24 @@ import { FareSelectionEthical } from './components/FareSelectionEthical';
 import { BookingAddOnView, SideBySideView } from './components/SideBySideView';
 import { ComparisonBanner } from './components/ComparisonBanner';
 import { DarkPatternInspector } from './components/DarkPatternInspector';
-import { NewsletterFooter } from './components/NewsletterFooter';
+import { StudyScreen } from './components/StudyScreen';
+import type { StudyEntry } from './studyEntry';
 
-export default function App() {
-  const [viewMode, setViewMode] = useState<ViewMode>('dark-pattern');
+export default function App({ entry }: { entry: StudyEntry }) {
+  const isReview = entry.mode === 'review';
+  const [studyStage, setStudyStage] = useState<'consent' | 'fare' | 'debrief'>('consent');
+  const [confirmedFare, setConfirmedFare] = useState<FareTierId | null>(null);
+  const [viewMode, setViewMode] = useState<ViewMode>(entry.variant === 'B' ? 'ethical' : 'dark-pattern');
   const [deviceView, setDeviceView] = useState<DeviceView>('desktop');
   const [currentStep, setCurrentStep] = useState<BookingStep>('flights');
   const stepContentRef = useRef<HTMLElement>(null);
+  const debriefButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (viewMode === 'dark-pattern' || (viewMode === 'ethical' && currentStep === 'flights')) return;
+    if (isReview && viewMode !== 'side-by-side' && currentStep === 'flights') return;
     window.scrollTo(0, 0);
     stepContentRef.current?.focus({ preventScroll: true });
-  }, [currentStep, viewMode]);
+  }, [currentStep, isReview, studyStage, viewMode]);
 
   // Both designs use the same itinerary and fare.
   const [outboundSelected, setOutboundSelected] = useState(true);
@@ -38,13 +43,19 @@ export default function App() {
     ethical: { ...EMPTY_BOOKING_CHOICES },
   });
 
-  const [showAuditMarkers, setShowAuditMarkers] = useState(true);
+  const [showAuditMarkers, setShowAuditMarkers] = useState(isReview);
   const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
   const [selectedAuditId, setSelectedAuditId] = useState<string | null>('dp-roadblock-confirmshame');
 
   const currentCartTotal = viewMode === 'side-by-side'
     ? undefined
-    : getBookingPricing(FARE_TIERS[selectedTier], bookings[viewMode], viewMode === 'dark-pattern').total;
+    : getBookingPricing(FARE_TIERS[selectedTier], bookings[viewMode], viewMode === 'dark-pattern', currentStep).total;
+
+  const showDebriefAction = !isReview && confirmedFare === selectedTier && outboundSelected && inboundSelected && !showUpsellModal;
+
+  useEffect(() => {
+    if (showDebriefAction) debriefButtonRef.current?.focus();
+  }, [confirmedFare, showDebriefAction]);
 
   const changeBooking = (mode: PrototypeMode, changes: Partial<BookingChoices>) => {
     if (viewMode === 'side-by-side') {
@@ -66,19 +77,21 @@ export default function App() {
 
   const handleSelectTier = (tier: FareTierId) => {
     setSelectedTier(tier);
+    if (!isReview) setConfirmedFare(viewMode === 'dark-pattern' && tier !== 'BASIC' ? tier : null);
     if (viewMode === 'dark-pattern' && tier === 'BASIC') {
       setShowUpsellModal(true);
     }
   };
 
-  const handleConfirmBasic = () => {
-    setSelectedTier('BASIC');
-    setShowUpsellModal(false);
+  const handleContinueFromFare = (tier: FareTierId) => {
+    if (isReview) setCurrentStep('seats');
+    else setConfirmedFare(tier);
   };
 
-  const handleSwitchToRegular = () => {
-    setSelectedTier('REGULAR');
+  const handleConfirmOriginalFare = (tier: FareTierId) => {
+    setSelectedTier(tier);
     setShowUpsellModal(false);
+    handleContinueFromFare(tier);
   };
 
   const handleOpenAuditItem = (id: string) => {
@@ -101,12 +114,26 @@ export default function App() {
         onToggleInbound={handleToggleInbound}
         onResetFlights={handleResetFlights}
         isDarkPattern={mode === 'dark-pattern'}
+        showScarcity={isReview && mode === 'dark-pattern'}
         showAuditMarkers={showAuditMarkers}
         onOpenAuditItem={handleOpenAuditItem}
       />
 
       {(viewMode === 'side-by-side' || (outboundSelected && inboundSelected)) && (
-        <div className="pt-2">
+        <div className="space-y-3 pt-2">
+          {showDebriefAction && (
+            <section aria-label="Fare choice complete" className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white p-4">
+              <p className="text-sm text-slate-700">Keep this screen open for any follow-up questions before viewing the debrief.</p>
+              <button
+                type="button"
+                ref={debriefButtonRef}
+                onClick={() => setStudyStage('debrief')}
+                className="min-h-11 cursor-pointer rounded-lg bg-[#073590] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#052973] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#073590]"
+              >
+                View debrief
+              </button>
+            </section>
+          )}
           {mode === 'dark-pattern' ? (
             <FareSelectionDark
               onSelectTier={handleSelectTier}
@@ -114,8 +141,8 @@ export default function App() {
               showUpsellModal={showUpsellModal}
               onOpenUpsellModal={() => setShowUpsellModal(true)}
               onCloseUpsellModal={() => setShowUpsellModal(false)}
-              onConfirmBasic={handleConfirmBasic}
-              onSwitchToRegular={handleSwitchToRegular}
+              onConfirmBasic={() => handleConfirmOriginalFare('BASIC')}
+              onSwitchToRegular={() => handleConfirmOriginalFare('REGULAR')}
               showAuditMarkers={showAuditMarkers}
               onOpenAuditItem={handleOpenAuditItem}
             />
@@ -123,7 +150,8 @@ export default function App() {
             <FareSelectionEthical
               onSelectTier={handleSelectTier}
               selectedTier={selectedTier}
-              onProceedToNextStep={() => setCurrentStep('seats')}
+              onProceedToNextStep={() => handleContinueFromFare(selectedTier)}
+              continueLabel={isReview ? undefined : 'Confirm fare choice'}
               showAuditMarkers={showAuditMarkers}
               onOpenAuditItem={handleOpenAuditItem}
             />
@@ -133,19 +161,29 @@ export default function App() {
     </>
   );
 
+  if (!isReview && studyStage !== 'fare') {
+    return (
+      <main ref={stepContentRef} tabIndex={-1} className="grid min-h-screen place-items-center bg-[#f2f5f8] px-4 py-8">
+        <StudyScreen stage={studyStage} variant={entry.variant} onConsent={() => setStudyStage('fare')} />
+      </main>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#f2f5f8] text-[#1b2738] flex flex-col font-sans selection:bg-[#f1c40f] selection:text-[#073590]">
-      <ComparisonBanner
-        viewMode={viewMode}
-        onViewModeChange={setViewMode}
-        deviceView={deviceView}
-        onDeviceViewChange={setDeviceView}
-        showAuditMarkers={showAuditMarkers}
-        onToggleAuditMarkers={() => setShowAuditMarkers(!showAuditMarkers)}
-        onOpenAuditDrawer={() => setIsAuditModalOpen(true)}
-        auditCount={DARK_PATTERNS_AUDIT.length}
-        auditGroupCount={DARK_PATTERN_GROUPS.length}
-      />
+      {isReview && (
+        <ComparisonBanner
+          viewMode={viewMode}
+          onViewModeChange={setViewMode}
+          deviceView={deviceView}
+          onDeviceViewChange={setDeviceView}
+          showAuditMarkers={showAuditMarkers}
+          onToggleAuditMarkers={() => setShowAuditMarkers(!showAuditMarkers)}
+          onOpenAuditDrawer={() => setIsAuditModalOpen(true)}
+          auditCount={DARK_PATTERNS_AUDIT.length}
+          auditGroupCount={DARK_PATTERN_GROUPS.length}
+        />
+      )}
 
       <div className={`flex-1 flex flex-col ${deviceView === 'mobile' ? 'max-w-md mx-auto my-6 border-8 border-slate-900 rounded-[40px] overflow-hidden shadow-2xl bg-white' : 'w-full'}`}>
         <Header
@@ -155,11 +193,13 @@ export default function App() {
           inboundDate={selectedInboundDate}
         />
 
-        <BookingStepper
-          currentStep={currentStep}
-          onStepChange={setCurrentStep}
-          canNavigateForward={outboundSelected && inboundSelected}
-        />
+        {isReview && (
+          <BookingStepper
+            currentStep={currentStep}
+            onStepChange={setCurrentStep}
+            canNavigateForward={outboundSelected && inboundSelected}
+          />
+        )}
 
         <main ref={stepContentRef} tabIndex={-1} className="flex-1 w-full mx-auto px-3 sm:px-6 py-6">
           {currentStep === 'flights' ? (
@@ -167,26 +207,28 @@ export default function App() {
               <SideBySideView original={renderFlights('dark-pattern')} ethical={renderFlights('ethical')} />
             ) : (
               <div className="max-w-6xl mx-auto space-y-6">
-                <div className={`rounded-xl p-3 sm:p-4 border flex flex-wrap items-center justify-between gap-3 text-xs shadow-xs ${
-                  viewMode === 'dark-pattern' ? 'bg-rose-50 border-rose-200 text-rose-900' : 'bg-emerald-50 border-emerald-200 text-emerald-900'
-                }`}>
-                  <div className="flex items-center gap-2 font-medium">
-                    <span className={`w-2.5 h-2.5 rounded-full ${viewMode === 'dark-pattern' ? 'bg-rose-500' : 'bg-emerald-500'}`} />
-                    <span>
-                      <strong>Currently Viewing:</strong>{' '}
-                      {viewMode === 'dark-pattern' ? 'Original Prototype (Reconstructed Fare Choice)' : 'Ethical Redesign (Untested)'}
-                    </span>
-                  </div>
+                {isReview && (
+                  <div className={`rounded-xl p-3 sm:p-4 border flex flex-wrap items-center justify-between gap-3 text-xs shadow-xs ${
+                    viewMode === 'dark-pattern' ? 'bg-rose-50 border-rose-200 text-rose-900' : 'bg-emerald-50 border-emerald-200 text-emerald-900'
+                  }`}>
+                    <div className="flex items-center gap-2 font-medium">
+                      <span className={`w-2.5 h-2.5 rounded-full ${viewMode === 'dark-pattern' ? 'bg-rose-500' : 'bg-emerald-500'}`} />
+                      <span>
+                        <strong>Currently Viewing:</strong>{' '}
+                        {viewMode === 'dark-pattern' ? 'Original Prototype (Reconstructed Fare Choice)' : 'Ethical Redesign (Untested)'}
+                      </span>
+                    </div>
 
-                  <button
-                    onClick={() => setViewMode(viewMode === 'dark-pattern' ? 'ethical' : 'dark-pattern')}
-                    className={`font-bold px-3 py-1 rounded-md transition cursor-pointer ${
-                      viewMode === 'dark-pattern' ? 'bg-rose-200 text-rose-900 hover:bg-rose-300' : 'bg-emerald-200 text-emerald-900 hover:bg-emerald-300'
-                    }`}
-                  >
-                    Switch to {viewMode === 'dark-pattern' ? 'Ethical UI' : 'Original Prototype'} →
-                  </button>
-                </div>
+                    <button
+                      onClick={() => setViewMode(viewMode === 'dark-pattern' ? 'ethical' : 'dark-pattern')}
+                      className={`font-bold px-3 py-1 rounded-md transition cursor-pointer ${
+                        viewMode === 'dark-pattern' ? 'bg-rose-200 text-rose-900 hover:bg-rose-300' : 'bg-emerald-200 text-emerald-900 hover:bg-emerald-300'
+                      }`}
+                    >
+                      Switch to {viewMode === 'dark-pattern' ? 'Ethical UI' : 'Original Prototype'} →
+                    </button>
+                  </div>
+                )}
                 {renderFlights(viewMode)}
               </div>
             )
@@ -204,15 +246,16 @@ export default function App() {
           )}
         </main>
 
-        <NewsletterFooter />
       </div>
 
-      <DarkPatternInspector
-        isOpen={isAuditModalOpen}
-        onClose={() => setIsAuditModalOpen(false)}
-        selectedPatternId={selectedAuditId}
-        onSelectPattern={setSelectedAuditId}
-      />
+      {isReview && (
+        <DarkPatternInspector
+          isOpen={isAuditModalOpen}
+          onClose={() => setIsAuditModalOpen(false)}
+          selectedPatternId={selectedAuditId}
+          onSelectPattern={setSelectedAuditId}
+        />
+      )}
     </div>
   );
 }

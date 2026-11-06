@@ -15,7 +15,7 @@ interface ExtraOption<T> {
 }
 
 function ExtraChoices<T extends string | number>({
-  name, title, description, options, value, onChange,
+  name, title, description, options, value, onChange, onReselect,
 }: {
   name: string;
   title: string;
@@ -23,6 +23,7 @@ function ExtraChoices<T extends string | number>({
   options: readonly ExtraOption<T>[];
   value: T;
   onChange?: (value: T) => void;
+  onReselect?: () => void;
 }) {
   return (
     <fieldset aria-labelledby={`${name}-title`} className={panel}>
@@ -40,6 +41,7 @@ function ExtraChoices<T extends string | number>({
               value={option.value}
               checked={value === option.value}
               onChange={() => onChange?.(option.value)}
+              onClick={value === option.value ? onReselect : undefined}
               className="mt-0.5 size-4 shrink-0 scroll-mt-48 accent-[#073590]"
             />
             <span className="min-w-0 flex-1">
@@ -94,7 +96,8 @@ export function EthicalExtrasStep({
   selectedParking = 'none', onSelectParking, selectedCarHire = 'none', onSelectCarHire,
   bookingTotal, onBack, onNext, activeSubStep = 'all', onSubStepChange,
 }: ExtrasStepProps) {
-  const hasExtras = (fastTrackSelected && !fastTrackIncluded) || insurancePlan !== 'none'
+  const selectedInsurance = insurancePlan ?? 'none';
+  const hasExtras = (fastTrackSelected && !fastTrackIncluded) || selectedInsurance !== 'none'
     || prepaidCredit > 0 || selectedParking !== 'none' || selectedCarHire !== 'none';
 
   const showAirport = activeSubStep === 'all' || activeSubStep === 'airport';
@@ -190,7 +193,8 @@ export function EthicalExtrasStep({
             )}
             <ExtraChoices
               name="insurance" title="Travel insurance" description="Total premium for one traveller. Annual cover is priced for one year."
-              options={insuranceOptions} value={insurancePlan} onChange={onSelectInsurance}
+              options={insuranceOptions} value={selectedInsurance} onChange={onSelectInsurance}
+              onReselect={insurancePlan === null ? () => onSelectInsurance('none') : undefined}
             />
             <ExtraChoices
               name="credit" title="Prepaid onboard credit" description="Use credit for food, drinks or other purchases on board."
