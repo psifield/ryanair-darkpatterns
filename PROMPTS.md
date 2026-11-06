@@ -213,8 +213,6 @@ GUARDRAILS: Front-end only. Keep all 9 automated tests passing. Do not alter exi
 
 ### Verify the checklist
 
-*Edited user input*
-
 ~~~text
 A teammate raised the following issues while checking the prototype against the term paper requirements. Please verify which reports are reproducible before implementing any fixes. You may run independent checks in parallel if helpful.
 
@@ -238,8 +236,6 @@ The audit checked the local build at `ea9e724` and the public demo. Eleven repor
 
 ### Set priorities and prepare a handoff
 
-*Edited user input*
-
 ~~~text
 Please group the issues into highest, medium, and low priorities. We can implement the highest-priority fixes in later turns in this chat. Prepare a handoff for the medium- and low-priority items so they can be addressed in a follow-up chat.
 ~~~
@@ -248,7 +244,6 @@ The highest-priority list covered #1–5, #7, and #8, which affect submission re
 
 ### Implement participant entry, consent and debrief
 
-*Edited user input*
 
 ~~~text
 Please implement #1, #2, #3, and #7 in this pass. I would like to work through the highest-priority items in smaller groups to keep this chat manageable.
@@ -262,7 +257,8 @@ Confirming a fare enables **View debrief** while keeping fare information availa
 
 ### Check preview access and A/B assignment
 
-*Edited user input* “The local preview does not open in either the in-app browser or my external browser. Please check it.”
+
+“The local preview does not open in either the in-app browser or my external browser. Please check it.”
 
 The local preview server had stopped. Codex started it again on port 3000 and confirmed that the consent screen opened in the in-app browser.
 
@@ -273,8 +269,6 @@ Slides 11 and 39 of the term paper brief specify the direct A/B links and a pers
 ---
 
 ## Entry 11 - fictional branding, footer privacy and Basic continuation · 2026-11-06, time not captured · sent by Xianlong · Codex
-
-*Edited user input*
 
 ~~~text
 Please finish the remaining highest-priority issues, #4, #5, and #8. Once they are verified, draft a concise WhatsApp message for the group that explains what changed for each issue. Include the draft and a record of the completed work in the handoff.
@@ -293,7 +287,7 @@ The handoff adopted the original 1–12 numbering. At this checkpoint, #6 and #9
 ## Entry 12 - participant scarcity, insurance and fare inclusions · 2026-11-07 · sent by Xianlong · Codex
 
 ~~~text
-we'll do the medium priority tasks in this chat, and hopefully the low priority ones as well after if the context window allows.
+“Please read the prototype follow-up handoff and work through the medium-priority items (#9–12) in this chat. If the context window allows, continue with the low-priority README task (#6).”
 ~~~
 
 For #9, both pilot arms omit the simulated seats-left cue. The pilot tests three fare-choice designs, so keeping availability copy out of both arms avoids introducing another difference. Original review retains the example for discussion.
@@ -302,5 +296,11 @@ For #10 and #11, the cart and Review use the same pricing calculation. A presele
 
 For #12, both variants offer seats in row 18 and the first 10 kg cabin bag within the £189.86 Regular fare. A paid seat and a second bag bring the return total to £227.86 before insurance. Basic with a paid reservation and one cabin bag totals £169.36.
 
-*Verification* All 26 tests, TypeScript, the production build, and 11 local Edge scenarios passed. For #6, five fresh Edge sessions on 7 November 2026 (SGT) verified the published A and B links, the bare link's saved assignment, the full review demo, and direct entry to review in B. A fresh link check is pending for the next release. [README](README.md) · [Handoff](docs/prototype-followup-handoff.md)
+*Verification* Locally, all 26 tests, the TypeScript check, the production build, and 11 Edge scenarios passed.
+
+*Edited follow-up* “Please move on to #6, the low-priority README task. It is the only item left.”
+
+The README lists the direct links for A and B, the bare link for a saved random assignment, and the review link for the full booking demo.
+
+*Verification* Five fresh Edge sessions on 7 November 2026 (SGT) verified the published A and B links, the bare link's saved assignment, the full review demo, and direct entry to review in B. A fresh link check is pending for the next release. [README](README.md) · [Handoff](docs/prototype-followup-handoff.md)
 
