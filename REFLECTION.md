@@ -4,6 +4,7 @@
 **Project:** Ryanair Fare Bundle and Ancillary Decision Architecture  
 **Group Members:** Aishan [AS], Roy [RO], Xianlong [XL], Zinuo [ZN]  
 **Repository:** https://github.com/psifield/ryanair-darkpatterns  
+**Live Application:** https://ryanair-darkpatterns.vercel.app/  
 **Date:** 5 November 2026
 
 ---
@@ -12,7 +13,7 @@
 
 Auditing Ryanair's desktop flow to construct ethical Variant B required shifting from usability to decision architecture. While heuristic evaluation asks whether screens block tasks ("Can people do what they came to do?"), a behavioral audit asks, "Which choice does this screen make easy, for whom and through which principle?" [AS]. Course frameworks (Week 4 framing, Week 7 fluency, Week 9 norms) classified interventions as nudge, sludge or grey by evaluating whose goal wins [AS, ZN].
 
-Our first obstacle was methodological: an early Variant B prototype was committed (`5579bef`) prior to our formal audit [RO, XL]. Auditing after an artifact exists risks retrospective rationalization (HARKing). Rather than pretending the audit preceded the build (course trap: "AUDIT.md written after the build"), we preserved integrity [AS, ZN], isolating prototype assumptions into `AUDIT.md` (`Added after building`) while freezing prospective hypotheses and testing boundaries.
+Our first obstacle was methodological: an early Variant B prototype was committed (`5579bef`) prior to our formal audit [RO, XL]. Auditing after an artifact exists risks retrospective rationalization. Rather than pretending the audit preceded the build (course trap: "AUDIT.md written after the build"), we preserved integrity [AS, ZN], isolating prototype assumptions into `AUDIT.md` (`Added after building`) while freezing prospective hypotheses and testing boundaries.
 
 Choice architecture is empirical science rather than cosmetic styling. To avoid "A prettier B" (restyling while leaving decisions unchanged), ethical design changes what choosers see at the moment of choice [RO, XL]. We audited for good existing nudges kept: Ryanair's cabin bag diagram under the seat (40 x 20 x 25 cm) was preserved because it sets clear expectations and reduces boarding friction without deception [AS].
 
