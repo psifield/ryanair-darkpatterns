@@ -427,9 +427,9 @@ WHAT TO BUILD:
 
 GUARDRAILS: Front-end only. Do not break test assertions in `study-entry.test.tsx` and `booking-followup.test.tsx`.
 
-*What came back:* AI Studio implemented `maxStepReached` gating in `App.tsx` and `BookingStepper.tsx`, added URL synchronization via a `useEffect` hook with `replaceState`, and expanded query resolution in `studyEntry.ts` and `main.tsx`.
+*What came back:* AI Studio implemented `maxStepReached` gating in `App.tsx` and `BookingStepper.tsx`, added URL synchronization via a `useEffect` hook with `replaceState` and expanded query resolution in `studyEntry.ts` and `main.tsx`.
 
-*Our judgement, and what we changed next:* Verified that clicking future steps such as "Review & Pay" directly from "Flights" is disabled. Advancing through each step unlocks subsequent steps sequentially, and users can freely click back to prior steps. Switching between versions updates the address bar instantaneously without page reloads, allowing deep-linking and bookmarking. All 26 automated unit tests passed.
+*Our judgement, and what we changed next:* Verified that clicking future steps such as "Review & Pay" directly from "Flights" is disabled. Advancing through each step unlocks subsequent steps sequentially and users can freely click back to prior steps. Switching between versions updates the address bar instantaneously without page reloads, allowing deep-linking and bookmarking. All 26 automated unit tests passed.
 
 *Principle check:* Week 10, Usability Principles (Error Prevention, Sequential Task Workflows and Visibility of System Status); Week 4, Drip Pricing Architecture (replicating airline funnel pacing).
 
@@ -456,10 +456,37 @@ WHAT TO BUILD:
 
 GUARDRAILS: Front-end only. Ensure identical guidance behavior across Version A, Version B and Side-by-Side views. Do not commit or push to remote until requested.
 
-*What came back:* AI Studio built the floating contextual guidance popup with `role="alert"` and auto-dismiss in `BookingStepper.tsx`, updated step badges to display clean step indicators instead of lock icons, and wired `handleResetSimulation` to reset state to the flights step while strictly preserving the active variant.
+*What came back:* AI Studio built the floating contextual guidance popup with `role="alert"` and auto-dismiss in `BookingStepper.tsx`, updated step badges to display clean step indicators instead of lock icons and wired `handleResetSimulation` to reset state to the flights step while strictly preserving the active variant.
 
 *Our judgement, and what we changed next:* Verified that clicking ahead on any locked tab now displays friendly, actionable guidance explaining what must be completed first, behaving consistently across all variants. Tested "Reset Simulation" on Version B; it now returns directly to the Flights screen in Version B with all selections cleared, without dumping the user into the comparison view. All 26 automated unit tests passed and TypeScript compiled with 0 errors.
 
 *Principle check:* Week 10, Usability Principles (Help Users Recognize, Diagnose & Recover from Errors; Informative Feedback over Hard Dead-Ends; Consistency & Standards between variants); Week 4, Reference Framing (preserving participant test conditions on reset).
 
+---
 
+## Entry 19 - pre-submission audit, documentation synchronization and banner debrief access · 2026-11-07, 08:34 · sent by Roy · AI Studio
+
+~~~text
+“what other thing do you think i am missing?”
+
+“sure.”
+~~~
+
+GOAL: Audit project state against MGMT 6108 requirements, correct `README.md` routing table, ensure style consistency across documentation, synchronize `REFLECTION.md` and provide ubiquitous study debrief access.
+
+CONTEXT: Final review of submission materials, grading entry points and project constraints.
+
+WHAT TO BUILD:
+- In `README.md`, update the entry links table to clarify that the root URL (`/`) defaults to the Review and comparison demo, while `/?mode=participant` hosts the randomized pilot assignment.
+- Audit and refine text style consistency across `README.md`, `docs/prototype-followup-handoff.md`, `REFLECTION.md` and `PROMPTS.md`.
+- In `REFLECTION.md`, update Section 2 and Section 6 to document all 19 prompt entries and record follow-up navigation contributions.
+- In `src/App.tsx`, add a direct "Study Debrief" button to the persistent participant banner so testers on Seats, Bags, or Extras can open the debrief at any step.
+- Add `public/assets/aistudio/` to `.gitignore` to keep git status clean of untracked scratch images.
+
+GUARDRAILS: All 26 automated tests must pass. Do not commit or push without explicit approval.
+
+*What came back:* AI Studio updated `README.md` routing descriptions, aligned prose style across the documentation suite, updated `REFLECTION.md` with the full 19 entries, added the persistent study debrief button to the participant top bar and updated `.gitignore`.
+
+*Our judgement, and what we changed next:* Verified that visiting `/` opens the Review and comparison demo directly, `/?mode=participant` launches the randomized pilot, and the study debrief can be opened from any step in participant mode. All 26 automated unit tests passed with 0 TypeScript errors.
+
+*Principle check:* MGMT 6108 Criterion 3 (Informed Consent and Accessible Debriefing); Criterion 4 (Clear Documentation and Reproducible Evaluation).

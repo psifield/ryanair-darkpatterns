@@ -321,6 +321,13 @@ export default function App({ entry, initialViewMode }: AppProps) {
             )}
             <button
               type="button"
+              onClick={() => setStudyStage('debrief')}
+              className="font-bold text-white bg-blue-800 hover:bg-blue-700 px-2.5 py-1 rounded transition cursor-pointer"
+            >
+              Study Debrief
+            </button>
+            <button
+              type="button"
               onClick={() => {
                 setModeOverride('review');
                 setViewMode('side-by-side');

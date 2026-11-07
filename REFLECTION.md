@@ -17,7 +17,7 @@ The course's warning about "A prettier B" pushed us to look at what travelers sa
 
 ## 2. How our prompts changed [RO, XL]
 
-We used Google Stitch to scaffold the prototype and OpenAI Codex for the fare tables. Google AI Studio helped with the React logic. The nine entries in `PROMPTS.md` record what we asked for and how we assessed the results [RO, XL].
+We used Google Stitch to scaffold the prototype and OpenAI Codex for the fare tables. Google AI Studio helped with the React logic. The nineteen entries in `PROMPTS.md` record what we asked for and how we assessed the results [RO, XL].
 
 ### Broad requests (entries 1 to 4) [RO, AS]
 
@@ -30,6 +30,10 @@ We adopted RGOGC and began specifying what each component should do [XL]. Entry 
 ### Comparing the same choices (entry 9) [RO]
 
 Original divided Extras into two stages (`1. Airport & trip`, `2. Transport & parking`), while Ethical showed everything together. We moved the sub-step state into `BookingAddOnView` so the tabs would switch together. We also mirrored selections so reviewers could see how each version presented the same choice at the same time [RO].
+
+### Follow-up testing and step navigation (entries 10 to 19) [RO, XL]
+
+Later entries expanded the prototype into a structured participant experiment and tightened booking navigation [RO]. Entries 10 to 12 implemented random pilot arm assignment, informed consent, study debriefs and Alderwake Air re-branding while verifying all 26 automated unit tests [XL]. Entries 13 to 19 addressed edge cases discovered during interactive walkthroughs: keeping study debrief accessible across all steps, synchronizing URL state (`?v=A/B/review`), fixing the simulation reset workflow to preserve the active test arm, replacing disabled stepper tabs with guidance alert popups that prompt participants to complete their current booking step first and harmonizing final documentation [RO].
 
 ## 3. What went wrong with AI-generated work [RO, XL, AS]
 
@@ -82,7 +86,7 @@ Asking travelers to confirm each declined extra in a dialog would add a step to 
 ## 6. Team contributions [AS, RO, XL, ZN]
 
 * Aishan [AS] mapped findings to the Week 4 and Week 7 decks, led mobile testing and wrote the descriptions, severity ratings and drivers for Findings 1 and 2 in `AUDIT.md`.
-* Roy [RO] managed the repository, dependencies and Git workflow. Roy took the lead on prompts for Entries 1 to 5 and Entry 9 and designed how `SideBySideView.tsx` keeps sub-steps and selections in sync.
+* Roy [RO] managed the repository, dependencies and Git workflow. Roy took the lead on prompts for Entries 1 to 5, Entry 9 and Entries 13 to 19, designed how `SideBySideView.tsx` keeps sub-steps and selections in sync and implemented the step navigation guidance popups.
 * Xianlong [XL] consolidated `AUDIT.md` and led the prompts for Entries 6 to 8, including the fare comparison and checkout opt-ins. Xianlong also maintained the tests and TypeScript types.
 * Zinuo [ZN] benchmarked airline practices, led severity scoring and calculated agreement. Zinuo developed hypotheses, guardrails and criteria for rejecting Variant B repairs in the pilot.
 
