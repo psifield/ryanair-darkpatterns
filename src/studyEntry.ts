@@ -19,7 +19,9 @@ export function resolveStudyEntry(
     params.get('mode') === 'review' ||
     params.get('review') === 'true' ||
     params.get('review') === '1' ||
-    params.get('view') === 'comparison'
+    params.get('view') === 'comparison' ||
+    requested === 'review' ||
+    requested === 'comparison'
   ) {
     return { mode: 'review', variant: requested === 'B' ? 'B' : 'A' };
   }

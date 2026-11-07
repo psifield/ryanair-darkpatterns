@@ -31,8 +31,49 @@ export default function App({ entry, initialViewMode }: AppProps) {
   );
   const [deviceView, setDeviceView] = useState<DeviceView>('desktop');
   const [currentStep, setCurrentStep] = useState<BookingStep>('flights');
+  const [maxStepReached, setMaxStepReached] = useState<BookingStep>('flights');
   const stepContentRef = useRef<HTMLElement>(null);
   const debriefButtonRef = useRef<HTMLButtonElement>(null);
+
+  const STEP_ORDER: BookingStep[] = ['flights', 'seats', 'bags', 'extras', 'review'];
+
+  const handleStepChange = (newStep: BookingStep) => {
+    const newIndex = STEP_ORDER.indexOf(newStep);
+    const maxIndex = STEP_ORDER.indexOf(maxStepReached);
+    if (newIndex > maxIndex) {
+      setMaxStepReached(newStep);
+    }
+    setCurrentStep(newStep);
+  };
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.history?.replaceState) return;
+
+    const currentUrl = new URL(window.location.href);
+    let targetV = 'review';
+    if (viewMode === 'dark-pattern' || (!isReview && currentVariant === 'A')) {
+      targetV = 'A';
+    } else if (viewMode === 'ethical' || (!isReview && currentVariant === 'B')) {
+      targetV = 'B';
+    } else if (viewMode === 'side-by-side') {
+      targetV = 'review';
+    }
+
+    if (!isReview) {
+      currentUrl.searchParams.set('mode', 'participant');
+    } else {
+      currentUrl.searchParams.delete('mode');
+      currentUrl.searchParams.delete('review');
+      currentUrl.searchParams.delete('view');
+    }
+
+    currentUrl.searchParams.set('v', targetV);
+
+    const newSearch = currentUrl.search;
+    if (window.location.search !== newSearch) {
+      window.history.replaceState(null, '', `${window.location.pathname}${newSearch}${window.location.hash}`);
+    }
+  }, [isReview, viewMode, currentVariant]);
 
   useEffect(() => {
     if (isReview && viewMode !== 'side-by-side' && currentStep === 'flights') return;
@@ -96,6 +137,8 @@ export default function App({ entry, initialViewMode }: AppProps) {
   const handleResetFlights = () => {
     setOutboundSelected(false);
     setInboundSelected(false);
+    setConfirmedFare(null);
+    setMaxStepReached('flights');
   };
 
   const handleSelectTier = (tier: FareTierId) => {
@@ -108,7 +151,7 @@ export default function App({ entry, initialViewMode }: AppProps) {
   const handleContinueFromFare = (tier: FareTierId) => {
     setSelectedTier(tier);
     if (isReview) {
-      setCurrentStep('seats');
+      handleStepChange('seats');
     } else {
       setConfirmedFare(tier);
     }
@@ -161,7 +204,7 @@ export default function App({ entry, initialViewMode }: AppProps) {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setCurrentStep('seats')}
+                  onClick={() => handleStepChange('seats')}
                   className="min-h-11 cursor-pointer rounded-lg border border-[#073590] bg-white px-4 py-2.5 text-sm font-semibold text-[#073590] hover:bg-blue-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#073590]"
                 >
                   Continue to Seats &amp; Extras →
@@ -207,7 +250,7 @@ export default function App({ entry, initialViewMode }: AppProps) {
           onBackToFlights={() => setStudyStage('fare')}
           onContinueToBooking={() => {
             setStudyStage('fare');
-            setCurrentStep('seats');
+            handleStepChange('seats');
           }}
           onOpenReviewMode={() => {
             setModeOverride('review');
@@ -270,7 +313,11 @@ export default function App({ entry, initialViewMode }: AppProps) {
       ) : (
         <ComparisonBanner
           viewMode={viewMode}
-          onViewModeChange={setViewMode}
+          onViewModeChange={(mode) => {
+            setViewMode(mode);
+            if (mode === 'dark-pattern') setVariantOverride('A');
+            if (mode === 'ethical') setVariantOverride('B');
+          }}
           deviceView={deviceView}
           onDeviceViewChange={setDeviceView}
           showAuditMarkers={showAuditMarkers}
@@ -288,7 +335,7 @@ export default function App({ entry, initialViewMode }: AppProps) {
       <div className={`flex-1 flex flex-col ${deviceView === 'mobile' ? 'max-w-md mx-auto my-6 border-8 border-slate-900 rounded-[40px] overflow-hidden shadow-2xl bg-white' : 'w-full'}`}>
         <Header
           cartTotal={currentCartTotal}
-          onEditSearch={() => setCurrentStep('flights')}
+          onEditSearch={() => handleStepChange('flights')}
           outboundDate={selectedOutboundDate}
           inboundDate={selectedInboundDate}
         />
@@ -296,8 +343,8 @@ export default function App({ entry, initialViewMode }: AppProps) {
         {(isReview || currentStep !== 'flights') && (
           <BookingStepper
             currentStep={currentStep}
-            onStepChange={setCurrentStep}
-            canNavigateForward={outboundSelected && inboundSelected}
+            maxStepReached={maxStepReached}
+            onStepChange={handleStepChange}
           />
         )}
 
@@ -321,7 +368,11 @@ export default function App({ entry, initialViewMode }: AppProps) {
 
                     <div className="flex items-center gap-2">
                       <button
-                        onClick={() => setViewMode(viewMode === 'dark-pattern' ? 'ethical' : 'dark-pattern')}
+                        onClick={() => {
+                          const nextMode = viewMode === 'dark-pattern' ? 'ethical' : 'dark-pattern';
+                          setViewMode(nextMode);
+                          setVariantOverride(nextMode === 'dark-pattern' ? 'A' : 'B');
+                        }}
                         className={`font-bold px-3 py-1 rounded-md transition cursor-pointer ${
                           viewMode === 'dark-pattern' ? 'bg-rose-200 text-rose-900 hover:bg-rose-300' : 'bg-emerald-200 text-emerald-900 hover:bg-emerald-300'
                         }`}
@@ -347,7 +398,7 @@ export default function App({ entry, initialViewMode }: AppProps) {
               selectedTier={selectedTier}
               bookings={bookings}
               onChangeBooking={changeBooking}
-              onStepChange={setCurrentStep}
+              onStepChange={handleStepChange}
               showAuditMarkers={showAuditMarkers}
               onOpenAuditItem={handleOpenAuditItem}
               onViewDebrief={() => setStudyStage('debrief')}
