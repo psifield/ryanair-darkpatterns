@@ -304,3 +304,162 @@ The README lists the direct links for A and B, the bare link for a saved random 
 
 *Verification* Five fresh Edge sessions on 7 November 2026 (SGT) verified the published A and B links, the bare link's saved assignment, the full review demo, and direct entry to review in B. A fresh link check is pending for the next release. [README](README.md) · [Handoff](docs/prototype-followup-handoff.md)
 
+---
+
+## Entry 13 - debrief navigation, fare selection, seat deselection and state mirroring · 2026-11-07, 04:39 · sent by Roy · AI Studio
+
+~~~text
+“some issues i did while testing.
+A/B/Random: doesn't seem to proceed past the flight page, no back button for debrief, have to refresh the page to go back.
+Review demo: original prototype the choose your fare buttons doesn't seem to work, can't seem to deselect seat reservation.
+Mirroring: if you go through either of the variants first, it doesn't seem to mirror to each other, hence if you were to go to the side by side view, price breakdown might be diff
+could the main homepage be the review (comparison)?”
+~~~
+
+GOAL: Address issues encountered during interactive user testing across debrief return routing, fare confirmation buttons, seat deselection and add-on state mirroring between comparison views.
+
+CONTEXT: Evaluator testing flight selection and checkout across Version A, Version B and Side-by-Side comparison views.
+
+WHAT TO BUILD:
+- Provide back navigation on the StudyScreen debrief card so users can return to the prototype without browser refreshing.
+- Ensure fare selection buttons on the original prototype register clicks and allow proceeding into subsequent booking steps.
+- Enable toggling off/deselection for reserved seats on the seat map.
+- Mirror add-on choices between Version A and Version B so price breakdowns match when opening side-by-side mode.
+- Set the default landing experience to the Review & Comparison demo for evaluators.
+
+GUARDRAILS: Front-end only. Keep all automated tests passing. Retain ethical consent for participant entry.
+
+*What came back:* AI Studio added `← Back to flight selection` and `Continue booking demo (Seats, Bags & Extras) →` buttons on `StudyScreen.tsx`, updated `SeatsStep.tsx` to permit clicking an already-selected seat to toggle back to unselected, unified add-on state synchronization across both prototype arms and set the root entry point to launch directly into the comparison view.
+
+*Our judgement, and what we changed next:* Verified that clicking debrief no longer traps participants on a terminal screen without a back pathway. Confirmed that seat selection can now be cleared cleanly and add-on choices made in single views persist into the side-by-side comparison. All 26 automated unit tests passed.
+
+*Principle check:* Week 10, Usability Principles (User Control & Freedom, Error Recovery and Visibility of System Status); Week 4, Reference Framing (ensuring equal starting baseline across comparative views).
+
+---
+
+## Entry 14 - manual fare continue, landing default and contextual version switching · 2026-11-07, 04:52 · sent by Roy · AI Studio
+
+~~~text
+“okay.. for the choose your fare section.. is it possible to not go directly to next step? i want it to show like selected instead, then manually go next by clicking the button.
+
+Also, i think the initial page is starts at version b.. can i make it start the review/comparison page? i do like the top right that shows switch to ..., but maybe include switch to A and switch to B as well?
+
+make it so that you can't switch to current version. for example: i can see active participant sesion version b, make it only able to switch to A and switch to review/comparison”
+~~~
+
+GOAL: Prevent automatic step advancement upon clicking fare cards, default landing to the side-by-side comparison page and implement contextual version switchers that exclude the active version.
+
+CONTEXT: Usability testing of fare selection in Version A and navigation headers across participant and review sessions.
+
+WHAT TO BUILD:
+- Update `FareSelectionDark.tsx` so clicking a fare card marks it as selected (`✓ Selected` badge and card highlight) without auto-advancing, accompanied by a bottom `Continue with [Selected Fare] →` confirmation action.
+- Update `src/main.tsx` to initialize `initialViewMode="side-by-side"` for root visits while honoring explicit `?v=...` overrides.
+- In the top participant header, provide contextual switch actions: when viewing Version B, show "Switch to Version A" and "Switch to Review & Side-by-Side Comparison"; when viewing Version A, show "Switch to Version B" and "Switch to Review & Side-by-Side Comparison". Prevent showing a button to switch to the already active version.
+
+GUARDRAILS: Front-end only. Preserve upsell modal logic for Basic fare in Version A. Maintain test suite compatibility.
+
+*What came back:* AI Studio reworked `FareSelectionDark.tsx` to separate selection state from step progression, added the bottom manual continue bar, configured `main.tsx` to land on `side-by-side` by default and updated `App.tsx` with contextual version buttons that only allow switching to alternative views.
+
+*Our judgement, and what we changed next:* Tested the fare selection flow on Version A; clicking Basic, Regular, Plus or Flexi Plus now highlights the column and updates the price without jarringly jumping to seats until the user deliberately clicks continue. Confirmed that the top banner no longer displays redundant self-referential switch buttons. All 26 automated unit tests passed.
+
+*Principle check:* Week 10, Usability Principles (User Control & Freedom, Preventing Unintended State Transitions); Week 7, Processing Fluency (deliberate confirmation vs disruptive auto-navigation).
+
+---
+
+## Entry 15 - participant banner debrief cleanup · 2026-11-07, 05:00 · sent by Roy · AI Studio
+
+GOAL: Clarify the ethical role of study debriefing under MGMT 6108 rubric Criterion 3 and remove confusing persistent debrief buttons from mid-flow headers.
+
+CONTEXT: Participant session navigation and experimental ethics requirements.
+
+WHAT TO BUILD:
+- Remove the persistent "Study Debrief" button from the top participant banner to prevent participants from viewing experimental disclosures mid-task.
+- Ensure the header remains focused solely on session status and variant switching.
+
+GUARDRAILS: Front-end only. Keep debrief access available at appropriate post-task decision milestones.
+
+*What came back:* AI Studio removed the persistent debrief button from the participant header in `App.tsx`, preserving unblinded disclosures for post-decision screens.
+
+*Our judgement, and what we changed next:* Confirmed that having a persistent debrief link in the header was poor experimental hygiene because reading the debrief mid-booking contaminates participant behavior. An ethical debrief belongs at the conclusion of a task, not as an omnipresent navigation tab. Next step is ensuring debrief access is placed logically both after the fare choice and at the end of the full booking journey.
+
+*Principle check:* Week 10, Research Ethics & Experimental Protocol (MGMT 6108 Criterion 3: unblinding participants post-task without contaminating live choices); Week 10, Usability Principles (Aesthetic & Minimalist Design).
+
+---
+
+## Entry 16 - end-of-booking debrief placement and journey return · 2026-11-07, 05:06 · sent by Roy · AI Studio
+
+GOAL: Position debrief access points to support both the focused fare-decision test and the extended five-step booking checkout flow.
+
+CONTEXT: Participants completing the entire booking journey to the final confirmation screen.
+
+WHAT TO BUILD:
+- Add a prominent "View Study Debrief & Findings →" button on the Booking Confirmed screen in `ReviewStep.tsx`.
+- Pass debrief trigger callbacks through `SideBySideView.tsx` and `BookingAddOnView`.
+- Update back navigation on `StudyScreen.tsx` to read `← Return to booking` to accommodate returning from either the flight step or the final checkout step.
+
+GUARDRAILS: Front-end only. Keep existing fare page debrief intact for evaluators testing only the fare decision.
+
+*What came back:* AI Studio added `onViewDebrief` support to `ReviewStep.tsx` and `SideBySideView.tsx`, rendered the debrief CTA alongside `Reset Simulation` on the confirmation screen and generalized the return label on `StudyScreen.tsx`.
+
+*Our judgement, and what we changed next:* Tested both participant pathways: participants who conclude after the return fare decision see the debrief trigger on the flight screen, while participants who continue through seats, bags and extras can view the debrief upon completing checkout. All 26 automated unit tests passed.
+
+*Principle check:* MGMT 6108 Criterion 3, Ethical Debriefing across varying task endpoints; Week 10, Usability Principles (Flexibility & Efficiency of Use).
+
+---
+
+## Entry 17 - sequential step completion gating and variant URL synchronization · 2026-11-07, 05:12 · sent by Roy · AI Studio
+
+~~~text
+“also, make it so that you can't go to the next step without finishing a step.. for example.. i can just click on the review&pay tab, and it brings me to the end. it should replicate what flight purchasement workflow looklike.
+
+and, i believe the ?v=A/B/review.. doesn't seem to change in the url when i switch to a certain version.. maybe because they are tab based and rendered in the same session?”
+~~~
+
+GOAL: Enforce realistic sequential step progression in `BookingStepper.tsx` and dynamically synchronize URL parameters (`?v=A`, `?v=B`, `?v=review`) during in-app variant switching.
+
+CONTEXT: Booking funnel progression rules and browser address bar state reflection.
+
+WHAT TO BUILD:
+- Track `maxStepReached` in `App.tsx` and prevent skipping ahead to unreached steps in `BookingStepper.tsx`.
+- Enable backward navigation to any previously completed step while keeping future unreached steps locked until the active step is finished.
+- Add active URL synchronization via `window.history.replaceState` so switching between Version A, Version B and Review updates the query string to `?v=A`, `?v=B` and `?v=review`.
+- Update `studyEntry.ts` and `main.tsx` to support deep-linking directly into `?v=review`, `?v=A` and `?v=B`.
+
+GUARDRAILS: Front-end only. Do not break test assertions in `study-entry.test.tsx` and `booking-followup.test.tsx`.
+
+*What came back:* AI Studio implemented `maxStepReached` gating in `App.tsx` and `BookingStepper.tsx`, added URL synchronization via a `useEffect` hook with `replaceState`, and expanded query resolution in `studyEntry.ts` and `main.tsx`.
+
+*Our judgement, and what we changed next:* Verified that clicking future steps such as "Review & Pay" directly from "Flights" is disabled. Advancing through each step unlocks subsequent steps sequentially, and users can freely click back to prior steps. Switching between versions updates the address bar instantaneously without page reloads, allowing deep-linking and bookmarking. All 26 automated unit tests passed.
+
+*Principle check:* Week 10, Usability Principles (Error Prevention, Sequential Task Workflows and Visibility of System Status); Week 4, Drip Pricing Architecture (replicating airline funnel pacing).
+
+---
+
+## Entry 18 - interactive step guidance popups and clean simulation reset · 2026-11-07, 08:11 · sent by Roy · AI Studio
+
+~~~text
+“fix "reset simulation" as well as it only brings me back to the review & pay screen. i believe it also brings to the side by side comparison and not the test (variant b)”
+
+“okay, instead of like just showing it as locked for each of the tabs.. maybe have an indicator, maybe popup? that says that to please complete which ever steps you're in first before they are able to proceed. remeber that this should be consistent with all the variants”
+~~~
+
+GOAL: Replace static lock icons with interactive contextual guidance popups in `BookingStepper.tsx` and fix "Reset Simulation" to return to the Flights step while preserving the active test variant.
+
+CONTEXT: Stepper interaction feedback and checkout simulation reset handling.
+
+WHAT TO BUILD:
+- In `BookingStepper.tsx`, replace static disabled lock styling with clickable tabs and an interactive floating guidance popup.
+- When an upcoming unreached step is clicked, display a floating notification banner: *"Please complete the [Current Step] step first before proceeding to [Target Step]"*, along with actionable guidance on what is required on the current screen.
+- Include a manual dismiss button and a 5-second automatic dismiss timer on the guidance popup.
+- Connect `onResetSimulation` from `ReviewStep.tsx` through `BookingAddOnView` to `App.tsx`.
+- In `handleResetSimulation`, return to `currentStep = 'flights'`, reset `maxStepReached`, clear all ancillary bookings and preserve the active variant (`ethical` / Variant B or `dark-pattern` / Variant A) rather than redirecting to the side-by-side comparison view.
+
+GUARDRAILS: Front-end only. Ensure identical guidance behavior across Version A, Version B and Side-by-Side views. Do not commit or push to remote until requested.
+
+*What came back:* AI Studio built the floating contextual guidance popup with `role="alert"` and auto-dismiss in `BookingStepper.tsx`, updated step badges to display clean step indicators instead of lock icons, and wired `handleResetSimulation` to reset state to the flights step while strictly preserving the active variant.
+
+*Our judgement, and what we changed next:* Verified that clicking ahead on any locked tab now displays friendly, actionable guidance explaining what must be completed first, behaving consistently across all variants. Tested "Reset Simulation" on Version B; it now returns directly to the Flights screen in Version B with all selections cleared, without dumping the user into the comparison view. All 26 automated unit tests passed and TypeScript compiled with 0 errors.
+
+*Principle check:* Week 10, Usability Principles (Help Users Recognize, Diagnose & Recover from Errors; Informative Feedback over Hard Dead-Ends; Consistency & Standards between variants); Week 4, Reference Framing (preserving participant test conditions on reset).
+
+
