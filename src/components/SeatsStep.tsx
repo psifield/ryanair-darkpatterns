@@ -114,7 +114,18 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
         <h3 className="text-sm font-bold text-gray-800">Cabin layout</h3>
 
         <div className="max-w-xs mx-auto bg-gray-50 border border-gray-200 rounded-2xl p-4 space-y-3">
-          <div className="text-[11px] font-bold text-gray-600 uppercase tracking-wider">Rows 15–18</div>
+          <div className="flex items-center justify-between text-[11px] font-bold text-gray-600 uppercase tracking-wider">
+            <span>Rows 15–18</span>
+            {selectedSeat && selectedSeat !== RANDOM_SEAT && (
+              <button
+                type="button"
+                onClick={() => onSelectSeat(RANDOM_SEAT)}
+                className="text-[11px] font-semibold text-rose-600 hover:text-rose-800 underline lowercase first-letter:uppercase cursor-pointer"
+              >
+                Deselect seat
+              </button>
+            )}
+          </div>
           {seats.map(seat => {
             const price = getSeatPrice(fare, seat);
             const selected = selectedSeat === seat;
@@ -122,15 +133,16 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
               <button
                 key={seat}
                 aria-pressed={selected}
-                onClick={() => onSelectSeat(seat)}
+                onClick={() => onSelectSeat(selected ? RANDOM_SEAT : seat)}
+                title={selected ? 'Click to deselect seat' : undefined}
                 className={`min-h-11 w-full py-2.5 px-3 rounded-lg text-xs font-bold transition flex items-center justify-between cursor-pointer ${
                   selected
-                    ? 'bg-[#073590] text-white shadow-xs'
+                    ? 'bg-[#073590] text-white shadow-xs ring-2 ring-[#073590] ring-offset-1'
                     : 'bg-white border border-gray-300 text-gray-700 hover:border-[#073590]'
                 }`}
               >
                 <span>Seat {seat}</span>
-                <span>{selected && 'Selected · '}{price > 0 ? `+£${price.toFixed(2)}` : 'Included'}</span>
+                <span>{selected ? 'Selected · Click to remove' : price > 0 ? `+£${price.toFixed(2)}` : 'Included'}</span>
               </button>
             );
           })}
@@ -143,7 +155,7 @@ export const SeatsStep: React.FC<SeatsStepProps> = ({
               onClick={handleRandomSeat}
               className="text-xs font-bold text-[#073590] hover:underline cursor-pointer"
             >
-              I'll take a free random seat
+              {selectedSeat === RANDOM_SEAT ? '✓ Free random seat chosen' : "I'll take a free random seat"}
             </button>
 
             {isDarkPattern && (

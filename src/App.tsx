@@ -15,7 +15,8 @@ import { StudyScreen } from './components/StudyScreen';
 import type { StudyEntry } from './studyEntry';
 
 export default function App({ entry }: { entry: StudyEntry }) {
-  const isReview = entry.mode === 'review';
+  const [modeOverride, setModeOverride] = useState<'participant' | 'review' | null>(null);
+  const isReview = (modeOverride ?? entry.mode) === 'review';
   const [studyStage, setStudyStage] = useState<'consent' | 'fare' | 'debrief'>('consent');
   const [confirmedFare, setConfirmedFare] = useState<FareTierId | null>(null);
   const [viewMode, setViewMode] = useState<ViewMode>(entry.variant === 'B' ? 'ethical' : 'dark-pattern');
@@ -58,14 +59,27 @@ export default function App({ entry }: { entry: StudyEntry }) {
   }, [confirmedFare, showDebriefAction]);
 
   const changeBooking = (mode: PrototypeMode, changes: Partial<BookingChoices>) => {
-    if (viewMode === 'side-by-side') {
-      setBookings(previous => ({
-        'dark-pattern': { ...previous['dark-pattern'], ...changes },
-        ethical: { ...previous.ethical, ...changes },
-      }));
-    } else {
-      setBookings(previous => ({ ...previous, [mode]: { ...previous[mode], ...changes } }));
-    }
+    setBookings(previous => {
+      const passengerChanges = { ...changes };
+      delete passengerChanges.newsletterOptIn;
+
+      return {
+        'dark-pattern': {
+          ...previous['dark-pattern'],
+          ...passengerChanges,
+          ...(changes.newsletterOptIn !== undefined && (viewMode === 'side-by-side' || mode === 'dark-pattern')
+            ? { newsletterOptIn: changes.newsletterOptIn }
+            : {}),
+        },
+        ethical: {
+          ...previous.ethical,
+          ...passengerChanges,
+          ...(changes.newsletterOptIn !== undefined && (viewMode === 'side-by-side' || mode === 'ethical')
+            ? { newsletterOptIn: changes.newsletterOptIn }
+            : {}),
+        },
+      };
+    });
   };
 
   const handleToggleOutbound = () => setOutboundSelected(!outboundSelected);
@@ -77,15 +91,24 @@ export default function App({ entry }: { entry: StudyEntry }) {
 
   const handleSelectTier = (tier: FareTierId) => {
     setSelectedTier(tier);
-    if (!isReview) setConfirmedFare(viewMode === 'dark-pattern' && tier !== 'BASIC' ? tier : null);
     if (viewMode === 'dark-pattern' && tier === 'BASIC') {
       setShowUpsellModal(true);
+      return;
+    }
+    if (isReview) {
+      handleContinueFromFare(tier);
+    } else {
+      setConfirmedFare(tier);
     }
   };
 
   const handleContinueFromFare = (tier: FareTierId) => {
-    if (isReview) setCurrentStep('seats');
-    else setConfirmedFare(tier);
+    setSelectedTier(tier);
+    if (isReview) {
+      setCurrentStep('seats');
+    } else {
+      setConfirmedFare(tier);
+    }
   };
 
   const handleConfirmOriginalFare = (tier: FareTierId) => {
@@ -124,14 +147,23 @@ export default function App({ entry }: { entry: StudyEntry }) {
           {showDebriefAction && (
             <section aria-label="Fare choice complete" className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white p-4">
               <p className="text-sm text-slate-700">Keep this screen open for any follow-up questions before viewing the debrief.</p>
-              <button
-                type="button"
-                ref={debriefButtonRef}
-                onClick={() => setStudyStage('debrief')}
-                className="min-h-11 cursor-pointer rounded-lg bg-[#073590] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#052973] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#073590]"
-              >
-                View debrief
-              </button>
+              <div className="flex flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  ref={debriefButtonRef}
+                  onClick={() => setStudyStage('debrief')}
+                  className="min-h-11 cursor-pointer rounded-lg bg-[#073590] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#052973] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#073590]"
+                >
+                  View debrief
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCurrentStep('seats')}
+                  className="min-h-11 cursor-pointer rounded-lg border border-[#073590] bg-white px-4 py-2.5 text-sm font-semibold text-[#073590] hover:bg-blue-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#073590]"
+                >
+                  Continue to Seats &amp; Extras →
+                </button>
+              </div>
             </section>
           )}
           {mode === 'dark-pattern' ? (
@@ -143,6 +175,7 @@ export default function App({ entry }: { entry: StudyEntry }) {
               onCloseUpsellModal={() => setShowUpsellModal(false)}
               onConfirmBasic={() => handleConfirmOriginalFare('BASIC')}
               onSwitchToRegular={() => handleConfirmOriginalFare('REGULAR')}
+              onProceedToNextStep={(tier) => handleContinueFromFare(tier ?? selectedTier)}
               showAuditMarkers={showAuditMarkers}
               onOpenAuditItem={handleOpenAuditItem}
             />
@@ -164,14 +197,58 @@ export default function App({ entry }: { entry: StudyEntry }) {
   if (!isReview && studyStage !== 'fare') {
     return (
       <main ref={stepContentRef} tabIndex={-1} className="grid min-h-screen place-items-center bg-[#f2f5f8] px-4 py-8">
-        <StudyScreen stage={studyStage} variant={entry.variant} onConsent={() => setStudyStage('fare')} />
+        <StudyScreen
+          stage={studyStage}
+          variant={entry.variant}
+          onConsent={() => setStudyStage('fare')}
+          onBackToFlights={() => setStudyStage('fare')}
+          onContinueToBooking={() => {
+            setStudyStage('fare');
+            setCurrentStep('seats');
+          }}
+          onOpenReviewMode={() => {
+            setModeOverride('review');
+            setViewMode('side-by-side');
+            setShowAuditMarkers(true);
+          }}
+        />
       </main>
     );
   }
 
   return (
     <div className="min-h-screen bg-[#f2f5f8] text-[#1b2738] flex flex-col font-sans selection:bg-[#f1c40f] selection:text-[#073590]">
-      {isReview && (
+      {!isReview ? (
+        <aside aria-label="Participant study banner" className="bg-[#073590] text-white px-3 sm:px-6 py-2 text-xs flex flex-wrap items-center justify-between gap-2 shadow-xs">
+          <div className="flex items-center gap-2">
+            <span className="inline-block w-2 h-2 rounded-full bg-emerald-400" />
+            <span className="font-semibold text-blue-100">
+              Active participant session · Version {entry.variant}
+            </span>
+          </div>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setStudyStage('debrief')}
+              className="text-white hover:underline cursor-pointer"
+            >
+              Study Debrief
+            </button>
+            <span className="text-blue-300">|</span>
+            <button
+              type="button"
+              onClick={() => {
+                setModeOverride('review');
+                setViewMode('side-by-side');
+                setShowAuditMarkers(true);
+              }}
+              className="font-bold underline text-yellow-300 hover:text-yellow-200 cursor-pointer"
+            >
+              Switch to Review &amp; Side-by-Side Comparison →
+            </button>
+          </div>
+        </aside>
+      ) : (
         <ComparisonBanner
           viewMode={viewMode}
           onViewModeChange={setViewMode}
@@ -193,7 +270,7 @@ export default function App({ entry }: { entry: StudyEntry }) {
           inboundDate={selectedInboundDate}
         />
 
-        {isReview && (
+        {(isReview || currentStep !== 'flights') && (
           <BookingStepper
             currentStep={currentStep}
             onStepChange={setCurrentStep}

@@ -14,6 +14,7 @@ interface FareSelectionDarkProps {
   onSwitchToRegular: () => void;
   showAuditMarkers?: boolean;
   onOpenAuditItem?: (id: string) => void;
+  onProceedToNextStep?: (tier?: FareTierId) => void;
 }
 
 export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
@@ -26,6 +27,7 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
   onSwitchToRegular,
   showAuditMarkers = false,
   onOpenAuditItem,
+  onProceedToNextStep,
 }) => {
   return (
     <section className="@container pt-2" data-purpose="fare-selection-matrix">
@@ -118,7 +120,10 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
                   />
                 )}
                 <button
-                  onClick={() => onSelectTier('REGULAR')}
+                  onClick={() => {
+                    onSelectTier('REGULAR');
+                    onProceedToNextStep?.('REGULAR');
+                  }}
                   className="w-full bg-[#073590] hover:bg-blue-900 text-white font-bold py-2 sm:py-2.5 px-1 sm:px-2 rounded text-xs transition cursor-pointer"
                 >
                   <span className="block text-xs sm:text-sm font-black">+£29.25</span>
@@ -166,7 +171,10 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
 
               <div className="mt-3 sm:mt-4">
                 <button
-                  onClick={() => onSelectTier('PLUS')}
+                  onClick={() => {
+                    onSelectTier('PLUS');
+                    onProceedToNextStep?.('PLUS');
+                  }}
                   className="w-full bg-[#f1c40f] hover:bg-[#f4b800] text-[#073590] font-black py-2 sm:py-2.5 px-1 sm:px-2 rounded text-xs transition shadow-xs cursor-pointer"
                 >
                   <span className="block text-xs sm:text-sm font-black">+£43.24</span>
@@ -192,7 +200,10 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
 
               <div className="mt-3 sm:mt-4">
                 <button
-                  onClick={() => onSelectTier('FLEXI_PLUS')}
+                  onClick={() => {
+                    onSelectTier('FLEXI_PLUS');
+                    onProceedToNextStep?.('FLEXI_PLUS');
+                  }}
                   className="w-full bg-[#073590] hover:bg-blue-900 text-white font-bold py-2 sm:py-2.5 px-1 sm:px-2 rounded text-xs transition cursor-pointer"
                 >
                   <span className="block text-xs sm:text-sm font-black">+£94.50</span>
@@ -310,6 +321,27 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Selected Fare & Continue Action Bar */}
+      <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-gray-200 bg-white p-4 sm:p-5 mt-4 shadow-xs">
+        <div>
+          <span className="text-xs font-semibold text-gray-500">Selected return fare</span>
+          <p className="text-base font-bold text-gray-900">{FARE_TIERS[selectedTier].name} · £{FARE_TIERS[selectedTier].totalPrice.toFixed(2)}</p>
+        </div>
+        <button
+          type="button"
+          onClick={() => {
+            if (selectedTier === 'BASIC') {
+              onOpenUpsellModal();
+            } else if (onProceedToNextStep) {
+              onProceedToNextStep(selectedTier);
+            }
+          }}
+          className="inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#073590] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#052973] shadow-xs"
+        >
+          Continue with {FARE_TIERS[selectedTier].name} →
+        </button>
       </div>
 
       {/* ========================================================================= */}

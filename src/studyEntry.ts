@@ -15,7 +15,12 @@ export function resolveStudyEntry(
 ): StudyEntry {
   const params = new URLSearchParams(search);
   const requested = params.get('v');
-  if (params.get('mode') === 'review') {
+  if (
+    params.get('mode') === 'review' ||
+    params.get('review') === 'true' ||
+    params.get('review') === '1' ||
+    params.get('view') === 'comparison'
+  ) {
     return { mode: 'review', variant: requested === 'B' ? 'B' : 'A' };
   }
   if (isStudyVariant(requested)) return { mode: 'participant', variant: requested };
