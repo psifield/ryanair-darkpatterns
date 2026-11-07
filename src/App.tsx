@@ -25,7 +25,6 @@ export default function App({ entry, initialViewMode }: AppProps) {
   const isReview = (modeOverride ?? entry.mode) === 'review';
   const currentVariant = variantOverride ?? entry.variant;
   const [studyStage, setStudyStage] = useState<'consent' | 'fare' | 'debrief'>('consent');
-  const [confirmedFare, setConfirmedFare] = useState<FareTierId | null>(null);
   const [viewMode, setViewMode] = useState<ViewMode>(
     initialViewMode ?? (currentVariant === 'B' ? 'ethical' : 'dark-pattern')
   );
@@ -33,7 +32,6 @@ export default function App({ entry, initialViewMode }: AppProps) {
   const [currentStep, setCurrentStep] = useState<BookingStep>('flights');
   const [maxStepReached, setMaxStepReached] = useState<BookingStep>('flights');
   const stepContentRef = useRef<HTMLElement>(null);
-  const debriefButtonRef = useRef<HTMLButtonElement>(null);
 
   const STEP_ORDER: BookingStep[] = ['flights', 'seats', 'bags', 'extras', 'review'];
 
@@ -102,12 +100,6 @@ export default function App({ entry, initialViewMode }: AppProps) {
     ? undefined
     : getBookingPricing(FARE_TIERS[selectedTier], bookings[viewMode], viewMode === 'dark-pattern', currentStep).total;
 
-  const showDebriefAction = !isReview && confirmedFare === selectedTier && outboundSelected && inboundSelected && !showUpsellModal;
-
-  useEffect(() => {
-    if (showDebriefAction) debriefButtonRef.current?.focus();
-  }, [confirmedFare, showDebriefAction]);
-
   const changeBooking = (mode: PrototypeMode, changes: Partial<BookingChoices>) => {
     setBookings(previous => {
       const passengerChanges = { ...changes };
@@ -137,24 +129,12 @@ export default function App({ entry, initialViewMode }: AppProps) {
   const handleResetFlights = () => {
     setOutboundSelected(false);
     setInboundSelected(false);
-    setConfirmedFare(null);
     setMaxStepReached('flights');
-  };
-
-  const handleSelectTier = (tier: FareTierId) => {
-    setSelectedTier(tier);
-    if (!isReview) {
-      setConfirmedFare(tier);
-    }
   };
 
   const handleContinueFromFare = (tier: FareTierId) => {
     setSelectedTier(tier);
-    if (isReview) {
-      handleStepChange('seats');
-    } else {
-      setConfirmedFare(tier);
-    }
+    handleStepChange('seats');
   };
 
   const handleConfirmOriginalFare = (tier: FareTierId) => {
@@ -178,7 +158,6 @@ export default function App({ entry, initialViewMode }: AppProps) {
     }
     setCurrentStep('flights');
     setMaxStepReached('flights');
-    setConfirmedFare(null);
     setSelectedTier('BASIC');
     setShowUpsellModal(false);
     setOutboundSelected(true);
@@ -212,31 +191,9 @@ export default function App({ entry, initialViewMode }: AppProps) {
 
       {(viewMode === 'side-by-side' || (outboundSelected && inboundSelected)) && (
         <div className="space-y-3 pt-2">
-          {showDebriefAction && (
-            <section aria-label="Fare choice complete" className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white p-4">
-              <p className="text-sm text-slate-700">Keep this screen open for any follow-up questions before viewing the debrief.</p>
-              <div className="flex flex-wrap items-center gap-2">
-                <button
-                  type="button"
-                  ref={debriefButtonRef}
-                  onClick={() => setStudyStage('debrief')}
-                  className="min-h-11 cursor-pointer rounded-lg bg-[#073590] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#052973] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#073590]"
-                >
-                  View debrief
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleStepChange('seats')}
-                  className="min-h-11 cursor-pointer rounded-lg border border-[#073590] bg-white px-4 py-2.5 text-sm font-semibold text-[#073590] hover:bg-blue-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#073590]"
-                >
-                  Continue to Seats &amp; Extras →
-                </button>
-              </div>
-            </section>
-          )}
           {mode === 'dark-pattern' ? (
             <FareSelectionDark
-              onSelectTier={handleSelectTier}
+              onSelectTier={setSelectedTier}
               selectedTier={selectedTier}
               showUpsellModal={showUpsellModal}
               onOpenUpsellModal={() => setShowUpsellModal(true)}
@@ -249,7 +206,7 @@ export default function App({ entry, initialViewMode }: AppProps) {
             />
           ) : (
             <FareSelectionEthical
-              onSelectTier={handleSelectTier}
+              onSelectTier={setSelectedTier}
               selectedTier={selectedTier}
               onProceedToNextStep={() => handleContinueFromFare(selectedTier)}
               continueLabel={isReview ? undefined : 'Confirm fare choice'}

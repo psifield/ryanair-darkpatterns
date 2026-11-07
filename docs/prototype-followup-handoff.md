@@ -1,15 +1,15 @@
 # Prototype follow-up handoff
 
-The follow-up builds on the 6 November 2026 audit baseline at `ea9e724`. The pilot ends at fare choice. Use `?mode=review` for the full booking demo. [Pilot protocol](../AUDIT.md)
+The follow-up builds on the 6 November 2026 audit baseline at `ea9e724`. The original pilot ended at fare choice; the current participant demo continues directly to Seats after fare confirmation. Use `?mode=participant&v=A` or `?mode=participant&v=B` for consent and the participant flow, and the root URL for the review and comparison demo. [Original pilot protocol](../AUDIT.md)
 
 ## Participant entry and branding
 
-- **#1** `?v=A` and `?v=B` select the specified participant variant. The bare URL randomly assigns an arm and saves it in browser storage. Explicit links override the saved arm for that visit.
-- **#2 and #3** Consent precedes fare choice. Confirming a fare enables **View debrief** and keeps fares visible for follow-up questions. The debrief names the variant, states that no order was placed and no payment was taken and describes the three studied designs in A.
+- **#1** `?mode=participant&v=A` and `?mode=participant&v=B` select the specified participant variant. `?mode=participant` randomly assigns an arm and saves it in browser storage. Explicit participant links override the saved arm for that visit. The bare URL and `?v=A` / `?v=B` open review mode.
+- **#2 and #3** Consent precedes fare choice. Confirming a fare opens Seats in both modes. The participant banner and booking confirmation offer debrief access. The debrief names the variant, states that no order was placed and no payment was taken and describes the three studied designs in A.
 - **#4** Both variants and the full demo use fictional Alderwake Air branding, a takeoff icon and `ALDW` flight and booking codes. The original screenshots moved from `public/assets/aistudio/` to the repository evidence folder with their original filenames and bytes. Older capture paths in the audit refer to those archived files. [Source captures](../evidence/source-captures/aistudio/)
 - **#5** The footer email signup was removed. The simulated promotional opt-in checkbox at Review is a separate audit element and takes no email address.
 - **#7** Audit markers, variant switching and side-by-side comparison open in the full demo at `?mode=review`.
-- **#8** In that demo, either choice in A's Basic upsell closes it and opens Seats with the chosen fare. In participant mode, fare confirmation enables debrief.
+- **#8** In both participant and review modes, either choice in A's Basic upsell closes it and opens Seats with the chosen fare. B's fare confirmation and quick-continue buttons also open Seats.
 
 All 18 tests, the TypeScript check and the production build passed. Twelve local Edge scenarios covered participant entry, assignment, debrief, branding, the review flow and Basic continuation at desktop and phone widths. The production output excludes the original source captures. [Implementation log](../PROMPTS.md)
 
@@ -23,7 +23,8 @@ All 26 tests, the TypeScript check, the production build and 11 local Edge scena
 
 ## Published status
 
-- **#6** The README lists the four entry links. On 7 November 2026 (SGT), five fresh Edge sessions verified the direct pilot links through consent and debrief, the bare link's saved assignment after a direct override, the full review demo and direct entry to review in B. A fresh link check is pending for the next release. [README](../README.md)
+- **#6 (previous release verification)** On 7 November 2026 (SGT), five fresh Edge sessions verified the direct pilot links through consent and debrief, the bare link's saved assignment after a direct override, the full review demo and direct entry to review in B. A fresh link check is pending for the next release. [README](../README.md)
+- **Navigation correction, 7 November 2026:** Reproduced the participant fare-confirmation problem on both published links in Brave. The fix advances both modes to Seats and removes the fare-complete debrief prompt. All 26 Node tests, 14 browser navigation scenarios, TypeScript and the production build passed. The browser scenarios also check fare totals, keyboard focus and returning from the participant debrief to Seats. The build retains an existing warning about `__dirname` in the Vite config. These checks cover the local build. [Browser regression page](../tests/booking-navigation.html)
 
 ## Prompt log for the follow-up chat
 
