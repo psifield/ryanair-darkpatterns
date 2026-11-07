@@ -16,6 +16,7 @@ interface ReviewStepProps {
   onToggleNewsletter: () => void;
   onBack: () => void;
   onViewDebrief?: () => void;
+  onResetSimulation?: () => void;
 }
 
 export const ReviewStep: React.FC<ReviewStepProps> = ({
@@ -28,6 +29,7 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
   onToggleNewsletter,
   onBack,
   onViewDebrief,
+  onResetSimulation,
 }) => {
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
   const { selectedSeat, additionalLuggage, prepaidCredit, selectedParking, selectedCarHire, newsletterOptIn } = booking;
@@ -77,7 +79,10 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
           )}
           <button
             type="button"
-            onClick={() => setBookingConfirmed(false)}
+            onClick={() => {
+              setBookingConfirmed(false);
+              onResetSimulation?.();
+            }}
             className="bg-[#073590] hover:bg-[#052973] text-white font-bold text-xs px-6 py-2.5 rounded-lg transition cursor-pointer"
           >
             Reset Simulation

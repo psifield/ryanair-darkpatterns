@@ -168,6 +168,28 @@ export default function App({ entry, initialViewMode }: AppProps) {
     setIsAuditModalOpen(true);
   };
 
+  const handleResetSimulation = (mode?: PrototypeMode) => {
+    if (mode === 'ethical' || currentVariant === 'B') {
+      setViewMode('ethical');
+      setVariantOverride('B');
+    } else if (mode === 'dark-pattern' || currentVariant === 'A') {
+      setViewMode('dark-pattern');
+      setVariantOverride('A');
+    }
+    setCurrentStep('flights');
+    setMaxStepReached('flights');
+    setConfirmedFare(null);
+    setSelectedTier('BASIC');
+    setShowUpsellModal(false);
+    setOutboundSelected(true);
+    setInboundSelected(true);
+    setStudyStage('fare');
+    setBookings({
+      'dark-pattern': { ...EMPTY_BOOKING_CHOICES, newsletterOptIn: true },
+      ethical: { ...EMPTY_BOOKING_CHOICES },
+    });
+  };
+
   const renderFlights = (mode: PrototypeMode) => (
     <>
       <FlightSelection
@@ -402,6 +424,7 @@ export default function App({ entry, initialViewMode }: AppProps) {
               showAuditMarkers={showAuditMarkers}
               onOpenAuditItem={handleOpenAuditItem}
               onViewDebrief={() => setStudyStage('debrief')}
+              onResetSimulation={handleResetSimulation}
             />
           )}
         </main>

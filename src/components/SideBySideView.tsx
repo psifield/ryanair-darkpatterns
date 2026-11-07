@@ -50,10 +50,11 @@ interface BookingAddOnViewProps {
   showAuditMarkers: boolean;
   onOpenAuditItem: (id: string) => void;
   onViewDebrief?: () => void;
+  onResetSimulation?: (mode?: PrototypeMode) => void;
 }
 
 export function BookingAddOnView({
-  step, viewMode, selectedTier, bookings, onChangeBooking, onStepChange, showAuditMarkers, onOpenAuditItem, onViewDebrief,
+  step, viewMode, selectedTier, bookings, onChangeBooking, onStepChange, showAuditMarkers, onOpenAuditItem, onViewDebrief, onResetSimulation,
 }: BookingAddOnViewProps) {
   const [extrasSubStep, setExtrasSubStep] = useState<'all' | 'airport' | 'transport'>('airport');
   const fare = FARE_TIERS[selectedTier];
@@ -122,6 +123,7 @@ export function BookingAddOnView({
           onToggleNewsletter={() => update({ newsletterOptIn: !booking.newsletterOptIn })}
           onBack={() => onStepChange('extras')}
           onViewDebrief={onViewDebrief}
+          onResetSimulation={() => onResetSimulation?.(mode)}
         />;
     }
   };
