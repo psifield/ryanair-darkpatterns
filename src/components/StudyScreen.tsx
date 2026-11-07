@@ -67,7 +67,7 @@ export function StudyScreen({
                 onClick={onBackToFlights}
                 className="min-h-11 cursor-pointer rounded-lg border border-slate-300 bg-white px-4 py-2.5 font-semibold text-slate-700 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#073590]"
               >
-                ← Back to flight selection
+                ← Return to booking
               </button>
             )}
             {onContinueToBooking && (

@@ -197,11 +197,11 @@ export default function App({ entry, initialViewMode }: AppProps) {
     </>
   );
 
-  if (!isReview && studyStage !== 'fare') {
+  if (studyStage === 'debrief' || (!isReview && studyStage !== 'fare')) {
     return (
       <main ref={stepContentRef} tabIndex={-1} className="grid min-h-screen place-items-center bg-[#f2f5f8] px-4 py-8">
         <StudyScreen
-          stage={studyStage}
+          stage={studyStage === 'debrief' ? 'debrief' : 'consent'}
           variant={currentVariant}
           onConsent={() => setStudyStage('fare')}
           onBackToFlights={() => setStudyStage('fare')}
@@ -213,6 +213,7 @@ export default function App({ entry, initialViewMode }: AppProps) {
             setModeOverride('review');
             setViewMode('side-by-side');
             setShowAuditMarkers(true);
+            setStudyStage('fare');
           }}
         />
       </main>
@@ -349,6 +350,7 @@ export default function App({ entry, initialViewMode }: AppProps) {
               onStepChange={setCurrentStep}
               showAuditMarkers={showAuditMarkers}
               onOpenAuditItem={handleOpenAuditItem}
+              onViewDebrief={() => setStudyStage('debrief')}
             />
           )}
         </main>

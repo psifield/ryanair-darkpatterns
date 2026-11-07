@@ -49,10 +49,11 @@ interface BookingAddOnViewProps {
   onStepChange: (step: BookingStep) => void;
   showAuditMarkers: boolean;
   onOpenAuditItem: (id: string) => void;
+  onViewDebrief?: () => void;
 }
 
 export function BookingAddOnView({
-  step, viewMode, selectedTier, bookings, onChangeBooking, onStepChange, showAuditMarkers, onOpenAuditItem,
+  step, viewMode, selectedTier, bookings, onChangeBooking, onStepChange, showAuditMarkers, onOpenAuditItem, onViewDebrief,
 }: BookingAddOnViewProps) {
   const [extrasSubStep, setExtrasSubStep] = useState<'all' | 'airport' | 'transport'>('airport');
   const fare = FARE_TIERS[selectedTier];
@@ -120,6 +121,7 @@ export function BookingAddOnView({
           onSelectInsurance={insurancePlan => update({ insurancePlan })}
           onToggleNewsletter={() => update({ newsletterOptIn: !booking.newsletterOptIn })}
           onBack={() => onStepChange('extras')}
+          onViewDebrief={onViewDebrief}
         />;
     }
   };

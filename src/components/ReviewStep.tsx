@@ -15,6 +15,7 @@ interface ReviewStepProps {
   onSelectInsurance: (plan: InsurancePlan) => void;
   onToggleNewsletter: () => void;
   onBack: () => void;
+  onViewDebrief?: () => void;
 }
 
 export const ReviewStep: React.FC<ReviewStepProps> = ({
@@ -26,6 +27,7 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
   onSelectInsurance,
   onToggleNewsletter,
   onBack,
+  onViewDebrief,
 }) => {
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
   const { selectedSeat, additionalLuggage, prepaidCredit, selectedParking, selectedCarHire, newsletterOptIn } = booking;
@@ -63,12 +65,24 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
           </div>
         </div>
 
-        <button
-          onClick={() => setBookingConfirmed(false)}
-          className="bg-[#073590] hover:bg-[#052973] text-white font-bold text-xs px-6 py-2.5 rounded-lg transition cursor-pointer"
-        >
-          Reset Simulation
-        </button>
+        <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+          {onViewDebrief && (
+            <button
+              type="button"
+              onClick={onViewDebrief}
+              className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs px-5 py-2.5 rounded-lg transition cursor-pointer shadow-sm"
+            >
+              View Study Debrief & Findings →
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={() => setBookingConfirmed(false)}
+            className="bg-[#073590] hover:bg-[#052973] text-white font-bold text-xs px-6 py-2.5 rounded-lg transition cursor-pointer"
+          >
+            Reset Simulation
+          </button>
+        </div>
       </div>
     );
   }
