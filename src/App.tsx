@@ -230,14 +230,6 @@ export default function App({ entry, initialViewMode }: AppProps) {
             </span>
           </div>
           <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
-            <button
-              type="button"
-              onClick={() => setStudyStage('debrief')}
-              className="text-white hover:underline cursor-pointer"
-            >
-              Study Debrief
-            </button>
-            <span className="text-blue-300">|</span>
             {currentVariant === 'B' ? (
               <button
                 type="button"
