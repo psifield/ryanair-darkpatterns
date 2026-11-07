@@ -12,14 +12,23 @@ import { BookingAddOnView, SideBySideView } from './components/SideBySideView';
 import { ComparisonBanner } from './components/ComparisonBanner';
 import { DarkPatternInspector } from './components/DarkPatternInspector';
 import { StudyScreen } from './components/StudyScreen';
-import type { StudyEntry } from './studyEntry';
+import type { StudyEntry, StudyVariant } from './studyEntry';
 
-export default function App({ entry }: { entry: StudyEntry }) {
+export interface AppProps {
+  entry: StudyEntry;
+  initialViewMode?: ViewMode;
+}
+
+export default function App({ entry, initialViewMode }: AppProps) {
   const [modeOverride, setModeOverride] = useState<'participant' | 'review' | null>(null);
+  const [variantOverride, setVariantOverride] = useState<StudyVariant | null>(null);
   const isReview = (modeOverride ?? entry.mode) === 'review';
+  const currentVariant = variantOverride ?? entry.variant;
   const [studyStage, setStudyStage] = useState<'consent' | 'fare' | 'debrief'>('consent');
   const [confirmedFare, setConfirmedFare] = useState<FareTierId | null>(null);
-  const [viewMode, setViewMode] = useState<ViewMode>(entry.variant === 'B' ? 'ethical' : 'dark-pattern');
+  const [viewMode, setViewMode] = useState<ViewMode>(
+    initialViewMode ?? (currentVariant === 'B' ? 'ethical' : 'dark-pattern')
+  );
   const [deviceView, setDeviceView] = useState<DeviceView>('desktop');
   const [currentStep, setCurrentStep] = useState<BookingStep>('flights');
   const stepContentRef = useRef<HTMLElement>(null);
@@ -91,13 +100,7 @@ export default function App({ entry }: { entry: StudyEntry }) {
 
   const handleSelectTier = (tier: FareTierId) => {
     setSelectedTier(tier);
-    if (viewMode === 'dark-pattern' && tier === 'BASIC') {
-      setShowUpsellModal(true);
-      return;
-    }
-    if (isReview) {
-      handleContinueFromFare(tier);
-    } else {
+    if (!isReview) {
       setConfirmedFare(tier);
     }
   };
@@ -199,7 +202,7 @@ export default function App({ entry }: { entry: StudyEntry }) {
       <main ref={stepContentRef} tabIndex={-1} className="grid min-h-screen place-items-center bg-[#f2f5f8] px-4 py-8">
         <StudyScreen
           stage={studyStage}
-          variant={entry.variant}
+          variant={currentVariant}
           onConsent={() => setStudyStage('fare')}
           onBackToFlights={() => setStudyStage('fare')}
           onContinueToBooking={() => {
@@ -221,12 +224,12 @@ export default function App({ entry }: { entry: StudyEntry }) {
       {!isReview ? (
         <aside aria-label="Participant study banner" className="bg-[#073590] text-white px-3 sm:px-6 py-2 text-xs flex flex-wrap items-center justify-between gap-2 shadow-xs">
           <div className="flex items-center gap-2">
-            <span className="inline-block w-2 h-2 rounded-full bg-emerald-400" />
+            <span className={`inline-block w-2.5 h-2.5 rounded-full ${currentVariant === 'B' ? 'bg-emerald-400' : 'bg-rose-400'}`} />
             <span className="font-semibold text-blue-100">
-              Active participant session · Version {entry.variant}
+              Active participant session · Version {currentVariant} ({currentVariant === 'A' ? 'Original Prototype' : 'Ethical Redesign'})
             </span>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
             <button
               type="button"
               onClick={() => setStudyStage('debrief')}
@@ -235,6 +238,29 @@ export default function App({ entry }: { entry: StudyEntry }) {
               Study Debrief
             </button>
             <span className="text-blue-300">|</span>
+            {currentVariant === 'B' ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setVariantOverride('A');
+                  setViewMode('dark-pattern');
+                }}
+                className="font-bold text-white bg-blue-800 hover:bg-blue-700 px-2.5 py-1 rounded transition cursor-pointer"
+              >
+                Switch to Version A →
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  setVariantOverride('B');
+                  setViewMode('ethical');
+                }}
+                className="font-bold text-white bg-blue-800 hover:bg-blue-700 px-2.5 py-1 rounded transition cursor-pointer"
+              >
+                Switch to Version B →
+              </button>
+            )}
             <button
               type="button"
               onClick={() => {
@@ -259,6 +285,10 @@ export default function App({ entry }: { entry: StudyEntry }) {
           onOpenAuditDrawer={() => setIsAuditModalOpen(true)}
           auditCount={DARK_PATTERNS_AUDIT.length}
           auditGroupCount={DARK_PATTERN_GROUPS.length}
+          onSwitchToParticipant={() => {
+            setModeOverride('participant');
+            setViewMode(currentVariant === 'B' ? 'ethical' : 'dark-pattern');
+          }}
         />
       )}
 
@@ -296,17 +326,25 @@ export default function App({ entry }: { entry: StudyEntry }) {
                       </span>
                     </div>
 
-                    <button
-                      onClick={() => setViewMode(viewMode === 'dark-pattern' ? 'ethical' : 'dark-pattern')}
-                      className={`font-bold px-3 py-1 rounded-md transition cursor-pointer ${
-                        viewMode === 'dark-pattern' ? 'bg-rose-200 text-rose-900 hover:bg-rose-300' : 'bg-emerald-200 text-emerald-900 hover:bg-emerald-300'
-                      }`}
-                    >
-                      Switch to {viewMode === 'dark-pattern' ? 'Ethical UI' : 'Original Prototype'} →
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => setViewMode(viewMode === 'dark-pattern' ? 'ethical' : 'dark-pattern')}
+                        className={`font-bold px-3 py-1 rounded-md transition cursor-pointer ${
+                          viewMode === 'dark-pattern' ? 'bg-rose-200 text-rose-900 hover:bg-rose-300' : 'bg-emerald-200 text-emerald-900 hover:bg-emerald-300'
+                        }`}
+                      >
+                        Switch to {viewMode === 'dark-pattern' ? 'Version B (Ethical Redesign)' : 'Version A (Original Prototype)'} →
+                      </button>
+                      <button
+                        onClick={() => setViewMode('side-by-side')}
+                        className="font-bold px-3 py-1 rounded-md bg-blue-100 text-blue-900 hover:bg-blue-200 transition cursor-pointer"
+                      >
+                        Switch to Side-by-Side Split →
+                      </button>
+                    </div>
                   </div>
                 )}
-                {renderFlights(viewMode)}
+                {renderFlights(!isReview ? (currentVariant === 'A' ? 'dark-pattern' : 'ethical') : viewMode)}
               </div>
             )
           ) : (

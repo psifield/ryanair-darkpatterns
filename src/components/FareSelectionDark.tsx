@@ -48,9 +48,16 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
         </div>
 
         {/* Basic Quick-Continue Banner */}
-        <div className="flex flex-wrap items-center justify-between sm:justify-end gap-2.5 bg-white border border-gray-200 rounded-lg p-2.5 px-3 sm:px-4 shadow-xs relative">
+        <div className={`flex flex-wrap items-center justify-between sm:justify-end gap-2.5 bg-white border rounded-lg p-2.5 px-3 sm:px-4 shadow-xs relative transition ${
+          selectedTier === 'BASIC' ? 'border-[#073590] ring-2 ring-[#073590]/40 bg-blue-50/20' : 'border-gray-200'
+        }`}>
           <div className="text-left">
-            <span className="text-sm font-black tracking-wide text-gray-800">BASIC</span>
+            <div className="flex items-center gap-1.5">
+              <span className="text-sm font-black tracking-wide text-gray-800">BASIC</span>
+              {selectedTier === 'BASIC' && (
+                <span className="text-[10px] font-bold bg-[#073590] text-white px-1.5 py-0.5 rounded">Selected</span>
+              )}
+            </div>
             <span className="block text-[11px] text-gray-400 italic">Travel light</span>
           </div>
 
@@ -62,8 +69,20 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
             </div>
           </div>
 
-          <div className={`relative ml-auto ${showAuditMarkers ? 'mt-5' : ''}`}>
+          <div className={`relative ml-auto flex items-center gap-2 ${showAuditMarkers ? 'mt-5' : ''}`}>
             <button
+              type="button"
+              onClick={() => onSelectTier('BASIC')}
+              className={`text-xs font-bold px-2.5 sm:px-3 py-1.5 sm:py-2 rounded transition whitespace-nowrap cursor-pointer ${
+                selectedTier === 'BASIC'
+                  ? 'bg-blue-50 text-[#073590] border-2 border-[#073590]'
+                  : 'text-gray-700 border border-gray-300 hover:bg-gray-50'
+              }`}
+            >
+              {selectedTier === 'BASIC' ? '✓ Selected: Basic (£131.36)' : 'Select Basic (£131.36)'}
+            </button>
+            <button
+              type="button"
               onClick={onOpenUpsellModal}
               className="text-xs font-bold text-[#073590] border border-[#073590] hover:bg-blue-50 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded transition whitespace-nowrap cursor-pointer"
             >
@@ -94,8 +113,8 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
             </div>
 
             {/* REGULAR TIER */}
-            <div className={`p-2 sm:p-3 text-center border-l border-gray-200 flex flex-col justify-between relative ${
-              selectedTier === 'REGULAR' ? 'bg-blue-50/30' : ''
+            <div className={`p-2 sm:p-3 text-center border-l border-gray-200 flex flex-col justify-between relative transition ${
+              selectedTier === 'REGULAR' ? 'bg-blue-50/50 ring-2 ring-[#073590] z-10' : ''
             }`}>
               <div>
                 <img
@@ -104,7 +123,12 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
                   src={FARE_TIERS.REGULAR.imageUrl}
                   referrerPolicy="no-referrer"
                 />
-                <h3 className="font-extrabold text-sm sm:text-base lg:text-lg text-gray-900 uppercase">REGULAR</h3>
+                <div className="flex items-center justify-center gap-1.5">
+                  <h3 className="font-extrabold text-sm sm:text-base lg:text-lg text-gray-900 uppercase">REGULAR</h3>
+                  {selectedTier === 'REGULAR' && (
+                    <span className="text-[10px] font-bold bg-[#073590] text-white px-1.5 py-0.5 rounded">Selected</span>
+                  )}
+                </div>
                 <p className="text-[10px] sm:text-xs text-gray-500 italic mt-0.5 line-clamp-2">
                   Choose your seat and 10kg bag on board
                 </p>
@@ -120,21 +144,25 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
                   />
                 )}
                 <button
-                  onClick={() => {
-                    onSelectTier('REGULAR');
-                    onProceedToNextStep?.('REGULAR');
-                  }}
-                  className="w-full bg-[#073590] hover:bg-blue-900 text-white font-bold py-2 sm:py-2.5 px-1 sm:px-2 rounded text-xs transition cursor-pointer"
+                  type="button"
+                  onClick={() => onSelectTier('REGULAR')}
+                  className={`w-full font-bold py-2 sm:py-2.5 px-1 sm:px-2 rounded text-xs transition cursor-pointer ${
+                    selectedTier === 'REGULAR'
+                      ? 'bg-[#073590] text-white ring-2 ring-[#073590] ring-offset-1 shadow-xs'
+                      : 'bg-[#073590] hover:bg-blue-900 text-white'
+                  }`}
                 >
-                  <span className="block text-xs sm:text-sm font-black">+£29.25</span>
+                  <span className="block text-xs sm:text-sm font-black">
+                    {selectedTier === 'REGULAR' ? '✓ Selected · +£29.25' : '+£29.25'}
+                  </span>
                   <span className="text-[9px] sm:text-[10px] font-normal opacity-90 block">on each flight</span>
                 </button>
               </div>
             </div>
 
             {/* PLUS TIER (Aggressively Highlighted Dark Pattern Steering) */}
-            <div className={`relative p-2 sm:p-3 text-center border-l-2 border-r-2 border-[#f1c40f] bg-yellow-50/30 flex flex-col justify-between ${
-              selectedTier === 'PLUS' ? 'ring-2 ring-yellow-400' : ''
+            <div className={`relative p-2 sm:p-3 text-center border-l-2 border-r-2 border-[#f1c40f] bg-yellow-50/30 flex flex-col justify-between transition ${
+              selectedTier === 'PLUS' ? 'ring-3 ring-[#073590] bg-yellow-100/50 z-10' : ''
             }`}>
               {/* Top Ribbon Badge */}
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#f1c40f] text-[#073590] font-black text-[8px] sm:text-[10px] px-2 sm:px-3 py-0.5 sm:py-1 rounded-sm uppercase tracking-wider flex items-center gap-1 shadow-xs whitespace-nowrap z-10 max-w-[95%] justify-center">
@@ -163,7 +191,12 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
                   src={FARE_TIERS.PLUS.imageUrl}
                   referrerPolicy="no-referrer"
                 />
-                <h3 className="font-extrabold text-sm sm:text-base lg:text-lg text-[#073590] uppercase">PLUS</h3>
+                <div className="flex items-center justify-center gap-1.5">
+                  <h3 className="font-extrabold text-sm sm:text-base lg:text-lg text-[#073590] uppercase">PLUS</h3>
+                  {selectedTier === 'PLUS' && (
+                    <span className="text-[10px] font-black bg-[#073590] text-white px-1.5 py-0.5 rounded">Selected</span>
+                  )}
+                </div>
                 <p className="text-[10px] sm:text-xs text-gray-500 italic mt-0.5 line-clamp-2">
                   Choose seat & 20kg checked bag
                 </p>
@@ -171,21 +204,25 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
 
               <div className="mt-3 sm:mt-4">
                 <button
-                  onClick={() => {
-                    onSelectTier('PLUS');
-                    onProceedToNextStep?.('PLUS');
-                  }}
-                  className="w-full bg-[#f1c40f] hover:bg-[#f4b800] text-[#073590] font-black py-2 sm:py-2.5 px-1 sm:px-2 rounded text-xs transition shadow-xs cursor-pointer"
+                  type="button"
+                  onClick={() => onSelectTier('PLUS')}
+                  className={`w-full font-black py-2 sm:py-2.5 px-1 sm:px-2 rounded text-xs transition shadow-xs cursor-pointer ${
+                    selectedTier === 'PLUS'
+                      ? 'bg-[#f1c40f] text-[#073590] ring-2 ring-[#073590] ring-offset-1'
+                      : 'bg-[#f1c40f] hover:bg-[#f4b800] text-[#073590]'
+                  }`}
                 >
-                  <span className="block text-xs sm:text-sm font-black">+£43.24</span>
+                  <span className="block text-xs sm:text-sm font-black">
+                    {selectedTier === 'PLUS' ? '✓ Selected · +£43.24' : '+£43.24'}
+                  </span>
                   <span className="text-[9px] sm:text-[10px] font-medium opacity-90 block">on each flight</span>
                 </button>
               </div>
             </div>
 
             {/* FLEXI PLUS TIER */}
-            <div className={`p-2 sm:p-3 text-center border-l border-gray-200 rounded-tr-lg flex flex-col justify-between ${
-              selectedTier === 'FLEXI_PLUS' ? 'bg-blue-50/30' : ''
+            <div className={`p-2 sm:p-3 text-center border-l border-gray-200 rounded-tr-lg flex flex-col justify-between transition ${
+              selectedTier === 'FLEXI_PLUS' ? 'bg-blue-50/50 ring-2 ring-[#073590] z-10' : ''
             }`}>
               <div>
                 <img
@@ -194,19 +231,28 @@ export const FareSelectionDark: React.FC<FareSelectionDarkProps> = ({
                   src={FARE_TIERS.FLEXI_PLUS.imageUrl}
                   referrerPolicy="no-referrer"
                 />
-                <h3 className="font-extrabold text-sm sm:text-base lg:text-lg text-gray-900 uppercase">FLEXI PLUS</h3>
+                <div className="flex items-center justify-center gap-1.5">
+                  <h3 className="font-extrabold text-sm sm:text-base lg:text-lg text-gray-900 uppercase">FLEXI PLUS</h3>
+                  {selectedTier === 'FLEXI_PLUS' && (
+                    <span className="text-[10px] font-bold bg-[#073590] text-white px-1.5 py-0.5 rounded">Selected</span>
+                  )}
+                </div>
                 <p className="text-[10px] sm:text-xs text-gray-500 italic mt-0.5 line-clamp-2">Our most flexible bundle</p>
               </div>
 
               <div className="mt-3 sm:mt-4">
                 <button
-                  onClick={() => {
-                    onSelectTier('FLEXI_PLUS');
-                    onProceedToNextStep?.('FLEXI_PLUS');
-                  }}
-                  className="w-full bg-[#073590] hover:bg-blue-900 text-white font-bold py-2 sm:py-2.5 px-1 sm:px-2 rounded text-xs transition cursor-pointer"
+                  type="button"
+                  onClick={() => onSelectTier('FLEXI_PLUS')}
+                  className={`w-full font-bold py-2 sm:py-2.5 px-1 sm:px-2 rounded text-xs transition cursor-pointer ${
+                    selectedTier === 'FLEXI_PLUS'
+                      ? 'bg-[#073590] text-white ring-2 ring-[#073590] ring-offset-1 shadow-xs'
+                      : 'bg-[#073590] hover:bg-blue-900 text-white'
+                  }`}
                 >
-                  <span className="block text-xs sm:text-sm font-black">+£94.50</span>
+                  <span className="block text-xs sm:text-sm font-black">
+                    {selectedTier === 'FLEXI_PLUS' ? '✓ Selected · +£94.50' : '+£94.50'}
+                  </span>
                   <span className="text-[9px] sm:text-[10px] font-normal opacity-90 block">on each flight</span>
                 </button>
               </div>

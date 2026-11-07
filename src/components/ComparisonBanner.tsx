@@ -12,6 +12,7 @@ interface ComparisonBannerProps {
   onOpenAuditDrawer: () => void;
   auditCount: number;
   auditGroupCount: number;
+  onSwitchToParticipant?: () => void;
 }
 
 export const ComparisonBanner: React.FC<ComparisonBannerProps> = ({
@@ -24,6 +25,7 @@ export const ComparisonBanner: React.FC<ComparisonBannerProps> = ({
   onOpenAuditDrawer,
   auditCount,
   auditGroupCount,
+  onSwitchToParticipant,
 }) => {
   return (
     <div className="bg-slate-950 text-white border-b border-slate-800 sticky top-0 z-50 px-3 sm:px-6 py-2.5 shadow-md">
@@ -131,6 +133,17 @@ export const ComparisonBanner: React.FC<ComparisonBannerProps> = ({
             <BookOpen className="w-3.5 h-3.5" />
             <span className="hidden md:inline">Full UX Audit</span>
           </button>
+
+          {/* Test Participant Study Button */}
+          {onSwitchToParticipant && (
+            <button
+              onClick={onSwitchToParticipant}
+              className="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold px-2.5 py-1.5 rounded-lg transition cursor-pointer"
+              title="Test the simulated participant study session"
+            >
+              <span>Test Participant</span>
+            </button>
+          )}
         </div>
       </div>
     </div>
