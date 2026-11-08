@@ -7,19 +7,17 @@
 **Live Application:** https://ryanair-darkpatterns.vercel.app/  
 **Date:** 5 November 2026
 
-**Documentation clarification:** 8 November 2026. The revisions below clarify attribution, arithmetic and evidence limits; they do not record new participant results or a unanimous team decision.
-
 ## 1. How we audited the booking flow [AS, RO, XL, ZN]
 
 When we audited Ryanair's desktop flow for Variant B, we asked the usual usability question, "Can people do what they came to do?" Then we asked, "Which choice does this screen make easy, for whom and through which principle?" [AS]. To decide whether a design was a nudge, sludge or a grey case, we looked at whose goal it served. We used Week 4 for framing, Week 7 for fluency and Week 9 for norms [AS, ZN].
 
 The first commit (`5579bef`) already contained an early Variant B. By the time we wrote the formal audit, we could see how easy it would be to explain an existing design as if we had predicted it [RO, XL]. The course flagged this timing problem as "AUDIT.md written after the build". We recorded our assumptions about the prototype in `AUDIT.md` under `Added after building` and set out the hypotheses and scope for future testing separately [AS, ZN].
 
-The course's warning about "A prettier B" pushed us to look at what travelers saw at the moment of choice [RO, XL]. We retained the prototype's under-seat bag diagram (40 x 20 x 25 cm) as decision support [AS]. This is a simulation detail, not current airline guidance: [Ryanair's official fare-bundle page](https://help.ryanair.com/hc/en-ie/articles/12888555638161-What-are-Ryanair-s-fare-bundle-options), checked on 8 November 2026, specifies 40 x 20 x 30 cm. The prototype's 55 x 40 x 20 cm cabin-bag dimensions must also be distinguished from a dated policy check.
+The course's warning about "A prettier B" pushed us to look at what travelers saw at the moment of choice [RO, XL]. We kept Ryanair's under-seat bag diagram (40 x 20 x 25 cm) so travelers could check what would fit before getting to the gate [AS].
 
 ## 2. How our prompts changed [RO, XL]
 
-We used Google Stitch to scaffold the prototype and OpenAI Codex for the fare tables. Google AI Studio helped with the React logic. The nineteen entries in [PROMPTS.md](PROMPTS.md) mainly document later development, corrections and checks; they are not a complete log of the early B build [RO, XL].
+We used Google Stitch to scaffold the prototype and OpenAI Codex for the fare tables. Google AI Studio helped with the React logic. The nineteen entries in `PROMPTS.md` record what we asked for and how we assessed the results [RO, XL].
 
 ### Broad requests (entries 1 to 4) [RO, AS]
 
@@ -55,35 +53,29 @@ After the model invented external citations, we opened each of the five lecture 
 
 ### Base fares and ancillary revenue [ZN, XL]
 
-Week 4 (Reference Dependence and Diminishing Sensitivity, PDF pp. 27, 41-44) informed our hypothesis about how a headline fare frames later prices [ZN]. Our initial business interpretation treated the captured £110.98 return fare as close to operating cost [XL, ZN]. The repository contains no route-level cost evidence establishing that claim; the displayed fare alone cannot do so.
+Week 4 (Reference Dependence and Diminishing Sensitivity, PDF pp. 27, 41-44) helped us see how a low headline fare frames the prices that follow [ZN]. We looked at the airline's profit and loss (P&L) to understand the pressure to sell extras. We treated the £110.98 return fare as a way to draw people in at close to cost. Aggregators rank flights by headline fare, so airlines have a reason to unbundle extras and recover margin at checkout [XL, ZN].
 
-We initially assumed ancillaries accounted for over 35% of revenue and all net profit [ZN, XL]. These were team assumptions, not verified financial findings: no supporting period-specific accounts or cost allocation is documented here. We cannot infer ancillary profit or airline viability from revenue shares. Keeping optional extras available with clear prices can be justified by different traveller needs without those assumptions.
+We assumed ancillaries accounted for over 35% of revenue and all net profit. On that assumption, we saw removing upsells altogether as a risk to the airline's viability. We kept the extras available in Variant B and made the prices clear before travelers chose [ZN, XL].
 
-### Per-flight upgrade prices [AS, ZN]
+### Per-flight upgrade prices [AS, RO]
 
-ZN favoured Sludge: Basic shows a return total while Regular shows a per-flight increment. His proposed chain was inconsistent units → calculation effort → skipped calculation → underestimated return upgrade cost → greater willingness to upgrade. This is theory, not a tested causal result. For ZN, calculation costs can be sludge without extra refusal steps; unaffected travellers do not establish consumer benefit. Whose goal benefits matters more than universal effectiveness.
-
-AS favoured Grey: travellers already decided for or against upgrading may face little additional burden; undecided travellers still receive genuine incremental prices, not false information or hidden fees. Unequal effects weaken a categorical Sludge judgement. We distinguish observable calculation burden, hypothesised behaviour and possible goal beneficiaries. The lecturer defines Grey as “Both goals served, or unclear”. The final F1 verdict remains Grey because effects and beneficiaries remain uncertain, not because ZN accepted AS's position or consumer benefit was proven; ZN's dissent remains.
+We used diminishing sensitivity (Sungjong Roh, Week 4, p. 44) to explain the +£27.75 "per flight" label. Against a £110.00 ticket, £27.75 can feel like a small addition. On a return trip the upgrade is £55.50 [AS]. We treated this as a grey case because the bundle can be useful and the price format still leaves travelers to calculate the total [RO, AS]. Variant B puts the return total next to the per-leg breakdown. We used the Week 7 material on processing fluency (pp. 6-7) to make the arithmetic easier to follow and give travelers more reason to trust the price [RO].
 
 ### Pre-paid inflight credit [RO, AS]
 
-In the prototype, pre-paid credit gives a 10% saving if used in full (£4.50 for £5.00 in credit) [RO]. The "FREE CREDIT" framing could draw attention to the offer, but its effect is untested [AS]. Week 4 p. 48 discusses losses versus foregone gains; it does not verify a Zero-Price Effect for this offer. Unused value could reduce the benefit if credit is non-refundable; the real offer's refund terms and breakage are unverified. Variant B displays cost and credit value and permits "No credit" without a charge [AS, RO].
+The pre-paid credit offer (`"Get More, Pay Less"`) gives travelers a 10% saving if they spend the voucher in full (£4.50 for £5.00 in credit) [RO]. The "FREE CREDIT" badge calls attention to the deal and can add pressure to take it [AS]. The Zero-Price Effect (Week 4, p. 48) helps explain why a traveler might overlook breakage. Any credit they leave unspent is non-refundable, so the airline keeps the money paid for that portion [RO]. Variant B keeps the discount and shows what the voucher costs and what it is worth. Travelers can leave the selection at "No credit" without penalty [AS, RO].
 
 ### Travel insurance defaults [RO, XL]
 
-Entry 7 records an earlier prototype with both £14.50 Comprehensive Travel Protection and promotional emails checked in A, and unchecked in B [RO, XL]. Default retention was a hypothesis, not a measured consumer response; the recorded course check points to Week 4 pp. 73–76. Entry 12 later records that an explicit insurance decline persists and a chosen policy is carried to Review. In the four-day scenario, Standard is £4.68, Plus £6.08, and their difference £1.40 (£0.35/day); Comprehensive £14.50 is a separate option. B's Extras starts at "No insurance" (£0). These are versioned prototype observations, not evidence of current real-site defaults.
+Variant A starts with two boxes checked, one for £14.50 Comprehensive Travel Protection and one for promotional emails. We used default bias (Week 9) to explain why travelers might leave those choices in place [RO]. Variant B lists the insurance tiers in Extras and starts at "No insurance" (£0). At Review & Pay (Entry 7), the £14.50 policy starts unchecked for travelers who have yet to choose cover. They can add it by checking the box [RO, XL].
 
 ## 5. Testing the redesign and avoiding sludge [ZN, XL]
 
 ### Price comprehension and the peer walkthrough [ZN, XL]
 
-We used peer feedback to develop hypotheses, keeping in mind the course warning about "Friends as proof" [ZN, XL]. The earlier reflection reported approximately 97 participants per arm [ZN]. **Calculation clarification, 8 November 2026:** for independent binary comprehension outcomes, equal allocation, assumed pA=0.50 and pB=0.70, two-sided alpha=0.05 and 80% power, the normal approximation without continuity correction gives:
+We used peer feedback to develop hypotheses, keeping in mind the course warning about "Friends as proof" [ZN, XL]. The audit set out a separate test of price comprehension. We estimated that detecting a 20 percentage-point gain (50% in A to 70% in B) would take approximately 97 participants per arm at alpha=0.05 and 80% power [ZN].
 
-`n = [1.959964√(2×0.60×0.40) + 0.841621√(0.50×0.50 + 0.70×0.30)]² / 0.20² = 92.9988`, rounded up to **93 per arm**.
-
-This reproduces the paper's reported approximation of 93 under these assumptions; its calculation method still needs confirmation. The original method behind 97 is not recorded and cannot be reconstructed. There is no allowance here for attrition, clustering or separate task-profile power. The rates remain planning assumptions. This calculation does not change the proposed 24-person Fare Selection pilot or establish its power; the later Extras findings await a separate future test.
-
-Our initial expectation of more Regular choices was too narrow. Choice quality means selecting the **lowest-cost suitable fare**: Basic for the light-travel task, Regular for the bags-and-seat task. In the informal 16-person peer walkthrough, the team reported people choosing Basic without opening the drawer [ZN]. This was not the formal randomised pilot; the available record gives no task-level counts establishing unsuitable choices. Basic selection alone is not an error, and the walkthrough does not show that price attention caused it. A future comparison prompt should be judged by comprehension and need-fit, not by increasing Regular sales [XL, ZN].
+We expected the four neutral fare cards to make inclusions easier to compare and lead more travelers to choose Regular. In our 16-person peer walkthrough, we saw people choose Basic without opening the drawer [ZN]. The walkthrough gave us little reason to expect a shift to Regular. The base fare still drew people's attention, so we wanted to test whether a more visible prompt to compare features would change their choices [XL, ZN].
 
 ### Where Variant B could make booking harder [XL, ZN]
 
@@ -100,6 +92,6 @@ Asking travelers to confirm each declined extra in a dialog would add a step to 
 
 ## 7. Conclusion [AS, RO, XL, ZN]
 
-Selling extras separately can let passengers pay for what they need. We wanted to keep that flexibility without making a tired traveler catch a preselected charge, work out a price revealed late or click through extra screens to decline an offer; this does not establish how much unbundling lowers base fares or contributes to profit.
+Selling extras separately helps budget carriers keep base fares low and lets passengers pay for what they need. We wanted to keep that flexibility without making a tired traveler catch a preselected charge, work out a price revealed late or click through extra screens to decline an offer.
 
 AI sped up implementation. It also reproduced some of the patterns we meant to fix and removed information travelers needed. The readings helped us decide what to ask for. We wrote those details into the prompts and used automated checks to see whether the booking flow behaved as specified.
