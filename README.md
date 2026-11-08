@@ -18,7 +18,7 @@ Run `npm test`, `npm run lint` and `npm run build` for automated checks. For the
 ## Course project documents
 
 - [AUDIT.md](AUDIT.md): historical audit, preserved ratings and predictions; [8 November post-build corrections](AUDIT.md#2026-11-08--post-build-corrections-and-evidence-limits) clarify F6 severity, insurance arithmetic and evidence limits.
-- [REFLECTION.md](REFLECTION.md): team disagreement, AI collaboration and testing limitations.
+- [REFLECTION.md](REFLECTION.md): design rationale, AI collaboration and testing limitations.
 - [PROMPTS.md](PROMPTS.md): 19 historical entries, with a dated coverage note about the incomplete early B record.
 - Evidence: [fare-selection captures and provenance](evidence/2026-10-23/ryanair-fare-screens/README.md), [Extras source-image index](evidence/source-captures/aistudio/README.md), and [reconstructed prototype verification](evidence/2026-10-22/annotation-followup/verification.md).
 

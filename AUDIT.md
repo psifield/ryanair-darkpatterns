@@ -267,7 +267,7 @@ All four individual scores and drivers are recorded below. Agreed scores consoli
 
 ### 2026-11-08 — Post-build corrections and evidence limits
 
-This is an **audit correction after B was developed, not pre-build preregistration**. It supplements the historical entries above without changing their dates, individual ratings or recorded disagreements. F1 remains **Grey**, with ZN favouring Sludge and AS favouring Grey; see [the reflection](REFLECTION.md#per-flight-upgrade-prices-as-zn). All F1–F6 verdicts and original numerical predictions remain unchanged. The only consolidated severity change is the confirmed F6 calculation correction below.
+This is an **audit correction after B was developed, not pre-build preregistration**. It supplements the historical entries above without changing their dates, individual ratings or recorded disagreements. F1 remains **Grey** in the final paper, with ZN favouring Sludge and AS favouring Grey. All F1–F6 verdicts and original numerical predictions remain unchanged. The only consolidated severity change is the confirmed F6 calculation correction below.
 
 #### F6 severity calculation
 
