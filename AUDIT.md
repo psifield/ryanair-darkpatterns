@@ -264,3 +264,44 @@ All four individual scores and drivers are recorded below. Agreed scores consoli
 | 4 | 3/4 (Major) | 2026-11-02 | Compulsory roadblock interrupts the booking flow between seats and bags, using queue-contrast imagery and asymmetric button weight to pressure an optional £7.49/leg decision. Kept at 3/4 because the dismissal link remains functional and behavioural impact is unmeasured (mean 2.75). |
 | 5 | 3/4 (Major) | 2026-11-02 | Daily micro-rate (+£0.35/day) obscures the full £14.50 policy cost, while the government warning banner and loaded refusal wording ('travel without insurance') exploit risk aversion. Rated 3/4 because opting out remains fully available even if choice neutrality is compromised (mean 2.75). |
 | 6 | 3/4 (Major) | 2026-11-02 | Unverified popularity badges ('Most Popular', 'Customer Favourite') and gold borders steer travellers toward high-margin £65 parking and £119 SUV rentals late in the funnel. Agreed at 3/4 (mean 2.25 rounded up; Aishan, Xianlong, Zinuo rated 2/4, Roy rated 3/4 preserving disagreement on sunk-cost severity) as cheaper options and decline controls remain visible. |
+
+### 2026-11-08 — Post-build corrections and evidence limits
+
+This is an **audit correction after B was developed, not pre-build preregistration**. It supplements the historical entries above without changing their dates, individual ratings or recorded disagreements. F1 remains **Grey**, with ZN favouring Sludge and AS favouring Grey; see [the reflection](REFLECTION.md#per-flight-upgrade-prices-as-zn). All F1–F6 verdicts and original numerical predictions remain unchanged. The only consolidated severity change is the confirmed F6 calculation correction below.
+
+#### F6 severity calculation
+
+The existing rule is the equal-weight mean rounded to the nearest whole number, with halves rounded up—not rounding every fractional mean upwards. **(2 + 3 + 2 + 2) / 4 = 2.25 → 2/4 (Minor)**. The earlier F6 heading and 2 November consolidated row incorrectly reported 3/4 (Major). This correction supplies the 2/4 value specified for Term Paper Table 2b; it does not claim a new team vote. Aishan 2, Roy 3, Xianlong 2 and Zinuo 2, their reasons and Roy's differing judgement remain preserved above. F1–F5 severities are unchanged.
+
+#### F5 insurance arithmetic
+
+For one traveller over the four-day prototype scenario:
+
+| Amount | Meaning |
+| --- | --- |
+| £1.17/day × 4 = **£4.68** | Standard premium |
+| £1.52/day × 4 = **£6.08** | Plus premium |
+| (£1.52 − £1.17)/day × 4 = **£1.40** | Standard → Plus difference, **£0.35/day** |
+| **£14.50** | Separate Comprehensive option; not the Plus premium or upgrade difference |
+
+The F5 description, repair and some rating reasons incorrectly linked £0.35/day to a £14.50 policy. The correction is to show each policy's own total and distinguish an upgrade difference from a full premium. The [archived insurance image](evidence/source-captures/aistudio/image_fcdb3a57.png) shows the daily Standard/Plus rates and incremental tag; the four-day totals are arithmetic, not independently observed real-site checkout charges. [PROMPTS.md, Entries 6–7 and 12](PROMPTS.md) records the distinct prototype Plus and Comprehensive options. This factual correction does not re-rate F5 or alter its forecasts.
+
+#### Course references and claim limits
+
+Apply the citation corrections already recorded in [PROMPTS.md on 30 October](PROMPTS.md#dated-correction-to-inherited-claims---2026-10-30), supported by the [course source map](docs/superpowers/plans/2026-10-30-course-evidence.md):
+
+- **F4:** Mathur et al.'s Obstruction is **§5.1.6**, not §5.1.4. Its observed type is Hard to Cancel; it does not name an interstitial-roadblock type. **F6:** Social Proof is **§5.1.4**, not §5.1.2 (Urgency). F5's confirmshaming/visual-interference discussion belongs under §5.1.3. These section mappings were rechecked against the [primary paper](https://arxiv.org/html/1907.07032) on 8 November 2026.
+- **F6's primary course connection is Week 9 descriptive/social norms**, PDF pp. 13–14, 27, 35, 39 and 48. Week 4 pp. 87–90 concerns hedonic editing; it does not verify sunk-cost escalation. Late placement alone establishes neither escalation nor lower price resistance. Lecture locators follow the recorded source check; underlying publication pages remain unverified.
+- Higher displayed prices do not establish higher profit margins. Popularity badges lack substantiating customer data here; they have **not been proven false**. Queue anxiety, shame, underestimation, social influence and unwanted purchasing are possible mechanisms, not observed causal consumer outcomes. Historical member wording remains their interpretation, not new evidence.
+
+#### Evidence paths and scope
+
+The old `/assets/aistudio/` references are historical app paths. Use the archived repository files below; [the evidence index](evidence/source-captures/aistudio/README.md) distinguishes supplied source images, reconstructions and missing provenance.
+
+| Finding | Current evidence reference | Evidence status |
+| --- | --- | --- |
+| F4 | [Fast Track modal](evidence/source-captures/aistudio/image_27e49d5b.png); [Extras Fast Track](evidence/source-captures/aistudio/image_16909bab.png) | Team-supplied images described as live-site captures; exact capture metadata and click sequence not independently verified. |
+| F5 | [Insurance matrix](evidence/source-captures/aistudio/image_fcdb3a57.png) | Supplied source image; this crop does not show the decline button. Refusal wording is a team report and prototype observation, not verified by this image alone. |
+| F6 | [PROMPTS.md, Entry 2](PROMPTS.md); [evidence inventory](evidence/source-captures/aistudio/README.md) | Team-reported transport observations and reconstruction. No identifiable original parking/car-hire image was located among the repository's archived source captures; the original file remains Pending. |
+
+Reconstructed prototype screenshots demonstrate the simulation, not the original airline's behaviour. F1–F3 are the core **Fare Selection** audit; F4–F6 were added later for **Extras**. The proposed **24-person pilot covers Fare Selection only**. F4–F6's recorded forecasts are retained for a future Extras Test, not claimed as pilot outcomes. No new failure thresholds or experimental design changes are introduced by this correction.

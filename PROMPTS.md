@@ -2,6 +2,10 @@
 *Members:* Aishan, Roy, Xianlong, Zinuo
 *Live link:* https://ryanair-darkpatterns.vercel.app/
 
+## Coverage note — 2026-11-08
+
+The 19 existing entries begin on 27 October 2026 and mainly cover later development, corrections and verification. An early B already existed in the initial repository commit (`5579bef`), so its prompt history may be incomplete. Later audit entries must not be presented as formal records made before B was developed. Entries 1–19, including failures, human corrections, member attributions and chronology, are preserved below; this note adds no reconstructed prompt or new test result.
+
 ---
 
 ## Entry 1 - extras tab population (Screen A baseline) · 2026-10-27, 14:45 · sent by Roy · AI Studio
